@@ -1,0 +1,26 @@
+{
+  "modulePathMap": {
+    "entry": "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry"
+  },
+  "compileMode": "esmodule",
+  "projectRootPath": "G:\\SimpleCalculator-master\\SimpleCalculator-master",
+  "nodeModulesPath": "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out\\default\\node_modules",
+  "byteCodeHarInfo": {},
+  "declarationEntry": [],
+  "moduleName": "entry",
+  "hspNameOhmMap": {},
+  "harNameOhmMap": {},
+  "packageManagerType": "ohpm",
+  "compileEntry": [],
+  "otherCompileFiles": [],
+  "dynamicImportLibInfo": {},
+  "routerMap": [],
+  "hspResourcesMap": {},
+  "updateVersionInfo": {},
+  "customizedHar": false,
+  "anBuildOutPut": "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out\\default\\an\\arm64-v8a",
+  "anBuildMode": "type",
+  "patchConfig": {
+    "changedFileList": "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\patch\\default\\changedFileList.json"
+  }
+}

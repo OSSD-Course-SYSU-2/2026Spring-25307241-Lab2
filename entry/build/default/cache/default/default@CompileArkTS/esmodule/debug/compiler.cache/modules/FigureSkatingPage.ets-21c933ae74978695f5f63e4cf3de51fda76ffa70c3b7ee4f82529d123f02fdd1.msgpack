@@ -1,0 +1,1566 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ«if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import ScoreCalculator from '../common/util/ScoreCalculator';
+import { SkatingScore } from '../viewmodel/SkatingScoreModel';
+class FigureSkatingPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__currentElement = new ObservedPropertySimplePU('', this, "currentElement");
+        this.__baseValue = new ObservedPropertySimplePU('', this, "baseValue");
+        this.__goeScores = new ObservedPropertyObjectPU(['', '', '', '', '', '', '', '', ''], this, "goeScores");
+        this.__totalScore = new ObservedPropertySimplePU('0.00', this, "totalScore");
+        this.__elementsList = new ObservedPropertyObjectPU([], this, "elementsList");
+        this.__showResult = new ObservedPropertySimplePU(false, this, "showResult");
+        this.__selectedLevel = new ObservedPropertySimplePU('Base', this, "selectedLevel");
+        this.__isCombinationMode = new ObservedPropertySimplePU(false, this, "isCombinationMode");
+        this.__combinationElements = new ObservedPropertyObjectPU([], this, "combinationElements");
+        this.__combinationBaseValues = new ObservedPropertyObjectPU([], this, "combinationBaseValues");
+        this.__combinationList = new ObservedPropertyObjectPU([], this, "combinationList");
+        this.elements = [
+            '1T', '1S', '1Lo', '1F', '1Lz', '1A',
+            '2T', '2S', '2Lo', '2F', '2Lz', '2A',
+            '3T', '3S', '3Lo', '3F', '3Lz', '3A',
+            '4T', '4S', '4Lo', '4F', '4Lz', '4A'
+        ];
+        this.baseValues = new Map([
+            ['1T', 0.4], ['1S', 0.4], ['1Lo', 0.5], ['1F', 0.8], ['1Lz', 0.6], ['1A', 1.1],
+            ['2T', 1.3], ['2S', 1.3], ['2Lo', 1.7], ['2F', 2.6], ['2Lz', 2.1], ['2A', 3.3],
+            ['3T', 4.2], ['3S', 4.3], ['3Lo', 4.9], ['3F', 5.3], ['3Lz', 5.9], ['3A', 8.0],
+            ['4T', 9.5], ['4S', 9.7], ['4Lo', 10.5], ['4F', 11.0], ['4Lz', 11.5], ['4A', 12.5]
+        ]);
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.currentElement !== undefined) {
+            this.currentElement = params.currentElement;
+        }
+        if (params.baseValue !== undefined) {
+            this.baseValue = params.baseValue;
+        }
+        if (params.goeScores !== undefined) {
+            this.goeScores = params.goeScores;
+        }
+        if (params.totalScore !== undefined) {
+            this.totalScore = params.totalScore;
+        }
+        if (params.elementsList !== undefined) {
+            this.elementsList = params.elementsList;
+        }
+        if (params.showResult !== undefined) {
+            this.showResult = params.showResult;
+        }
+        if (params.selectedLevel !== undefined) {
+            this.selectedLevel = params.selectedLevel;
+        }
+        if (params.isCombinationMode !== undefined) {
+            this.isCombinationMode = params.isCombinationMode;
+        }
+        if (params.combinationElements !== undefined) {
+            this.combinationElements = params.combinationElements;
+        }
+        if (params.combinationBaseValues !== undefined) {
+            this.combinationBaseValues = params.combinationBaseValues;
+        }
+        if (params.combinationList !== undefined) {
+            this.combinationList = params.combinationList;
+        }
+        if (params.elements !== undefined) {
+            this.elements = params.elements;
+        }
+        if (params.baseValues !== undefined) {
+            this.baseValues = params.baseValues;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__currentElement.purgeDependencyOnElmtId(rmElmtId);
+        this.__baseValue.purgeDependencyOnElmtId(rmElmtId);
+        this.__goeScores.purgeDependencyOnElmtId(rmElmtId);
+        this.__totalScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__elementsList.purgeDependencyOnElmtId(rmElmtId);
+        this.__showResult.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedLevel.purgeDependencyOnElmtId(rmElmtId);
+        this.__isCombinationMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__combinationElements.purgeDependencyOnElmtId(rmElmtId);
+        this.__combinationBaseValues.purgeDependencyOnElmtId(rmElmtId);
+        this.__combinationList.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__currentElement.aboutToBeDeleted();
+        this.__baseValue.aboutToBeDeleted();
+        this.__goeScores.aboutToBeDeleted();
+        this.__totalScore.aboutToBeDeleted();
+        this.__elementsList.aboutToBeDeleted();
+        this.__showResult.aboutToBeDeleted();
+        this.__selectedLevel.aboutToBeDeleted();
+        this.__isCombinationMode.aboutToBeDeleted();
+        this.__combinationElements.aboutToBeDeleted();
+        this.__combinationBaseValues.aboutToBeDeleted();
+        this.__combinationList.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get currentElement() {
+        return this.__currentElement.get();
+    }
+    set currentElement(newValue) {
+        this.__currentElement.set(newValue);
+    }
+    get baseValue() {
+        return this.__baseValue.get();
+    }
+    set baseValue(newValue) {
+        this.__baseValue.set(newValue);
+    }
+    get goeScores() {
+        return this.__goeScores.get();
+    }
+    set goeScores(newValue) {
+        this.__goeScores.set(newValue);
+    }
+    get totalScore() {
+        return this.__totalScore.get();
+    }
+    set totalScore(newValue) {
+        this.__totalScore.set(newValue);
+    }
+    get elementsList() {
+        return this.__elementsList.get();
+    }
+    set elementsList(newValue) {
+        this.__elementsList.set(newValue);
+    }
+    get showResult() {
+        return this.__showResult.get();
+    }
+    set showResult(newValue) {
+        this.__showResult.set(newValue);
+    }
+    get selectedLevel() {
+        return this.__selectedLevel.get();
+    }
+    set selectedLevel(newValue) {
+        this.__selectedLevel.set(newValue);
+    }
+    get isCombinationMode() {
+        return this.__isCombinationMode.get();
+    }
+    set isCombinationMode(newValue) {
+        this.__isCombinationMode.set(newValue);
+    }
+    get combinationElements() {
+        return this.__combinationElements.get();
+    }
+    set combinationElements(newValue) {
+        this.__combinationElements.set(newValue);
+    }
+    get combinationBaseValues() {
+        return this.__combinationBaseValues.get();
+    }
+    set combinationBaseValues(newValue) {
+        this.__combinationBaseValues.set(newValue);
+    }
+    get combinationList() {
+        return this.__combinationList.get();
+    }
+    set combinationList(newValue) {
+        this.__combinationList.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.backgroundColor('#F0F0F0');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ ‡é¢˜
+            Text.create('èŠ±æ ·æ»‘å†°è®¡åˆ†è®¡ç®—å™¨');
+            // æ ‡é¢˜
+            Text.fontSize(24);
+            // æ ‡é¢˜
+            Text.fontWeight(FontWeight.Bold);
+            // æ ‡é¢˜
+            Text.margin({ top: 20, bottom: 20 });
+        }, Text);
+        // æ ‡é¢˜
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.create();
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.width('90%');
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.height(100);
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.justifyContent(FlexAlign.Center);
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.backgroundColor('#F5F5F5');
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.borderRadius(10);
+            // æ€»åˆ†æ˜¾ç¤º
+            Column.margin({ bottom: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ€»åˆ†');
+            Text.fontSize(16);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.totalScore);
+            Text.fontSize(36);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#FF6B6B');
+        }, Text);
+        Text.pop();
+        // æ€»åˆ†æ˜¾ç¤º
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+            Row.create();
+            // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+            Row.width('90%');
+            // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+            Row.justifyContent(FlexAlign.SpaceBetween);
+            // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+            Row.margin({ bottom: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('å•è·³æ¨¡å¼');
+            Button.width('45%');
+            Button.height(45);
+            Button.fontSize(16);
+            Button.backgroundColor(!this.isCombinationMode ? '#4CAF50' : '#E0E0E0');
+            Button.fontColor(!this.isCombinationMode ? Color.White : Color.Black);
+            Button.onClick(() => {
+                this.isCombinationMode = false;
+                this.clearCombination();
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('è¿è·³æ¨¡å¼');
+            Button.width('45%');
+            Button.height(45);
+            Button.fontSize(16);
+            Button.backgroundColor(this.isCombinationMode ? '#4CAF50' : '#E0E0E0');
+            Button.fontColor(this.isCombinationMode ? Color.White : Color.Black);
+            Button.onClick(() => {
+                this.isCombinationMode = true;
+                this.clearCurrent();
+            });
+        }, Button);
+        Button.pop();
+        // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.create();
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.width('90%');
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.padding(15);
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.backgroundColor(Color.White);
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.borderRadius(10);
+            // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+            Column.margin({ bottom: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.isCombinationMode ? 'é€‰æ‹©è¿è·³åŠ¨ä½œï¼ˆæœ€å¤š3ä¸ªï¼‰' : 'é€‰æ‹©åŠ¨ä½œ');
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Medium);
+            Text.margin({ bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Flex.create({ wrap: FlexWrap.Wrap });
+            Flex.width('100%');
+        }, Flex);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const element = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Button.createWithLabel(element);
+                    Button.width(60);
+                    Button.height(40);
+                    Button.fontSize(14);
+                    Button.margin({ right: 8, bottom: 8 });
+                    Button.backgroundColor(this.isCombinationMode
+                        ? (this.combinationElements.includes(element) ? '#FF6B6B' : '#E0E0E0')
+                        : (this.currentElement === element ? '#FF6B6B' : '#E0E0E0'));
+                    Button.fontColor(this.isCombinationMode
+                        ? (this.combinationElements.includes(element) ? Color.White : Color.Black)
+                        : (this.currentElement === element ? Color.White : Color.Black));
+                    Button.onClick(() => {
+                        if (this.isCombinationMode) {
+                            // è¿è·³æ¨¡å¼ï¼šç›´æ¥æ·»åŠ åˆ°è¿è·³ç»„åˆ
+                            if (this.combinationElements.length < 3 && !this.combinationElements.includes(element)) {
+                                const baseVal = this.baseValues.get(element) || 0;
+                                this.combinationElements.push(element);
+                                this.combinationBaseValues.push(baseVal);
+                            }
+                        }
+                        else {
+                            // å•è·³æ¨¡å¼ï¼šé€‰æ‹©å½“å‰åŠ¨ä½œ
+                            this.currentElement = element;
+                            this.updateBaseValue();
+                        }
+                    });
+                }, Button);
+                Button.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.elements, forEachItemGenFunction);
+        }, ForEach);
+        ForEach.pop();
+        Flex.pop();
+        // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // è¿è·³æ¨¡å¼ï¼šæ˜¾ç¤ºå·²é€‰æ‹©çš„è¿è·³ç»„åˆ
+            if (this.isCombinationMode && this.combinationElements.length > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('90%');
+                        Column.padding(15);
+                        Column.backgroundColor(Color.White);
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('è¿è·³ç»„åˆ');
+                        Text.fontSize(16);
+                        Text.fontWeight(FontWeight.Medium);
+                        Text.margin({ bottom: 10 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.margin({ bottom: 10 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const element = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(element);
+                                Text.fontSize(16);
+                                Text.fontWeight(FontWeight.Bold);
+                                Text.fontColor('#FF6B6B');
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                If.create();
+                                if (index < this.combinationElements.length - 1) {
+                                    this.ifElseBranchUpdateFunction(0, () => {
+                                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                            Text.create(' + ');
+                                            Text.fontSize(16);
+                                        }, Text);
+                                        Text.pop();
+                                    });
+                                }
+                                else {
+                                    this.ifElseBranchUpdateFunction(1, () => {
+                                    });
+                                }
+                            }, If);
+                            If.pop();
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.combinationElements, forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.margin({ bottom: 10 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('å„åŸºç¡€åˆ†å€¼: ');
+                        Text.fontSize(14);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.combinationBaseValues.map(v => v.toFixed(2)).join(' + '));
+                        Text.fontSize(14);
+                        Text.fontColor('#4CAF50');
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('è¿è·³æ€»åŸºç¡€åˆ†å€¼: ');
+                        Text.fontSize(14);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(ScoreCalculator.calculateCombinationBaseValue(ObservedObject.GetRawObject(this.combinationBaseValues)).toFixed(2));
+                        Text.fontSize(18);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#4CAF50');
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            // å•è·³æ¨¡å¼ï¼šåŸºç¡€åˆ†å€¼æ˜¾ç¤º
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // å•è·³æ¨¡å¼ï¼šåŸºç¡€åˆ†å€¼æ˜¾ç¤º
+            if (!this.isCombinationMode && this.currentElement !== '') {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('90%');
+                        Column.padding(15);
+                        Column.backgroundColor(Color.White);
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.margin({ bottom: 10 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('åŠ¨ä½œ: ');
+                        Text.fontSize(16);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.currentElement);
+                        Text.fontSize(18);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#FF6B6B');
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('åŸºç¡€åˆ†å€¼: ');
+                        Text.fontSize(16);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.baseValue);
+                        Text.fontSize(18);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#4CAF50');
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            // GOEè¯„åˆ†åŒºåŸŸ
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // GOEè¯„åˆ†åŒºåŸŸ
+            if ((this.isCombinationMode && this.combinationElements.length >= 2) ||
+                (!this.isCombinationMode && this.currentElement !== '')) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('90%');
+                        Column.padding(15);
+                        Column.backgroundColor(Color.White);
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('è£åˆ¤GOEè¯„åˆ† (-5 åˆ° +5)');
+                        Text.fontSize(16);
+                        Text.fontWeight(FontWeight.Medium);
+                        Text.margin({ bottom: 10 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = _item => {
+                            const index = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.justifyContent(FlexAlign.Start);
+                                Row.margin({ bottom: 8 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`è£åˆ¤ ${index + 1}:`);
+                                Text.fontSize(14);
+                                Text.width(60);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ text: this.goeScores[index] });
+                                TextInput.width(80);
+                                TextInput.height(40);
+                                TextInput.type(InputType.Number);
+                                TextInput.onChange((value) => {
+                                    this.goeScores[index] = value;
+                                });
+                            }, TextInput);
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, [0, 1, 2, 3, 4, 5, 6, 7, 8], forEachItemGenFunction);
+                    }, ForEach);
+                    ForEach.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('90%');
+                        Column.padding(15);
+                        Column.backgroundColor(Color.White);
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('è£åˆ¤GOEè¯„åˆ† (-5 åˆ° +5)');
+                        Text.fontSize(16);
+                        Text.fontWeight(FontWeight.Medium);
+                        Text.margin({ bottom: 10 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = _item => {
+                            const index = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.justifyContent(FlexAlign.Start);
+                                Row.margin({ bottom: 8 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`è£åˆ¤ ${index + 1}:`);
+                                Text.fontSize(14);
+                                Text.width(60);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ text: this.goeScores[index] });
+                                TextInput.width(80);
+                                TextInput.height(40);
+                                TextInput.type(InputType.Number);
+                                TextInput.onChange((value) => {
+                                    this.goeScores[index] = value;
+                                });
+                            }, TextInput);
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, [0, 1, 2, 3, 4, 5, 6, 7, 8], forEachItemGenFunction);
+                    }, ForEach);
+                    ForEach.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+                        Row.create();
+                        // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+                        Row.width('90%');
+                        // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+                        Row.justifyContent(FlexAlign.SpaceBetween);
+                        // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+                        Row.margin({ bottom: 20 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        If.create();
+                        if (this.isCombinationMode) {
+                            this.ifElseBranchUpdateFunction(0, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Button.createWithLabel('å®Œæˆè¿è·³');
+                                    Button.width('45%');
+                                    Button.height(50);
+                                    Button.fontSize(16);
+                                    Button.backgroundColor('#4CAF50');
+                                    Button.enabled(this.combinationElements.length >= 2);
+                                    Button.onClick(() => {
+                                        this.addCombination();
+                                    });
+                                }, Button);
+                                Button.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Button.createWithLabel('æ¸…ç©ºè¿è·³');
+                                    Button.width('45%');
+                                    Button.height(50);
+                                    Button.fontSize(16);
+                                    Button.backgroundColor('#FF9800');
+                                    Button.onClick(() => {
+                                        this.clearCombination();
+                                    });
+                                }, Button);
+                                Button.pop();
+                            });
+                        }
+                        else {
+                            this.ifElseBranchUpdateFunction(1, () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Button.createWithLabel('æ·»åŠ åŠ¨ä½œ');
+                                    Button.width('45%');
+                                    Button.height(50);
+                                    Button.fontSize(16);
+                                    Button.backgroundColor('#4CAF50');
+                                    Button.onClick(() => {
+                                        this.addElement();
+                                    });
+                                }, Button);
+                                Button.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Button.createWithLabel('æ¸…ç©º');
+                                    Button.width('45%');
+                                    Button.height(50);
+                                    Button.fontSize(16);
+                                    Button.backgroundColor('#FF9800');
+                                    Button.onClick(() => {
+                                        this.clearCurrent();
+                                    });
+                                }, Button);
+                                Button.pop();
+                            });
+                        }
+                    }, If);
+                    If.pop();
+                    // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+                    Row.pop();
+                });
+            }
+            // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+            if (this.elementsList.length > 0 || this.combinationList.length > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('90%');
+                        Column.padding(15);
+                        Column.backgroundColor(Color.White);
+                        Column.borderRadius(10);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('å·²æ·»åŠ åŠ¨ä½œ');
+                        Text.fontSize(16);
+                        Text.fontWeight(FontWeight.Medium);
+                        Text.margin({ bottom: 10 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // å•è·³åˆ—è¡¨
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const item = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.justifyContent(FlexAlign.SpaceBetween);
+                                Row.padding({ top: 8, bottom: 8 });
+                                Row.borderWidth({ bottom: 1 });
+                                Row.borderColor('#E0E0E0');
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`${index + 1}. ${item.element}`);
+                                Text.fontSize(14);
+                                Text.layoutWeight(1);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`åŸºç¡€: ${item.baseValue.toFixed(2)}`);
+                                Text.fontSize(14);
+                                Text.width(100);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`å¾—åˆ†: ${item.finalScore.toFixed(2)}`);
+                                Text.fontSize(14);
+                                Text.fontColor('#FF6B6B');
+                                Text.width(100);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Button.createWithLabel('åˆ é™¤');
+                                Button.width(50);
+                                Button.height(30);
+                                Button.fontSize(12);
+                                Button.backgroundColor('#FF4444');
+                                Button.onClick(() => {
+                                    this.removeElement(index);
+                                });
+                            }, Button);
+                            Button.pop();
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.elementsList, forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    // å•è·³åˆ—è¡¨
+                    ForEach.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // è¿è·³åˆ—è¡¨
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const item = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width('100%');
+                                Column.borderWidth({ bottom: 1 });
+                                Column.borderColor('#E0E0E0');
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.justifyContent(FlexAlign.SpaceBetween);
+                                Row.padding({ top: 8, bottom: 4 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`${this.elementsList.length + index + 1}. ${item.elements.join(' + ')} (è¿è·³)`);
+                                Text.fontSize(14);
+                                Text.layoutWeight(1);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Button.createWithLabel('åˆ é™¤');
+                                Button.width(50);
+                                Button.height(30);
+                                Button.fontSize(12);
+                                Button.backgroundColor('#FF4444');
+                                Button.onClick(() => {
+                                    this.removeCombination(index);
+                                });
+                            }, Button);
+                            Button.pop();
+                            Row.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.padding({ bottom: 8 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`å„åŸºç¡€: ${item.baseValues.map(v => v.toFixed(2)).join(' + ')}`);
+                                Text.fontSize(12);
+                                Text.fontColor('#666666');
+                                Text.layoutWeight(1);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`æ€»åŸºç¡€: ${item.totalBaseValue.toFixed(2)}`);
+                                Text.fontSize(12);
+                                Text.fontColor('#4CAF50');
+                                Text.width(100);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`å¾—åˆ†: ${item.finalScore.toFixed(2)}`);
+                                Text.fontSize(14);
+                                Text.fontColor('#FF6B6B');
+                                Text.width(100);
+                            }, Text);
+                            Text.pop();
+                            Row.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.combinationList, forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    // è¿è·³åˆ—è¡¨
+                    ForEach.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.createWithLabel('è®¡ç®—æ€»åˆ†');
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.width('90%');
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.height(50);
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.fontSize(18);
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.backgroundColor('#FF6B6B');
+                        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                        Button.onClick(() => {
+                            this.calculateTotal();
+                        });
+                    }, Button);
+                    // è®¡ç®—æ€»åˆ†æŒ‰é’®
+                    Button.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+    }
+    updateBaseValue() {
+        const value = this.baseValues.get(this.currentElement);
+        if (value !== undefined) {
+            this.baseValue = value.toFixed(2);
+        }
+    }
+    addElement() {
+        if (this.currentElement === '') {
+            return;
+        }
+        const baseVal = this.baseValues.get(this.currentElement) || 0;
+        const goeValues = [];
+        for (let i = 0; i < 9; i++) {
+            const goe = parseFloat(this.goeScores[i]);
+            if (!isNaN(goe)) {
+                goeValues.push(goe);
+            }
+        }
+        const finalScore = ScoreCalculator.calculateElementScore(baseVal, goeValues);
+        const score = new SkatingScore(this.currentElement, baseVal, goeValues, finalScore);
+        this.elementsList.push(score);
+        this.clearCurrent();
+    }
+    removeElement(index) {
+        this.elementsList.splice(index, 1);
+        this.calculateTotal();
+    }
+    clearCurrent() {
+        this.currentElement = '';
+        this.baseValue = '';
+        this.goeScores = ['', '', '', '', '', '', '', '', ''];
+    }
+    calculateTotal() {
+        let total = 0;
+        for (const item of this.elementsList) {
+            total += item.finalScore;
+        }
+        for (const item of this.combinationList) {
+            total += item.finalScore;
+        }
+        this.totalScore = total.toFixed(2);
+    }
+    // è¿è·³ç›¸å…³æ–¹æ³•
+    addToCombination() {
+        if (this.currentElement === '' || this.combinationElements.length >= 3) {
+            return;
+        }
+        const baseVal = this.baseValues.get(this.currentElement) || 0;
+        this.combinationElements.push(this.currentElement);
+        this.combinationBaseValues.push(baseVal);
+        this.currentElement = '';
+        this.baseValue = '';
+    }
+    addCombination() {
+        if (this.combinationElements.length < 2) {
+            return;
+        }
+        const goeValues = [];
+        for (let i = 0; i < 9; i++) {
+            const goe = parseFloat(this.goeScores[i]);
+            if (!isNaN(goe)) {
+                goeValues.push(goe);
+            }
+        }
+        const combination = ScoreCalculator.createCombinationJump([...this.combinationElements], [...this.combinationBaseValues], goeValues);
+        this.combinationList.push(combination);
+        this.clearCombination();
+    }
+    removeCombination(index) {
+        this.combinationList.splice(index, 1);
+        this.calculateTotal();
+    }
+    clearCombination() {
+        this.combinationElements = [];
+        this.combinationBaseValues = [];
+        this.currentElement = '';
+        this.baseValue = '';
+        this.goeScores = ['', '', '', '', '', '', '', '', ''];
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "FigureSkatingPage";
+    }
+}
+registerNamedRoute(() => new FigureSkatingPage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/FigureSkatingPage", pageFullPath: "entry/src/main/ets/pages/FigureSkatingPage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=FigureSkatingPage.js.mapÂ’ÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\ScoreCalculator.etsÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\SkatingScoreModel.etsÙaG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\FigureSkatingPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚAk/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import Logger from '../common/util/Logger';
+import ScoreCalculator from '../common/util/ScoreCalculator';
+import { SkatingScore, JudgeScore, CombinationJump } from '../viewmodel/SkatingScoreModel';
+import { CommonConstants } from '../common/constants/CommonConstants';
+
+@Entry
+@Component
+struct FigureSkatingPage {
+  @State currentElement: string = '';
+  @State baseValue: string = '';
+  @State goeScores: Array<string> = ['', '', '', '', '', '', '', '', ''];
+  @State totalScore: string = '0.00';
+  @State elementsList: Array<SkatingScore> = [];
+  @State showResult: boolean = false;
+  @State selectedLevel: string = 'Base';
+
+  // è¿è·³ç›¸å…³çŠ¶æ€
+  @State isCombinationMode: boolean = false;
+  @State combinationElements: Array<string> = [];
+  @State combinationBaseValues: Array<number> = [];
+  @State combinationList: Array<CombinationJump> = [];
+
+  private elements: Array<string> = [
+    '1T', '1S', '1Lo', '1F', '1Lz', '1A',
+    '2T', '2S', '2Lo', '2F', '2Lz', '2A',
+    '3T', '3S', '3Lo', '3F', '3Lz', '3A',
+    '4T', '4S', '4Lo', '4F', '4Lz', '4A'
+  ];
+
+  private baseValues: Map<string, number> = new Map([
+    ['1T', 0.4], ['1S', 0.4], ['1Lo', 0.5], ['1F', 0.8], ['1Lz', 0.6], ['1A', 1.1],
+    ['2T', 1.3], ['2S', 1.3], ['2Lo', 1.7], ['2F', 2.6], ['2Lz', 2.1], ['2A', 3.3],
+    ['3T', 4.2], ['3S', 4.3], ['3Lo', 4.9], ['3F', 5.3], ['3Lz', 5.9], ['3A', 8.0],
+    ['4T', 9.5], ['4S', 9.7], ['4Lo', 10.5], ['4F', 11.0], ['4Lz', 11.5], ['4A', 12.5]
+  ]);
+
+  build() {
+    Column() {
+      // æ ‡é¢˜
+      Text('èŠ±æ ·æ»‘å†°è®¡åˆ†è®¡ç®—å™¨')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .margin({ top: 20, bottom: 20 })
+
+      // æ€»åˆ†æ˜¾ç¤º
+      Column() {
+        Text('æ€»åˆ†')
+          .fontSize(16)
+          .fontColor('#666666')
+        Text(this.totalScore)
+          .fontSize(36)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#FF6B6B')
+      }
+      .width('90%')
+      .height(100)
+      .justifyContent(FlexAlign.Center)
+      .backgroundColor('#F5F5F5')
+      .borderRadius(10)
+      .margin({ bottom: 20 })
+
+      // æ¨¡å¼åˆ‡æ¢æŒ‰é’®
+      Row() {
+        Button('å•è·³æ¨¡å¼')
+          .width('45%')
+          .height(45)
+          .fontSize(16)
+          .backgroundColor(!this.isCombinationMode ? '#4CAF50' : '#E0E0E0')
+          .fontColor(!this.isCombinationMode ? Color.White : Color.Black)
+          .onClick(() => {
+            this.isCombinationMode = false;
+            this.clearCombination();
+          })
+
+        Button('è¿è·³æ¨¡å¼')
+          .width('45%')
+          .height(45)
+          .fontSize(16)
+          .backgroundColor(this.isCombinationMode ? '#4CAF50' : '#E0E0E0')
+          .fontColor(this.isCombinationMode ? Color.White : Color.Black)
+          .onClick(() => {
+            this.isCombinationMode = true;
+            this.clearCurrent();
+          })
+      }
+      .width('90%')
+      .justifyContent(FlexAlign.SpaceBetween)
+      .margin({ bottom: 20 })
+
+      // åŠ¨ä½œé€‰æ‹©åŒºåŸŸ
+      Column() {
+        Text(this.isCombinationMode ? 'é€‰æ‹©è¿è·³åŠ¨ä½œï¼ˆæœ€å¤š3ä¸ªï¼‰' : 'é€‰æ‹©åŠ¨ä½œ')
+          .fontSize(16)
+          .fontWeight(FontWeight.Medium)
+          .margin({ bottom: 10 })
+
+        Flex({ wrap: FlexWrap.Wrap }) {
+          ForEach(this.elements, (element: string) => {
+            Button(element)
+              .width(60)
+              .height(40)
+              .fontSize(14)
+              .margin({ right: 8, bottom: 8 })
+              .backgroundColor(
+                this.isCombinationMode
+                  ? (this.combinationElements.includes(element) ? '#FF6B6B' : '#E0E0E0')
+                  : (this.currentElement === element ? '#FF6B6B' : '#E0E0E0')
+              )
+              .fontColor(
+                this.isCombinationMode
+                  ? (this.combinationElements.includes(element) ? Color.White : Color.Black)
+                  : (this.currentElement === element ? Color.White : Color.Black)
+              )
+              .onClick(() => {
+                if (this.isCombinationMode) {
+                  // è¿è·³æ¨¡å¼ï¼šç›´æ¥æ·»åŠ åˆ°è¿è·³ç»„åˆ
+                  if (this.combinationElements.length < 3 && !this.combinationElements.includes(element)) {
+                    const baseVal = this.baseValues.get(element) || 0;
+                    this.combinationElements.push(element);
+                    this.combinationBaseValues.push(baseVal);
+                  }
+                } else {
+                  // å•è·³æ¨¡å¼ï¼šé€‰æ‹©å½“å‰åŠ¨ä½œ
+                  this.currentElement = element;
+                  this.updateBaseValue();
+                }
+              })
+          })
+        }
+        .width('100%')
+      }
+      .width('90%')
+      .padding(15)
+      .backgroundColor(Color.White)
+      .borderRadius(10)
+      .margin({ bottom: 20 })
+
+      // è¿è·³æ¨¡å¼ï¼šæ˜¾ç¤ºå·²é€‰æ‹©çš„è¿è·³ç»„åˆ
+      if (this.isCombinationMode && this.combinationElements.length > 0) {
+        Column() {
+          Text('è¿è·³ç»„åˆ')
+            .fontSize(16)
+            .fontWeight(FontWeight.Medium)
+            .margin({ bottom: 10 })
+
+          Row() {
+            ForEach(this.combinationElements, (element: string, index: number) => {
+              Row() {
+                Text(element)
+                  .fontSize(16)
+                  .fontWeight(FontWeight.Bold)
+                  .fontColor('#FF6B6B')
+                if (index < this.combinationElements.length - 1) {
+                  Text(' + ')
+                    .fontSize(16)
+                }
+              }
+            })
+          }
+          .margin({ bottom: 10 })
+
+          Row() {
+            Text('å„åŸºç¡€åˆ†å€¼: ')
+              .fontSize(14)
+            Text(this.combinationBaseValues.map(v => v.toFixed(2)).join(' + '))
+              .fontSize(14)
+              .fontColor('#4CAF50')
+          }
+          .margin({ bottom: 10 })
+
+          Row() {
+            Text('è¿è·³æ€»åŸºç¡€åˆ†å€¼: ')
+              .fontSize(14)
+            Text(ScoreCalculator.calculateCombinationBaseValue(this.combinationBaseValues).toFixed(2))
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#4CAF50')
+          }
+        }
+        .width('90%')
+        .padding(15)
+        .backgroundColor(Color.White)
+        .borderRadius(10)
+        .margin({ bottom: 20 })
+      }
+
+      // å•è·³æ¨¡å¼ï¼šåŸºç¡€åˆ†å€¼æ˜¾ç¤º
+      if (!this.isCombinationMode && this.currentElement !== '') {
+        Column() {
+          Row() {
+            Text('åŠ¨ä½œ: ')
+              .fontSize(16)
+            Text(this.currentElement)
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#FF6B6B')
+          }
+          .margin({ bottom: 10 })
+
+          Row() {
+            Text('åŸºç¡€åˆ†å€¼: ')
+              .fontSize(16)
+            Text(this.baseValue)
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#4CAF50')
+          }
+        }
+        .width('90%')
+        .padding(15)
+        .backgroundColor(Color.White)
+        .borderRadius(10)
+        .margin({ bottom: 20 })
+      }
+
+      // GOEè¯„åˆ†åŒºåŸŸ
+      if ((this.isCombinationMode && this.combinationElements.length >= 2) ||
+          (!this.isCombinationMode && this.currentElement !== '')) {
+        Column() {
+          Text('è£åˆ¤GOEè¯„åˆ† (-5 åˆ° +5)')
+            .fontSize(16)
+            .fontWeight(FontWeight.Medium)
+            .margin({ bottom: 10 })
+
+          ForEach([0, 1, 2, 3, 4, 5, 6, 7, 8], (index: number) => {
+            Row() {
+              Text(`è£åˆ¤ ${index + 1}:`)
+                .fontSize(14)
+                .width(60)
+              TextInput({ text: this.goeScores[index] })
+                .width(80)
+                .height(40)
+                .type(InputType.Number)
+                .onChange((value: string) => {
+                  this.goeScores[index] = value;
+                })
+            }
+            .width('100%')
+            .justifyContent(FlexAlign.Start)
+            .margin({ bottom: 8 })
+          })
+        }
+        .width('90%')
+        .padding(15)
+        .backgroundColor(Color.White)
+        .borderRadius(10)
+        .margin({ bottom: 20 })
+        Column() {
+          Text('è£åˆ¤GOEè¯„åˆ† (-5 åˆ° +5)')
+            .fontSize(16)
+            .fontWeight(FontWeight.Medium)
+            .margin({ bottom: 10 })
+
+          ForEach([0, 1, 2, 3, 4, 5, 6, 7, 8], (index: number) => {
+            Row() {
+              Text(`è£åˆ¤ ${index + 1}:`)
+                .fontSize(14)
+                .width(60)
+              TextInput({ text: this.goeScores[index] })
+                .width(80)
+                .height(40)
+                .type(InputType.Number)
+                .onChange((value: string) => {
+                  this.goeScores[index] = value;
+                })
+            }
+            .width('100%')
+            .justifyContent(FlexAlign.Start)
+            .margin({ bottom: 8 })
+          })
+        }
+        .width('90%')
+        .padding(15)
+        .backgroundColor(Color.White)
+        .borderRadius(10)
+        .margin({ bottom: 20 })
+
+        // æ·»åŠ åŠ¨ä½œæŒ‰é’®
+        Row() {
+          if (this.isCombinationMode) {
+            Button('å®Œæˆè¿è·³')
+              .width('45%')
+              .height(50)
+              .fontSize(16)
+              .backgroundColor('#4CAF50')
+              .enabled(this.combinationElements.length >= 2)
+              .onClick(() => {
+                this.addCombination();
+              })
+
+            Button('æ¸…ç©ºè¿è·³')
+              .width('45%')
+              .height(50)
+              .fontSize(16)
+              .backgroundColor('#FF9800')
+              .onClick(() => {
+                this.clearCombination();
+              })
+          } else {
+            Button('æ·»åŠ åŠ¨ä½œ')
+              .width('45%')
+              .height(50)
+              .fontSize(16)
+              .backgroundColor('#4CAF50')
+              .onClick(() => {
+                this.addElement();
+              })
+
+            Button('æ¸…ç©º')
+              .width('45%')
+              .height(50)
+              .fontSize(16)
+              .backgroundColor('#FF9800')
+              .onClick(() => {
+                this.clearCurrent();
+              })
+          }
+        }
+        .width('90%')
+        .justifyContent(FlexAlign.SpaceBetween)
+        .margin({ bottom: 20 })
+      }
+
+      // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+      if (this.elementsList.length > 0 || this.combinationList.length > 0) {
+        Column() {
+          Text('å·²æ·»åŠ åŠ¨ä½œ')
+            .fontSize(16)
+            .fontWeight(FontWeight.Medium)
+            .margin({ bottom: 10 })
+
+          // å•è·³åˆ—è¡¨
+          ForEach(this.elementsList, (item: SkatingScore, index: number) => {
+            Row() {
+              Text(`${index + 1}. ${item.element}`)
+                .fontSize(14)
+                .layoutWeight(1)
+              Text(`åŸºç¡€: ${item.baseValue.toFixed(2)}`)
+                .fontSize(14)
+                .width(100)
+              Text(`å¾—åˆ†: ${item.finalScore.toFixed(2)}`)
+                .fontSize(14)
+                .fontColor('#FF6B6B')
+                .width(100)
+              Button('åˆ é™¤')
+                .width(50)
+                .height(30)
+                .fontSize(12)
+                .backgroundColor('#FF4444')
+                .onClick(() => {
+                  this.removeElement(index);
+                })
+            }
+            .width('100%')
+            .justifyContent(FlexAlign.SpaceBetween)
+            .padding({ top: 8, bottom: 8 })
+            .borderWidth({ bottom: 1 })
+            .borderColor('#E0E0E0')
+          })
+
+          // è¿è·³åˆ—è¡¨
+          ForEach(this.combinationList, (item: CombinationJump, index: number) => {
+            Column() {
+              Row() {
+                Text(`${this.elementsList.length + index + 1}. ${item.elements.join(' + ')} (è¿è·³)`)
+                  .fontSize(14)
+                  .layoutWeight(1)
+                Button('åˆ é™¤')
+                  .width(50)
+                  .height(30)
+                  .fontSize(12)
+                  .backgroundColor('#FF4444')
+                  .onClick(() => {
+                    this.removeCombination(index);
+                  })
+              }
+              .width('100%')
+              .justifyContent(FlexAlign.SpaceBetween)
+              .padding({ top: 8, bottom: 4 })
+
+              Row() {
+                Text(`å„åŸºç¡€: ${item.baseValues.map(v => v.toFixed(2)).join(' + ')}`)
+                  .fontSize(12)
+                  .fontColor('#666666')
+                  .layoutWeight(1)
+                Text(`æ€»åŸºç¡€: ${item.totalBaseValue.toFixed(2)}`)
+                  .fontSize(12)
+                  .fontColor('#4CAF50')
+                  .width(100)
+                Text(`å¾—åˆ†: ${item.finalScore.toFixed(2)}`)
+                  .fontSize(14)
+                  .fontColor('#FF6B6B')
+                  .width(100)
+              }
+              .width('100%')
+              .padding({ bottom: 8 })
+            }
+            .width('100%')
+            .borderWidth({ bottom: 1 })
+            .borderColor('#E0E0E0')
+          })
+        }
+        .width('90%')
+        .padding(15)
+        .backgroundColor(Color.White)
+        .borderRadius(10)
+        .margin({ bottom: 20 })
+
+        // è®¡ç®—æ€»åˆ†æŒ‰é’®
+        Button('è®¡ç®—æ€»åˆ†')
+          .width('90%')
+          .height(50)
+          .fontSize(18)
+          .backgroundColor('#FF6B6B')
+          .onClick(() => {
+            this.calculateTotal();
+          })
+      }
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#F0F0F0')
+  }
+
+  updateBaseValue() {
+    const value = this.baseValues.get(this.currentElement);
+    if (value !== undefined) {
+      this.baseValue = value.toFixed(2);
+    }
+  }
+
+  addElement() {
+    if (this.currentElement === '') {
+      return;
+    }
+
+    const baseVal = this.baseValues.get(this.currentElement) || 0;
+    const goeValues: number[] = [];
+    
+    for (let i = 0; i < 9; i++) {
+      const goe = parseFloat(this.goeScores[i]);
+      if (!isNaN(goe)) {
+        goeValues.push(goe);
+      }
+    }
+
+    const finalScore = ScoreCalculator.calculateElementScore(baseVal, goeValues);
+    
+    const score = new SkatingScore(
+      this.currentElement,
+      baseVal,
+      goeValues,
+      finalScore
+    );
+
+    this.elementsList.push(score);
+    this.clearCurrent();
+  }
+
+  removeElement(index: number) {
+    this.elementsList.splice(index, 1);
+    this.calculateTotal();
+  }
+
+  clearCurrent() {
+    this.currentElement = '';
+    this.baseValue = '';
+    this.goeScores = ['', '', '', '', '', '', '', '', ''];
+  }
+
+  calculateTotal() {
+    let total = 0;
+    for (const item of this.elementsList) {
+      total += item.finalScore;
+    }
+    for (const item of this.combinationList) {
+      total += item.finalScore;
+    }
+    this.totalScore = total.toFixed(2);
+  }
+
+  // è¿è·³ç›¸å…³æ–¹æ³•
+  addToCombination() {
+    if (this.currentElement === '' || this.combinationElements.length >= 3) {
+      return;
+    }
+
+    const baseVal = this.baseValues.get(this.currentElement) || 0;
+    this.combinationElements.push(this.currentElement);
+    this.combinationBaseValues.push(baseVal);
+    this.currentElement = '';
+    this.baseValue = '';
+  }
+
+  addCombination() {
+    if (this.combinationElements.length < 2) {
+      return;
+    }
+
+    const goeValues: number[] = [];
+    for (let i = 0; i < 9; i++) {
+      const goe = parseFloat(this.goeScores[i]);
+      if (!isNaN(goe)) {
+        goeValues.push(goe);
+      }
+    }
+
+    const combination = ScoreCalculator.createCombinationJump(
+      [...this.combinationElements],
+      [...this.combinationBaseValues],
+      goeValues
+    );
+
+    this.combinationList.push(combination);
+    this.clearCombination();
+  }
+
+  removeCombination(index: number) {
+    this.combinationList.splice(index, 1);
+    this.calculateTotal();
+  }
+
+  clearCombination() {
+    this.combinationElements = [];
+    this.combinationBaseValues = [];
+    this.currentElement = '';
+    this.baseValue = '';
+    this.goeScores = ['', '', '', '', '', '', '', '', ''];
+  }
+}
+ÀÔrD’¾../viewmodel/SkatingScoreModel¾../common/util/ScoreCalculatorÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\SkatingScoreModel.etsAÃªoh-resolveÂEAÂÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\ScoreCalculator.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings´FigureSkatingPage.js ‘µFigureSkatingPage.etsÜ‹–”   ” ” ” ”< <”= =˜”   ” ”	 	” ” 4” :”= ÌZ”> Ì[’” ” ‘”  ’”= "”? $’”8 ”: Ü ”8 $”9 %”; '”= )”? +”ÌA -”ÌC /”ÌE 1”ÌG 3”ÌI 5”ÌK 7”ÌM 9”ÌO ;”ÌQ =”ÌS ?”ÌU ÌA”ÌW ÌC”ÌY ÌE”Ì[ ÌG”Ì\ ÌH’”9 ”? $’”; -”= /’”9 ”> $’”< !”ÌB '’”Ì@  &”ÌE  +’”ÌB !.”ÌD !0’”ÌD "0”ÌF "2’”> #3”Ì@ #5‘” %$œ” &” &” &
+” &” &” &” &”# &”% &”* &"”, &$”0 &(œ” '” '” '
+” '” '” '” '”# '”% '”* '"”, '$”0 '(œ” (” (” (
+” (” (” (” (”# (”% (”* ("”, ($”0 ((œ” )” )” )
+” )” )” )” )”# )”% )”* )"”, )$”0 )(‘”	 *”” ,,” ,0”! ,3”" ,4Ü $” -” -” -	” -” -” -” -” -” -”  -”# -”$ -”& -”' -”, -$”. -&”1 -)”2 -*”4 -,”5 --”9 -1”; -3”> -6”? -7”ÌA -9”ÌB -:”ÌG -?”ÌI -ÌA”ÌL -ÌD”ÌM -ÌE”ÌO -ÌG”ÌP -ÌH”ÌT -ÌL”ÌV -ÌN”ÌY -ÌQ”ÌZ -ÌRÜ $” .” .” .	” .” .” .” .” .” .”  .”# .”$ .”& .”' .”, .$”. .&”1 .)”2 .*”4 .,”5 .-”9 .1”; .3”> .6”? .7”ÌA .9”ÌB .:”ÌG .?”ÌI .ÌA”ÌL .ÌD”ÌM .ÌE”ÌO .ÌG”ÌP .ÌH”ÌT .ÌL”ÌV .ÌN”ÌY .ÌQ”ÌZ .ÌRÜ $” /” /” /	” /” /” /” /” /” /”  /”# /”$ /”& /”' /”, /$”. /&”1 /)”2 /*”4 /,”5 /-”9 /1”; /3”> /6”? /7”ÌA /9”ÌB /:”ÌG /?”ÌI /ÌA”ÌL /ÌD”ÌM /ÌE”ÌO /ÌG”ÌP /ÌH”ÌT /ÌL”ÌV /ÌN”ÌY /ÌQ”ÌZ /ÌRÜ $” 0” 0” 0	” 0” 0” 0” 0” 0” 0”  0”# 0”$ 0”& 0”' 0”, 0$”. 0&”2 0*”3 0+”5 0-”6 0.”: 02”< 04”Ì@ 08”ÌA 09”ÌC 0;”ÌD 0<”ÌI 0ÌA”ÌK 0ÌC”ÌO 0ÌG”ÌP 0ÌH”ÌR 0ÌJ”ÌS 0ÌK”ÌW 0ÌO”ÌY 0ÌQ”Ì] 0ÌU”Ì^ 0ÌV’”	 1”
+ 1‘” ÌF’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’”  	”  ’”  	”  ’” !	” !’” !	” !’” "	” "’” "	” "’” #	” #’” #	” #‘” 3’” 4” 4
+–” 4” 4
+” Í²” Í²
+” Í²” Í²–” 4” 4
+” Í³” Í³” Í³”  Í³–” 4” 4
+” Í´”" Í´”# Í´”, Í´’” 5” 5”” 6” 6
+” 6”# 6’” 5” 5–” 6” 6
+” 7	” 7” 7” 7’” 5” 5˜” 6” 6
+” 8	” 8” 8”& 8”' 8”+ 8#’” 5” 5” 6” 6
+” 9	” 9” 9” 9” 9” 9”! 9”# 9”) 9!”+ 9#”- 9%”/ 9'’” 5” 5’” 6” 6
+’” ;” ;’” <” <’” ;” ;–” <” <” ÌE” ÌE” ÌE” ÌE’” ;” ;–” <” <” ÌF” ÌF” ÌF” ÌF’” ;” ;˜” <” <” ÌG”! ÌG”" ÌG”+ ÌG”, ÌG ”2 ÌG&’” ;” ;–” <” <” ÌH”" ÌH”# ÌH”, ÌH ’” ;” ;–” <” <” ÌI” ÌI”  ÌI”" ÌI’” ;” ;š” <” <” ÌJ” ÌJ” ÌJ” ÌJ”" ÌJ”$ ÌJ”& ÌJ”( ÌJ”” =” =” =” =–” =” =” >” >” >” >–” =” =” ?” ?” ?”$ ?’” =” =–” Ì@” Ì@” Ì@” Ì@” Ì@”' Ì@–” Ì@” Ì@” ÌA” ÌA” ÌA” ÌA˜” Ì@” Ì@” ÌB” ÌB” ÌB”& ÌB ”' ÌB!”+ ÌB%–” Ì@” Ì@” ÌC” ÌC” ÌC”$ ÌC’” Ì@” Ì@’” ;” ;’” <” <’” ÌL” ÌL’” ÌM” ÌM	’” ÌL” ÌL–” ÌM” ÌM	” Ìd” Ìd” Ìd” Ìd’” ÌL” ÌL˜” ÌM” ÌM	” Ìe” Ìe” Ìe”( Ìe”) Ìe ”5 Ìe,’” ÌL” ÌLš” ÌM” ÌM	” Ìf” Ìf” Ìf” Ìf” Ìf”! Ìf”# Ìf”% Ìf”” ÌN” ÌN”# ÌN”) ÌN–” ÌN” ÌN” ÌO” ÌO” ÌO” ÌO–” ÌN” ÌN” ÌP” ÌP” ÌP” ÌP–” ÌN” ÌN” ÌQ” ÌQ” ÌQ” ÌQÜ ” ÌN” ÌN” ÌR”" ÌR”# ÌR”$ ÌR”( ÌR ”) ÌR!”: ÌR2”; ÌR3”< ÌR4”= ÌR5”ÌF ÌR>”ÌG ÌR?”ÌH ÌRÌ@”ÌI ÌRÌA”ÌR ÌRÌJÜ ” ÌN” ÌN” ÌS” ÌS” ÌS” ÌS”" ÌS”# ÌS”4 ÌS,”5 ÌS-”6 ÌS.”7 ÌS/”< ÌS4”= ÌS5”ÌB ÌS:”ÌC ÌS;”ÌD ÌS<”ÌE ÌS=”ÌJ ÌSÌB”ÌK ÌSÌC”ÌP ÌSÌH—” ÌN” ÌN” ÌT” ÌT” ÌT” ÌT”  ÌT—” ÌU” ÌU” ÌU”& ÌU"”) ÌU%”. ÌU*”/ ÌU+–” ÌV” ÌV” ÌV”% ÌV!”' ÌV#”( ÌV$’” ÌW
+” ÌW’” ÌN” ÌN”” ÌY” ÌY”# ÌY”) ÌY–” ÌY” ÌY” ÌZ” ÌZ” ÌZ” ÌZ–” ÌY” ÌY” Ì[” Ì[” Ì[” Ì[–” ÌY” ÌY” Ì\” Ì\” Ì\” Ì\Ü ” ÌY” ÌY” Ì]”" Ì]”# Ì]”' Ì]”( Ì] ”9 Ì]1”: Ì]2”; Ì]3”< Ì]4”ÌE Ì]=”ÌF Ì]>”ÌG Ì]?”ÌH Ì]Ì@”ÌQ Ì]ÌIÜ ” ÌY” ÌY” Ì^” Ì^” Ì^”! Ì^”" Ì^”3 Ì^+”4 Ì^,”5 Ì^-”6 Ì^.”; Ì^3”< Ì^4”ÌA Ì^9”ÌB Ì^:”ÌC Ì^;”ÌD Ì^<”ÌI Ì^ÌA”ÌJ Ì^ÌB”ÌO Ì^ÌG—” ÌY” ÌY” Ì_” Ì_” Ì_” Ì_”  Ì_—” Ì`” Ì`” Ì`”& Ì`"”) Ì`%”- Ì`)”. Ì`*–” Ìa” Ìa” Ìa”! Ìa”# Ìa”$ Ìa ’” Ìb
+” Ìb’” ÌY” ÌY’” ÌL” ÌL’” ÌM” ÌM	’” Ìh” Ìh’” Ìi” Ìi’” Ìh” Ìh–” Ìi” Ìi” Ì’” Ì’” Ì’” Ì’’” Ìh” Ìh–” Ìi” Ìi” Ì“” Ì“” Ì“” Ì“’” Ìh” Ìh˜” Ìi” Ìi” Ì””" Ì””# Ì””( Ì””) Ì””. Ì”"’” Ìh” Ìh–” Ìi” Ìi” Ì•” Ì•”  Ì•”" Ì•’” Ìh” Ìhš” Ìi” Ìi” Ì–” Ì–” Ì–” Ì–”" Ì–”$ Ì–”& Ì–”( Ì–” Ìj” Ìj” Ìj” Ìj” Ìj”. Ìj#”/ Ìj$”0 Ìj%”1 Ìj&”? Ìj4”Ì@ Ìj5”ÌA Ìj6”ÌB Ìj7”ÌH Ìj=–” Ìj” Ìj” Ìk” Ìk” Ìk” Ìk˜” Ìj” Ìj” Ìl” Ìl” Ìl”& Ìl ”' Ìl!”- Ìl'š” Ìj” Ìj” Ìm” Ìm” Ìm” Ìm”  Ìm”" Ìm”$ Ìm”& Ìm ’” Ìj” Ìjš” Ìo” Ìo” Ìo” Ìo” Ìo”  Ìo”( Ìo”) Ìo”- Ìo"”/ Ìo$–” Ìo” Ìo” Ì	” Ì” Ì” Ì’” Ìp
+” Ìp”” Ìq” Ìq”+ Ìq”2 Ìq–” Ìq” Ìq” Ìr”  Ìr”! Ìr”# Ìr–” Ìq” Ìq” Ìs”! Ìs”" Ìs”$ Ìs–” Ìq” Ìq” Ìt”# Ìt”$ Ìt”& Ìt” Ìq” Ìq” Ìu”! Ìu”" Ìu”$ Ìu”) Ìu”+ Ìu”, Ìu ”. Ìu"”4 Ìu(”6 Ìu*”7 Ìu+”9 Ìu-˜” Ìq” Ìq” Ìv”* Ìv”+ Ìw”/ Ìw”0 Ìw”ÌA Ìw&Ü ” Ìx” Ìx” Ìx” Ìx” Ìx”  Ìx”3 Ìx-”4 Ìx.”< Ìx6”= Ìx7”ÌD Ìx>”ÌE Ìx?”ÌF ÌxÌ@”ÌG ÌxÌA”ÌH ÌxÌB”ÌQ ÌxÌK”ÌR ÌxÌL”ÌS ÌxÌM”ÌT ÌxÌN”Ì] ÌxÌW”Ì^ ÌxÌXÜ ” Ìy” Ìy” Ìy” Ìy” Ìy”  Ìy”. Ìy(”3 Ìy-”: Ìy4”; Ìy5”< Ìy6”= Ìy7”ÌF ÌyÌ@”ÌG ÌyÌA”ÌH ÌyÌB”ÌI ÌyÌC”ÌR ÌyÌL”ÌS ÌyÌM˜” Ìq” Ìq” Ì{”$ Ì{”% Ì|”) Ì|”* Ì|”; Ì|&Ü ” Ì}” Ì}” Ì}” Ì}” Ì}”  Ì}”3 Ì}-”4 Ì}.”< Ì}6”= Ì}7”ÌD Ì}>”ÌE Ì}?”ÌF Ì}Ì@”ÌG Ì}ÌA”ÌH Ì}ÌB”ÌM Ì}ÌG”ÌN Ì}ÌH”ÌS Ì}ÌM”ÌT Ì}ÌN”ÌU Ì}ÌO”ÌV Ì}ÌP”Ì[ Ì}ÌU”Ì\ Ì}ÌV”Ìa Ì}Ì[”Ìb Ì}Ì\Ü ” Ì~” Ì~” Ì~” Ì~” Ì~”  Ì~”. Ì~(”3 Ì~-”: Ì~4”; Ì~5”< Ì~6”= Ì~7”ÌB Ì~<”ÌC Ì~=”ÌH Ì~ÌB”ÌI Ì~ÌC”ÌJ Ì~ÌD”ÌK Ì~ÌE”ÌP Ì~ÌJ”ÌQ Ì~ÌK”ÌV Ì~ÌP”ÌW Ì~ÌQ—” Ìq” Ìq” Ì€”" Ì€”# Ì€”& Ì€”( Ì€–” Ì” Ì”  Ì”! Ì”2 Ì*”4 Ì,’” Ì‚”- Ì‚#Ü ” Ìƒ”  Ìƒ”$ Ìƒ”% Ìƒ”8 Ìƒ.”9 Ìƒ/”? Ìƒ5”ÌB Ìƒ8”ÌC Ìƒ9”ÌG Ìƒ=”ÌH Ìƒ>”ÌL ÌƒÌB”ÌM ÌƒÌC”Ì` ÌƒÌV”Ìa ÌƒÌW”Ìi ÌƒÌ_”Ìj ÌƒÌ`”Ìq ÌƒÌg”Ìr ÌƒÌh”Ìt ÌƒÌjŸ”  Ì„”& Ì„”- Ì„!”0 Ì„$”4 Ì„(”5 Ì„)”? Ì„3”Ì@ Ì„4”ÌC Ì„7”ÌD Ì„8”ÌK Ì„?”ÌL Ì„Ì@”ÌP Ì„ÌD”ÌQ Ì„ÌE”ÌR Ì„ÌFš”  Ì…”$ Ì…”% Ì…”8 Ì…,”9 Ì…-”= Ì…1”> Ì…2”ÌE Ì…9”ÌF Ì…:”ÌG Ì…;š”  Ì†”$ Ì†”% Ì†”: Ì†.”; Ì†/”? Ì†3”Ì@ Ì†4”ÌG Ì†;”ÌH Ì†<”ÌI Ì†=‘” Ì‡‘” Ìˆ‘” Ìˆ’” Ì‰”* Ì‰ —” ÌŠ”  ÌŠ”! ÌŠ”/ ÌŠ%”2 ÌŠ(”9 ÌŠ/”: ÌŠ0–” Ì‹”  Ì‹”! Ì‹”0 Ì‹&”2 Ì‹(”3 Ì‹)‘” ÌŒ’” Ì” Ì’” Ìq” Ìq””/ Ìp”3 Ìp”4 Ìp”< Ìp’” Ìp
+” Ìp’” Ìo” Ìo’” Ìh” Ìh’” Ìi” Ìi’” Ì˜” Ì˜” Ì™” Ì™
+” Ì™” Ì™”& Ì™ ”* Ì™$”. Ì™(”/ Ì™)”ÌB Ì™<”ÌC Ì™=”ÌI Ì™ÌC”ÌL Ì™ÌF”ÌM Ì™ÌG”ÌO Ì™ÌI’” Ìš” Ìš–” Ìš” Ìš” ÌÂ	”$ ÌÂ”% ÌÂ”* ÌÂ–” Ìš” Ìš” ÌÃ	”& ÌÃ”' ÌÃ”) ÌÃ˜” Ìš” Ìš” ÌÄ	”. ÌÄ”/ ÌÄ”4 ÌÄ”5 ÌÄ”: ÌÄ$–” Ìš” Ìš” ÌÅ	”+ ÌÅ”, ÌÅ”. ÌÅš” Ìš” Ìš” ÌÆ	”% ÌÆ”& ÌÆ”( ÌÆ”. ÌÆ”0 ÌÆ”2 ÌÆ”4 ÌÆ”” Ì›
+” Ì›”$ Ì›”* Ì›–” Ì›
+” Ì›” Ìœ”% Ìœ”& Ìœ”( Ìœ˜” Ì›
+” Ì›” Ì”' Ì”( Ì”2 Ì"”3 Ì#”9 Ì)š” Ì›
+” Ì›” Ì”# Ì”$ Ì”& Ì”, Ì”. Ì”0 Ì ”2 Ì"’” Ì›
+” Ì›’” Ì 
+” Ì š” Ì 
+” Ì ” Ì®”" Ì®”# Ì®”% Ì®”+ Ì®”- Ì®”/ Ì®”1 Ì® ’” Ì¡” Ì¡’”? Ì¡Ì@”ÌD Ì¡ÌM’”  Ì¢”# Ì¢””  Ì£”$ Ì£”, Ì£”3 Ì£–”  Ì£”$ Ì£”% Ì¤”- Ì¤”. Ì¤”0 Ì¤˜”  Ì£”$ Ì£”% Ì¥”/ Ì¥”0 Ì¥”: Ì¥(”; Ì¥)”? Ì¥-–”  Ì£”$ Ì£”% Ì¦”. Ì¦”/ Ì¦”8 Ì¦&’” Ì£”  Ì£œ”  Ì§”$ Ì§”) Ì§”, Ì§”0 Ì§ ”1 Ì§!”ÌD Ì§4”ÌE Ì§5”ÌK Ì§;”ÌN Ì§>”ÌO Ì§?”ÌQ Ì§ÌA””, Ì¨”0 Ì¨”8 Ì¨”= Ì¨–”, Ì¨”0 Ì¨”1 Ì©”9 Ì©”: Ì©”< Ì© ’”( Ì¨”, Ì¨‘”! Ìª‘”! Ìª’” Ì¢” Ì¢””; Ì¡”? Ì¡”Ì@ Ì¡”ÌS Ì¡,’” Ì¡” Ì¡’” Ì 
+” Ì ’” Ì°
+” Ì°š” Ì°
+” Ì°” Ì·”" Ì·”# Ì·”% Ì·”+ Ì·”- Ì·”/ Ì·”1 Ì· ”” Ì±” Ì±”$ Ì±”- Ì±–” Ì±” Ì±” Ì²”% Ì²”& Ì²”( Ì²’” Ì±” Ì±Ü ” Ì³” Ì³”$ Ì³”( Ì³”) Ì³”> Ì³+”? Ì³,”ÌB Ì³/”ÌC Ì³0”ÌD Ì³1”ÌE Ì³2”ÌG Ì³4”ÌH Ì³5”ÌI Ì³6”ÌJ Ì³7”ÌQ Ì³>”ÌR Ì³?”ÌS Ì³Ì@”ÌT Ì³ÌA”ÌU Ì³ÌB”ÌV Ì³ÌC”ÌZ Ì³ÌG”Ì[ Ì³ÌH”Ì` Ì³ÌM”Ìa Ì³ÌN–” Ì³” Ì³” Ì´”% Ì´”& Ì´”( Ì´–” Ì³” Ì³” Ìµ”& Ìµ”' Ìµ”0 Ìµ"’” Ì³” Ì³’” Ì°
+” Ì°’” Ì¹
+” Ì¹”” Ìº” Ìº”$ Ìº”/ Ìº–” Ìº” Ìº” Ì»”% Ì»”& Ì»”( Ì»’” Ìº” ÌºÜ ” Ì¼” Ì¼”$ Ì¼”3 Ì¼ ”4 Ì¼!”ÌQ Ì¼>”Ìn Ì¼?”Ìr Ì¼ÌC”Ìs Ì¼ÌD”Ìˆ Ì¼ÌY”ÌŠ Ì¼ÌZ”Ì‹ Ì¼Ì[”Ì’ Ì¼Ìb”Ì“ Ì¼Ìc”Ì” Ì¼Ìd”Ì• Ì¼Ìe–” Ì¼” Ì¼” Ì½”% Ì½”& Ì½”( Ì½˜” Ì¼” Ì¼” Ì¾”' Ì¾”( Ì¾”2 Ì¾$”3 Ì¾%”7 Ì¾)–” Ì¼” Ì¼” Ì¿”& Ì¿”' Ì¿”0 Ì¿"’” Ì¼” Ì¼’” Ì¹
+” Ì¹’” Ìš” Ìš‘” ÌÇ’” ÌÉ” ÌÉ‘” ÌÇ’” ÌÉ” ÌÉ” ÌÊ” ÌÊ
+” ÌÊ” ÌÊ” ÌÊ”' ÌÊ!”+ ÌÊ%”/ ÌÊ)”0 ÌÊ*”> ÌÊ8”ÌC ÌÊ=”ÌE ÌÊ?”ÌG ÌÊÌA’” ÌË” ÌË–” ÌË” ÌË” Ìß	”$ Ìß”% Ìß”* Ìß–” ÌË” ÌË” Ìà	”& Ìà”' Ìà”) Ìà˜” ÌË” ÌË” Ìá	”. Ìá”/ Ìá”4 Ìá”5 Ìá”: Ìá$–” ÌË” ÌË” Ìâ	”+ Ìâ”, Ìâ”. Ìâš” ÌË” ÌË” Ìã	”% Ìã”& Ìã”( Ìã”. Ìã”0 Ìã”2 Ìã”4 Ìã’” ÌÌ
+” ÌÌš” ÌÌ
+” ÌÌ” ÌÔ”" ÌÔ”# ÌÔ”% ÌÔ”+ ÌÔ”- ÌÔ”/ ÌÔ”1 ÌÔ ”” ÌÍ” ÌÍ”$ ÌÍ”* ÌÍ–” ÌÍ” ÌÍ” ÌÎ”% ÌÎ”& ÌÎ”( ÌÎ’” ÌÍ” ÌÍ–” ÌÏ” ÌÏ”$ ÌÏ”( ÌÏ”) ÌÏ”7 ÌÏ$–” ÌÏ” ÌÏ” ÌĞ”% ÌĞ”& ÌĞ”( ÌĞ˜” ÌÏ” ÌÏ” ÌÑ”' ÌÑ”( ÌÑ”2 ÌÑ$”3 ÌÑ%”7 ÌÑ)–” ÌÏ” ÌÏ” ÌÒ”& ÌÒ”' ÌÒ”0 ÌÒ"’” ÌÏ” ÌÏ’” ÌÌ
+” ÌÌ’” ÌÖ
+” ÌÖ”” Ì×” Ì×”$ Ì×”, Ì×–” Ì×” Ì×” ÌØ”% ÌØ”& ÌØ”( ÌØ’” Ì×” Ì×–” ÌÙ” ÌÙ”$ ÌÙ”( ÌÙ”) ÌÙ”2 ÌÙ–” ÌÙ” ÌÙ” ÌÚ”% ÌÚ”& ÌÚ”( ÌÚ˜” ÌÙ” ÌÙ” ÌÛ”' ÌÛ”( ÌÛ”2 ÌÛ$”3 ÌÛ%”7 ÌÛ)–” ÌÙ” ÌÙ” ÌÜ”& ÌÜ”' ÌÜ”0 ÌÜ"’” ÌÙ” ÌÙ’” ÌÖ
+” ÌÖ’” ÌË” ÌË‘” Ìä’” Ìæ” Ìæ‘” Ìä’” Ìæ” ÌæŸ” Ìç” Ìç
+” Ìç” Ìç” Ìç”' Ìç!”+ Ìç%”/ Ìç)”0 Ìç*”ÌC Ìç=”ÌD Ìç>”ÌJ ÌçÌD”ÌN ÌçÌH”ÌO ÌçÌI”ÌP ÌçÌJ” Ìè
+” Ìè” Ìè” Ìè” Ìè”( Ìè"”, Ìè&”0 Ìè*”1 Ìè+”? Ìè9”ÌD Ìè>”ÌF ÌèÌ@”ÌG ÌèÌA”ÌI ÌèÌC’” Ìé” Ìé–” Ìé” Ìé” Í	”$ Í”% Í”* Í–” Ìé” Ìé” Í	”& Í”' Í”) Í˜” Ìé” Ìé” Í	”. Í”/ Í”4 Í”5 Í”: Í$–” Ìé” Ìé” Í	”+ Í”, Í”. Íš” Ìé” Ìé” Í	”% Í”& Í”( Í”. Í”0 Í”2 Í”4 Í”” Ìê
+” Ìê”$ Ìê”7 Ìê"–” Ìê
+” Ìê” Ìë”% Ìë”& Ìë”( Ìë˜” Ìê
+” Ìê” Ìì”' Ìì”( Ìì”2 Ìì"”3 Ìì#”9 Ìì)š” Ìê
+” Ìê” Ìí”# Ìí”$ Ìí”& Ìí”, Ìí”. Ìí”0 Ìí ”2 Ìí"’” Ìê
+” Ìê’” Ìï
+” Ìï’”  Ìğ”# Ìğ–”  Ìğ”# Ìğ”$ Ìü”) Ìü”* Ìü”0 Ìü˜”  Ìğ”# Ìğ”$ Ìı”2 Ìı”3 Ìı”< Ìı%”= Ìı&”ÌB Ìı+š”  Ìğ”# Ìğ”$ Ìş”* Ìş”+ Ìş”- Ìş”3 Ìş”5 Ìş”6 Ìş”8 Ìş!˜”  Ìñ”$ Ìñ”, Ìñ”2 Ìñ”7 Ìñ”: Ìñ!”; Ìñ"”> Ìñ%–”  Ìñ”$ Ìñ”% Ìò”- Ìò”. Ìò”0 Ìò–”  Ìñ”$ Ìñ”% Ìó”* Ìó”+ Ìó”- Ìó’” Ìñ”  Ìñ”  Ìô”) Ìô”1 Ìô”3 Ìô”7 Ìô”9 Ìô ”= Ìô$”> Ìô%”ÌG Ìô.”ÌH Ìô/”ÌM Ìô4”ÌN Ìô5”ÌP Ìô7–”  Ìô”) Ìô”* Ìõ”/ Ìõ”0 Ìõ”2 Ìõ–”  Ìô”) Ìô”* Ìö”0 Ìö”1 Ìö”3 Ìö˜”  Ìô”) Ìô”* Ì÷”. Ì÷”/ Ì÷”8 Ì÷”9 Ì÷ ”? Ì÷&™”  Ìô”) Ìô”* Ìø”2 Ìø”3 Ìø”4 Ìø”9 Ìø(”; Ìø*”= Ìø,š”$ Ìù”( Ìù”) Ìù”2 Ìù ”3 Ìù!”8 Ìù&”9 Ìù'”< Ìù*”ÌA Ìù/”ÌB Ìù0’”  Ìú”! Ìú’” Ìğ” ÌğÜ ”; Ìï”< Ìï”= Ìï”? Ìï”Ì@ Ìï”ÌB Ìï”ÌC Ìï”ÌE Ìï”ÌF Ìï”ÌH Ìï”ÌI Ìï ”ÌK Ìï"”ÌL Ìï#”ÌN Ìï%”ÌO Ìï&”ÌQ Ìï(”ÌR Ìï)”ÌT Ìï+”ÌU Ìï,”ÌV Ìï-’” Ìï
+” Ìï’” Ìé” Ìé’” Í” Í–” Í” Í” Í	”$ Í”% Í”* Í–” Í” Í” Í	”& Í”' Í”) Í˜” Í” Í” Í 	”. Í ”/ Í ”4 Í ”5 Í ”: Í $–” Í” Í” Í!	”+ Í!”, Í!”. Í!š” Í” Í” Í"	”% Í"”& Í"”( Í"”. Í"”0 Í"”2 Í"”4 Í"”” Í
+” Í”$ Í”7 Í"–” Í
+” Í” Í”% Í”& Í”( Í˜” Í
+” Í” Í	”' Í	”( Í	”2 Í	"”3 Í	#”9 Í	)š” Í
+” Í” Í
+”# Í
+”$ Í
+”& Í
+”, Í
+”. Í
+”0 Í
+ ”2 Í
+"’” Í
+” Í’” Í
+” Í’”  Í”# Í–”  Í”# Í”$ Í”) Í”* Í”0 Í˜”  Í”# Í”$ Í”2 Í”3 Í”< Í%”= Í&”ÌB Í+š”  Í”# Í”$ Í”* Í”+ Í”- Í”3 Í”5 Í”6 Í”8 Í!˜”  Í”$ Í”, Í”2 Í”7 Í”: Í!”; Í"”> Í%–”  Í”$ Í”% Í”- Í”. Í”0 Í–”  Í”$ Í”% Í”* Í”+ Í”- Í’” Í”  Í”  Í”) Í”1 Í”3 Í”7 Í”9 Í ”= Í$”> Í%”ÌG Í.”ÌH Í/”ÌM Í4”ÌN Í5”ÌP Í7–”  Í”) Í”* Í”/ Í”0 Í”2 Í–”  Í”) Í”* Í”0 Í”1 Í”3 Í˜”  Í”) Í”* Í”. Í”/ Í”8 Í”9 Í ”? Í&™”  Í”) Í”* Í”2 Í”3 Í”4 Í”9 Í(”; Í*”= Í,š”$ Í”( Í”) Í”2 Í ”3 Í!”8 Í&”9 Í'”< Í*”ÌA Í/”ÌB Í0’”  Í”! Í’” Í” ÍÜ ”; Í”< Í”= Í”? Í”Ì@ Í”ÌB Í”ÌC Í”ÌE Í”ÌF Í”ÌH Í”ÌI Í ”ÌK Í"”ÌL Í#”ÌN Í%”ÌO Í&”ÌQ Í(”ÌR Í)”ÌT Í+”ÌU Í,”ÌV Í-’” Í
+” Í’” Í” Í’” Í$”! Í$’” Í%” Í%’” Í$”! Í$–” Í%” Í%” ÍM	”! ÍM”" ÍM”' ÍM’” Í$”! Í$˜” Í%” Í%” ÍN	”* ÍN”+ ÍN”4 ÍN!”5 ÍN"”ÌA ÍN.’” Í$”! Í$š” Í%” Í%” ÍO	”" ÍO”# ÍO”% ÍO”+ ÍO”- ÍO”/ ÍO”1 ÍO–” Í&
+” Í&”  Í&”! Í&”2 Í&$”4 Í&&””$ Í'”* Í'”; Í'”ÌA Í'–”$ Í'”* Í'”+ Í(”0 Í(”1 Í(”6 Í(–”$ Í'”* Í'”+ Í)”1 Í)”2 Í)”4 Í)–”$ Í'”* Í'”+ Í*”3 Í*”4 Í*”6 Í*–”$ Í'”* Í'”+ Í+”: Í+”; Í+”ÌD Í+(œ”$ Í'”* Í'”+ Í,”2 Í,”3 Í,”7 Í,”8 Í,”ÌK Í,/”ÌL Í,0”ÌR Í,6”ÌV Í,:”ÌW Í,;—”$ Í'”* Í'”+ Í-”2 Í-”3 Í-”6 Í-”8 Í-–”( Í.”, Í.”- Í.”; Í.#”= Í.%”> Í.&’”$ Í/”% Í/’”  Í'”& Í'””$ Í1”* Í1”; Í1”ÌA Í1–”$ Í1”* Í1”+ Í2”0 Í2”1 Í2”6 Í2–”$ Í1”* Í1”+ Í3”1 Í3”2 Í3”4 Í3–”$ Í1”* Í1”+ Í4”3 Í4”4 Í4”6 Í4–”$ Í1”* Í1”+ Í5”: Í5”; Í5”ÌD Í5(—”$ Í1”* Í1”+ Í6”2 Í6”3 Í6”6 Í6”8 Í6–”( Í7”, Í7”- Í7”= Í7%”? Í7'”Ì@ Í7(’”$ Í8”% Í8’”  Í1”& Í1‘” Í9‘” Í9””$ Í:”* Í:”; Í:”ÌA Í:–”$ Í:”* Í:”+ Í;”0 Í;”1 Í;”6 Í;–”$ Í:”* Í:”+ Í<”1 Í<”2 Í<”4 Í<–”$ Í:”* Í:”+ Í=”3 Í=”4 Í=”6 Í=–”$ Í:”* Í:”+ Í>”: Í>”; Í>”ÌD Í>(—”$ Í:”* Í:”+ Í?”2 Í?”3 Í?”6 Í?”8 Í?–”( Í@”, Í@”- Í@”7 Í@”9 Í@!”: Í@"’”$ ÍA”% ÍA’”  Í:”& Í:””$ ÍC”* ÍC”; ÍC”? ÍC–”$ ÍC”* ÍC”+ ÍD”0 ÍD”1 ÍD”6 ÍD–”$ ÍC”* ÍC”+ ÍE”1 ÍE”2 ÍE”4 ÍE–”$ ÍC”* ÍC”+ ÍF”3 ÍF”4 ÍF”6 ÍF–”$ ÍC”* ÍC”+ ÍG”: ÍG”; ÍG”ÌD ÍG(—”$ ÍC”* ÍC”+ ÍH”2 ÍH”3 ÍH”6 ÍH”8 ÍH–”( ÍI”, ÍI”- ÍI”9 ÍI!”; ÍI#”< ÍI$’”$ ÍJ”% ÍJ’”  ÍC”& ÍC‘” ÍK’” Í$” Í$’” Í%” Í%‘” ÍP’” ÍR” ÍR‘” ÍP’” ÍR” ÍRÜ ” ÍS” ÍS
+” ÍS” ÍS”! ÍS”" ÍS”( ÍS"”+ ÍS%”, ÍS&”0 ÍS*”4 ÍS.”5 ÍS/”ÌD ÍS>”ÌE ÍS?”ÌK ÍSÌE”ÌN ÍSÌH”ÌO ÍSÌI”ÌQ ÍSÌK’” ÍT” ÍT–” ÍT” ÍT” Í¡	”$ Í¡”% Í¡”* Í¡–” ÍT” ÍT” Í¢	”& Í¢”' Í¢”) Í¢˜” ÍT” ÍT” Í£	”. Í£”/ Í£”4 Í£”5 Í£”: Í£$–” ÍT” ÍT” Í¤	”+ Í¤”, Í¤”. Í¤š” ÍT” ÍT” Í¥	”% Í¥”& Í¥”( Í¥”. Í¥”0 Í¥”2 Í¥”4 Í¥”” ÍU
+” ÍU”$ ÍU”+ ÍU–” ÍU
+” ÍU” ÍV”% ÍV”& ÍV”( ÍV˜” ÍU
+” ÍU” ÍW”' ÍW”( ÍW”2 ÍW"”3 ÍW#”9 ÍW)š” ÍU
+” ÍU” ÍX”# ÍX”$ ÍX”& ÍX”, ÍX”. ÍX”0 ÍX ”2 ÍX"’” ÍU
+” ÍU’” ÍZ
+” ÍZ’” Í[
+” Í[’”? Í[:”ÌD Í[ÌG’”  Í\”# Í\–”  Í\”# Í\”$ Íp”) Íp”* Íp”0 Íp˜”  Í\”# Í\”$ Íq”2 Íq”3 Íq”< Íq%”= Íq&”ÌI Íq2”  Í\”# Í\”$ Ír”+ Ír”, Ír”. Ír”1 Ír”3 Ír”4 Ír”6 Ír”< Ír%”> Ír'”? Ír(”ÌA Ír*š”  Í\”# Í\”$ Ís”/ Ís”0 Ís”2 Ís”8 Ís!”: Ís#”; Ís$”= Ís&–”  Í\”# Í\”$ Ít”/ Ít”0 Ít”9 Ít"œ”  Í]”$ Í]”, Í]”/ Í]”4 Í]”7 Í]”8 Í]”= Í]$”ÌA Í](”ÌB Í])”ÌI Í]0”ÌK Í]2–”  Í]”$ Í]”% Í^”- Í^”. Í^”0 Í^–”  Í]”$ Í]”% Í_”1 Í_”2 Í_”3 Í_’” Í]”  Í]”  Í`”$ Í`”, Í`”3 Í`”7 Í`”8 Í`”ÌA Í`(”ÌB Í`)”ÌI Í`0”ÌJ Í`1”ÌK Í`2”ÌL Í`3”ÌN Í`5–”  Í`”$ Í`”% Ía”- Ía”. Ía”0 Ía–”  Í`”$ Í`”% Íb”* Íb”+ Íb”. Íb’” Í`”  Í`”  Íc”$ Íc”, Íc”3 Íc”7 Íc”8 Íc”ÌB Íc)”ÌC Íc*”ÌJ Íc1”ÌK Íc2”ÌL Íc3”ÌM Íc4”ÌO Íc6–”  Íc”$ Íc”% Íd”- Íd”. Íd”0 Íd–”  Íc”$ Íc”% Íe”. Íe”/ Íe”8 Íe$–”  Íc”$ Íc”% Íf”* Íf”+ Íf”. Íf’” Íc”  Íc””  Íg”& Íg”7 Íg”; Íg–”  Íg”& Íg”' Íh”, Íh”- Íh”/ Íh–”  Íg”& Íg”' Íi”- Íi”. Íi”0 Íi–”  Íg”& Íg”' Íj”/ Íj”0 Íj”2 Íj–”  Íg”& Íg”' Ík”6 Ík ”7 Ík!”Ì@ Ík*—”  Íg”& Íg”' Íl”. Íl”/ Íl”2 Íl”4 Íl˜”$ Ím”( Ím”) Ím”6 Ím$”7 Ím%”< Ím*”= Ím+”> Ím,’”  Ín”! Ín’” Íg”" Íg’” Í\” Í\””; Í[”? Í[”Ì@ Í[”ÌL Í[#’” ÍZ
+” ÍZ’” Í[
+” Í[’” Íw
+” Íw’” Íx
+” Íx’”? ÍxÌ@”ÌD ÍxÌM’”  Íy”& Íy–”  Íy”& Íy”' Íœ”, Íœ”- Íœ”3 Íœš”  Íy”& Íy”' Í”2 Í”3 Í”5 Í”; Í!”= Í#”> Í$”Ì@ Í&–”  Íy”& Íy”' Í”2 Í”3 Í”< Í"’”  Íz”# Íz–”  Íz”# Íz”$ Í‡”) Í‡”* Í‡”0 Í‡˜”  Íz”# Íz”$ Íˆ”2 Íˆ”3 Íˆ”< Íˆ'”= Íˆ(”ÌI Íˆ4”  Íz”# Íz”$ Í‰”+ Í‰”, Í‰”. Í‰”1 Í‰”3 Í‰”4 Í‰”6 Í‰!”< Í‰'”> Í‰)”? Í‰*”ÌA Í‰,Ü ”  Í{”$ Í{”, Í{”/ Í{”3 Í{”4 Í{”Ì@ Í{)”ÌA Í{*”ÌG Í{0”ÌJ Í{3”ÌO Í{8”ÌR Í{;”ÌS Í{<”ÌX Í{ÌA”Ì\ Í{ÌE”Ì] Í{ÌF”Ìe Í{ÌN”Ìf Í{ÌO”Ìj Í{ÌS”Ìk Í{ÌT”Ìp Í{ÌY”Ìq Í{ÌZ”Ìx Í{Ìa–”  Í{”$ Í{”% Í|”- Í|”. Í|”0 Í|–”  Í{”$ Í{”% Í}”1 Í}”2 Í} ”3 Í}!’” Í{”  Í{””  Í~”& Í~”7 Í~”; Í~–”  Í~”& Í~”' Í”, Í”- Í”/ Í–”  Í~”& Í~”' Í€”- Í€”. Í€”0 Í€–”  Í~”& Í~”' Í”/ Í”0 Í”2 Í–”  Í~”& Í~”' Í‚”6 Í‚"”7 Í‚#”Ì@ Í‚,—”  Í~”& Í~”' Íƒ”. Íƒ”/ Íƒ”2 Íƒ”4 Íƒ ˜”$ Í„”( Í„”) Í„”: Í„*”; Í„+”Ì@ Í„0”ÌA Í„1”ÌB Í„2’”  Í…”! Í…’” Í~”" Í~’” Íz” Íz’”  Í‹”# Í‹–”  Í‹”# Í‹”$ Í™”) Í™”* Í™”0 Í™š”  Í‹”# Í‹”$ Íš”+ Íš”, Íš”. Íš”4 Íš”6 Íš!”7 Íš"”9 Íš$Ü ”  ÍŒ”$ ÍŒ”, ÍŒ”4 ÍŒ”8 ÍŒ!”9 ÍŒ"”ÌC ÍŒ,”ÌD ÍŒ-”ÌG ÍŒ0”ÌH ÍŒ1”ÌI ÍŒ2”ÌJ ÍŒ3”ÌL ÍŒ5”ÌM ÍŒ6”ÌN ÍŒ7”ÌO ÍŒ8”ÌV ÍŒ?”ÌW ÍŒÌ@”ÌX ÍŒÌA”ÌY ÍŒÌB”ÌZ ÍŒÌC”Ì[ ÍŒÌD”Ì_ ÍŒÌH”Ì` ÍŒÌI”Ìe ÍŒÌN”Ìf ÍŒÌO”Ìh ÍŒÌQ–”  ÍŒ”$ ÍŒ”% Í”- Í”. Í”0 Í–”  ÍŒ”$ ÍŒ”% Í”. Í”/ Í”8 Í&–”  ÍŒ”$ ÍŒ”% Í”1 Í”2 Í ”3 Í!’” ÍŒ”  ÍŒ”  Í”$ Í”, Í”4 Í”8 Í!”9 Í"”ÌG Í0”ÌH Í1”ÌO Í8”ÌP Í9”ÌQ Í:”ÌR Í;”ÌT Í=–”  Í”$ Í”% Í‘”- Í‘”. Í‘”0 Í‘–”  Í”$ Í”% Í’”. Í’”/ Í’”8 Í’&–”  Í”$ Í”% Í“”* Í“”+ Í“”. Í“’” Í”  Í”  Í””$ Í””, Í””3 Í””7 Í” ”8 Í”!”ÌB Í”+”ÌC Í”,”ÌJ Í”3”ÌK Í”4”ÌL Í”5”ÌM Í”6”ÌO Í”8–”  Í””$ Í””% Í•”- Í•”. Í•”0 Í•–”  Í””$ Í””% Í–”. Í–”/ Í–”8 Í–&–”  Í””$ Í””% Í—”* Í—”+ Í—”. Í—’” Í””  Í”’” Í‹” Í‹’” Íy”" Íy””; Íx”? Íx”Ì@ Íx”ÌO Íx&’” Íw
+” Íw’” Íx
+” Íx’” ÍT” ÍT’” Í§”! Í§”” Í¨” Í¨”/ Í¨”5 Í¨’” Í§”! Í§–” Í¨” Í¨” Í©”$ Í©”% Í©”* Í©’” Í§”! Í§–” Í¨” Í¨” Íª”% Íª”& Íª”( Íª’” Í§”! Í§–” Í¨” Í¨” Í«”' Í«”( Í«”* Í«’” Í§”! Í§–” Í¨” Í¨” Í¬”. Í¬”/ Í¬”8 Í¬$’” Í§”! Í§—” Í¨” Í¨” Í­”& Í­”' Í­”* Í­”, Í­–” Í®”  Í®”! Í®”/ Í®”1 Í®!”2 Í®"’” Í¯
+” Í¯’” Í§” Í§’” Í¨” Í¨‘” Í°‘” Í°’” 4” 4
+‘” Íµ’” Í·” Í·Ÿ” Í¸” Í¸
+” Í¸” Í¸” Í¸” Í¸”% Í¸!”& Í¸"”) Í¸%”* Í¸&”. Í¸*”/ Í¸+”= Í¸9”> Í¸:”? Í¸;–” Í¹” Í¹” Í¹” Í¹” Í¹”! Í¹œ” Íº” Íº
+” Íº” Íº” Íº”" Íº”# Íº”* Íº$”+ Íº%”, Íº&”- Íº'”. Íº(‘”	 Í»’” Í¼” Í¼’” Í¾” Í¾˜” Í¿” Í¿” Í¿” Í¿” Í¿”$ Í¿ ”& Í¿"”( Í¿$’” ÍÀ” ÍÀ‘”	 ÍÁÜ ” ÍÃ” ÍÃ
+” ÍÃ” ÍÃ” ÍÃ” ÍÃ”' ÍÃ#”( ÍÃ$”+ ÍÃ'”, ÍÃ(”0 ÍÃ,”1 ÍÃ-”? ÍÃ;”Ì@ ÍÃ<”ÌD ÍÃÌ@”ÌE ÍÃÌA”ÌF ÍÃÌB–” ÍÄ” ÍÄ
+” ÍÄ” ÍÄ ” ÍÄ"” ÍÄ#” ÍÆ” ÍÆ	” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ” ÍÆ”  ÍÆ”" ÍÆ”$ ÍÆ ” ÍÇ” ÍÇ” ÍÇ” ÍÇ”" ÍÇ”# ÍÇ”' ÍÇ!”( ÍÇ"”1 ÍÇ+”2 ÍÇ,”3 ÍÇ-”4 ÍÇ.”5 ÍÇ/”6 ÍÇ0˜” ÍÈ” ÍÈ
+” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ˜” ÍÉ” ÍÉ” ÍÉ” ÍÉ” ÍÉ”" ÍÉ”# ÍÉ”$ ÍÉ‘” ÍÊ‘”	 ÍË” ÍÍ” ÍÍ
+” ÍÍ” ÍÍ”* ÍÍ&”+ ÍÍ'”Ì@ ÍÍ<”ÌA ÍÍ=”ÌH ÍÍÌD”ÌJ ÍÍÌF”ÌS ÍÍÌO”ÌT ÍÍÌP”ÌU ÍÍÌQÜ ” ÍÏ” ÍÏ
+” ÍÏ” ÍÏ” ÍÏ”& ÍÏ"”' ÍĞ”+ ÍĞ
+”, ÍĞ”: ÍĞ”< ÍÑ”ÌC ÍÑ”ÌE ÍÒ”ÌN ÍÒ”ÌP ÍÓ”ÌZ ÍÓ”Ì[ ÍÔ”Ì\ ÍÔš” ÍÖ” ÍÖ” ÍÖ	” ÍÖ” ÍÖ” ÍÖ” ÍÖ”$ ÍÖ ”% ÍÖ!”& ÍÖ"–” Í×” Í×” Í×	” Í×” Í×” Í×’” ÍØ” ÍØ”” ÍÚ” ÍÚ” ÍÚ” ÍÚœ” ÍÛ” ÍÛ” ÍÛ	” ÍÛ” ÍÛ”  ÍÛ”! ÍÛ”& ÍÛ"”( ÍÛ$”) ÍÛ%”* ÍÛ&”+ ÍÛ'–” ÍÜ” ÍÜ” ÍÜ	” ÍÜ” ÍÜ” ÍÜ’” Íİ” Íİ’” Íß” Íß—” Íà” Íà” Íà	” Íà” Íà”  Íà”! Íà—” Íá” Íá” Íá	” Íá” Íá” Íá” ÍáÜ ” Íâ” Íâ” Íâ	” Íâ” Íâ” Íâ” Íâ” Íâ”  Íâ”" Íâ”$ Íâ ”& Íâ"”( Íâ$”* Íâ&”, Íâ(”. Íâ*”0 Íâ,”2 Íâ.”4 Íâ0”6 Íâ2”8 Íâ4”: Íâ6”< Íâ8”= Íâ9”> Íâ:’” Íã” Íã’” Íå” Íå–” Íæ” Íæ” Íæ” Íæ” Íæ” Íæ™” Íç” Íç	” Íç” Íç” Íç” Íç”  Íç”, Íç(”. Íç*—” Íè” Íè” Íè” Íè” Íè”$ Íè”% Íè‘”	 Íé™” Íê” Íê	” Íê” Íê” Íê” Íê”  Íê”/ Íê+”1 Íê-—” Íë” Íë” Íë” Íë” Íë”$ Íë”% Íë‘”	 Íìœ” Íí” Íí” Íí	” Íí” Íí” Íí”  Íí”' Íí#”( Íí$”) Íí%”* Íí&”+ Íí'’” Íî” Íî’” Íğ” Íğ’” Íñ” ÍñÜ ” Íò” Íò” Íò” Íò” Íò”$ Íò ”& Íò"”* Íò&”. Íò*”/ Íò+”ÌB Íò>”ÌC Íò?”ÌI ÍòÌE”ÌM ÍòÌI”ÌN ÍòÌJ”ÌP ÍòÌL’” Íó” Íó‘”	 ÍôÜ ” Íö” Íö
+” Íö” Íö” Íö” Íö”' Íö#”( Íö$”+ Íö'”, Íö(”0 Íö,”1 Íö-”? Íö;”Ì@ Íö<”ÌD ÍöÌ@”ÌE ÍöÌA”ÌF ÍöÌBœ” Í÷” Í÷” Í÷	”  Í÷”! Í÷”% Í÷!”& Í÷"”* Í÷&”+ Í÷'”9 Í÷5”: Í÷6”; Í÷7š” Íø” Íø” Íø	”" Íø”# Íø”' Íø#”( Íø$”/ Íø+”0 Íø,”1 Íø-—” Íù” Íù” Íù	” Íù” Íù”  Íù”! Íù—” Íú” Íú” Íú	” Íú” Íú” Íú” Íú’” Íû” Íû’” Íı” Íıš” Íş” Íş” Íş” Íş”$ Íş ”% Íş!”+ Íş'”. Íş*”/ Íş+”1 Íş-’” Íÿ” Íÿ‘”	 Í –” Í” Í
+” Í” Í ” Í"” Í#” Í” Í	” Í” Í” Í” Í” Í” Í” Í” Í” Í”  Í”" Í”$ Í ” Í” Í” Í” Í”" Í”# Í”' Í!”( Í"”1 Í+”2 Í,”3 Í-”4 Í.”5 Í/”6 Í0˜” Í” Í
+” Í” Í” Í” Í” Í” Í˜” Í” Í” Í” Í” Í”" Í”# Í”$ Í‘” Í‘”	 ÍÜ ” Í
+” Í
+
+” Í
+” Í
+”+ Í
+'”, Í
+(”ÌA Í
+=”ÌB Í”ÌC Í”ÌF Í
+”ÌJ Í”ÌK Í”Ì^ Í"”Ì_ Í#”Ìa Í”Ìb Í”Ìe Í
+”Ìi Í”Ìj Í”Ì Í$”Ì€ Í%”Ì‚ Í”Ì‹ Í”ÌŒ Í”Ì Íš” Í” Í” Í	” Í” Í”! Í”" Í”- Í)”. Í*”/ Í+–” Í” Í” Í	” Í” Í”  Í’” Í” Í”” Í” Í” Í” Í!œ” Í” Í” Í	” Í” Í”# Í”$ Í ”) Í%”+ Í'”, Í(”- Í)”. Í*–” Í” Í” Í	” Í” Í” Í’” Í” Í’” Í” Í—” Í” Í” Í	”  Í”# Í”% Í!”& Í"—” Í” Í” Í	”" Í”% Í!”' Í#”( Í$—” Í” Í” Í	” Í” Í”  Í”! Í—” Í” Í” Í	” Í” Í” Í” ÍÜ ” Í” Í” Í	” Í” Í” Í” Í” Í”  Í”" Í”$ Í ”& Í"”( Í$”* Í&”, Í(”. Í*”0 Í,”2 Í.”4 Í0”6 Í2”8 Í4”: Í6”< Í8”= Í9”> Í:’” Í” ÍÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ”‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì½‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌ‡Ì–ÔrL”¤type¥start£end¤nameªIdentifierÌ‡Ì–¯ScoreCalculatorÔrM•¤type¥start£end¥value£raw§LiteralÌœÌ¼¾../common/util/ScoreCalculatorÙ '../common/util/ScoreCalculator'J±ImportDeclarationÌ¿Ìı‘ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÌÈÌÔLªIdentifierÌÈÌÔ¬SkatingScoreLªIdentifierÌÈÌÔ¬SkatingScoreM§LiteralÌÜÌü¾../viewmodel/SkatingScoreModelÙ '../viewmodel/SkatingScoreModel'

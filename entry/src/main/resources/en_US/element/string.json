@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Calculator App"
+    },
+    {
+      "name": "error",
+      "value": "error"
+    },
+    {
+      "name": "main_page_title",
+      "value": "Calculator App"
+    },
+    {
+      "name": "skating_title",
+      "value": "Figure Skating Scoring Calculator"
+    },
+    {
+      "name": "select_element",
+      "value": "Select Element"
+    },
+    {
+      "name": "base_value",
+      "value": "Base Value"
+    },
+    {
+      "name": "goe_score",
+      "value": "GOE Score"
+    },
+    {
+      "name": "total_score",
+      "value": "Total Score"
+    },
+    {
+      "name": "add_element",
+      "value": "Add Element"
+    },
+    {
+      "name": "calculate_total",
+      "value": "Calculate Total"
+    },
+    {
+      "name": "clear",
+      "value": "Clear"
+    }
+  ]
+}

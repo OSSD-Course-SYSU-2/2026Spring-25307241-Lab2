@@ -1,0 +1,563 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚP/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { CombinationJump } from '../../viewmodel/SkatingScoreModel';
+/**
+ * èŠ±æ ·æ»‘å†°è®¡åˆ†è®¡ç®—å·¥å…·ç±»
+ */
+class ScoreCalculator {
+    /**
+     * è®¡ç®—å•ä¸ªåŠ¨ä½œçš„æœ€ç»ˆå¾—åˆ†
+     *
+     * @param baseValue åŸºç¡€åˆ†å€¼
+     * @param goeScores GOEè¯„åˆ†æ•°ç»„
+     * @return æœ€ç»ˆå¾—åˆ†
+     */
+    calculateElementScore(baseValue, goeScores) {
+        if (goeScores.length === 0) {
+            return baseValue;
+        }
+        // è®¡ç®—GOEå¹³å‡å€¼
+        const averageGOE = this.calculateAverage(goeScores);
+        // GOEè½¬æ¢ä¸ºåˆ†æ•°: GOEå€¼ * åŸºç¡€åˆ†å€¼ * 0.1
+        const goeValue = averageGOE * baseValue * 0.1;
+        // æœ€ç»ˆå¾—åˆ† = åŸºç¡€åˆ†å€¼ + GOEåˆ†æ•°
+        const finalScore = baseValue + goeValue;
+        return Math.round(finalScore * 100) / 100;
+    }
+    /**
+     * è®¡ç®—æ•°ç»„å¹³å‡å€¼
+     *
+     * @param values æ•°å€¼æ•°ç»„
+     * @return å¹³å‡å€¼
+     */
+    calculateAverage(values) {
+        if (values.length === 0) {
+            return 0;
+        }
+        // åŽ»æŽ‰æœ€é«˜åˆ†å’Œæœ€ä½Žåˆ†
+        const sorted = [...values].sort((a, b) => a - b);
+        const trimmed = sorted.slice(1, sorted.length - 1);
+        if (trimmed.length === 0) {
+            return values[0];
+        }
+        const sum = trimmed.reduce((acc, val) => acc + val, 0);
+        return sum / trimmed.length;
+    }
+    /**
+     * è®¡ç®—æŠ€æœ¯åˆ†æ€»åˆ†
+     *
+     * @param elements æ‰€æœ‰åŠ¨ä½œè¯„åˆ†
+     * @return æŠ€æœ¯åˆ†æ€»åˆ†
+     */
+    calculateTechnicalTotal(elements) {
+        let total = 0;
+        for (const element of elements) {
+            total += element.finalScore;
+        }
+        return Math.round(total * 100) / 100;
+    }
+    /**
+     * è®¡ç®—èŠ‚ç›®å†…å®¹åˆ†
+     *
+     * @param component èŠ‚ç›®å†…å®¹åˆ†é¡¹
+     * @return æœ€ç»ˆèŠ‚ç›®å†…å®¹åˆ†
+     */
+    calculateProgramComponent(component) {
+        if (component.scores.length === 0) {
+            return 0;
+        }
+        // è®¡ç®—å¹³å‡åˆ†
+        const average = this.calculateAverage(component.scores);
+        component.averageScore = average;
+        // æœ€ç»ˆåˆ†æ•° = å¹³å‡åˆ† * ç³»æ•°
+        const finalScore = average * component.factor;
+        component.finalScore = Math.round(finalScore * 100) / 100;
+        return component.finalScore;
+    }
+    /**
+     * è®¡ç®—èŠ‚ç›®å†…å®¹åˆ†æ€»åˆ†
+     *
+     * @param components æ‰€æœ‰èŠ‚ç›®å†…å®¹åˆ†é¡¹
+     * @return èŠ‚ç›®å†…å®¹åˆ†æ€»åˆ†
+     */
+    calculateComponentTotal(components) {
+        let total = 0;
+        for (const component of components) {
+            total += this.calculateProgramComponent(component);
+        }
+        return Math.round(total * 100) / 100;
+    }
+    /**
+     * è®¡ç®—æ¯”èµ›æ€»åˆ†
+     *
+     * @param technicalScore æŠ€æœ¯åˆ†
+     * @param componentScore èŠ‚ç›®å†…å®¹åˆ†
+     * @param deductions æ‰£åˆ†
+     * @return æ¯”èµ›æ€»åˆ†
+     */
+    calculateTotalScore(technicalScore, componentScore, deductions = 0) {
+        const total = technicalScore + componentScore - deductions;
+        return Math.round(total * 100) / 100;
+    }
+    /**
+     * éªŒè¯GOEè¯„åˆ†æ˜¯å¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
+     *
+     * @param goe GOEè¯„åˆ†
+     * @return æ˜¯å¦æœ‰æ•ˆ
+     */
+    validateGOE(goe) {
+        return goe >= -5 && goe <= 5;
+    }
+    /**
+     * éªŒè¯èŠ‚ç›®å†…å®¹åˆ†æ˜¯å¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
+     *
+     * @param score èŠ‚ç›®å†…å®¹åˆ†
+     * @return æ˜¯å¦æœ‰æ•ˆ
+     */
+    validateProgramScore(score) {
+        return score >= 0.25 && score <= 10.0;
+    }
+    /**
+     * æ ¼å¼åŒ–åˆ†æ•°æ˜¾ç¤º
+     *
+     * @param score åˆ†æ•°
+     * @return æ ¼å¼åŒ–åŽçš„å­—ç¬¦ä¸²
+     */
+    formatScore(score) {
+        return score.toFixed(2);
+    }
+    /**
+     * è®¡ç®—è¿žè·³ç»„åˆçš„åŸºç¡€åˆ†å€¼
+     * è¿žè·³è§„åˆ™ï¼šç¬¬äºŒä¸ªåŠåŽç»­è·³è·ƒçš„åŸºç¡€åˆ†å€¼ä¹˜ä»¥1.1
+     *
+     * @param baseValues å„è·³è·ƒçš„åŸºç¡€åˆ†å€¼æ•°ç»„
+     * @return è¿žè·³æ€»åŸºç¡€åˆ†å€¼
+     */
+    calculateCombinationBaseValue(baseValues) {
+        if (baseValues.length === 0) {
+            return 0;
+        }
+        let totalBaseValue = baseValues[0]; // ç¬¬ä¸€ä¸ªè·³è·ƒä¿æŒåŽŸå€¼
+        // ç¬¬äºŒä¸ªåŠåŽç»­è·³è·ƒåŸºç¡€åˆ†å€¼ä¹˜ä»¥1.1
+        for (let i = 1; i < baseValues.length; i++) {
+            totalBaseValue += baseValues[i] * 1.1;
+        }
+        return Math.round(totalBaseValue * 100) / 100;
+    }
+    /**
+     * è®¡ç®—è¿žè·³ç»„åˆçš„æœ€ç»ˆå¾—åˆ†
+     *
+     * @param baseValues å„è·³è·ƒçš„åŸºç¡€åˆ†å€¼æ•°ç»„
+     * @param goeScores GOEè¯„åˆ†æ•°ç»„
+     * @return æœ€ç»ˆå¾—åˆ†
+     */
+    calculateCombinationScore(baseValues, goeScores) {
+        if (baseValues.length === 0) {
+            return 0;
+        }
+        // è®¡ç®—è¿žè·³æ€»åŸºç¡€åˆ†å€¼
+        const totalBaseValue = this.calculateCombinationBaseValue(baseValues);
+        if (goeScores.length === 0) {
+            return totalBaseValue;
+        }
+        // è®¡ç®—GOEå¹³å‡å€¼
+        const averageGOE = this.calculateAverage(goeScores);
+        // GOEè½¬æ¢ä¸ºåˆ†æ•°: GOEå€¼ * æ€»åŸºç¡€åˆ†å€¼ * 0.1
+        const goeValue = averageGOE * totalBaseValue * 0.1;
+        // æœ€ç»ˆå¾—åˆ† = æ€»åŸºç¡€åˆ†å€¼ + GOEåˆ†æ•°
+        const finalScore = totalBaseValue + goeValue;
+        return Math.round(finalScore * 100) / 100;
+    }
+    /**
+     * è§£æžè·³è·ƒåŠ¨ä½œåç§°ï¼ŒèŽ·å–å‘¨æ•°å’Œè·³è·ƒç±»åž‹
+     *
+     * @param element è·³è·ƒåŠ¨ä½œåç§°ï¼ˆå¦‚ '3T', '4Lz'ï¼‰
+     * @return {rotations: å‘¨æ•°, type: è·³è·ƒç±»åž‹}
+     */
+    parseJumpElement(element) {
+        const rotations = parseInt(element.charAt(0));
+        const type = element.substring(1);
+        const result = { rotations, type };
+        return result;
+    }
+    /**
+     * èŽ·å–é™ç»„åŽçš„è·³è·ƒåŠ¨ä½œåç§°
+     * é™ç»„è§„åˆ™ï¼šå‘¨æ•°å‡1
+     *
+     * @param element åŽŸè·³è·ƒåŠ¨ä½œåç§°
+     * @return é™ç»„åŽçš„è·³è·ƒåŠ¨ä½œåç§°
+     */
+    getUnderRotatedElement(element) {
+        const parsed = this.parseJumpElement(element);
+        if (parsed.rotations > 1) {
+            return `${parsed.rotations - 1}${parsed.type}`;
+        }
+        return element;
+    }
+    /**
+     * éªŒè¯è¿žè·³ç»„åˆæ˜¯å¦æœ‰æ•ˆ
+     * è§„åˆ™ï¼š
+     * 1. è¿žè·³æœ€å¤š3ä¸ªè·³è·ƒ
+     * 2. æ¯ä¸ªè·³è·ƒå¿…é¡»æ˜¯æœ‰æ•ˆçš„è·³è·ƒåŠ¨ä½œ
+     *
+     * @param elements è·³è·ƒåŠ¨ä½œæ•°ç»„
+     * @param validElements æœ‰æ•ˆè·³è·ƒåŠ¨ä½œåˆ—è¡¨
+     * @return æ˜¯å¦æœ‰æ•ˆ
+     */
+    validateCombination(elements, validElements) {
+        if (elements.length === 0 || elements.length > 3) {
+            return false;
+        }
+        for (const element of elements) {
+            if (!validElements.includes(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * åˆ›å»ºè¿žè·³ç»„åˆå¯¹è±¡
+     *
+     * @param elements è·³è·ƒåŠ¨ä½œæ•°ç»„
+     * @param baseValues å„è·³è·ƒåŸºç¡€åˆ†å€¼æ•°ç»„
+     * @param goeScores GOEè¯„åˆ†æ•°ç»„
+     * @return è¿žè·³ç»„åˆå¯¹è±¡
+     */
+    createCombinationJump(elements, baseValues, goeScores) {
+        const finalScore = this.calculateCombinationScore(baseValues, goeScores);
+        return new CombinationJump(elements, baseValues, goeScores, finalScore);
+    }
+}
+export default new ScoreCalculator();
+//# sourceMappingURL=ScoreCalculator.js.mapÂ‘ÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\SkatingScoreModel.etsÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\ScoreCalculator.etsÔrBœªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo¯hostModulesInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  ‘ÔrC’²hostDependencyName®hostModuleName¾../common/util/ScoreCalculator¥entryÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrDÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ"/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { SkatingScore, ProgramComponent, CombinationJump } from '../../viewmodel/SkatingScoreModel';
+
+/**
+ * è·³è·ƒåŠ¨ä½œè§£æžç»“æžœæŽ¥å£
+ */
+interface JumpElementParseResult {
+  rotations: number;
+  type: string;
+}
+
+/**
+ * èŠ±æ ·æ»‘å†°è®¡åˆ†è®¡ç®—å·¥å…·ç±»
+ */
+class ScoreCalculator {
+  /**
+   * è®¡ç®—å•ä¸ªåŠ¨ä½œçš„æœ€ç»ˆå¾—åˆ†
+   * 
+   * @param baseValue åŸºç¡€åˆ†å€¼
+   * @param goeScores GOEè¯„åˆ†æ•°ç»„
+   * @return æœ€ç»ˆå¾—åˆ†
+   */
+  calculateElementScore(baseValue: number, goeScores: number[]): number {
+    if (goeScores.length === 0) {
+      return baseValue;
+    }
+
+    // è®¡ç®—GOEå¹³å‡å€¼
+    const averageGOE = this.calculateAverage(goeScores);
+    
+    // GOEè½¬æ¢ä¸ºåˆ†æ•°: GOEå€¼ * åŸºç¡€åˆ†å€¼ * 0.1
+    const goeValue = averageGOE * baseValue * 0.1;
+    
+    // æœ€ç»ˆå¾—åˆ† = åŸºç¡€åˆ†å€¼ + GOEåˆ†æ•°
+    const finalScore = baseValue + goeValue;
+    
+    return Math.round(finalScore * 100) / 100;
+  }
+
+  /**
+   * è®¡ç®—æ•°ç»„å¹³å‡å€¼
+   * 
+   * @param values æ•°å€¼æ•°ç»„
+   * @return å¹³å‡å€¼
+   */
+  calculateAverage(values: number[]): number {
+    if (values.length === 0) {
+      return 0;
+    }
+
+    // åŽ»æŽ‰æœ€é«˜åˆ†å’Œæœ€ä½Žåˆ†
+    const sorted = [...values].sort((a, b) => a - b);
+    const trimmed = sorted.slice(1, sorted.length - 1);
+    
+    if (trimmed.length === 0) {
+      return values[0];
+    }
+
+    const sum = trimmed.reduce((acc, val) => acc + val, 0);
+    return sum / trimmed.length;
+  }
+
+  /**
+   * è®¡ç®—æŠ€æœ¯åˆ†æ€»åˆ†
+   * 
+   * @param elements æ‰€æœ‰åŠ¨ä½œè¯„åˆ†
+   * @return æŠ€æœ¯åˆ†æ€»åˆ†
+   */
+  calculateTechnicalTotal(elements: SkatingScore[]): number {
+    let total = 0;
+    for (const element of elements) {
+      total += element.finalScore;
+    }
+    return Math.round(total * 100) / 100;
+  }
+
+  /**
+   * è®¡ç®—èŠ‚ç›®å†…å®¹åˆ†
+   * 
+   * @param component èŠ‚ç›®å†…å®¹åˆ†é¡¹
+   * @return æœ€ç»ˆèŠ‚ç›®å†…å®¹åˆ†
+   */
+  calculateProgramComponent(component: ProgramComponent): number {
+    if (component.scores.length === 0) {
+      return 0;
+    }
+
+    // è®¡ç®—å¹³å‡åˆ†
+    const average = this.calculateAverage(component.scores);
+    component.averageScore = average;
+    
+    // æœ€ç»ˆåˆ†æ•° = å¹³å‡åˆ† * ç³»æ•°
+    const finalScore = average * component.factor;
+    component.finalScore = Math.round(finalScore * 100) / 100;
+    
+    return component.finalScore;
+  }
+
+  /**
+   * è®¡ç®—èŠ‚ç›®å†…å®¹åˆ†æ€»åˆ†
+   * 
+   * @param components æ‰€æœ‰èŠ‚ç›®å†…å®¹åˆ†é¡¹
+   * @return èŠ‚ç›®å†…å®¹åˆ†æ€»åˆ†
+   */
+  calculateComponentTotal(components: ProgramComponent[]): number {
+    let total = 0;
+    for (const component of components) {
+      total += this.calculateProgramComponent(component);
+    }
+    return Math.round(total * 100) / 100;
+  }
+
+  /**
+   * è®¡ç®—æ¯”èµ›æ€»åˆ†
+   * 
+   * @param technicalScore æŠ€æœ¯åˆ†
+   * @param componentScore èŠ‚ç›®å†…å®¹åˆ†
+   * @param deductions æ‰£åˆ†
+   * @return æ¯”èµ›æ€»åˆ†
+   */
+  calculateTotalScore(technicalScore: number, componentScore: number, deductions: number = 0): number {
+    const total = technicalScore + componentScore - deductions;
+    return Math.round(total * 100) / 100;
+  }
+
+  /**
+   * éªŒè¯GOEè¯„åˆ†æ˜¯å¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
+   * 
+   * @param goe GOEè¯„åˆ†
+   * @return æ˜¯å¦æœ‰æ•ˆ
+   */
+  validateGOE(goe: number): boolean {
+    return goe >= -5 && goe <= 5;
+  }
+
+  /**
+   * éªŒè¯èŠ‚ç›®å†…å®¹åˆ†æ˜¯å¦åœ¨æœ‰æ•ˆèŒƒå›´å†…
+   * 
+   * @param score èŠ‚ç›®å†…å®¹åˆ†
+   * @return æ˜¯å¦æœ‰æ•ˆ
+   */
+  validateProgramScore(score: number): boolean {
+    return score >= 0.25 && score <= 10.0;
+  }
+
+  /**
+   * æ ¼å¼åŒ–åˆ†æ•°æ˜¾ç¤º
+   * 
+   * @param score åˆ†æ•°
+   * @return æ ¼å¼åŒ–åŽçš„å­—ç¬¦ä¸²
+   */
+  formatScore(score: number): string {
+    return score.toFixed(2);
+  }
+
+  /**
+   * è®¡ç®—è¿žè·³ç»„åˆçš„åŸºç¡€åˆ†å€¼
+   * è¿žè·³è§„åˆ™ï¼šç¬¬äºŒä¸ªåŠåŽç»­è·³è·ƒçš„åŸºç¡€åˆ†å€¼ä¹˜ä»¥1.1
+   * 
+   * @param baseValues å„è·³è·ƒçš„åŸºç¡€åˆ†å€¼æ•°ç»„
+   * @return è¿žè·³æ€»åŸºç¡€åˆ†å€¼
+   */
+  calculateCombinationBaseValue(baseValues: number[]): number {
+    if (baseValues.length === 0) {
+      return 0;
+    }
+
+    let totalBaseValue = baseValues[0]; // ç¬¬ä¸€ä¸ªè·³è·ƒä¿æŒåŽŸå€¼
+    
+    // ç¬¬äºŒä¸ªåŠåŽç»­è·³è·ƒåŸºç¡€åˆ†å€¼ä¹˜ä»¥1.1
+    for (let i = 1; i < baseValues.length; i++) {
+      totalBaseValue += baseValues[i] * 1.1;
+    }
+
+    return Math.round(totalBaseValue * 100) / 100;
+  }
+
+  /**
+   * è®¡ç®—è¿žè·³ç»„åˆçš„æœ€ç»ˆå¾—åˆ†
+   * 
+   * @param baseValues å„è·³è·ƒçš„åŸºç¡€åˆ†å€¼æ•°ç»„
+   * @param goeScores GOEè¯„åˆ†æ•°ç»„
+   * @return æœ€ç»ˆå¾—åˆ†
+   */
+  calculateCombinationScore(baseValues: number[], goeScores: number[]): number {
+    if (baseValues.length === 0) {
+      return 0;
+    }
+
+    // è®¡ç®—è¿žè·³æ€»åŸºç¡€åˆ†å€¼
+    const totalBaseValue = this.calculateCombinationBaseValue(baseValues);
+
+    if (goeScores.length === 0) {
+      return totalBaseValue;
+    }
+
+    // è®¡ç®—GOEå¹³å‡å€¼
+    const averageGOE = this.calculateAverage(goeScores);
+    
+    // GOEè½¬æ¢ä¸ºåˆ†æ•°: GOEå€¼ * æ€»åŸºç¡€åˆ†å€¼ * 0.1
+    const goeValue = averageGOE * totalBaseValue * 0.1;
+    
+    // æœ€ç»ˆå¾—åˆ† = æ€»åŸºç¡€åˆ†å€¼ + GOEåˆ†æ•°
+    const finalScore = totalBaseValue + goeValue;
+    
+    return Math.round(finalScore * 100) / 100;
+  }
+
+  /**
+   * è§£æžè·³è·ƒåŠ¨ä½œåç§°ï¼ŒèŽ·å–å‘¨æ•°å’Œè·³è·ƒç±»åž‹
+   * 
+   * @param element è·³è·ƒåŠ¨ä½œåç§°ï¼ˆå¦‚ '3T', '4Lz'ï¼‰
+   * @return {rotations: å‘¨æ•°, type: è·³è·ƒç±»åž‹}
+   */
+  parseJumpElement(element: string): JumpElementParseResult {
+    const rotations = parseInt(element.charAt(0));
+    const type = element.substring(1);
+    const result: JumpElementParseResult = { rotations, type };
+    return result;
+  }
+
+  /**
+   * èŽ·å–é™ç»„åŽçš„è·³è·ƒåŠ¨ä½œåç§°
+   * é™ç»„è§„åˆ™ï¼šå‘¨æ•°å‡1
+   * 
+   * @param element åŽŸè·³è·ƒåŠ¨ä½œåç§°
+   * @return é™ç»„åŽçš„è·³è·ƒåŠ¨ä½œåç§°
+   */
+  getUnderRotatedElement(element: string): string {
+    const parsed = this.parseJumpElement(element);
+    if (parsed.rotations > 1) {
+      return `${parsed.rotations - 1}${parsed.type}`;
+    }
+    return element;
+  }
+
+  /**
+   * éªŒè¯è¿žè·³ç»„åˆæ˜¯å¦æœ‰æ•ˆ
+   * è§„åˆ™ï¼š
+   * 1. è¿žè·³æœ€å¤š3ä¸ªè·³è·ƒ
+   * 2. æ¯ä¸ªè·³è·ƒå¿…é¡»æ˜¯æœ‰æ•ˆçš„è·³è·ƒåŠ¨ä½œ
+   * 
+   * @param elements è·³è·ƒåŠ¨ä½œæ•°ç»„
+   * @param validElements æœ‰æ•ˆè·³è·ƒåŠ¨ä½œåˆ—è¡¨
+   * @return æ˜¯å¦æœ‰æ•ˆ
+   */
+  validateCombination(elements: string[], validElements: string[]): boolean {
+    if (elements.length === 0 || elements.length > 3) {
+      return false;
+    }
+
+    for (const element of elements) {
+      if (!validElements.includes(element)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * åˆ›å»ºè¿žè·³ç»„åˆå¯¹è±¡
+   * 
+   * @param elements è·³è·ƒåŠ¨ä½œæ•°ç»„
+   * @param baseValues å„è·³è·ƒåŸºç¡€åˆ†å€¼æ•°ç»„
+   * @param goeScores GOEè¯„åˆ†æ•°ç»„
+   * @return è¿žè·³ç»„åˆå¯¹è±¡
+   */
+  createCombinationJump(elements: string[], baseValues: number[], goeScores: number[]): CombinationJump {
+    const finalScore = this.calculateCombinationScore(baseValues, goeScores);
+    return new CombinationJump(elements, baseValues, goeScores, finalScore);
+  }
+}
+
+export default new ScoreCalculator();
+ÀÔrE‘Ù!../../viewmodel/SkatingScoreModelÔrF—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\SkatingScoreModel.etsAÃªoh-resolveÂ“ÔrG–§version¤fileªsourceRoot§sources¥names¨mappings²ScoreCalculator.js ‘³ScoreCalculator.etsÜ ó‘”    ‘” ˜”   ” ”	 )” 8” :”  Ì@”ÌC Ìc”ÌD Ìd‘”   ‘” “”   ” ” ‘” ‘” #–” $” $” $”# $)”% $+”. $>˜” %” %” %” %” %”! %”" %”$ % ”” &” &” &” &‘”	 '’” )” )›” *” *
+” *” *” *”  *”0 *,”1 *-”: *6”; *7”< *8’” ,”& ,"š” -” -
+” -” -”# -”& -"”/ -+”2 -.”5 -1”6 -2’” /” /˜” 0” 0
+” 0” 0”$ 0 ”' 0#”/ 0+”0 0,” 2” 2” 2” 2” 2” 2”$ 2 ”' 2#”* 2&”+ 2'”. 2*”1 2-”2 2.’” 3” 3‘” 5‘” :”” ;” ;” ;” ;#˜” <” <” <” <” <” <” <”! <”” =” =” =” =‘”	 >’” Ì@” Ì@Ü ” ÌA” ÌA
+” ÌA” ÌA” ÌA” ÌA”! ÌA”" ÌA”# ÌA”' ÌA#”( ÌA$”) ÌA%”* ÌA&”, ÌA(”- ÌA)”/ ÌA+”1 ÌA-”2 ÌA.”3 ÌA/”6 ÌA2”7 ÌA3”8 ÌA4”9 ÌA5Ü ” ÌB” ÌB
+” ÌB” ÌB” ÌB” ÌB”$ ÌB ”% ÌB!”& ÌB"”( ÌB$”. ÌB*”/ ÌB+”5 ÌB1”8 ÌB4”9 ÌB5”: ÌB6”; ÌB7˜” ÌD” ÌD” ÌD” ÌD” ÌD” ÌD”  ÌD”" ÌD—” ÌE” ÌE” ÌE” ÌE” ÌE” ÌE” ÌE‘”	 ÌFÜ ” ÌH” ÌH
+” ÌH” ÌH” ÌH” ÌH”" ÌH”# ÌH”$ ÌH ”' ÌH#”) ÌH%”, ÌH(”. ÌH*”0 ÌH,”1 ÌH-”4 ÌH0”7 ÌH3”: ÌH6”< ÌH8”= ÌH9”> ÌH:”? ÌH;˜” ÌI” ÌI” ÌI” ÌI” ÌI” ÌI”# ÌI”$ ÌI ’” ÌJ” ÌJ‘” ÌL‘” ÌQ”” ÌR” ÌR” ÌR”$ ÌR2–” ÌS” ÌS” ÌS” ÌS” ÌS” ÌS—” ÌT” ÌT	” ÌT” ÌT” ÌT”& ÌT"”( ÌT$—” ÌU” ÌU” ÌU” ÌU” ÌU”' ÌU!”( ÌU"‘”	 ÌV” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW” ÌW”" ÌW”% ÌW!”& ÌW"”) ÌW%”, ÌW(”- ÌW)’” ÌX” ÌX‘” ÌZ‘” Ì_”” Ì`” Ì`” Ì`”' Ì`7š” Ìa” Ìa” Ìa” Ìa” Ìa” Ìa”# Ìa”( Ìa$”) Ìa%”+ Ìa'”” Ìb” Ìb” Ìb” Ìb‘”	 Ìc’” Ìe” Ìe” Ìf” Ìf
+” Ìf” Ìf” Ìf” Ìf”- Ìf)”. Ìf*”7 Ìf3”8 Ìf4”> Ìf:”? Ìf;”Ì@ Ìf<—” Ìg” Ìg” Ìg” Ìg”! Ìg”( Ìg$”) Ìg%’” Ìi” Ìiš” Ìj” Ìj
+” Ìj” Ìj”" Ìj”% Ìj!”. Ìj*”/ Ìj+”5 Ìj1”6 Ìj2Ü ” Ìk” Ìk” Ìk” Ìk” Ìk”# Ìk”$ Ìk ”) Ìk%”* Ìk&”4 Ìk0”7 Ìk3”: Ìk6”; Ìk7”> Ìk:”ÌA Ìk=”ÌB Ìk>–” Ìm” Ìm” Ìm” Ìm”# Ìm”$ Ìm ’” Ìn” Ìn‘” Ìp‘” Ìu”” Ìv” Ìv” Ìv”& Ìv8–” Ìw” Ìw” Ìw” Ìw” Ìw” Ìw—” Ìx” Ìx	” Ìx” Ìx”  Ìx”* Ìx&”, Ìx(š” Ìy” Ìy” Ìy” Ìy” Ìy”3 Ìy-”4 Ìy.”= Ìy7”> Ìy8”? Ìy9‘”	 Ìz” Ì{” Ì{” Ì{” Ì{” Ì{” Ì{” Ì{”" Ì{”% Ì{!”& Ì{"”) Ì{%”, Ì{(”- Ì{)’” Ì|” Ì|‘” Ì~‘” Ì…™” Ì†” Ì†” Ì†”& Ì†,”( Ì†.”6 Ì†ÌD”8 Ì†ÌF”ÌE Ì†Ì[”ÌF Ì†Ì\š” Ì‡” Ì‡
+” Ì‡” Ì‡”$ Ì‡ ”' Ì‡#”5 Ì‡1”8 Ì‡4”ÌB Ì‡>”ÌC Ì‡?” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ”" Ìˆ”% Ìˆ!”& Ìˆ"”) Ìˆ%”, Ìˆ(”- Ìˆ)’” Ì‰” Ì‰‘” Ì‹‘” Ì”” Ì‘” Ì‘” Ì‘” Ì‘›” Ì’” Ì’” Ì’” Ì’” Ì’” Ì’” Ì’” Ì’”# Ì’”$ Ì’ ”% Ì’!’” Ì“” Ì“‘” Ì•‘” Ìš”” Ì›” Ì›” Ì›” Ì›$š” Ìœ” Ìœ” Ìœ” Ìœ” Ìœ”  Ìœ”% Ìœ!”) Ìœ%”- Ìœ)”. Ìœ*’” Ì” Ì‘” ÌŸ‘” Ì¤”” Ì¥” Ì¥” Ì¥” Ì¥™” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦” Ì¦”  Ì¦’” Ì§” Ì§‘” Ì©‘” Ì¯”” Ì°”! Ì°”" Ì° ”, Ì°4˜” Ì±” Ì±” Ì±” Ì±” Ì±”" Ì±”# Ì±”% Ì±!”” Ì²” Ì²” Ì²” Ì²‘”	 Ì³›” Ìµ” Ìµ” Ìµ” Ìµ”' Ìµ#”( Ìµ$”) Ìµ%”* Ìµ&”+ Ìµ'”, Ìµ(”8 Ìµ4’” Ì·” Ì·Ü ” Ì¸” Ì¸	” Ì¸” Ì¸” Ì¸” Ì¸” Ì¸” Ì¸” Ì¸”& Ì¸"”' Ì¸#”- Ì¸)”/ Ì¸+”0 Ì¸,”2 Ì¸.”4 Ì¸0š” Ì¹” Ì¹” Ì¹”( Ì¹"”) Ì¹#”* Ì¹$”+ Ì¹%”. Ì¹(”1 Ì¹+”2 Ì¹,‘”	 Ìº” Ì¼” Ì¼” Ì¼” Ì¼” Ì¼” Ì¼”( Ì¼$”+ Ì¼'”. Ì¼*”/ Ì¼+”2 Ì¼.”5 Ì¼1”6 Ì¼2’” Ì½” Ì½‘” Ì¿‘” ÌÅ–” ÌÆ” ÌÆ” ÌÆ”( ÌÆ0”* ÌÆ2”3 ÌÆÌE˜” ÌÇ” ÌÇ” ÌÇ” ÌÇ” ÌÇ”" ÌÇ”# ÌÇ”% ÌÇ!”” ÌÈ” ÌÈ” ÌÈ” ÌÈ‘”	 ÌÉ’” ÌË” ÌË›” ÌÌ” ÌÌ
+” ÌÌ” ÌÌ”# ÌÌ”$ ÌÌ ”ÌA ÌÌ=”ÌB ÌÌ>”ÌL ÌÌÌH”ÌM ÌÌÌI”ÌN ÌÌÌJ˜” ÌÎ” ÌÎ” ÌÎ” ÌÎ” ÌÎ”! ÌÎ”" ÌÎ”$ ÌÎ ”” ÌÏ” ÌÏ”! ÌÏ”" ÌÏ‘”	 ÌÐ’” ÌÒ” ÌÒ›” ÌÓ” ÌÓ
+” ÌÓ” ÌÓ” ÌÓ”  ÌÓ”0 ÌÓ,”1 ÌÓ-”: ÌÓ6”; ÌÓ7”< ÌÓ8’” ÌÕ”' ÌÕ#š” ÌÖ” ÌÖ
+” ÌÖ” ÌÖ”# ÌÖ”& ÌÖ"”4 ÌÖ0”7 ÌÖ3”: ÌÖ6”; ÌÖ7’” ÌØ” ÌØ˜” ÌÙ” ÌÙ
+” ÌÙ” ÌÙ”) ÌÙ%”, ÌÙ(”4 ÌÙ0”5 ÌÙ1” ÌÛ” ÌÛ” ÌÛ” ÌÛ” ÌÛ” ÌÛ”$ ÌÛ ”' ÌÛ#”* ÌÛ&”+ ÌÛ'”. ÌÛ*”1 ÌÛ-”2 ÌÛ.’” ÌÜ” ÌÜ‘” ÌÞ‘” Ìã”” Ìä” Ìä” Ìä” Ìä"ž” Ìå” Ìå
+” Ìå” Ìå”" Ìå”# Ìå”* Ìå&”+ Ìå'”1 Ìå-”2 Ìå.”3 Ìå/”4 Ìå0”5 Ìå1”6 Ìå2›” Ìæ” Ìæ
+” Ìæ” Ìæ” Ìæ” Ìæ”& Ìæ"”' Ìæ#”( Ìæ$”) Ìæ%”* Ìæ&š” Ìç” Ìç
+” Ìç” Ìç+” Ìç-”" Ìç6”$ Ìç8”( Ìç<”* Ìç>”+ Ìç?”” Ìè” Ìè” Ìè” Ìè’” Ìé” Ìé‘” Ìë‘” Ìñ”” Ìò” Ìò” Ìò”" Ìò(›” Ìó” Ìó
+” Ìó” Ìó” Ìó” Ìó”, Ìó(”- Ìó)”4 Ìó0”5 Ìó1”6 Ìó2˜” Ìô” Ìô” Ìô” Ìô” Ìô” Ìô”  Ìô”" Ìôž” Ìõ” Ìõ” Ìõ” Ìõ” Ìõ”& Ìõ ”) Ìõ#”* Ìõ$”- Ìõ'”3 Ìõ-”4 Ìõ.”8 Ìõ2”: Ìõ4”; Ìõ5‘”	 Ìö”” Ì÷” Ì÷” Ì÷” Ì÷’” Ìø” Ìø‘” Ìú‘” Í–” Í” Í” Í”  Í(”" Í*”/ ÍÌAž” Í” Í” Í” Í” Í”  Í”! Í”% Í!”- Í)”. Í*”4 Í0”7 Í3”8 Í4”: Í6”” Í” Í” Í” Í‘”	 Í—” Í	” Í		” Í	” Í	” Í	”& Í	"”( Í	$š” Í
+” Í
+
+” Í
+” Í
+” Í
+”' Í
+!”( Í
+"”/ Í
+)”0 Í
+*”2 Í
+,”” Í” Í” Í” Í‘” Í‘”	 Í”” Í” Í” Í” Í’” Í” Í‘” Í‘” Í˜” Í” Í” Í”" Í*”$ Í,”. ÍÌ@”0 ÍÌB”9 ÍÌU” Í” Í
+” Í” Í” Í”  Í”9 Í5”: Í6”ÌD ÍÌ@”ÌF ÍÌB”ÌO ÍÌK”ÌP ÍÌL”ÌQ ÍÌMž” Í” Í” Í”" Í”# Í”+ Í'”- Í)”7 Í3”9 Í5”ÌB Í>”ÌD ÍÌ@”ÌN ÍÌJ”ÌO ÍÌK”ÌP ÍÌL’” Í” Í‘” Í–”  Í  ” Í ” Í ”" Í "”$ Í $”% Í %ÔrH–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ ô‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  ÌŽ ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ìž ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌÐ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  ÌÝ ‘”  ÌÞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìð ‘”  Ìñ ‘”  Ìò ‘”  Ìó ÔrI’§missing¦pluginÃ¦genAbcÂÔ  ÔrJ”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache‘ÔrK•¤type¥start£endªspecifiers¦source±ImportDeclarationÍnÍ²‘ÔrL•¤type¥start£end¨imported¥local¯ImportSpecifierÍwÍ†ÔrM”¤type¥start£end¤nameªIdentifierÍwÍ†¯CombinationJumpMªIdentifierÍwÍ†¯CombinationJumpÔrN•¤type¥start£end¥value£raw§LiteralÍŽÍ±Ù!../../viewmodel/SkatingScoreModelÙ#'../../viewmodel/SkatingScoreModel'

@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "描述"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "计算器应用"
+    },
+    {
+      "name": "error",
+      "value": "错误"
+    },
+    {
+      "name": "main_page_title",
+      "value": "计算器应用"
+    },
+    {
+      "name": "skating_title",
+      "value": "花样滑冰计分计算器"
+    },
+    {
+      "name": "select_element",
+      "value": "选择动作"
+    },
+    {
+      "name": "base_value",
+      "value": "基础分值"
+    },
+    {
+      "name": "goe_score",
+      "value": "GOE评分"
+    },
+    {
+      "name": "total_score",
+      "value": "总分"
+    },
+    {
+      "name": "add_element",
+      "value": "添加动作"
+    },
+    {
+      "name": "calculate_total",
+      "value": "计算总分"
+    },
+    {
+      "name": "clear",
+      "value": "清空"
+    }
+  ]
+}
