@@ -1,401 +1,461 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 花样滑冰技术元素计算器
+ * Copyright (c) 2024
  */
 
-import Logger from '../common/util/Logger';
-import CalculateUtil from '../common/util/CalculateUtil';
-import CheckEmptyUtil from '../common/util/CheckEmptyUtil';
-import keysModel from '../viewmodel/PresskeysViewModel';
-import { PressKeysBean } from '../viewmodel/PressKeysItem';
-import { CommonConstants, Symbol } from '../common/constants/CommonConstants';
+import router from '@ohos.router';
+import {
+  TechnicalElement, ElementType, GOE_RANGE,
+  getAllJumps, getAllSpins, getAllSteps,
+  createTechnicalElement, getElementChineseName
+} from '../viewmodel/TechnicalElementModel';
 
 @Entry
 @Component
 struct HomePage {
-  @State inputValue: string = '';
-  @State calValue: string = '';
-  private expressions: Array<string> = [];
-
+  @State selectedCategory: string = 'jump'; // jump, spin, step
+  @State selectedElement: string = '';
+  @State selectedGOE: number = 0;
+  @State currentElement: TechnicalElement | null = null;
+  @State elementList: TechnicalElement[] = [];
+  @State totalScore: number = 0;
+  
+  private jumps: string[] = getAllJumps();
+  private spins: string[] = getAllSpins();
+  private steps: string[] = getAllSteps();
+  
   build() {
     Column() {
-      Column() {
-        TextInput({ text: this.resultFormat(this.inputValue) })
-          .height(CommonConstants.FULL_PERCENT)
-          .fontSize(
-            (this.inputValue.length > CommonConstants.INPUT_LENGTH_MAX) ?
-              $r('app.float.font_size_text') : $r('app.float.font_size_input')
-          )
-          .enabled(false)
-          .fontColor(Color.Black)
-          .textAlign(TextAlign.End)
-          .backgroundColor($r('app.color.input_back_color'))
-      }
-      .width(CommonConstants.FULL_PERCENT)
-      .height($r('app.float.input_height'))
-      .alignItems(HorizontalAlign.End)
-      .margin({
-        right: $r('app.float.input_margin_right'),
-        top: $r('app.float.input_margin_top')
-      })
-
-      Column() {
-        Text(this.resultFormat(this.calValue))
-          .fontSize($r('app.float.font_size_text'))
-          .fontColor($r('app.color.text_color'))
-      }
-      .width(CommonConstants.FULL_PERCENT)
-      .height($r('app.float.text_height'))
-      .alignItems(HorizontalAlign.End)
-      .margin({
-        right: $r('app.float.text_margin_right'),
-        bottom: $r('app.float.text_margin_bottom')
-      })
-
-      Column() {
-        Row() {
-          ForEach(keysModel.getPressKeys(), (columnItem: Array<PressKeysBean>, columnItemIndex?: number) => {
-            Column() {
-              ForEach(columnItem, (keyItem: PressKeysBean, keyItemIndex?: number) => {
-                Column() {
-                  Column() {
-                    if (keyItem.flag === 0) {
-                      Image(keyItem.source !== undefined ? keyItem.source : '')
-                        .width(keyItem.width)
-                        .height(keyItem.height)
-                    } else {
-                      Text(keyItem.value)
-                        .fontSize(
-                          (keyItem.value === CommonConstants.DOTS) ?
-                            $r('app.float.font_size_dot') : $r('app.float.font_size_text')
-                        )
-                        .width(keyItem.width)
-                        .height(keyItem.height)
-                    }
-                  }
-                  .width($r('app.float.key_width'))
-                  .height(
-                    ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                      (keyItemIndex === (columnItem.length - 1))) ?
-                      $r('app.float.equals_height') : $r('app.float.key_height')
-                  )
-                  .borderWidth(1)
-                  .borderColor($r('app.color.border_color'))
-                  .borderRadius($r('app.float.border_radius'))
-                  .backgroundColor(
-                    ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                      (keyItemIndex === (columnItem.length - 1))) ?
-                      $r('app.color.equals_back_color') : Color.White
-                  )
-                  .alignItems(HorizontalAlign.Center)
-                  .justifyContent(FlexAlign.Center)
-                  .onClick(() => {
-                    if (keyItem.flag === 0) {
-                      this.inputSymbol(keyItem.value);
-                    } else {
-                      this.inputNumber(keyItem.value);
-                    }
-                  })
-                }
-                .layoutWeight(
-                  ((columnItemIndex === (keysModel.getPressKeys().length - 1)) &&
-                    (keyItemIndex === (columnItem.length - 1))) ? CommonConstants.TWO : 1
-                )
-                .width(CommonConstants.FULL_PERCENT)
-                .justifyContent(FlexAlign.Center)
-              }, (keyItem: PressKeysBean) => JSON.stringify(keyItem))
-            }
-            .layoutWeight(1)
-            .margin({
-              top: $r('app.float.margin_top'),
-              bottom: $r('app.float.margin_bottom')
-            })
-          }, (item: Array<Array<PressKeysBean>>) => JSON.stringify(item))
+      // 顶部导航栏
+      Row() {
+        Button() {
+          Text('←')
+            .fontSize(24)
+            .fontColor(Color.White)
         }
-        .height(CommonConstants.FULL_PERCENT)
-        .alignItems(VerticalAlign.Top)
-        .margin({
-          left: $r('app.float.margin_left'),
-          right: $r('app.float.margin_right')
+        .width(40)
+        .height(40)
+        .backgroundColor('rgba(255,255,255,0.2)')
+        .borderRadius(20)
+        .onClick(() => {
+          router.back();
         })
+        
+        Blank().layoutWeight(1)
+        
+        Text('⛸️ 技术元素计算器')
+          .fontSize(20)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+        
+        Blank().layoutWeight(1)
+        
+        Blank().width(40)
+      }
+      .width('100%')
+      .height(80)
+      .padding({ left: 20, right: 20 })
+      
+      Scroll() {
+        Column() {
+          // 分类选择
+          this.buildCategorySelector()
+          
+          // 元素选择
+          this.buildElementSelector()
+          
+          // GOE选择
+          this.buildGOESelector()
+          
+          // 当前元素信息
+          this.buildCurrentElementInfo()
+          
+          // 添加按钮
+          this.buildAddButton()
+          
+          // 已添加元素列表
+          this.buildElementList()
+          
+          // 总分显示
+          this.buildTotalScore()
+        }
+        .width('100%')
+        .padding(20)
       }
       .layoutWeight(1)
-      .width(CommonConstants.FULL_PERCENT)
-      .backgroundColor($r('app.color.row_back_color'))
+      .scrollBar(BarState.Auto)
+      .edgeEffect(EdgeEffect.Spring)
     }
-    .height(CommonConstants.FULL_PERCENT)
-    .backgroundColor($r('app.color.column_back_color'))
+    .width('100%')
+    .height('100%')
+    .linearGradient({
+      angle: 135,
+      colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+    })
   }
-
-
-  /**
-   * Input Symbols.
-   *
-   * @param value Input Operators.
-   */
-  inputSymbol(value: string) {
-    if (CheckEmptyUtil.isEmpty(value)) {
-      return;
+  
+  // 分类选择器
+  @Builder
+  buildCategorySelector() {
+    Column() {
+      Text('选择元素类型')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Row() {
+        this.buildCategoryButton('跳跃', 'jump', '🦘')
+        this.buildCategoryButton('旋转', 'spin', '🔄')
+        this.buildCategoryButton('步法', 'step', '👟')
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceEvenly)
     }
-    let len = this.expressions.length;
-    switch (value) {
-      case Symbol.CLEAN:
-        this.expressions = [];
-        this.calValue = '';
-        break;
-      case Symbol.DEL:
-        this.inputDelete(len);
-        break;
-      case Symbol.EQU:
-        if (len === 0) {
-          return;
-        }
-        this.getResult().then((result: boolean) => {
-          if (!result) {
-            return;
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  @Builder
+  buildCategoryButton(name: string, category: string, icon: string) {
+    Column() {
+      Text(icon)
+        .fontSize(30)
+      Text(name)
+        .fontSize(14)
+        .fontColor(Color.White)
+        .margin({ top: 5 })
+    }
+    .width(80)
+    .height(80)
+    .backgroundColor(this.selectedCategory === category ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)')
+    .borderRadius(15)
+    .justifyContent(FlexAlign.Center)
+    .onClick(() => {
+      this.selectedCategory = category;
+      this.selectedElement = '';
+      this.currentElement = null;
+    })
+  }
+  
+  // 元素选择器
+  @Builder
+  buildElementSelector() {
+    Column() {
+      Text('选择技术元素')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Grid() {
+        ForEach(this.getCurrentElements(), (element: string) => {
+          GridItem() {
+            Column() {
+              Text(element)
+                .fontSize(16)
+                .fontColor(Color.White)
+                .fontWeight(FontWeight.Medium)
+              Text(getElementChineseName(element))
+                .fontSize(12)
+                .fontColor('rgba(255,255,255,0.7)')
+                .margin({ top: 3 })
+            }
+            .width('100%')
+            .height(60)
+            .backgroundColor(this.selectedElement === element ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)')
+            .borderRadius(10)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.selectedElement = element;
+              this.currentElement = createTechnicalElement(element);
+              if (this.currentElement) {
+                this.currentElement.goe = this.selectedGOE;
+                this.currentElement.calculateFinalScore();
+              }
+            })
           }
-          this.inputValue = this.calValue;
-          this.calValue = '';
-          this.expressions = [];
-          this.expressions.push(this.inputValue);
         })
-        break;
+      }
+      .columnsTemplate('1fr 1fr 1fr')
+      .rowsGap(10)
+      .columnsGap(10)
+      .width('100%')
+      .height(300)
+    }
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  // GOE选择器
+  @Builder
+  buildGOESelector() {
+    Column() {
+      Text('选择GOE评分')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Row() {
+        ForEach(GOE_RANGE, (goe: number) => {
+          Column() {
+            Text(goe > 0 ? `+${goe}` : `${goe}`)
+              .fontSize(18)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+          }
+          .width(30)
+          .height(40)
+          .backgroundColor(this.selectedGOE === goe ? this.getGOEColor(goe) : 'rgba(255,255,255,0.1)')
+          .borderRadius(8)
+          .justifyContent(FlexAlign.Center)
+          .onClick(() => {
+            this.selectedGOE = goe;
+            if (this.currentElement) {
+              this.currentElement.goe = goe;
+              this.currentElement.calculateFinalScore();
+            }
+          })
+        })
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+    }
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  // 当前元素信息
+  @Builder
+  buildCurrentElementInfo() {
+    if (this.currentElement) {
+      Column() {
+        Text('当前元素得分')
+          .fontSize(16)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+          .margin({ bottom: 15 })
+        
+        Row() {
+          Column() {
+            Text('元素')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.name)
+              .fontSize(20)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('基础分')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.baseValue.toFixed(2))
+              .fontSize(20)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('GOE')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.selectedGOE > 0 ? `+${this.selectedGOE}` : `${this.selectedGOE}`)
+              .fontSize(20)
+              .fontColor(this.getGOEColor(this.selectedGOE))
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('最终得分')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.finalScore.toFixed(2))
+              .fontSize(20)
+              .fontColor('#FFD700')
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+        }
+        .width('100%')
+      }
+      .width('100%')
+      .padding(20)
+      .backgroundColor('rgba(255,255,255,0.15)')
+      .borderRadius(15)
+      .margin({ bottom: 20 })
+    }
+  }
+  
+  // 添加按钮
+  @Builder
+  buildAddButton() {
+    if (this.currentElement) {
+      Button('添加元素')
+        .width('100%')
+        .height(50)
+        .backgroundColor('#4CAF50')
+        .borderRadius(25)
+        .fontSize(18)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          if (this.currentElement) {
+            this.elementList.push(this.currentElement);
+            this.calculateTotalScore();
+            // 重置选择
+            this.selectedElement = '';
+            this.currentElement = null;
+            this.selectedGOE = 0;
+          }
+        })
+        .margin({ bottom: 25 })
+    }
+  }
+  
+  // 已添加元素列表
+  @Builder
+  buildElementList() {
+    if (this.elementList.length > 0) {
+      Column() {
+        Row() {
+          Text('已添加元素')
+            .fontSize(16)
+            .fontColor(Color.White)
+            .fontWeight(FontWeight.Bold)
+          
+          Blank()
+          
+          Button('清空')
+            .height(30)
+            .backgroundColor('rgba(255,255,255,0.2)')
+            .borderRadius(15)
+            .fontSize(14)
+            .fontColor(Color.White)
+            .onClick(() => {
+              this.elementList = [];
+              this.totalScore = 0;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 15 })
+        
+        ForEach(this.elementList, (element: TechnicalElement, index: number) => {
+          Row() {
+            Text(element.name)
+              .fontSize(16)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Medium)
+              .layoutWeight(1)
+            
+            Text(`基础: ${element.baseValue.toFixed(2)}`)
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+              .margin({ right: 10 })
+            
+            Text(`GOE: ${element.goe > 0 ? '+' : ''}${element.goe}`)
+              .fontSize(14)
+              .fontColor(this.getGOEColor(element.goe))
+              .margin({ right: 10 })
+            
+            Text(`${element.finalScore.toFixed(2)}`)
+              .fontSize(16)
+              .fontColor('#FFD700')
+              .fontWeight(FontWeight.Bold)
+            
+            Button('×')
+              .width(30)
+              .height(30)
+              .backgroundColor('rgba(255,255,255,0.2)')
+              .borderRadius(15)
+              .fontSize(16)
+              .fontColor(Color.White)
+              .margin({ left: 10 })
+              .onClick(() => {
+                this.elementList.splice(index, 1);
+                this.calculateTotalScore();
+              })
+          }
+          .width('100%')
+          .padding(15)
+          .backgroundColor('rgba(255,255,255,0.1)')
+          .borderRadius(10)
+          .margin({ bottom: 10 })
+        })
+      }
+      .width('100%')
+      .padding(20)
+      .backgroundColor('rgba(255,255,255,0.15)')
+      .borderRadius(15)
+      .margin({ bottom: 25 })
+    }
+  }
+  
+  // 总分显示
+  @Builder
+  buildTotalScore() {
+    Column() {
+      Row() {
+        Text('技术分总分')
+          .fontSize(18)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+        
+        Blank()
+        
+        Text(this.totalScore.toFixed(2))
+          .fontSize(32)
+          .fontColor('#FFD700')
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+    }
+    .width('100%')
+    .padding(25)
+    .backgroundColor('rgba(255,255,255,0.2)')
+    .borderRadius(20)
+    .shadow({ radius: 10, color: 'rgba(0,0,0,0.3)', offsetX: 0, offsetY: 5 })
+  }
+  
+  // 获取当前分类的元素列表
+  getCurrentElements(): string[] {
+    switch (this.selectedCategory) {
+      case 'jump':
+        return this.jumps;
+      case 'spin':
+        return this.spins;
+      case 'step':
+        return this.steps;
       default:
-        this.inputOperators(len, value);
-        break;
-    }
-    this.formatInputValue();
-  }
-
-  /**
-   * Enter numbers.
-   *
-   * @param value Enter numbers.
-   */
-  inputNumber(value: string) {
-    if (CheckEmptyUtil.isEmpty(value)) {
-      return;
-    }
-    let len = this.expressions.length;
-    let last = len > 0 ? this.expressions[len - 1] : '';
-    let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
-    if (!this.validateEnter(last, value)) {
-      return;
-    }
-    if (!last) {
-      this.expressions.push(value);
-    } else if (!secondLast) {
-      this.expressions[len - 1] += value;
-    }
-    if (secondLast && CalculateUtil.isSymbol(secondLast)) {
-      this.expressions[len -1] += value;
-    }
-    if (secondLast && !CalculateUtil.isSymbol(secondLast)) {
-      this.expressions.push(value);
-    }
-    this.formatInputValue();
-    if (value !== CommonConstants.DOTS) {
-      this.getResult();
+        return this.jumps;
     }
   }
-
-  /**
-   * Verify that you can enter.
-   *
-   * @param last Value of the last element.
-   * @param value Current input value.
-   * return Indicates whether to allow input.
-   */
-  validateEnter(last: string, value: string) {
-    if (!last && value === CommonConstants.PERCENT_SIGN) {
-      return false;
-    }
-    if ((last === CommonConstants.MIN) && (value === CommonConstants.PERCENT_SIGN)) {
-      return false;
-    }
-    if (last.endsWith(CommonConstants.PERCENT_SIGN)) {
-      return false;
-    }
-    if ((last.indexOf(CommonConstants.DOTS) !== -1) && (value === CommonConstants.DOTS)) {
-      return false;
-    }
-    if ((last === '0') && (value !== CommonConstants.DOTS) &&
-      (value !== CommonConstants.PERCENT_SIGN)) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Delete Key Trigger.
-   *
-   * @param len Expression Length.
-   */
-  inputDelete(len: number) {
-    if (len === 0) {
-      return;
-    }
-    let last = this.expressions[len - 1];
-    let lastLen = last.length;
-    if (lastLen === 1) {
-      this.expressions.pop();
-      len = this.expressions.length;
+  
+  // 获取GOE对应的颜色
+  getGOEColor(goe: number): string {
+    if (goe > 0) {
+      return '#4CAF50'; // 绿色
+    } else if (goe < 0) {
+      return '#F44336'; // 红色
     } else {
-      this.expressions[len - 1] = last.slice(0, last.length - 1);
-    }
-    if (len === 0) {
-      this.inputValue = '';
-      this.calValue = '';
-      return;
-    }
-    if (!CalculateUtil.isSymbol(this.expressions[len - 1])) {
-      this.getResult();
+      return '#FFFFFF'; // 白色
     }
   }
-
-  /**
-   * Triggered when input is added, subtracted, multiplied, and divided.
-   *
-   * @param len Expression Length.
-   * @param value Current Input Value.
-   */
-  inputOperators(len: number, value: string) {
-    let last = len > 0 ? this.expressions[len - 1] : undefined;
-    let secondLast = len > 1 ? this.expressions[len - CommonConstants.TWO] : undefined;
-    if (!last && (value === Symbol.MIN)) {
-      this.expressions.push(this.getSymbol(value));
-      return;
-    }
-    if (!last) {
-      return;
-    }
-    if (!CalculateUtil.isSymbol(last)) {
-      this.expressions.push(this.getSymbol(value));
-      return;
-    }
-    if ((value === Symbol.MIN) &&
-      (last === CommonConstants.MIN || last === CommonConstants.ADD)) {
-      this.expressions.pop();
-      this.expressions.push(this.getSymbol(value));
-      return;
-    }
-    if (!secondLast) {
-      return;
-    }
-    if (value !== Symbol.MIN) {
-      this.expressions.pop();
-    }
-    if (CalculateUtil.isSymbol(secondLast)) {
-      this.expressions.pop();
-    }
-    this.expressions.push(this.getSymbol(value));
-  }
-
-  /**
-   * Get Operator.
-   *
-   * @param value.
-   * @return Operators.
-   */
-  getSymbol(value: string) {
-    if (CheckEmptyUtil.isEmpty(value)) {
-      return '';
-    }
-    let symbol = '';
-    switch (value) {
-      case Symbol.ADD:
-        symbol = CommonConstants.ADD;
-        break;
-      case Symbol.MIN:
-        symbol = CommonConstants.MIN;
-        break;
-      case Symbol.MUL:
-        symbol = CommonConstants.MUL;
-        break;
-      case Symbol.DIV:
-        symbol = CommonConstants.DIV;
-        break;
-      default:
-        break;
-    }
-    return symbol;
-  }
-
-  /**
-   * Make a deep copy of an expression.
-   *
-   * @return deep copy expression.
-   */
-  deepCopy(): Array<string> {
-    let copyExpressions: Array<string> = Array.from(this.expressions);
-    return copyExpressions;
-  }
-
-  /**
-   * Obtaining Results.
-   *
-   * @return Whether the result is incorrect.
-   */
-  async getResult() {
-    let calResult = CalculateUtil.parseExpression(this.deepCopy());
-    if (calResult === 'NaN') {
-      this.calValue = this.resourceToString($r('app.string.error'));
-      return false;
-    }
-    this.calValue = calResult;
-    return true;
-  }
-
-  /**
-   * Number Formatting.
-   *
-   * @param value Formatting parameters.
-   * @return Thousand percentile data.
-   */
-  resultFormat(value: string) {
-    let reg = (value.indexOf('.') > -1) ? new RegExp("/(\d)(?=(\d{3})+\.)/g") : new RegExp("/(\d)(?=(?:\d{3})+$)/g");
-    return value.replace(reg, '$1,');
-  }
-
-  /**
-   * Convert a resource file to a string.
-   *
-   * @param resource Resource file.
-   * @return Character string converted from the resource file.
-   */
-  resourceToString(resource: Resource): string {
-    if (CheckEmptyUtil.isEmpty(resource)) {
-      return '';
-    }
-    let result = '';
-    try {
-      const uiContext: UIContext | undefined = AppStorage.get('uiContext');
-      let context = uiContext!.getHostContext()!;
-      result = context.resourceManager.getStringSync(resource.id);
-    } catch (error) {
-      Logger.error('[CalculateModel] getResourceString fail: ' + JSON.stringify(error))
-    }
-    return result;
-  }
-
-  /**
-   * Thousands in the formatting result.
-   */
-  formatInputValue() {
-    let deepExpressions: Array<string> = [];
-    this.deepCopy().forEach((item: string, index: number) => {
-      deepExpressions[index] = this.resultFormat(item);
-    });
-    this.inputValue = deepExpressions.join('');
+  
+  // 计算总分
+  calculateTotalScore(): void {
+    this.totalScore = this.elementList.reduce((sum, element) => {
+      return sum + element.finalScore;
+    }, 0);
   }
 }

@@ -2,22 +2,25 @@ if (!("finalizeConstruction" in ViewPU.prototype)) {
     Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
 }
 interface FigureSkatingPage_Params {
+    programType?: string;
     currentElement?: string;
     baseValue?: string;
-    goeScores?: Array<string>;
+    goeScores?: string[];
     totalScore?: string;
-    elementsList?: Array<SkatingScore>;
-    showResult?: boolean;
-    selectedLevel?: string;
+    elementsList?: SkatingScore[];
     isCombinationMode?: boolean;
-    combinationElements?: Array<string>;
-    combinationBaseValues?: Array<number>;
-    combinationList?: Array<CombinationJump>;
-    elements?: Array<string>;
+    combinationElements?: string[];
+    combinationBaseValues?: number[];
+    combinationList?: CombinationJump[];
+    programComponents?: ProgramComponent[];
+    pcsScores?: string[][];
+    technicalScore?: string;
+    componentScore?: string;
+    elements?: string[];
     baseValues?: Map<string, number>;
 }
 import ScoreCalculator from "@bundle:com.example.simplecalculator/entry/ets/common/util/ScoreCalculator";
-import { SkatingScore } from "@bundle:com.example.simplecalculator/entry/ets/viewmodel/SkatingScoreModel";
+import { SkatingScore, ProgramComponent } from "@bundle:com.example.simplecalculator/entry/ets/viewmodel/SkatingScoreModel";
 import type { CombinationJump } from "@bundle:com.example.simplecalculator/entry/ets/viewmodel/SkatingScoreModel";
 class FigureSkatingPage extends ViewPU {
     constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
@@ -25,33 +28,61 @@ class FigureSkatingPage extends ViewPU {
         if (typeof paramsLambda === "function") {
             this.paramsGenerator_ = paramsLambda;
         }
+        this.__programType = new ObservedPropertySimplePU('SP', this, "programType");
         this.__currentElement = new ObservedPropertySimplePU('', this, "currentElement");
         this.__baseValue = new ObservedPropertySimplePU('', this, "baseValue");
         this.__goeScores = new ObservedPropertyObjectPU(['', '', '', '', '', '', '', '', ''], this, "goeScores");
         this.__totalScore = new ObservedPropertySimplePU('0.00', this, "totalScore");
         this.__elementsList = new ObservedPropertyObjectPU([], this, "elementsList");
-        this.__showResult = new ObservedPropertySimplePU(false, this, "showResult");
-        this.__selectedLevel = new ObservedPropertySimplePU('Base', this, "selectedLevel");
         this.__isCombinationMode = new ObservedPropertySimplePU(false, this, "isCombinationMode");
         this.__combinationElements = new ObservedPropertyObjectPU([], this, "combinationElements");
         this.__combinationBaseValues = new ObservedPropertyObjectPU([], this, "combinationBaseValues");
         this.__combinationList = new ObservedPropertyObjectPU([], this, "combinationList");
+        this.__programComponents = new ObservedPropertyObjectPU([
+            new ProgramComponent('滑行技术 SS', 0.8),
+            new ProgramComponent('动作衔接 TR', 0.8),
+            new ProgramComponent('表演质量 PE', 0.8),
+            new ProgramComponent('编排构成 CH', 0.8),
+            new ProgramComponent('音乐诠释 IN', 0.8)
+        ], this, "programComponents");
+        this.__pcsScores = new ObservedPropertyObjectPU([
+            ['', '', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', '', ''],
+            ['', '', '', '', '', '', '', '', '']
+        ], this, "pcsScores");
+        this.__technicalScore = new ObservedPropertySimplePU('0.00', this, "technicalScore");
+        this.__componentScore = new ObservedPropertySimplePU('0.00', this, "componentScore");
         this.elements = [
             '1T', '1S', '1Lo', '1F', '1Lz', '1A',
             '2T', '2S', '2Lo', '2F', '2Lz', '2A',
             '3T', '3S', '3Lo', '3F', '3Lz', '3A',
-            '4T', '4S', '4Lo', '4F', '4Lz', '4A'
+            '4T', '4S', '4Lo', '4F', '4Lz', '4A',
+            'Sp1', 'Sp2', 'Sp3', 'Sp4',
+            'LSp1', 'LSp2', 'LSp3', 'LSp4',
+            'CSp1', 'CSp2', 'CSp3', 'CSp4',
+            'SSp1', 'SSp2', 'SSp3', 'SSp4',
+            'StSq1', 'StSq2', 'StSq3', 'StSq4'
         ];
         this.baseValues = new Map([
             ['1T', 0.4], ['1S', 0.4], ['1Lo', 0.5], ['1F', 0.8], ['1Lz', 0.6], ['1A', 1.1],
             ['2T', 1.3], ['2S', 1.3], ['2Lo', 1.7], ['2F', 2.6], ['2Lz', 2.1], ['2A', 3.3],
             ['3T', 4.2], ['3S', 4.3], ['3Lo', 4.9], ['3F', 5.3], ['3Lz', 5.9], ['3A', 8.0],
-            ['4T', 9.5], ['4S', 9.7], ['4Lo', 10.5], ['4F', 11.0], ['4Lz', 11.5], ['4A', 12.5]
+            ['4T', 9.5], ['4S', 9.7], ['4Lo', 10.5], ['4F', 11.0], ['4Lz', 11.5], ['4A', 12.5],
+            ['Sp1', 1.5], ['Sp2', 2.5], ['Sp3', 3.0], ['Sp4', 3.5],
+            ['LSp1', 1.7], ['LSp2', 2.7], ['LSp3', 3.2], ['LSp4', 3.7],
+            ['CSp1', 1.6], ['CSp2', 2.6], ['CSp3', 3.1], ['CSp4', 3.6],
+            ['SSp1', 1.7], ['SSp2', 2.7], ['SSp3', 3.3], ['SSp4', 3.8],
+            ['StSq1', 1.5], ['StSq2', 2.5], ['StSq3', 3.25], ['StSq4', 3.9]
         ]);
         this.setInitiallyProvidedValue(params);
         this.finalizeConstruction();
     }
     setInitiallyProvidedValue(params: FigureSkatingPage_Params) {
+        if (params.programType !== undefined) {
+            this.programType = params.programType;
+        }
         if (params.currentElement !== undefined) {
             this.currentElement = params.currentElement;
         }
@@ -67,12 +98,6 @@ class FigureSkatingPage extends ViewPU {
         if (params.elementsList !== undefined) {
             this.elementsList = params.elementsList;
         }
-        if (params.showResult !== undefined) {
-            this.showResult = params.showResult;
-        }
-        if (params.selectedLevel !== undefined) {
-            this.selectedLevel = params.selectedLevel;
-        }
         if (params.isCombinationMode !== undefined) {
             this.isCombinationMode = params.isCombinationMode;
         }
@@ -85,6 +110,18 @@ class FigureSkatingPage extends ViewPU {
         if (params.combinationList !== undefined) {
             this.combinationList = params.combinationList;
         }
+        if (params.programComponents !== undefined) {
+            this.programComponents = params.programComponents;
+        }
+        if (params.pcsScores !== undefined) {
+            this.pcsScores = params.pcsScores;
+        }
+        if (params.technicalScore !== undefined) {
+            this.technicalScore = params.technicalScore;
+        }
+        if (params.componentScore !== undefined) {
+            this.componentScore = params.componentScore;
+        }
         if (params.elements !== undefined) {
             this.elements = params.elements;
         }
@@ -95,32 +132,45 @@ class FigureSkatingPage extends ViewPU {
     updateStateVars(params: FigureSkatingPage_Params) {
     }
     purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__programType.purgeDependencyOnElmtId(rmElmtId);
         this.__currentElement.purgeDependencyOnElmtId(rmElmtId);
         this.__baseValue.purgeDependencyOnElmtId(rmElmtId);
         this.__goeScores.purgeDependencyOnElmtId(rmElmtId);
         this.__totalScore.purgeDependencyOnElmtId(rmElmtId);
         this.__elementsList.purgeDependencyOnElmtId(rmElmtId);
-        this.__showResult.purgeDependencyOnElmtId(rmElmtId);
-        this.__selectedLevel.purgeDependencyOnElmtId(rmElmtId);
         this.__isCombinationMode.purgeDependencyOnElmtId(rmElmtId);
         this.__combinationElements.purgeDependencyOnElmtId(rmElmtId);
         this.__combinationBaseValues.purgeDependencyOnElmtId(rmElmtId);
         this.__combinationList.purgeDependencyOnElmtId(rmElmtId);
+        this.__programComponents.purgeDependencyOnElmtId(rmElmtId);
+        this.__pcsScores.purgeDependencyOnElmtId(rmElmtId);
+        this.__technicalScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__componentScore.purgeDependencyOnElmtId(rmElmtId);
     }
     aboutToBeDeleted() {
+        this.__programType.aboutToBeDeleted();
         this.__currentElement.aboutToBeDeleted();
         this.__baseValue.aboutToBeDeleted();
         this.__goeScores.aboutToBeDeleted();
         this.__totalScore.aboutToBeDeleted();
         this.__elementsList.aboutToBeDeleted();
-        this.__showResult.aboutToBeDeleted();
-        this.__selectedLevel.aboutToBeDeleted();
         this.__isCombinationMode.aboutToBeDeleted();
         this.__combinationElements.aboutToBeDeleted();
         this.__combinationBaseValues.aboutToBeDeleted();
         this.__combinationList.aboutToBeDeleted();
+        this.__programComponents.aboutToBeDeleted();
+        this.__pcsScores.aboutToBeDeleted();
+        this.__technicalScore.aboutToBeDeleted();
+        this.__componentScore.aboutToBeDeleted();
         SubscriberManager.Get().delete(this.id__());
         this.aboutToBeDeletedInternal();
+    }
+    private __programType: ObservedPropertySimplePU<string>;
+    get programType() {
+        return this.__programType.get();
+    }
+    set programType(newValue: string) {
+        this.__programType.set(newValue);
     }
     private __currentElement: ObservedPropertySimplePU<string>;
     get currentElement() {
@@ -136,11 +186,11 @@ class FigureSkatingPage extends ViewPU {
     set baseValue(newValue: string) {
         this.__baseValue.set(newValue);
     }
-    private __goeScores: ObservedPropertyObjectPU<Array<string>>;
+    private __goeScores: ObservedPropertyObjectPU<string[]>;
     get goeScores() {
         return this.__goeScores.get();
     }
-    set goeScores(newValue: Array<string>) {
+    set goeScores(newValue: string[]) {
         this.__goeScores.set(newValue);
     }
     private __totalScore: ObservedPropertySimplePU<string>;
@@ -150,28 +200,13 @@ class FigureSkatingPage extends ViewPU {
     set totalScore(newValue: string) {
         this.__totalScore.set(newValue);
     }
-    private __elementsList: ObservedPropertyObjectPU<Array<SkatingScore>>;
+    private __elementsList: ObservedPropertyObjectPU<SkatingScore[]>;
     get elementsList() {
         return this.__elementsList.get();
     }
-    set elementsList(newValue: Array<SkatingScore>) {
+    set elementsList(newValue: SkatingScore[]) {
         this.__elementsList.set(newValue);
     }
-    private __showResult: ObservedPropertySimplePU<boolean>;
-    get showResult() {
-        return this.__showResult.get();
-    }
-    set showResult(newValue: boolean) {
-        this.__showResult.set(newValue);
-    }
-    private __selectedLevel: ObservedPropertySimplePU<string>;
-    get selectedLevel() {
-        return this.__selectedLevel.get();
-    }
-    set selectedLevel(newValue: string) {
-        this.__selectedLevel.set(newValue);
-    }
-    // 连跳相关状态
     private __isCombinationMode: ObservedPropertySimplePU<boolean>;
     get isCombinationMode() {
         return this.__isCombinationMode.get();
@@ -179,28 +214,56 @@ class FigureSkatingPage extends ViewPU {
     set isCombinationMode(newValue: boolean) {
         this.__isCombinationMode.set(newValue);
     }
-    private __combinationElements: ObservedPropertyObjectPU<Array<string>>;
+    private __combinationElements: ObservedPropertyObjectPU<string[]>;
     get combinationElements() {
         return this.__combinationElements.get();
     }
-    set combinationElements(newValue: Array<string>) {
+    set combinationElements(newValue: string[]) {
         this.__combinationElements.set(newValue);
     }
-    private __combinationBaseValues: ObservedPropertyObjectPU<Array<number>>;
+    private __combinationBaseValues: ObservedPropertyObjectPU<number[]>;
     get combinationBaseValues() {
         return this.__combinationBaseValues.get();
     }
-    set combinationBaseValues(newValue: Array<number>) {
+    set combinationBaseValues(newValue: number[]) {
         this.__combinationBaseValues.set(newValue);
     }
-    private __combinationList: ObservedPropertyObjectPU<Array<CombinationJump>>;
+    private __combinationList: ObservedPropertyObjectPU<CombinationJump[]>;
     get combinationList() {
         return this.__combinationList.get();
     }
-    set combinationList(newValue: Array<CombinationJump>) {
+    set combinationList(newValue: CombinationJump[]) {
         this.__combinationList.set(newValue);
     }
-    private elements: Array<string>;
+    private __programComponents: ObservedPropertyObjectPU<ProgramComponent[]>;
+    get programComponents() {
+        return this.__programComponents.get();
+    }
+    set programComponents(newValue: ProgramComponent[]) {
+        this.__programComponents.set(newValue);
+    }
+    private __pcsScores: ObservedPropertyObjectPU<string[][]>;
+    get pcsScores() {
+        return this.__pcsScores.get();
+    }
+    set pcsScores(newValue: string[][]) {
+        this.__pcsScores.set(newValue);
+    }
+    private __technicalScore: ObservedPropertySimplePU<string>;
+    get technicalScore() {
+        return this.__technicalScore.get();
+    }
+    set technicalScore(newValue: string) {
+        this.__technicalScore.set(newValue);
+    }
+    private __componentScore: ObservedPropertySimplePU<string>;
+    get componentScore() {
+        return this.__componentScore.get();
+    }
+    set componentScore(newValue: string) {
+        this.__componentScore.set(newValue);
+    }
+    private elements: string[];
     private baseValues: Map<string, number>;
     initialRender() {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -210,56 +273,117 @@ class FigureSkatingPage extends ViewPU {
             Column.backgroundColor('#F0F0F0');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 标题
             Text.create('花样滑冰计分计算器');
-            // 标题
             Text.fontSize(24);
-            // 标题
             Text.fontWeight(FontWeight.Bold);
-            // 标题
             Text.margin({ top: 20, bottom: 20 });
         }, Text);
-        // 标题
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 总分显示
+            Row.create();
+            Row.width('90%');
+            Row.justifyContent(FlexAlign.SpaceBetween);
+            Row.margin({ bottom: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('短节目 (SP)');
+            Button.width('45%');
+            Button.height(45);
+            Button.fontSize(16);
+            Button.backgroundColor(this.programType === 'SP' ? '#4CAF50' : '#E0E0E0');
+            Button.fontColor(this.programType === 'SP' ? Color.White : Color.Black);
+            Button.onClick(() => {
+                this.programType = 'SP';
+                this.updateProgramFactor();
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('自由滑 (FS)');
+            Button.width('45%');
+            Button.height(45);
+            Button.fontSize(16);
+            Button.backgroundColor(this.programType === 'FS' ? '#4CAF50' : '#E0E0E0');
+            Button.fontColor(this.programType === 'FS' ? Color.White : Color.Black);
+            Button.onClick(() => {
+                this.programType = 'FS';
+                this.updateProgramFactor();
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
-            // 总分显示
             Column.width('90%');
-            // 总分显示
-            Column.height(100);
-            // 总分显示
-            Column.justifyContent(FlexAlign.Center);
-            // 总分显示
+            Column.padding(15);
             Column.backgroundColor('#F5F5F5');
-            // 总分显示
             Column.borderRadius(10);
-            // 总分显示
             Column.margin({ bottom: 20 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('技术分 (TES)');
+            Text.fontSize(14);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.technicalScore);
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#2196F3');
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('节目分 (PCS)');
+            Text.fontSize(14);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.componentScore);
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#4CAF50');
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create('总分');
-            Text.fontSize(16);
+            Text.fontSize(14);
             Text.fontColor('#666666');
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Text.create(this.totalScore);
-            Text.fontSize(36);
+            Text.fontSize(28);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#FF6B6B');
         }, Text);
         Text.pop();
-        // 总分显示
+        Column.pop();
+        Row.pop();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 模式切换按钮
             Row.create();
-            // 模式切换按钮
             Row.width('90%');
-            // 模式切换按钮
             Row.justifyContent(FlexAlign.SpaceBetween);
-            // 模式切换按钮
             Row.margin({ bottom: 20 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -288,20 +412,13 @@ class FigureSkatingPage extends ViewPU {
             });
         }, Button);
         Button.pop();
-        // 模式切换按钮
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 动作选择区域
             Column.create();
-            // 动作选择区域
             Column.width('90%');
-            // 动作选择区域
             Column.padding(15);
-            // 动作选择区域
             Column.backgroundColor(Color.White);
-            // 动作选择区域
             Column.borderRadius(10);
-            // 动作选择区域
             Column.margin({ bottom: 20 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -333,7 +450,6 @@ class FigureSkatingPage extends ViewPU {
                         : (this.currentElement === element ? Color.White : Color.Black));
                     Button.onClick(() => {
                         if (this.isCombinationMode) {
-                            // 连跳模式：直接添加到连跳组合
                             if (this.combinationElements.length < 3 && !this.combinationElements.includes(element)) {
                                 const baseVal = this.baseValues.get(element) || 0;
                                 this.combinationElements.push(element);
@@ -341,7 +457,6 @@ class FigureSkatingPage extends ViewPU {
                             }
                         }
                         else {
-                            // 单跳模式：选择当前动作
                             this.currentElement = element;
                             this.updateBaseValue();
                         }
@@ -353,11 +468,9 @@ class FigureSkatingPage extends ViewPU {
         }, ForEach);
         ForEach.pop();
         Flex.pop();
-        // 动作选择区域
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 连跳模式：显示已选择的连跳组合
             if (this.isCombinationMode && this.combinationElements.length > 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -426,7 +539,7 @@ class FigureSkatingPage extends ViewPU {
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(this.combinationBaseValues.map(v => v.toFixed(2)).join(' + '));
+                        Text.create(this.combinationBaseValues.map((v: number): string => v.toFixed(2)).join(' + '));
                         Text.fontSize(14);
                         Text.fontColor('#4CAF50');
                     }, Text);
@@ -451,7 +564,6 @@ class FigureSkatingPage extends ViewPU {
                     Column.pop();
                 });
             }
-            // 单跳模式：基础分值显示
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -460,7 +572,6 @@ class FigureSkatingPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 单跳模式：基础分值显示
             if (!this.isCombinationMode && this.currentElement !== '') {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -507,7 +618,6 @@ class FigureSkatingPage extends ViewPU {
                     Column.pop();
                 });
             }
-            // GOE评分区域
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -516,7 +626,6 @@ class FigureSkatingPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // GOE评分区域
             if ((this.isCombinationMode && this.combinationElements.length >= 2) ||
                 (!this.isCombinationMode && this.currentElement !== '')) {
                 this.ifElseBranchUpdateFunction(0, () => {
@@ -567,59 +676,9 @@ class FigureSkatingPage extends ViewPU {
                     ForEach.pop();
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('90%');
-                        Column.padding(15);
-                        Column.backgroundColor(Color.White);
-                        Column.borderRadius(10);
-                        Column.margin({ bottom: 20 });
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('裁判GOE评分 (-5 到 +5)');
-                        Text.fontSize(16);
-                        Text.fontWeight(FontWeight.Medium);
-                        Text.margin({ bottom: 10 });
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        ForEach.create();
-                        const forEachItemGenFunction = _item => {
-                            const index = _item;
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Row.create();
-                                Row.width('100%');
-                                Row.justifyContent(FlexAlign.Start);
-                                Row.margin({ bottom: 8 });
-                            }, Row);
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Text.create(`裁判 ${index + 1}:`);
-                                Text.fontSize(14);
-                                Text.width(60);
-                            }, Text);
-                            Text.pop();
-                            this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                TextInput.create({ text: this.goeScores[index] });
-                                TextInput.width(80);
-                                TextInput.height(40);
-                                TextInput.type(InputType.Number);
-                                TextInput.onChange((value: string) => {
-                                    this.goeScores[index] = value;
-                                });
-                            }, TextInput);
-                            Row.pop();
-                        };
-                        this.forEachUpdateFunction(elmtId, [0, 1, 2, 3, 4, 5, 6, 7, 8], forEachItemGenFunction);
-                    }, ForEach);
-                    ForEach.pop();
-                    Column.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 添加动作按钮
                         Row.create();
-                        // 添加动作按钮
                         Row.width('90%');
-                        // 添加动作按钮
                         Row.justifyContent(FlexAlign.SpaceBetween);
-                        // 添加动作按钮
                         Row.margin({ bottom: 20 });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -679,11 +738,9 @@ class FigureSkatingPage extends ViewPU {
                         }
                     }, If);
                     If.pop();
-                    // 添加动作按钮
                     Row.pop();
                 });
             }
-            // 已添加动作列表
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -692,7 +749,6 @@ class FigureSkatingPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 已添加动作列表
             if (this.elementsList.length > 0 || this.combinationList.length > 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -711,7 +767,6 @@ class FigureSkatingPage extends ViewPU {
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 单跳列表
                         ForEach.create();
                         const forEachItemGenFunction = (_item, index: number) => {
                             const item = _item;
@@ -757,10 +812,8 @@ class FigureSkatingPage extends ViewPU {
                         };
                         this.forEachUpdateFunction(elmtId, this.elementsList, forEachItemGenFunction, undefined, true, false);
                     }, ForEach);
-                    // 单跳列表
                     ForEach.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 连跳列表
                         ForEach.create();
                         const forEachItemGenFunction = (_item, index: number) => {
                             const item = _item;
@@ -800,7 +853,7 @@ class FigureSkatingPage extends ViewPU {
                                 Row.padding({ bottom: 8 });
                             }, Row);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Text.create(`各基础: ${item.baseValues.map(v => v.toFixed(2)).join(' + ')}`);
+                                Text.create(`各基础: ${item.baseValues.map((v: number): string => v.toFixed(2)).join(' + ')}`);
                                 Text.fontSize(12);
                                 Text.fontColor('#666666');
                                 Text.layoutWeight(1);
@@ -825,27 +878,8 @@ class FigureSkatingPage extends ViewPU {
                         };
                         this.forEachUpdateFunction(elmtId, this.combinationList, forEachItemGenFunction, undefined, true, false);
                     }, ForEach);
-                    // 连跳列表
                     ForEach.pop();
                     Column.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计算总分按钮
-                        Button.createWithLabel('计算总分');
-                        // 计算总分按钮
-                        Button.width('90%');
-                        // 计算总分按钮
-                        Button.height(50);
-                        // 计算总分按钮
-                        Button.fontSize(18);
-                        // 计算总分按钮
-                        Button.backgroundColor('#FF6B6B');
-                        // 计算总分按钮
-                        Button.onClick(() => {
-                            this.calculateTotal();
-                        });
-                    }, Button);
-                    // 计算总分按钮
-                    Button.pop();
                 });
             }
             else {
@@ -854,15 +888,145 @@ class FigureSkatingPage extends ViewPU {
             }
         }, If);
         If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('90%');
+            Column.padding(15);
+            Column.backgroundColor(Color.White);
+            Column.borderRadius(10);
+            Column.margin({ bottom: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('节目内容分 (PCS)');
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Medium);
+            Text.margin({ bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = (_item, compIndex: number) => {
+                const component = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.width('100%');
+                    Column.padding(10);
+                    Column.backgroundColor('#F9F9F9');
+                    Column.borderRadius(8);
+                    Column.margin({ bottom: 10 });
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width('100%');
+                    Row.margin({ bottom: 8 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(component.name);
+                    Text.fontSize(14);
+                    Text.fontWeight(FontWeight.Medium);
+                    Text.layoutWeight(1);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(`系数: ${component.factor.toFixed(2)}`);
+                    Text.fontSize(12);
+                    Text.fontColor('#666666');
+                }, Text);
+                Text.pop();
+                Row.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Flex.create({ wrap: FlexWrap.Wrap });
+                    Flex.width('100%');
+                }, Flex);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    ForEach.create();
+                    const forEachItemGenFunction = _item => {
+                        const judgeIndex = _item;
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.margin({ right: 5, bottom: 5 });
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(`裁判${judgeIndex + 1}`);
+                            Text.fontSize(10);
+                            Text.fontColor('#999999');
+                        }, Text);
+                        Text.pop();
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            TextInput.create({ text: this.pcsScores[compIndex][judgeIndex] });
+                            TextInput.width(35);
+                            TextInput.height(35);
+                            TextInput.fontSize(12);
+                            TextInput.type(InputType.Number);
+                            TextInput.onChange((value: string) => {
+                                this.pcsScores[compIndex][judgeIndex] = value;
+                            });
+                        }, TextInput);
+                        Column.pop();
+                    };
+                    this.forEachUpdateFunction(elmtId, [0, 1, 2, 3, 4, 5, 6, 7, 8], forEachItemGenFunction);
+                }, ForEach);
+                ForEach.pop();
+                Flex.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width('100%');
+                    Row.margin({ top: 8 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create('平均分: ');
+                    Text.fontSize(12);
+                    Text.fontColor('#666666');
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(this.calculateComponentAverage(compIndex).toFixed(2));
+                    Text.fontSize(14);
+                    Text.fontWeight(FontWeight.Bold);
+                    Text.fontColor('#4CAF50');
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create('  最终分: ');
+                    Text.fontSize(12);
+                    Text.fontColor('#666666');
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(this.calculateComponentFinalScore(compIndex).toFixed(2));
+                    Text.fontSize(14);
+                    Text.fontWeight(FontWeight.Bold);
+                    Text.fontColor('#FF6B6B');
+                }, Text);
+                Text.pop();
+                Row.pop();
+                Column.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.programComponents, forEachItemGenFunction, undefined, true, false);
+        }, ForEach);
+        ForEach.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('计算总分');
+            Button.width('90%');
+            Button.height(50);
+            Button.fontSize(18);
+            Button.backgroundColor('#FF6B6B');
+            Button.onClick(() => {
+                this.calculateTotal();
+            });
+            Button.margin({ bottom: 20 });
+        }, Button);
+        Button.pop();
         Column.pop();
     }
-    updateBaseValue() {
+    updateBaseValue(): void {
         const value = this.baseValues.get(this.currentElement);
         if (value !== undefined) {
             this.baseValue = value.toFixed(2);
         }
     }
-    addElement() {
+    addElement(): void {
         if (this.currentElement === '') {
             return;
         }
@@ -879,37 +1043,63 @@ class FigureSkatingPage extends ViewPU {
         this.elementsList.push(score);
         this.clearCurrent();
     }
-    removeElement(index: number) {
+    removeElement(index: number): void {
         this.elementsList.splice(index, 1);
         this.calculateTotal();
     }
-    clearCurrent() {
+    clearCurrent(): void {
         this.currentElement = '';
         this.baseValue = '';
         this.goeScores = ['', '', '', '', '', '', '', '', ''];
     }
-    calculateTotal() {
-        let total = 0;
+    calculateTotal(): void {
+        let tes = 0;
         for (const item of this.elementsList) {
-            total += item.finalScore;
+            tes += item.finalScore;
         }
         for (const item of this.combinationList) {
-            total += item.finalScore;
+            tes += item.finalScore;
         }
+        this.technicalScore = tes.toFixed(2);
+        let pcs = 0;
+        for (let i = 0; i < this.programComponents.length; i++) {
+            pcs += this.calculateComponentFinalScore(i);
+        }
+        this.componentScore = pcs.toFixed(2);
+        const total = tes + pcs;
         this.totalScore = total.toFixed(2);
     }
-    // 连跳相关方法
-    addToCombination() {
-        if (this.currentElement === '' || this.combinationElements.length >= 3) {
-            return;
+    calculateComponentAverage(compIndex: number): number {
+        const scores: number[] = [];
+        for (let i = 0; i < 9; i++) {
+            const score = parseFloat(this.pcsScores[compIndex][i]);
+            if (!isNaN(score)) {
+                scores.push(score);
+            }
         }
-        const baseVal = this.baseValues.get(this.currentElement) || 0;
-        this.combinationElements.push(this.currentElement);
-        this.combinationBaseValues.push(baseVal);
-        this.currentElement = '';
-        this.baseValue = '';
+        if (scores.length === 0) {
+            return 0;
+        }
+        const sorted = scores.slice().sort((a: number, b: number): number => a - b);
+        const trimmed = sorted.slice(1, sorted.length - 1);
+        if (trimmed.length === 0) {
+            return scores[0];
+        }
+        const sum = trimmed.reduce((acc: number, val: number): number => acc + val, 0);
+        return sum / trimmed.length;
     }
-    addCombination() {
+    calculateComponentFinalScore(compIndex: number): number {
+        const average = this.calculateComponentAverage(compIndex);
+        const factor = this.programComponents[compIndex].factor;
+        return Math.round(average * factor * 100) / 100;
+    }
+    updateProgramFactor(): void {
+        const factor = this.programType === 'SP' ? 0.8 : 1.6;
+        for (const component of this.programComponents) {
+            component.factor = factor;
+        }
+    }
+    addCombination(): void {
         if (this.combinationElements.length < 2) {
             return;
         }
@@ -920,15 +1110,15 @@ class FigureSkatingPage extends ViewPU {
                 goeValues.push(goe);
             }
         }
-        const combination = ScoreCalculator.createCombinationJump([...this.combinationElements], [...this.combinationBaseValues], goeValues);
+        const combination = ScoreCalculator.createCombinationJump(this.combinationElements.slice(), this.combinationBaseValues.slice(), goeValues);
         this.combinationList.push(combination);
         this.clearCombination();
     }
-    removeCombination(index: number) {
+    removeCombination(index: number): void {
         this.combinationList.splice(index, 1);
         this.calculateTotal();
     }
-    clearCombination() {
+    clearCombination(): void {
         this.combinationElements = [];
         this.combinationBaseValues = [];
         this.currentElement = '';

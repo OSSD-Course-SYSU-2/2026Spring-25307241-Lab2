@@ -1,0 +1,2217 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ´ãif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆ - ä¸»ç•Œé¢
+ * Copyright (c) 2024
+ */
+import router from '@ohos.router';
+import { PuzzleGameEngine } from '../common/util/PuzzleGameEngine';
+import { MedalType, ActionType, GameMode, GameState, PlayerScore } from '../viewmodel/PuzzleGameModel';
+class PuzzleGamePage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.gameEngine = new PuzzleGameEngine();
+        this.__gameMode = new ObservedPropertySimplePU(GameMode.CLASSIC, this, "gameMode");
+        this.__board = new ObservedPropertyObjectPU([], this, "board");
+        this.__handCards = new ObservedPropertyObjectPU([], this, "handCards");
+        this.__currentTarget = new ObservedPropertyObjectPU(null, this, "currentTarget");
+        this.__allTargets = new ObservedPropertyObjectPU([], this, "allTargets");
+        this.__gameState = new ObservedPropertySimplePU(GameState.READY, this, "gameState");
+        this.__playerScore = new ObservedPropertyObjectPU(new PlayerScore(), this, "playerScore");
+        this.__selectedCardIndex = new ObservedPropertySimplePU(-1, this, "selectedCardIndex");
+        this.__selectedPosition = new ObservedPropertySimplePU(-1, this, "selectedPosition");
+        this.__elapsedTime = new ObservedPropertySimplePU(0, this, "elapsedTime");
+        this.__showResult = new ObservedPropertySimplePU(false, this, "showResult");
+        this.__showHelp = new ObservedPropertySimplePU(false, this, "showHelp");
+        this.timer = -1;
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.gameEngine !== undefined) {
+            this.gameEngine = params.gameEngine;
+        }
+        if (params.gameMode !== undefined) {
+            this.gameMode = params.gameMode;
+        }
+        if (params.board !== undefined) {
+            this.board = params.board;
+        }
+        if (params.handCards !== undefined) {
+            this.handCards = params.handCards;
+        }
+        if (params.currentTarget !== undefined) {
+            this.currentTarget = params.currentTarget;
+        }
+        if (params.allTargets !== undefined) {
+            this.allTargets = params.allTargets;
+        }
+        if (params.gameState !== undefined) {
+            this.gameState = params.gameState;
+        }
+        if (params.playerScore !== undefined) {
+            this.playerScore = params.playerScore;
+        }
+        if (params.selectedCardIndex !== undefined) {
+            this.selectedCardIndex = params.selectedCardIndex;
+        }
+        if (params.selectedPosition !== undefined) {
+            this.selectedPosition = params.selectedPosition;
+        }
+        if (params.elapsedTime !== undefined) {
+            this.elapsedTime = params.elapsedTime;
+        }
+        if (params.showResult !== undefined) {
+            this.showResult = params.showResult;
+        }
+        if (params.showHelp !== undefined) {
+            this.showHelp = params.showHelp;
+        }
+        if (params.timer !== undefined) {
+            this.timer = params.timer;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__gameMode.purgeDependencyOnElmtId(rmElmtId);
+        this.__board.purgeDependencyOnElmtId(rmElmtId);
+        this.__handCards.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentTarget.purgeDependencyOnElmtId(rmElmtId);
+        this.__allTargets.purgeDependencyOnElmtId(rmElmtId);
+        this.__gameState.purgeDependencyOnElmtId(rmElmtId);
+        this.__playerScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedCardIndex.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedPosition.purgeDependencyOnElmtId(rmElmtId);
+        this.__elapsedTime.purgeDependencyOnElmtId(rmElmtId);
+        this.__showResult.purgeDependencyOnElmtId(rmElmtId);
+        this.__showHelp.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__gameMode.aboutToBeDeleted();
+        this.__board.aboutToBeDeleted();
+        this.__handCards.aboutToBeDeleted();
+        this.__currentTarget.aboutToBeDeleted();
+        this.__allTargets.aboutToBeDeleted();
+        this.__gameState.aboutToBeDeleted();
+        this.__playerScore.aboutToBeDeleted();
+        this.__selectedCardIndex.aboutToBeDeleted();
+        this.__selectedPosition.aboutToBeDeleted();
+        this.__elapsedTime.aboutToBeDeleted();
+        this.__showResult.aboutToBeDeleted();
+        this.__showHelp.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get gameMode() {
+        return this.__gameMode.get();
+    }
+    set gameMode(newValue) {
+        this.__gameMode.set(newValue);
+    }
+    get board() {
+        return this.__board.get();
+    }
+    set board(newValue) {
+        this.__board.set(newValue);
+    }
+    get handCards() {
+        return this.__handCards.get();
+    }
+    set handCards(newValue) {
+        this.__handCards.set(newValue);
+    }
+    get currentTarget() {
+        return this.__currentTarget.get();
+    }
+    set currentTarget(newValue) {
+        this.__currentTarget.set(newValue);
+    }
+    get allTargets() {
+        return this.__allTargets.get();
+    }
+    set allTargets(newValue) {
+        this.__allTargets.set(newValue);
+    }
+    get gameState() {
+        return this.__gameState.get();
+    }
+    set gameState(newValue) {
+        this.__gameState.set(newValue);
+    }
+    get playerScore() {
+        return this.__playerScore.get();
+    }
+    set playerScore(newValue) {
+        this.__playerScore.set(newValue);
+    }
+    get selectedCardIndex() {
+        return this.__selectedCardIndex.get();
+    }
+    set selectedCardIndex(newValue) {
+        this.__selectedCardIndex.set(newValue);
+    }
+    get selectedPosition() {
+        return this.__selectedPosition.get();
+    }
+    set selectedPosition(newValue) {
+        this.__selectedPosition.set(newValue);
+    }
+    get elapsedTime() {
+        return this.__elapsedTime.get();
+    }
+    set elapsedTime(newValue) {
+        this.__elapsedTime.set(newValue);
+    }
+    get showResult() {
+        return this.__showResult.get();
+    }
+    set showResult(newValue) {
+        this.__showResult.set(newValue);
+    }
+    get showHelp() {
+        return this.__showHelp.get();
+    }
+    set showHelp(newValue) {
+        this.__showHelp.set(newValue);
+    }
+    aboutToAppear() {
+        const params = router.getParams();
+        if (params && params['mode']) {
+            this.gameMode = params['mode'];
+        }
+        this.startNewGame();
+    }
+    aboutToDisappear() {
+        if (this.timer !== -1) {
+            clearInterval(this.timer);
+        }
+    }
+    startNewGame() {
+        this.gameEngine.initializeGame(this.gameMode);
+        this.gameEngine.startGame();
+        this.updateGameState();
+        this.startTimer();
+    }
+    updateGameState() {
+        this.board = this.gameEngine.getBoard();
+        this.handCards = this.gameEngine.getHandCards();
+        this.currentTarget = this.gameEngine.getCurrentTarget();
+        this.allTargets = this.gameEngine.getAllTargets();
+        this.gameState = this.gameEngine.getGameState();
+        this.playerScore = this.gameEngine.getPlayerScore();
+        if (this.gameState === GameState.COMPLETED) {
+            this.stopTimer();
+            this.showResult = true;
+        }
+    }
+    startTimer() {
+        this.elapsedTime = 0;
+        this.timer = setInterval(() => {
+            this.elapsedTime++;
+        }, 1000);
+    }
+    stopTimer() {
+        if (this.timer !== -1) {
+            clearInterval(this.timer);
+            this.timer = -1;
+        }
+    }
+    useCard(cardIndex) {
+        if (this.gameState !== GameState.PLAYING)
+            return;
+        this.selectedCardIndex = cardIndex;
+        const card = this.handCards[cardIndex];
+        if (this.needsPositionSelection(card.type)) {
+            return;
+        }
+        const params = {};
+        const success = this.gameEngine.executeAction(cardIndex, params);
+        if (success) {
+            this.updateGameState();
+        }
+        else {
+            this.selectedCardIndex = -1;
+        }
+    }
+    clickBoardPosition(pos) {
+        if (this.selectedCardIndex === -1)
+            return;
+        const card = this.handCards[this.selectedCardIndex];
+        let params = {};
+        switch (card.type) {
+            case ActionType.SPIN:
+                params.column = pos % 3;
+                break;
+            case ActionType.JUMP:
+                if (this.selectedPosition === -1) {
+                    this.selectedPosition = pos;
+                    return;
+                }
+                params.pos1 = this.selectedPosition;
+                params.pos2 = pos;
+                this.selectedPosition = -1;
+                break;
+            case ActionType.POSE:
+                if (this.selectedPosition === -1) {
+                    this.selectedPosition = pos;
+                    return;
+                }
+                params.from = this.selectedPosition;
+                params.to = pos;
+                this.selectedPosition = -1;
+                break;
+            default:
+                params.pos = pos;
+                break;
+        }
+        const success = this.gameEngine.executeAction(this.selectedCardIndex, params);
+        if (success) {
+            this.updateGameState();
+        }
+        this.selectedCardIndex = -1;
+    }
+    needsPositionSelection(type) {
+        return [
+            ActionType.SPIN, ActionType.JUMP, ActionType.POSE,
+            ActionType.PIROUETTE, ActionType.AXEL, ActionType.LUTZ,
+            ActionType.FLIP, ActionType.LOOP, ActionType.SALCHOW,
+            ActionType.TOE_LOOP, ActionType.CAMEL, ActionType.SIT,
+            ActionType.UPRIGHT, ActionType.SPIRAL, ActionType.STEP
+        ].includes(type);
+    }
+    getMedalColor(type) {
+        switch (type) {
+            case MedalType.GOLD:
+                return '#FFD700';
+            case MedalType.SILVER:
+                return '#C0C0C0';
+            case MedalType.BRONZE:
+                return '#CD7F32';
+            default:
+                return '#CCCCCC';
+        }
+    }
+    getMedalIcon(type) {
+        switch (type) {
+            case MedalType.GOLD:
+                return 'ğŸ¥‡';
+            case MedalType.SILVER:
+                return 'ğŸ¥ˆ';
+            case MedalType.BRONZE:
+                return 'ğŸ¥‰';
+            default:
+                return 'ğŸ…';
+        }
+    }
+    formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Stack.create();
+            Stack.width('100%');
+            Stack.height('100%');
+        }, Stack);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.showResult) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.buildResultPage.bind(this)();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.buildGamePage.bind(this)();
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // å¸®åŠ©å¼¹çª—
+            if (this.showHelp) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.height('100%');
+                        Column.justifyContent(FlexAlign.Center);
+                        Column.alignItems(HorizontalAlign.Center);
+                        Column.backgroundColor('rgba(0,0,0,0.5)');
+                        Column.onClick(() => {
+                            this.showHelp = false;
+                        });
+                    }, Column);
+                    this.buildHelpDialog.bind(this)();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Stack.pop();
+    }
+    buildGamePage(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.linearGradient({
+                angle: 135,
+                colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.height(60);
+            Row.padding({ left: 20, right: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithChild();
+            Button.width(40);
+            Button.height(40);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(20);
+            Button.onClick(() => {
+                router.back();
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('â†');
+            Text.fontSize(24);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.gameMode === GameMode.CLASSIC ? 'ç»å…¸æ¨¡å¼' : 'æ¯æ—¥æŒ‘æˆ˜');
+            Text.fontSize(18);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithChild();
+            Button.width(40);
+            Button.height(40);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(20);
+            Button.onClick(() => {
+                this.showHelp = true;
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('?');
+            Text.fontSize(20);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('â±ï¸');
+            Text.fontSize(20);
+            Text.margin({ left: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.formatTime(this.elapsedTime));
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.margin({ left: 5 });
+        }, Text);
+        Text.pop();
+        Row.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+            Column.width('100%');
+            Column.padding(20);
+        }, Column);
+        this.buildTargetSection.bind(this)();
+        this.buildBoard.bind(this)();
+        this.buildHandCards.bind(this)();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.height(80);
+            Row.padding({ left: 20, right: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('é‡æ–°å¼€å§‹');
+            Button.width('40%');
+            Button.height(45);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(25);
+            Button.fontColor(Color.White);
+            Button.onClick(() => {
+                this.stopTimer();
+                this.startNewGame();
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æš‚åœ');
+            Button.width('40%');
+            Button.height(45);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(25);
+            Button.fontColor(Color.White);
+            Button.onClick(() => {
+                if (this.gameState === GameState.PLAYING) {
+                    this.gameEngine.pauseGame();
+                    this.stopTimer();
+                }
+                else if (this.gameState === GameState.PAUSED) {
+                    this.gameEngine.resumeGame();
+                    this.startTimer();
+                }
+                this.gameState = this.gameEngine.getGameState();
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
+        Column.pop();
+    }
+    buildResultPage(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.linearGradient({
+                angle: 135,
+                colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ‰ è¡¨æ¼”å®Œæˆï¼');
+            Text.fontSize(28);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+            Text.margin({ top: 80, bottom: 30 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.getMedalIcon(this.playerScore.medal));
+            Text.fontSize(80);
+            Text.margin({ bottom: 30 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('85%');
+            Column.padding(25);
+            Column.backgroundColor('rgba(255,255,255,0.15)');
+            Column.borderRadius(20);
+            Column.margin({ bottom: 40 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ top: 10 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å®Œæˆå›¾æ¡ˆ');
+            Text.fontSize(16);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(`${this.playerScore.patternsCompleted}/${this.allTargets.length}`);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ top: 10 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ€»ç§»åŠ¨æ¬¡æ•°');
+            Text.fontSize(16);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(`${this.playerScore.moves}`);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ top: 10 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å¤±è¯¯æ¬¡æ•°');
+            Text.fontSize(16);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(`${this.playerScore.mistakes}`);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ top: 10 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ç”¨æ—¶');
+            Text.fontSize(16);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.formatTime(this.playerScore.time));
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ top: 10 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ€»åˆ†');
+            Text.fontSize(16);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(`${this.playerScore.score}`);
+            Text.fontSize(20);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#FFD700');
+        }, Text);
+        Text.pop();
+        Row.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('85%');
+            Row.justifyContent(FlexAlign.Center);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('å†æ¥ä¸€å±€');
+            Button.width('45%');
+            Button.height(50);
+            Button.backgroundColor('#667eea');
+            Button.borderRadius(25);
+            Button.fontColor(Color.White);
+            Button.fontSize(18);
+            Button.onClick(() => {
+                this.showResult = false;
+                this.startNewGame();
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('è¿”å›');
+            Button.width('45%');
+            Button.height(50);
+            Button.backgroundColor('rgba(255,255,255,0.3)');
+            Button.borderRadius(25);
+            Button.fontColor(Color.White);
+            Button.fontSize(18);
+            Button.onClick(() => {
+                router.back();
+            });
+            Button.margin({ left: 10 });
+        }, Button);
+        Button.pop();
+        Row.pop();
+        Column.pop();
+    }
+    buildTargetSection(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(15);
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            Column.borderRadius(15);
+            Column.margin({ bottom: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å½“å‰ç›®æ ‡');
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.currentTarget) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.margin({ top: 10 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.currentTarget.description);
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.8)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('éœ€è¦: ');
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.8)');
+                        Text.margin({ left: 10 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const medal = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(this.getMedalIcon(medal));
+                                Text.fontSize(20);
+                            }, Text);
+                            Text.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.currentTarget.requiredMedals, forEachItemGenFunction, (medal, index) => index.toString(), true, true);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.margin({ top: 5 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`è¿›åº¦: ${this.playerScore.patternsCompleted}/${this.allTargets.length}`);
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.8)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`å¤±è¯¯: ${this.playerScore.mistakes}`);
+                        Text.fontSize(14);
+                        Text.fontColor(this.playerScore.mistakes > 0 ? '#FF6B6B' : 'rgba(255,255,255,0.8)');
+                        Text.margin({ left: 20 });
+                    }, Text);
+                    Text.pop();
+                    Row.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+    }
+    buildBoard(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.justifyContent(FlexAlign.Center);
+            Column.padding(20);
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            Column.borderRadius(15);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const row = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.margin({ top: row === 0 ? 0 : 10 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    ForEach.create();
+                    const forEachItemGenFunction = _item => {
+                        const col = _item;
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.width(80);
+                            Column.height(80);
+                            Column.backgroundColor(this.getMedalColor(this.board[row * 3 + col]?.type || MedalType.BRONZE));
+                            Column.borderRadius(10);
+                            Column.justifyContent(FlexAlign.Center);
+                            Column.border({
+                                width: this.selectedPosition === row * 3 + col ? 3 : 1,
+                                color: this.selectedPosition === row * 3 + col ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
+                            });
+                            Column.shadow({ radius: 5, color: 'rgba(0,0,0,0.3)', offsetX: 2, offsetY: 2 });
+                            Column.onClick(() => {
+                                this.clickBoardPosition(row * 3 + col);
+                            });
+                            Column.margin({ left: col === 0 ? 0 : 10 });
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(this.getMedalIcon(this.board[row * 3 + col]?.type || MedalType.BRONZE));
+                            Text.fontSize(40);
+                        }, Text);
+                        Text.pop();
+                        Column.pop();
+                    };
+                    this.forEachUpdateFunction(elmtId, [0, 1, 2], forEachItemGenFunction, (col) => col.toString(), false, false);
+                }, ForEach);
+                ForEach.pop();
+                Row.pop();
+            };
+            this.forEachUpdateFunction(elmtId, [0, 1, 2], forEachItemGenFunction, (row) => row.toString(), false, false);
+        }, ForEach);
+        ForEach.pop();
+        Column.pop();
+    }
+    buildHandCards(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(15);
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            Column.borderRadius(15);
+            Column.margin({ top: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('åŠ¨ä½œå¡ç‰Œ');
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 10 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Scroll.create();
+            Scroll.scrollable(ScrollDirection.Horizontal);
+            Scroll.width('100%');
+            Scroll.height(120);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = (_item, index) => {
+                const card = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.width(80);
+                    Column.height(100);
+                    Column.backgroundColor(this.selectedCardIndex === index ? '#FF6B6B' : 'rgba(255,255,255,0.2)');
+                    Column.borderRadius(10);
+                    Column.justifyContent(FlexAlign.Center);
+                    Column.border({
+                        width: 2,
+                        color: this.selectedCardIndex === index ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
+                    });
+                    Column.onClick(() => {
+                        this.useCard(index);
+                    });
+                    Column.margin({ left: index === 0 ? 0 : 10 });
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(card.icon);
+                    Text.fontSize(30);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(card.name);
+                    Text.fontSize(12);
+                    Text.fontColor(Color.White);
+                    Text.margin({ top: 5 });
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(`éš¾åº¦: ${card.difficulty}`);
+                    Text.fontSize(10);
+                    Text.fontColor('rgba(255,255,255,0.7)');
+                    Text.margin({ top: 2 });
+                }, Text);
+                Text.pop();
+                Column.pop();
+            };
+            this.forEachUpdateFunction(elmtId, this.handCards, forEachItemGenFunction, (card, index) => index.toString(), true, true);
+        }, ForEach);
+        ForEach.pop();
+        Row.pop();
+        Scroll.pop();
+        Column.pop();
+    }
+    // å¸®åŠ©å¼¹çª—
+    buildHelpDialog(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('90%');
+            Column.constraintSize({ maxHeight: '80%' });
+            Column.padding(20);
+            Column.backgroundColor('rgba(102,126,234,0.95)');
+            Column.borderRadius(20);
+            Column.shadow({ radius: 20, color: 'rgba(0,0,0,0.3)', offsetX: 0, offsetY: 10 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ ‡é¢˜
+            Row.create();
+            // æ ‡é¢˜
+            Row.width('100%');
+            // æ ‡é¢˜
+            Row.margin({ bottom: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ“– æ¸¸æˆç©æ³•');
+            Text.fontSize(22);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithChild();
+            Button.width(36);
+            Button.height(36);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(18);
+            Button.onClick(() => {
+                this.showHelp = false;
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('âœ•');
+            Text.fontSize(20);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Button.pop();
+        // æ ‡é¢˜
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Scroll.create();
+            Scroll.layoutWeight(1);
+            Scroll.scrollBar(BarState.Auto);
+            Scroll.edgeEffect(EdgeEffect.Spring);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+        }, Column);
+        // æ¸¸æˆç›®æ ‡
+        this.buildHelpSection.bind(this)('ğŸ¯ æ¸¸æˆç›®æ ‡', [
+            'åœ¨3Ã—3æ£‹ç›˜ä¸Šå‡‘å‡ºæŒ‡å®šçš„å¥–ç‰Œå›¾æ¡ˆ',
+            'è¿ç»­å®Œæˆ6ç»„å›¾æ¡ˆå³å¯é€šå…³',
+            'ç”¨æ—¶è¶ŠçŸ­ã€å¤±è¯¯è¶Šå°‘ï¼Œåˆ†æ•°è¶Šé«˜'
+        ]);
+        // æ“ä½œæ–¹æ³•
+        this.buildHelpSection.bind(this)('ğŸ® æ“ä½œæ–¹æ³•', [
+            '1. ç‚¹å‡»ä¸‹æ–¹å¡ç‰Œé€‰æ‹©è¦æ‰§è¡Œçš„åŠ¨ä½œ',
+            '2. ç‚¹å‡»æ£‹ç›˜ä½ç½®æ‰§è¡ŒåŠ¨ä½œæ•ˆæœ',
+            '3. éƒ¨åˆ†å¡ç‰Œéœ€è¦é€‰æ‹©ä¸¤ä¸ªä½ç½®',
+            '4. å®Œæˆç›®æ ‡å›¾æ¡ˆåè‡ªåŠ¨è¿›å…¥ä¸‹ä¸€å…³'
+        ]);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.create();
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.width('100%');
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.padding(15);
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.borderRadius(12);
+            // æ ¸å¿ƒå¡ç‰Œ
+            Column.margin({ bottom: 15 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ´ æ ¸å¿ƒå¡ç‰Œ');
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+            Text.width('100%');
+            Text.margin({ bottom: 12 });
+        }, Text);
+        Text.pop();
+        this.buildCardHelp.bind(this)('ğŸ”„ Spin', 'ç¿»è½¬æ•´åˆ—å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©åˆ—');
+        this.buildCardHelp.bind(this)('ğŸ¦˜ Jump', 'äº¤æ¢ä¸¤å †å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ä¸¤ä¸ªä½ç½®');
+        this.buildCardHelp.bind(this)('ğŸ’ƒ Pose', 'å †å ç›¸é‚»å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ç›®æ ‡ä½ç½®');
+        this.buildCardHelp.bind(this)('ğŸ€ Pirouette', 'äº¤æ¢ä¾§è¾¹å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ä½ç½®');
+        // æ ¸å¿ƒå¡ç‰Œ
+        Column.pop();
+        // å¥–ç‰Œè¯´æ˜
+        this.buildHelpSection.bind(this)('ğŸ† å¥–ç‰Œè¯„åˆ†', [
+            'ğŸ¥‡ é‡‘ç‰Œï¼šé›¶å¤±è¯¯ï¼Œå®Œç¾è¡¨æ¼”',
+            'ğŸ¥ˆ é“¶ç‰Œï¼šä»…1æ¬¡å¤±è¯¯',
+            'ğŸ¥‰ é“œç‰Œï¼š2æ¬¡å¤±è¯¯'
+        ]);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æç¤º
+            Column.create();
+            // æç¤º
+            Column.width('100%');
+            // æç¤º
+            Column.padding(15);
+            // æç¤º
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            // æç¤º
+            Column.borderRadius(12);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ’¡ å°æç¤º');
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#FFD700');
+            Text.width('100%');
+            Text.margin({ bottom: 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('è§‚å¯Ÿç›®æ ‡å›¾æ¡ˆï¼Œè§„åˆ’å¥½æ­¥éª¤å†æ“ä½œï¼Œå¯ä»¥å‡å°‘å¤±è¯¯æ¬¡æ•°ï¼');
+            Text.fontSize(14);
+            Text.fontColor('rgba(255,255,255,0.9)');
+            Text.lineHeight(22);
+        }, Text);
+        Text.pop();
+        // æç¤º
+        Column.pop();
+        Column.pop();
+        Scroll.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // å…³é—­æŒ‰é’®
+            Button.createWithLabel('çŸ¥é“äº†');
+            // å…³é—­æŒ‰é’®
+            Button.width('100%');
+            // å…³é—­æŒ‰é’®
+            Button.height(50);
+            // å…³é—­æŒ‰é’®
+            Button.backgroundColor('#667eea');
+            // å…³é—­æŒ‰é’®
+            Button.borderRadius(25);
+            // å…³é—­æŒ‰é’®
+            Button.fontColor(Color.White);
+            // å…³é—­æŒ‰é’®
+            Button.fontSize(18);
+            // å…³é—­æŒ‰é’®
+            Button.margin({ top: 15 });
+            // å…³é—­æŒ‰é’®
+            Button.onClick(() => {
+                this.showHelp = false;
+            });
+        }, Button);
+        // å…³é—­æŒ‰é’®
+        Button.pop();
+        Column.pop();
+    }
+    buildHelpSection(title, items, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(15);
+            Column.backgroundColor('rgba(255,255,255,0.1)');
+            Column.borderRadius(12);
+            Column.margin({ bottom: 15 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(title);
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor(Color.White);
+            Text.width('100%');
+            Text.margin({ bottom: 12 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = (_item, index) => {
+                const item = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width('100%');
+                    Row.margin({ bottom: 6 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create('â€¢');
+                    Text.fontSize(14);
+                    Text.fontColor('rgba(255,255,255,0.8)');
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(item);
+                    Text.fontSize(14);
+                    Text.fontColor('rgba(255,255,255,0.9)');
+                    Text.margin({ left: 8 });
+                    Text.layoutWeight(1);
+                }, Text);
+                Text.pop();
+                Row.pop();
+            };
+            this.forEachUpdateFunction(elmtId, items, forEachItemGenFunction, (item, index) => index.toString(), true, true);
+        }, ForEach);
+        ForEach.pop();
+        Column.pop();
+    }
+    buildCardHelp(icon, desc, tip, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.padding(8);
+            Row.margin({ bottom: 8 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(icon);
+            Text.fontSize(20);
+            Text.width(50);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.alignItems(HorizontalAlign.Start);
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(desc);
+            Text.fontSize(14);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(tip);
+            Text.fontSize(12);
+            Text.fontColor('rgba(255,255,255,0.7)');
+            Text.margin({ top: 2 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        Row.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "PuzzleGamePage";
+    }
+}
+registerNamedRoute(() => new PuzzleGamePage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/PuzzleGamePage", pageFullPath: "entry/src/main/ets/pages/PuzzleGamePage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=PuzzleGamePage.js.mapÂ“Ù` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙfG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\PuzzleGameEngine.etsÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\PuzzleGameModel.etsÙ^G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\PuzzleGamePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚP©/*
+ * èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆ - ä¸»ç•Œé¢
+ * Copyright (c) 2024
+ */
+
+import router from '@ohos.router';
+import { PuzzleGameEngine } from '../common/util/PuzzleGameEngine';
+import {
+  Medal, MedalType, ActionType, ActionCard,
+  TargetPattern, GameMode, GameState, PlayerScore
+} from '../viewmodel/PuzzleGameModel';
+
+@Entry
+@Component
+struct PuzzleGamePage {
+  private gameEngine: PuzzleGameEngine = new PuzzleGameEngine();
+  
+  @State gameMode: GameMode = GameMode.CLASSIC;
+  @State board: Medal[] = [];
+  @State handCards: ActionCard[] = [];
+  @State currentTarget: TargetPattern | null = null;
+  @State allTargets: TargetPattern[] = [];
+  @State gameState: GameState = GameState.READY;
+  @State playerScore: PlayerScore = new PlayerScore();
+  @State selectedCardIndex: number = -1;
+  @State selectedPosition: number = -1;
+  @State elapsedTime: number = 0;
+  @State showResult: boolean = false;
+  @State showHelp: boolean = false;
+  
+  private timer: number = -1;
+  
+  aboutToAppear(): void {
+    const params = router.getParams() as Record<string, GameMode>;
+    if (params && params['mode']) {
+      this.gameMode = params['mode'];
+    }
+    this.startNewGame();
+  }
+  
+  aboutToDisappear(): void {
+    if (this.timer !== -1) {
+      clearInterval(this.timer);
+    }
+  }
+  
+  startNewGame(): void {
+    this.gameEngine.initializeGame(this.gameMode);
+    this.gameEngine.startGame();
+    this.updateGameState();
+    this.startTimer();
+  }
+  
+  updateGameState(): void {
+    this.board = this.gameEngine.getBoard();
+    this.handCards = this.gameEngine.getHandCards();
+    this.currentTarget = this.gameEngine.getCurrentTarget();
+    this.allTargets = this.gameEngine.getAllTargets();
+    this.gameState = this.gameEngine.getGameState();
+    this.playerScore = this.gameEngine.getPlayerScore();
+    
+    if (this.gameState === GameState.COMPLETED) {
+      this.stopTimer();
+      this.showResult = true;
+    }
+  }
+  
+  startTimer(): void {
+    this.elapsedTime = 0;
+    this.timer = setInterval(() => {
+      this.elapsedTime++;
+    }, 1000);
+  }
+  
+  stopTimer(): void {
+    if (this.timer !== -1) {
+      clearInterval(this.timer);
+      this.timer = -1;
+    }
+  }
+  
+  useCard(cardIndex: number): void {
+    if (this.gameState !== GameState.PLAYING) return;
+    
+    this.selectedCardIndex = cardIndex;
+    const card = this.handCards[cardIndex];
+    if (this.needsPositionSelection(card.type)) {
+      return;
+    }
+    
+    const params: ESObject = {};
+    const success = this.gameEngine.executeAction(cardIndex, params);
+    if (success) {
+      this.updateGameState();
+    } else {
+      this.selectedCardIndex = -1;
+    }
+  }
+  
+  clickBoardPosition(pos: number): void {
+    if (this.selectedCardIndex === -1) return;
+    
+    const card = this.handCards[this.selectedCardIndex];
+    let params: ESObject = {};
+    
+    switch (card.type) {
+      case ActionType.SPIN:
+        params.column = pos % 3;
+        break;
+      case ActionType.JUMP:
+        if (this.selectedPosition === -1) {
+          this.selectedPosition = pos;
+          return;
+        }
+        params.pos1 = this.selectedPosition;
+        params.pos2 = pos;
+        this.selectedPosition = -1;
+        break;
+      case ActionType.POSE:
+        if (this.selectedPosition === -1) {
+          this.selectedPosition = pos;
+          return;
+        }
+        params.from = this.selectedPosition;
+        params.to = pos;
+        this.selectedPosition = -1;
+        break;
+      default:
+        params.pos = pos;
+        break;
+    }
+    
+    const success = this.gameEngine.executeAction(this.selectedCardIndex, params);
+    if (success) {
+      this.updateGameState();
+    }
+    this.selectedCardIndex = -1;
+  }
+  
+  needsPositionSelection(type: ActionType): boolean {
+    return [
+      ActionType.SPIN, ActionType.JUMP, ActionType.POSE,
+      ActionType.PIROUETTE, ActionType.AXEL, ActionType.LUTZ,
+      ActionType.FLIP, ActionType.LOOP, ActionType.SALCHOW,
+      ActionType.TOE_LOOP, ActionType.CAMEL, ActionType.SIT,
+      ActionType.UPRIGHT, ActionType.SPIRAL, ActionType.STEP
+    ].includes(type);
+  }
+  
+  getMedalColor(type: MedalType): string {
+    switch (type) {
+      case MedalType.GOLD:
+        return '#FFD700';
+      case MedalType.SILVER:
+        return '#C0C0C0';
+      case MedalType.BRONZE:
+        return '#CD7F32';
+      default:
+        return '#CCCCCC';
+    }
+  }
+  
+  getMedalIcon(type: MedalType): string {
+    switch (type) {
+      case MedalType.GOLD:
+        return 'ğŸ¥‡';
+      case MedalType.SILVER:
+        return 'ğŸ¥ˆ';
+      case MedalType.BRONZE:
+        return 'ğŸ¥‰';
+      default:
+        return 'ğŸ…';
+    }
+  }
+  
+  formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+  
+  build() {
+    Stack() {
+      Column() {
+        if (this.showResult) {
+          this.buildResultPage()
+        } else {
+          this.buildGamePage()
+        }
+      }
+      .width('100%')
+      .height('100%')
+      
+      // å¸®åŠ©å¼¹çª—
+      if (this.showHelp) {
+        Column() {
+          this.buildHelpDialog()
+        }
+        .width('100%')
+        .height('100%')
+        .justifyContent(FlexAlign.Center)
+        .alignItems(HorizontalAlign.Center)
+        .backgroundColor('rgba(0,0,0,0.5)')
+        .onClick(() => {
+          this.showHelp = false;
+        })
+      }
+    }
+    .width('100%')
+    .height('100%')
+  }
+  
+  @Builder
+  buildGamePage() {
+    Column() {
+      Row() {
+        Button() {
+          Text('â†')
+            .fontSize(24)
+            .fontColor(Color.White)
+        }
+        .width(40)
+        .height(40)
+        .backgroundColor('rgba(255,255,255,0.2)')
+        .borderRadius(20)
+        .onClick(() => {
+          router.back();
+        })
+        
+        Blank().layoutWeight(1)
+        
+        Text(this.gameMode === GameMode.CLASSIC ? 'ç»å…¸æ¨¡å¼' : 'æ¯æ—¥æŒ‘æˆ˜')
+          .fontSize(18)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+        
+        Blank().layoutWeight(1)
+        
+        Row() {
+          Button() {
+            Text('?')
+              .fontSize(20)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+          }
+          .width(40)
+          .height(40)
+          .backgroundColor('rgba(255,255,255,0.2)')
+          .borderRadius(20)
+          .onClick(() => {
+            this.showHelp = true;
+          })
+          
+          Text('â±ï¸')
+            .fontSize(20)
+            .margin({ left: 10 })
+          Text(this.formatTime(this.elapsedTime))
+            .fontSize(16)
+            .fontColor(Color.White)
+            .margin({ left: 5 })
+        }
+      }
+      .width('100%')
+      .height(60)
+      .padding({ left: 20, right: 20 })
+      
+      Column() {
+        this.buildTargetSection()
+        this.buildBoard()
+        this.buildHandCards()
+      }
+      .layoutWeight(1)
+      .width('100%')
+      .padding(20)
+      
+      Row() {
+        Button('é‡æ–°å¼€å§‹')
+          .width('40%')
+          .height(45)
+          .backgroundColor('rgba(255,255,255,0.2)')
+          .borderRadius(25)
+          .fontColor(Color.White)
+          .onClick(() => {
+            this.stopTimer();
+            this.startNewGame();
+          })
+        
+        Blank().layoutWeight(1)
+        
+        Button('æš‚åœ')
+          .width('40%')
+          .height(45)
+          .backgroundColor('rgba(255,255,255,0.2)')
+          .borderRadius(25)
+          .fontColor(Color.White)
+          .onClick(() => {
+            if (this.gameState === GameState.PLAYING) {
+              this.gameEngine.pauseGame();
+              this.stopTimer();
+            } else if (this.gameState === GameState.PAUSED) {
+              this.gameEngine.resumeGame();
+              this.startTimer();
+            }
+            this.gameState = this.gameEngine.getGameState();
+          })
+      }
+      .width('100%')
+      .height(80)
+      .padding({ left: 20, right: 20 })
+    }
+    .width('100%')
+    .height('100%')
+    .linearGradient({
+      angle: 135,
+      colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+    })
+  }
+  
+  @Builder
+  buildResultPage() {
+    Column() {
+      Text('ğŸ‰ è¡¨æ¼”å®Œæˆï¼')
+        .fontSize(28)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(Color.White)
+        .margin({ top: 80, bottom: 30 })
+      
+      Text(this.getMedalIcon(this.playerScore.medal))
+        .fontSize(80)
+        .margin({ bottom: 30 })
+      
+      Column() {
+        Row() {
+          Text('å®Œæˆå›¾æ¡ˆ')
+            .fontSize(16)
+            .fontColor('rgba(255,255,255,0.8)')
+          Blank().layoutWeight(1)
+          Text(`${this.playerScore.patternsCompleted}/${this.allTargets.length}`)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.White)
+        }
+        .width('100%')
+        .margin({ top: 10 })
+        
+        Row() {
+          Text('æ€»ç§»åŠ¨æ¬¡æ•°')
+            .fontSize(16)
+            .fontColor('rgba(255,255,255,0.8)')
+          Blank().layoutWeight(1)
+          Text(`${this.playerScore.moves}`)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.White)
+        }
+        .width('100%')
+        .margin({ top: 10 })
+        
+        Row() {
+          Text('å¤±è¯¯æ¬¡æ•°')
+            .fontSize(16)
+            .fontColor('rgba(255,255,255,0.8)')
+          Blank().layoutWeight(1)
+          Text(`${this.playerScore.mistakes}`)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.White)
+        }
+        .width('100%')
+        .margin({ top: 10 })
+        
+        Row() {
+          Text('ç”¨æ—¶')
+            .fontSize(16)
+            .fontColor('rgba(255,255,255,0.8)')
+          Blank().layoutWeight(1)
+          Text(this.formatTime(this.playerScore.time))
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor(Color.White)
+        }
+        .width('100%')
+        .margin({ top: 10 })
+        
+        Row() {
+          Text('æ€»åˆ†')
+            .fontSize(16)
+            .fontColor('rgba(255,255,255,0.8)')
+          Blank().layoutWeight(1)
+          Text(`${this.playerScore.score}`)
+            .fontSize(20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#FFD700')
+        }
+        .width('100%')
+        .margin({ top: 10 })
+      }
+      .width('85%')
+      .padding(25)
+      .backgroundColor('rgba(255,255,255,0.15)')
+      .borderRadius(20)
+      .margin({ bottom: 40 })
+      
+      Row() {
+        Button('å†æ¥ä¸€å±€')
+          .width('45%')
+          .height(50)
+          .backgroundColor('#667eea')
+          .borderRadius(25)
+          .fontColor(Color.White)
+          .fontSize(18)
+          .onClick(() => {
+            this.showResult = false;
+            this.startNewGame();
+          })
+        
+        Button('è¿”å›')
+          .width('45%')
+          .height(50)
+          .backgroundColor('rgba(255,255,255,0.3)')
+          .borderRadius(25)
+          .fontColor(Color.White)
+          .fontSize(18)
+          .onClick(() => {
+            router.back();
+          })
+          .margin({ left: 10 })
+      }
+      .width('85%')
+      .justifyContent(FlexAlign.Center)
+    }
+    .width('100%')
+    .height('100%')
+    .linearGradient({
+      angle: 135,
+      colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+    })
+  }
+  
+  @Builder
+  buildTargetSection() {
+    Column() {
+      Text('å½“å‰ç›®æ ‡')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+      
+      if (this.currentTarget) {
+        Row() {
+          Text(this.currentTarget.description)
+            .fontSize(14)
+            .fontColor('rgba(255,255,255,0.8)')
+          
+          Text('éœ€è¦: ')
+            .fontSize(14)
+            .fontColor('rgba(255,255,255,0.8)')
+            .margin({ left: 10 })
+          
+          ForEach(this.currentTarget.requiredMedals, (medal: MedalType, index: number) => {
+            Text(this.getMedalIcon(medal))
+              .fontSize(20)
+          }, (medal: MedalType, index: number) => index.toString())
+        }
+        .margin({ top: 10 })
+        
+        Row() {
+          Text(`è¿›åº¦: ${this.playerScore.patternsCompleted}/${this.allTargets.length}`)
+            .fontSize(14)
+            .fontColor('rgba(255,255,255,0.8)')
+          
+          Text(`å¤±è¯¯: ${this.playerScore.mistakes}`)
+            .fontSize(14)
+            .fontColor(this.playerScore.mistakes > 0 ? '#FF6B6B' : 'rgba(255,255,255,0.8)')
+            .margin({ left: 20 })
+        }
+        .margin({ top: 5 })
+      }
+    }
+    .width('100%')
+    .padding(15)
+    .backgroundColor('rgba(255,255,255,0.1)')
+    .borderRadius(15)
+    .margin({ bottom: 20 })
+  }
+  
+  @Builder
+  buildBoard() {
+    Column() {
+      ForEach([0, 1, 2], (row: number) => {
+        Row() {
+          ForEach([0, 1, 2], (col: number) => {
+            Column() {
+              Text(this.getMedalIcon(this.board[row * 3 + col]?.type || MedalType.BRONZE))
+                .fontSize(40)
+            }
+            .width(80)
+            .height(80)
+            .backgroundColor(this.getMedalColor(this.board[row * 3 + col]?.type || MedalType.BRONZE))
+            .borderRadius(10)
+            .justifyContent(FlexAlign.Center)
+            .border({
+              width: this.selectedPosition === row * 3 + col ? 3 : 1,
+              color: this.selectedPosition === row * 3 + col ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
+            })
+            .shadow({ radius: 5, color: 'rgba(0,0,0,0.3)', offsetX: 2, offsetY: 2 })
+            .onClick(() => {
+              this.clickBoardPosition(row * 3 + col);
+            })
+            .margin({ left: col === 0 ? 0 : 10 })
+          }, (col: number) => col.toString())
+        }
+        .margin({ top: row === 0 ? 0 : 10 })
+      }, (row: number) => row.toString())
+    }
+    .width('100%')
+    .justifyContent(FlexAlign.Center)
+    .padding(20)
+    .backgroundColor('rgba(255,255,255,0.1)')
+    .borderRadius(15)
+  }
+  
+  @Builder
+  buildHandCards() {
+    Column() {
+      Text('åŠ¨ä½œå¡ç‰Œ')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 10 })
+      
+      Scroll() {
+        Row() {
+          ForEach(this.handCards, (card: ActionCard, index: number) => {
+            Column() {
+              Text(card.icon)
+                .fontSize(30)
+              
+              Text(card.name)
+                .fontSize(12)
+                .fontColor(Color.White)
+                .margin({ top: 5 })
+              
+              Text(`éš¾åº¦: ${card.difficulty}`)
+                .fontSize(10)
+                .fontColor('rgba(255,255,255,0.7)')
+                .margin({ top: 2 })
+            }
+            .width(80)
+            .height(100)
+            .backgroundColor(this.selectedCardIndex === index ? '#FF6B6B' : 'rgba(255,255,255,0.2)')
+            .borderRadius(10)
+            .justifyContent(FlexAlign.Center)
+            .border({
+              width: 2,
+              color: this.selectedCardIndex === index ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
+            })
+            .onClick(() => {
+              this.useCard(index);
+            })
+            .margin({ left: index === 0 ? 0 : 10 })
+          }, (card: ActionCard, index: number) => index.toString())
+        }
+      }
+      .scrollable(ScrollDirection.Horizontal)
+      .width('100%')
+      .height(120)
+    }
+    .width('100%')
+    .padding(15)
+    .backgroundColor('rgba(255,255,255,0.1)')
+    .borderRadius(15)
+    .margin({ top: 20 })
+  }
+  
+  // å¸®åŠ©å¼¹çª—
+  @Builder
+  buildHelpDialog() {
+    Column() {
+      // æ ‡é¢˜
+      Row() {
+        Text('ğŸ“– æ¸¸æˆç©æ³•')
+          .fontSize(22)
+          .fontWeight(FontWeight.Bold)
+          .fontColor(Color.White)
+        
+        Blank().layoutWeight(1)
+        
+        Button() {
+          Text('âœ•')
+            .fontSize(20)
+            .fontColor(Color.White)
+        }
+        .width(36)
+        .height(36)
+        .backgroundColor('rgba(255,255,255,0.2)')
+        .borderRadius(18)
+        .onClick(() => {
+          this.showHelp = false;
+        })
+      }
+      .width('100%')
+      .margin({ bottom: 20 })
+      
+      Scroll() {
+        Column() {
+          // æ¸¸æˆç›®æ ‡
+          this.buildHelpSection('ğŸ¯ æ¸¸æˆç›®æ ‡', [
+            'åœ¨3Ã—3æ£‹ç›˜ä¸Šå‡‘å‡ºæŒ‡å®šçš„å¥–ç‰Œå›¾æ¡ˆ',
+            'è¿ç»­å®Œæˆ6ç»„å›¾æ¡ˆå³å¯é€šå…³',
+            'ç”¨æ—¶è¶ŠçŸ­ã€å¤±è¯¯è¶Šå°‘ï¼Œåˆ†æ•°è¶Šé«˜'
+          ])
+          
+          // æ“ä½œæ–¹æ³•
+          this.buildHelpSection('ğŸ® æ“ä½œæ–¹æ³•', [
+            '1. ç‚¹å‡»ä¸‹æ–¹å¡ç‰Œé€‰æ‹©è¦æ‰§è¡Œçš„åŠ¨ä½œ',
+            '2. ç‚¹å‡»æ£‹ç›˜ä½ç½®æ‰§è¡ŒåŠ¨ä½œæ•ˆæœ',
+            '3. éƒ¨åˆ†å¡ç‰Œéœ€è¦é€‰æ‹©ä¸¤ä¸ªä½ç½®',
+            '4. å®Œæˆç›®æ ‡å›¾æ¡ˆåè‡ªåŠ¨è¿›å…¥ä¸‹ä¸€å…³'
+          ])
+          
+          // æ ¸å¿ƒå¡ç‰Œ
+          Column() {
+            Text('ğŸ´ æ ¸å¿ƒå¡ç‰Œ')
+              .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor(Color.White)
+              .width('100%')
+              .margin({ bottom: 12 })
+            
+            this.buildCardHelp('ğŸ”„ Spin', 'ç¿»è½¬æ•´åˆ—å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©åˆ—')
+            this.buildCardHelp('ğŸ¦˜ Jump', 'äº¤æ¢ä¸¤å †å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ä¸¤ä¸ªä½ç½®')
+            this.buildCardHelp('ğŸ’ƒ Pose', 'å †å ç›¸é‚»å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ç›®æ ‡ä½ç½®')
+            this.buildCardHelp('ğŸ€ Pirouette', 'äº¤æ¢ä¾§è¾¹å¥–ç‰Œ', 'ç‚¹å‡»åé€‰æ‹©ä½ç½®')
+          }
+          .width('100%')
+          .padding(15)
+          .backgroundColor('rgba(255,255,255,0.1)')
+          .borderRadius(12)
+          .margin({ bottom: 15 })
+          
+          // å¥–ç‰Œè¯´æ˜
+          this.buildHelpSection('ğŸ† å¥–ç‰Œè¯„åˆ†', [
+            'ğŸ¥‡ é‡‘ç‰Œï¼šé›¶å¤±è¯¯ï¼Œå®Œç¾è¡¨æ¼”',
+            'ğŸ¥ˆ é“¶ç‰Œï¼šä»…1æ¬¡å¤±è¯¯',
+            'ğŸ¥‰ é“œç‰Œï¼š2æ¬¡å¤±è¯¯'
+          ])
+          
+          // æç¤º
+          Column() {
+            Text('ğŸ’¡ å°æç¤º')
+              .fontSize(16)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#FFD700')
+              .width('100%')
+              .margin({ bottom: 8 })
+            
+            Text('è§‚å¯Ÿç›®æ ‡å›¾æ¡ˆï¼Œè§„åˆ’å¥½æ­¥éª¤å†æ“ä½œï¼Œå¯ä»¥å‡å°‘å¤±è¯¯æ¬¡æ•°ï¼')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.9)')
+              .lineHeight(22)
+          }
+          .width('100%')
+          .padding(15)
+          .backgroundColor('rgba(255,255,255,0.1)')
+          .borderRadius(12)
+        }
+        .width('100%')
+      }
+      .layoutWeight(1)
+      .scrollBar(BarState.Auto)
+      .edgeEffect(EdgeEffect.Spring)
+      
+      // å…³é—­æŒ‰é’®
+      Button('çŸ¥é“äº†')
+        .width('100%')
+        .height(50)
+        .backgroundColor('#667eea')
+        .borderRadius(25)
+        .fontColor(Color.White)
+        .fontSize(18)
+        .margin({ top: 15 })
+        .onClick(() => {
+          this.showHelp = false;
+        })
+    }
+    .width('90%')
+    .constraintSize({ maxHeight: '80%' })
+    .padding(20)
+    .backgroundColor('rgba(102,126,234,0.95)')
+    .borderRadius(20)
+    .shadow({ radius: 20, color: 'rgba(0,0,0,0.3)', offsetX: 0, offsetY: 10 })
+  }
+  
+  @Builder
+  buildHelpSection(title: string, items: string[]) {
+    Column() {
+      Text(title)
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor(Color.White)
+        .width('100%')
+        .margin({ bottom: 12 })
+      
+      ForEach(items, (item: string, index: number) => {
+        Row() {
+          Text('â€¢')
+            .fontSize(14)
+            .fontColor('rgba(255,255,255,0.8)')
+          
+          Text(item)
+            .fontSize(14)
+            .fontColor('rgba(255,255,255,0.9)')
+            .margin({ left: 8 })
+            .layoutWeight(1)
+        }
+        .width('100%')
+        .margin({ bottom: 6 })
+      }, (item: string, index: number) => index.toString())
+    }
+    .width('100%')
+    .padding(15)
+    .backgroundColor('rgba(255,255,255,0.1)')
+    .borderRadius(12)
+    .margin({ bottom: 15 })
+  }
+  
+  @Builder
+  buildCardHelp(icon: string, desc: string, tip: string) {
+    Row() {
+      Text(icon)
+        .fontSize(20)
+        .width(50)
+      
+      Column() {
+        Text(desc)
+          .fontSize(14)
+          .fontColor(Color.White)
+        
+        Text(tip)
+          .fontSize(12)
+          .fontColor('rgba(255,255,255,0.7)')
+          .margin({ top: 2 })
+      }
+      .alignItems(HorizontalAlign.Start)
+      .layoutWeight(1)
+    }
+    .width('100%')
+    .padding(8)
+    .margin({ bottom: 8 })
+  }
+}
+ÀÔrD“¬@ohos.router¿../common/util/PuzzleGameEngine¼../viewmodel/PuzzleGameModelÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙ` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÂÙfG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\PuzzleGameEngine.etsAÃªoh-resolveÂEAÂÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\PuzzleGameModel.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings±PuzzleGamePage.js ‘²PuzzleGamePage.etsÜ…‘”    ‘” –”   ” ” ” ”! !”" "˜”   ” ”	 	” ” ”! !”ÌB ÌB”ÌC ÌCÜ ”   ” ”	 	” ” ” ”  	”( 	”* 	”3 	$”5 	&”Ì@ 	1”ÌB 
+”ÌH 
+”Ìf 
+%”Ìg 
+&’” ” ‘”  ”” )” -”. =”0 ?””7 ”? &”Ì@ '”ÌG .’”4 ”6 ’”8 #”: %’”< /”Ì@ 3’”9 '”; )””8  ”ÌA )”ÌB *”ÌG /””: $”> (”ÌI 3”ÌK 5“”Ì@ %”ÌA &”ÌB '“”? $”Ì@ %”ÌA &’”: ”;  ’”9 ”> $’”7 ”< "“” ” ” ‘” 
+&’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’”  ”  ™” !” !
+” !” !” !” !”' !#”) !ÌA”* !ÌB™” "” "” "” "” "” "”# "”$ " ”& ""š” #” #
+” #” #” #”" #”# #”) ##”* #$”+ #%‘”	 $–” %” %” %	” %” %” %’” &” &’” (” (™” )” )” )” )” )” )” )” )” )˜” *” *” *” *” *”$ *”% *”& * ‘”	 +’” ,” ,’” .” .œ” /” /” /	” /” /”& /"”' /#”+ /'”, /(”4 /0”5 /1”6 /2˜” 0” 0” 0	” 0” 0”! 0”# 0”$ 0 –” 1” 1” 1	” 1” 1” 1–” 2” 2” 2	” 2” 2” 2’” 3” 3’” 5” 5œ” 6” 6” 6	” 6” 6” 6” 6”$ 6 ”% 6!”- 6)”/ 6+”0 6,œ” 7” 7” 7	” 7” 7” 7” 7”( 7$”) 7%”5 71”7 73”8 74œ” 8” 8” 8	” 8” 8”! 8”" 8”, 8(”- 8)”= 89”? 8;”Ì@ 8<œ” 9” 9” 9	” 9” 9” 9” 9”) 9%”* 9&”7 93”9 95”: 96œ” :” :” :	” :” :” :” :”( :$”) :%”5 :1”7 :3”8 :4œ” ;” ;” ;	” ;” ;” ;”  ;”* ;&”+ ;'”9 ;5”; ;7”< ;8š” =” =” =” =” =” =”( =$”) =%”2 =.”4 =0–” >” >
+” >” >” >” >—” ?” ?
+” ?” ?” ?”" ?”# ?‘”	 Ì@’” ÌA” ÌA’” ÌC” ÌC—” ÌD” ÌD” ÌD	” ÌD” ÌD” ÌD” ÌD™” ÌE” ÌE” ÌE	” ÌE” ÌE”  ÌE”! ÌE”$ ÌE ”& ÌE"–” ÌF” ÌF
+” ÌF” ÌF” ÌF” ÌF–” ÌG”	 ÌG” ÌG” ÌG” ÌG” ÌG’” ÌH” ÌH’” ÌJ” ÌJ™” ÌK” ÌK” ÌK” ÌK” ÌK” ÌK” ÌK” ÌK” ÌK˜” ÌL” ÌL” ÌL” ÌL” ÌL”$ ÌL”% ÌL”& ÌL ˜” ÌM” ÌM
+” ÌM” ÌM” ÌM” ÌM” ÌM” ÌM‘”	 ÌN’” ÌO” ÌO”” ÌQ” ÌQ	” ÌQ
+” ÌQ™” ÌR” ÌR” ÌR” ÌR” ÌR” ÌR”( ÌR$”) ÌR%”0 ÌR,’” ÌR.” ÌR5—” ÌT” ÌT” ÌT	” ÌT”! ÌT”* ÌT&”+ ÌT'›” ÌU” ÌU
+” ÌU” ÌU” ÌU” ÌU”# ÌU”$ ÌU ”- ÌU)”. ÌU*”/ ÌU+›” ÌV” ÌV” ÌV” ÌV”' ÌV#”( ÌV$”, ÌV(”- ÌV)”1 ÌV-”2 ÌV.”4 ÌV0’” ÌW” ÌW‘”	 ÌX–” ÌZ” ÌZ
+” ÌZ” ÌZ” ÌZ” ÌZ Ÿ” Ì[” Ì[
+” Ì[” Ì[” Ì[” Ì[”' Ì[#”( Ì[$”5 Ì[1”6 Ì[2”? Ì[;”ÌA Ì[=”ÌG Ì[ÌC”ÌH Ì[ÌD”ÌI Ì[ÌE”” Ì\” Ì\” Ì\” Ì\–” Ì]” Ì]
+” Ì]”  Ì]”" Ì]”# Ì]‘”	 Ì^‘” Ì^˜” Ì_” Ì_
+” Ì_”" Ì_”% Ì_”& Ì_ ”' Ì_!”( Ì_"‘”	 Ì`’” Ìa” Ìa”” Ìc” Ìc” Ìc” Ìc ˜” Ìd” Ìd” Ìd” Ìd”" Ìd”' Ìd#”( Ìd$”) Ìd%’” Ìd'” Ìd.” Ìf” Ìf
+” Ìf” Ìf” Ìf” Ìf”# Ìf”$ Ìf ”( Ìf$”) Ìf%”: Ìf6”; Ìf7”< Ìf8–” Ìg” Ìg” Ìg” Ìg” Ìg” Ìg–” Ìi” Ìi” Ìi” Ìi” Ìi” Ìi•” Ìj” Ìj” Ìj” Ìj”  Ìj™” Ìk” Ìk” Ìk” Ìk”  Ìk”# Ìk”& Ìk”' Ìk”( Ìk ’” Ìl” Ìl•” Ìm” Ìm” Ìm” Ìm”  Ìm™” Ìn” Ìn” Ìn” Ìn”) Ìn!”. Ìn&”/ Ìn'”0 Ìn(”2 Ìn*—” Ìo
+” Ìo” Ìo”) Ìo”, Ìo"”/ Ìo%”0 Ìo&’” Ìp
+” Ìp‘” Ìq	™” Ìr” Ìr” Ìr” Ìr” Ìr”" Ìr”# Ìr”3 Ìr+”4 Ìr,—” Ìs” Ìs” Ìs” Ìs” Ìs”! Ìs”" Ìs˜” Ìt” Ìt” Ìt”% Ìt”( Ìt ”) Ìt!”* Ìt"”+ Ìt#’” Ìu” Ìu•” Ìv” Ìv” Ìv” Ìv”  Ìv™” Ìw” Ìw” Ìw” Ìw”) Ìw!”. Ìw&”/ Ìw'”0 Ìw(”2 Ìw*—” Ìx
+” Ìx” Ìx”) Ìx”, Ìx"”/ Ìx%”0 Ìx&’” Ìy
+” Ìy‘” Ìz	™” Ì{” Ì{” Ì{” Ì{” Ì{”" Ì{”# Ì{”3 Ì{+”4 Ì{,—” Ì|” Ì|” Ì|” Ì|” Ì|” Ì|”  Ì|˜” Ì}” Ì}” Ì}”% Ì}”( Ì} ”) Ì}!”* Ì}"”+ Ì}#’” Ì~” Ì~‘” Ì—” Ì€” Ì€” Ì€” Ì€” Ì€”  Ì€”! Ì€’” Ì” Ì‘”	 Ì‚Ü ” Ì„” Ì„
+” Ì„” Ì„” Ì„” Ì„”' Ì„#”( Ì„$”5 Ì„1”6 Ì„2”: Ì„6”; Ì„7”ÌL Ì„ÌH”ÌN Ì„ÌJ”ÌT Ì„ÌP”ÌU Ì„ÌQ”ÌV Ì„ÌR”” Ì…” Ì…” Ì…” Ì…–” Ì†” Ì†
+” Ì†”  Ì†”" Ì†”# Ì†‘”	 Ì‡˜” Ìˆ” Ìˆ” Ìˆ	” Ìˆ”! Ìˆ”" Ìˆ”# Ìˆ”$ Ìˆ ’” Ì‰” Ì‰”” Ì‹” Ì‹” Ì‹” Ì‹)’” ÌŒ” ÌŒœ” Ì” Ì” Ì” Ì” Ì”' Ì!”( Ì"”, Ì&”. Ì(”8 Ì2”9 Ì3”= Ì7œ” Ì” Ì” Ì”  Ì”" Ì”, Ì&”- Ì'”1 Ì+”3 Ì-”= Ì7”> Ì8”ÌB Ì<œ” Ì” Ì” Ì” Ì” Ì”' Ì!”( Ì"”, Ì&”. Ì(”8 Ì2”9 Ì3”Ì@ Ì:œ” Ì” Ì” Ì” Ì”! Ì”+ Ì%”, Ì&”1 Ì+”3 Ì-”= Ì7”> Ì8”ÌA Ì;œ” Ì‘” Ì‘” Ì‘” Ì‘”  Ì‘”* Ì‘$”+ Ì‘%”1 Ì‘+”3 Ì‘-”= Ì‘7”> Ì‘8”ÌB Ì‘<—”	 Ì’”
+ Ì’” Ì’” Ì’” Ì’” Ì’” Ì’’” Ì“” Ì“”” Ì•” Ì•” Ì•” Ì•”” Ì–” Ì–” Ì–” Ì–•” Ì—” Ì—” Ì—” Ì—” Ì—”” Ì˜” Ì˜”  Ì˜”! Ì˜•” Ì™” Ì™” Ì™” Ì™”! Ì™”” Ìš” Ìš”  Ìš”! Ìš•” Ì›” Ì›” Ì›” Ì›”! Ì›”” Ìœ” Ìœ”  Ìœ”! Ìœ‘” Ì”” Ì” Ì”  Ì”! Ì‘”	 ÌŸ’” Ì ” Ì ”” Ì¢” Ì¢” Ì¢” Ì¢”” Ì£” Ì£” Ì£” Ì£•” Ì¤” Ì¤” Ì¤” Ì¤” Ì¤”” Ì¥” Ì¥” Ì¥” Ì¥•” Ì¦” Ì¦” Ì¦” Ì¦”! Ì¦”” Ì§” Ì§” Ì§” Ì§•” Ì¨” Ì¨” Ì¨” Ì¨”! Ì¨”” Ì©” Ì©” Ì©” Ì©‘” Ìª”” Ì«” Ì«” Ì«” Ì«‘”	 Ì¬’” Ì­” Ì­”” Ì¯” Ì¯” Ì¯” Ì¯” Ì°” Ì°
+” Ì°” Ì°” Ì°” Ì°” Ì°”  Ì°”' Ì°#”* Ì°&”, Ì°(”- Ì°)”. Ì°*˜” Ì±” Ì±
+” Ì±” Ì±” Ì±” Ì±”! Ì±”" Ì±Ü ” Ì²” Ì²” Ì²” Ì²” Ì²” Ì²” Ì²”' Ì²#”) Ì²%”* Ì²&”2 Ì².”3 Ì²/”4 Ì²0”6 Ì²2”9 Ì²5”: Ì²6”< Ì²8”= Ì²9’” Ì³” Ì³‘” Ìµ’” Ì¶” Ì¶	–” Ì¶” Ì¶	” ÌĞ” ÌĞ
+” ÌĞ” ÌĞ–” Ì¶” Ì¶	” ÌÑ” ÌÑ” ÌÑ” ÌÑ’” Ì·” Ì·–” Ì·” Ì·” Ì¾” Ì¾” Ì¾” Ì¾–” Ì·” Ì·” Ì¿” Ì¿” Ì¿”  Ì¿–” Ì¸” Ì¸” Ì¸” Ì¸” Ì¸”! Ì¸•” Ì¹
+” Ì¹” Ì¹”( Ì¹”5 Ì¹ ‘” Ìº	‘” Ìº•” Ì»
+” Ì»” Ì»”& Ì»”3 Ì»‘” Ì¼	’” Ì·” Ì·’” ÌÁ” ÌÁ–” ÌÂ” ÌÂ
+” ÌÂ” ÌÂ” ÌÂ” ÌÂ’” ÌÃ” ÌÃ–” ÌÃ” ÌÃ” ÌÆ	”$ ÌÆ”% ÌÆ”+ ÌÆ–” ÌÃ” ÌÃ” ÌÇ	”% ÌÇ”& ÌÇ”, ÌÇ˜” ÌÃ” ÌÃ” ÌÈ	”- ÌÈ”. ÌÈ”7 ÌÈ!”8 ÌÈ"”> ÌÈ(˜” ÌÃ” ÌÃ” ÌÉ	”) ÌÉ”* ÌÉ”9 ÌÉ#”: ÌÉ$”Ì@ ÌÉ*–” ÌÃ” ÌÃ” ÌÊ	”. ÌÊ”/ ÌÊ”Ì@ ÌÊ*—” ÌÃ” ÌÃ” ÌË	”& ÌË”' ÌË”* ÌË”, ÌË—” ÌÌ
+”  ÌÌ”! ÌÌ”) ÌÌ”, ÌÌ”1 ÌÌ”2 ÌÌ ’” ÌÍ” ÌÍ	•” ÌÄ
+” ÌÄ” ÌÄ”( ÌÄ”5 ÌÄ ’” ÌÃ” ÌÃ‘” ÌÎ‘” ÌÎ’” Ì¶” Ì¶	‘” ÌÒ’” ÌÕ” ÌÕ’” ÌÖ” ÌÖ
+–” ÌÖ” ÌÖ
+” Í6” Í6
+” Í6” Í6–” ÌÖ” ÌÖ
+” Í7” Í7” Í7”  Í7•” ÌÖ” ÌÖ
+” Í8”! Í8”" Í8”” Í9” Í9” Í9” Í9Ü ” Í:” Í:” Í:” Í:” Í:”# Í:”% Í:”( Í:”) Í:”+ Í:!”, Í:"”5 Í:+”7 Í:-”: Í:0”; Í:1”< Í:2‘” Í;’” Ì×” Ì×	–” Ì×” Ì×	” Í” Í” Í” Í–” Ì×” Ì×	” Í” Í” Í” Í” Ì×” Ì×	” Í” Í” Í” Í” Í”  Í”" Í”$ Í”) Í ”+ Í"”- Í$”/ Í&’” ÌØ” ÌØ–” ÌØ” ÌØ” Ìİ	” Ìİ” Ìİ” Ìİ–” ÌØ” ÌØ” ÌŞ	” ÌŞ” ÌŞ” ÌŞ–” ÌØ” ÌØ” Ìß	”" Ìß”# Ìß”: Ìß0–” ÌØ” ÌØ” Ìà	” Ìà”  Ìà”" Ìà—” ÌØ” ÌØ” Ìá	” Ìá” Ìá” Ìá”  Ìá–” Ìâ
+” Ìâ” Ìâ” Ìâ” Ìâ” Ìâ’” Ìã” Ìã	”” ÌÙ
+” ÌÙ” ÌÙ” ÌÙ–” ÌÙ
+” ÌÙ” ÌÚ” ÌÚ” ÌÚ” ÌÚ˜” ÌÙ
+” ÌÙ” ÌÛ” ÌÛ” ÌÛ”  ÌÛ”! ÌÛ”& ÌÛ"’” ÌÙ
+” ÌÙ’” ÌØ” ÌØ’” Ìå” Ìå–” Ìå” Ìå” Ìå” Ìå” Ìå”  Ìå’” Ìå” ÌåÜ ” Ìç” Ìç” Ìç” Ìç” Ìç”% Ìç”* Ìç”2 Ìç'”3 Ìç(”: Ìç/”; Ìç0”< Ìç1”= Ìç2”ÌC Ìç8”ÌD Ìç9”ÌE Ìç:”ÌF Ìç;”ÌL ÌçÌA–” Ìç” Ìç” Ìè” Ìè” Ìè” Ìè˜” Ìç” Ìç” Ìé” Ìé” Ìé”  Ìé”! Ìé”& Ìé ˜” Ìç” Ìç” Ìê” Ìê” Ìê”& Ìê ”' Ìê!”+ Ìê%’” Ìç” Ìç’” Ìì” Ìì–” Ìì” Ìì” Ìì” Ìì” Ìì”  Ìì’” Ìì” Ìì’” Ìî” Ìî’” Ìï
+” Ìï–” Ìï
+” Ìï” Ìõ” Ìõ” Ìõ” Ìõ–” Ìï
+” Ìï” Ìö” Ìö” Ìö” Ìö–” Ìï
+” Ìï” Ì÷”" Ì÷”# Ì÷”: Ì÷2–” Ìï
+” Ìï” Ìø” Ìø”  Ìø”" Ìø—” Ìï
+” Ìï” Ìù” Ìù” Ìù” Ìù”  Ìù—” Ìú” Ìú” Ìú” Ìú”  Ìú”$ Ìú ”% Ìú!’” Ìû
+” Ìû”” Ìğ” Ìğ” Ìğ” Ìğ–” Ìğ” Ìğ” Ìñ” Ìñ” Ìñ” Ìñ˜” Ìğ” Ìğ” Ìò” Ìò” Ìò”  Ìò”! Ìò”& Ìò$˜” Ìğ” Ìğ” Ìó” Ìó” Ìó”& Ìó$”' Ìó%”+ Ìó)’” Ìğ” Ìğ’” Ìï
+” Ìï”” Ìı
+” Ìı” Ìı” Ìı–” Ìı
+” Ìı” Ìş” Ìş” Ìş” Ìşš” Ìı
+” Ìı” Ìÿ” Ìÿ” Ìÿ” Ìÿ” Ìÿ”  Ìÿ”" Ìÿ”$ Ìÿ ’” Ìı
+” Ìı›” Í 
+” Í ” Í ” Í ” Í ”' Í ”( Í ”, Í #”- Í $”8 Í /”9 Í 0–” Í 
+” Í ” Í” Í” Í” Í˜” Í 
+” Í ” Í” Í” Í”  Í”! Í”& Í"š” Í 
+” Í ” Í” Í” Í” Í” Í”  Í”! Í”# Í’” Í 
+” Í ’” Ìî” Ìî’” Ì×” Ì×	’” Í
+” Í
+–” Í
+” Í
+” Í” Í”  Í”! Í–” Í
+” Í
+” Í” Í” Í” Í–” Í
+” Í
+” Í” Í” Í” Í•” Í” Í” Í” Í”, Í!•” Í” Í” Í” Í”$ Í•” Í” Í” Í” Í”( Í’” Í
+” Í
+’” Í” Í	–” Í” Í	” Í2” Í2” Í2” Í2–” Í” Í	” Í3” Í3” Í3” Í3” Í” Í	” Í4” Í4” Í4” Í4” Í4”  Í4”" Í4”$ Í4”) Í4 ”+ Í4"”- Í4$”/ Í4&”” Í” Í”# Í”) Í–” Í” Í” Í” Í” Í” Í–” Í” Í” Í” Í” Í” Í–” Í” Í” Í”" Í”# Í”: Í2–” Í” Í” Í” Í”  Í”" Í˜” Í” Í” Í” Í” Í”" Í”# Í”( Í —” Í” Í” Í” Í” Í” Í”  Í–” Í” Í” Í” Í”  Í”! Í–” Í” Í” Í”! Í”# Í”$ Í ’” Í
+” Í’” Í” Í’” Í” Í–” Í” Í” Í” Í” Í”  Í’” Í” Í”” Í!” Í!”# Í!”' Í!–” Í!” Í!” Í"” Í"” Í"” Í"–” Í!” Í!” Í#” Í#” Í#” Í#–” Í!” Í!” Í$”" Í$”# Í$”: Í$2–” Í!” Í!” Í%” Í%”  Í%”" Í%˜” Í!” Í!” Í&” Í&” Í&”" Í&”# Í&”( Í& —” Í!” Í!” Í'” Í'” Í'” Í'”  Í'š” Í(” Í(” Í(” Í(”" Í(”' Í(#”0 Í(,”1 Í(-”8 Í(4”: Í(6˜” Í)” Í)” Í)”# Í)”$ Í)”- Í)'”/ Í))”0 Í)*–” Í*” Í*” Í*”" Í*”$ Í*”% Í*‘” Í+š” Í+” Í+” Í+” Í+”' Í+%”, Í+*”5 Í+3”6 Í+4”< Í+:”> Í+<˜” Í,” Í,” Í,”# Í,”$ Í,”. Í,(”0 Í,*”1 Í,+–” Í-” Í-” Í-”# Í-”% Í-”& Í- ‘” Í.œ” Í/” Í/” Í/” Í/”! Í/”% Í/!”& Í/"”0 Í/,”1 Í/-”= Í/9”? Í/;”Ì@ Í/<’” Í0
+” Í0’” Í!” Í!’” Í” Í	’” ÌÖ” ÌÖ
+‘” Í<’” Í?” Í?’” Í@” Í@
+–” Í@” Í@
+” Í¯” Í¯
+” Í¯” Í¯–” Í@” Í@
+” Í°” Í°” Í°”  Í°•” Í@” Í@
+” Í±”! Í±”" Í±”” Í²” Í²” Í²” Í²Ü ” Í³” Í³” Í³” Í³” Í³”# Í³”% Í³”( Í³”) Í³”+ Í³!”, Í³"”5 Í³+”7 Í³-”: Í³0”; Í³1”< Í³2‘” Í´”” ÍA” ÍA
+” ÍA”" ÍA–” ÍA” ÍA
+” ÍB	” ÍB” ÍB” ÍB˜” ÍA” ÍA
+” ÍC	” ÍC” ÍC”& ÍC”' ÍC”+ ÍC#˜” ÍA” ÍA
+” ÍD	” ÍD” ÍD”  ÍD”! ÍD”& ÍD” ÍA” ÍA
+” ÍE	” ÍE” ÍE” ÍE” ÍE” ÍE”! ÍE”# ÍE”) ÍE!”+ ÍE#”- ÍE%”/ ÍE'’” ÍA” ÍA
+” ÍG” ÍG
+” ÍG” ÍG” ÍG”) ÍG”* ÍG”. ÍG!”/ ÍG"”: ÍG-”; ÍG.”Ì@ ÍG3”ÌA ÍG4–” ÍG” ÍG
+” ÍH	” ÍH” ÍH” ÍHš” ÍG” ÍG
+” ÍI	” ÍI” ÍI” ÍI”  ÍI”" ÍI”$ ÍI”& ÍI’” ÍG” ÍG
+’” ÍK” ÍK–” ÍK” ÍK” Í” Í” Í” Í–” ÍK” ÍK” Í” Í” Í” Í–” ÍK” ÍK” Í”" Í”# Í”; Í/–” ÍK” ÍK” Í” Í”  Í”" Íš” ÍK” ÍK” Í‘” Í‘” Í‘” Í‘”" Í‘”$ Í‘”& Í‘”( Í‘’” ÍL” ÍL–” ÍL” ÍL” ÍV	” ÍV” ÍV” ÍVš” ÍL” ÍL” ÍW	” ÍW” ÍW” ÍW” ÍW” ÍW”  ÍW”" ÍW”” ÍM
+” ÍM” ÍM” ÍM–” ÍM
+” ÍM” ÍN” ÍN” ÍN” ÍN–” ÍM
+” ÍM” ÍO” ÍO” ÍO”2 ÍO.’” ÍM
+” ÍM’” ÍP
+” ÍP–” ÍP
+” ÍP” ÍP” ÍP” ÍP”  ÍP ’” ÍP
+” ÍPÜ ” ÍQ
+” ÍQ” ÍQ” ÍQ” ÍQ”  ÍQ”+ ÍQ"”, ÍQ#”= ÍQ4”ÌA ÍQ8”ÌE ÍQ<”ÌF ÍQ=”ÌP ÍQÌG”ÌQ ÍQÌH”ÌW ÍQÌN”ÌY ÍQÌP–” ÍQ
+” ÍQ” ÍR” ÍR” ÍR” ÍR˜” ÍQ
+” ÍQ” ÍS” ÍS” ÍS”& ÍS"”' ÍS#”+ ÍS'˜” ÍQ
+” ÍQ” ÍT” ÍT” ÍT”  ÍT”! ÍT”& ÍT"’” ÍQ
+” ÍQ’” ÍL” ÍL’” ÍY” ÍY–” ÍY” ÍY” Íc	” Íc” Íc” Ícš” ÍY” ÍY” Íd	” Íd” Íd” Íd” Íd” Íd”  Íd”" Íd”” ÍZ
+” ÍZ” ÍZ” ÍZ–” ÍZ
+” ÍZ” Í[” Í[” Í[” Í[–” ÍZ
+” ÍZ” Í\” Í\” Í\”2 Í\.’” ÍZ
+” ÍZ’” Í]
+” Í]–” Í]
+” Í]” Í]” Í]” Í]”  Í] ’” Í]
+” Í]š” Í^
+” Í^” Í^” Í^” Í^”  Í^”+ Í^"”, Í^#”1 Í^(”3 Í^*–” Í^
+” Í^” Í_” Í_” Í_” Í_˜” Í^
+” Í^” Í`” Í`” Í`”& Í`"”' Í`#”+ Í`'˜” Í^
+” Í^” Ía” Ía” Ía”  Ía”! Ía”& Ía"’” Í^
+” Í^’” ÍY” ÍY’” Íf” Íf–” Íf” Íf” Íp	” Íp” Íp” Ípš” Íf” Íf” Íq	” Íq” Íq” Íq” Íq” Íq”  Íq”" Íq”” Íg
+” Íg” Íg” Íg–” Íg
+” Íg” Íh” Íh” Íh” Íh–” Íg
+” Íg” Íi” Íi” Íi”2 Íi.’” Íg
+” Íg’” Íj
+” Íj–” Íj
+” Íj” Íj” Íj” Íj”  Íj ’” Íj
+” Íjš” Ík
+” Ík” Ík” Ík” Ík”  Ík”+ Ík"”, Ík#”4 Ík+”6 Ík-–” Ík
+” Ík” Íl” Íl” Íl” Íl˜” Ík
+” Ík” Ím” Ím” Ím”& Ím"”' Ím#”+ Ím'˜” Ík
+” Ík” Ín” Ín” Ín”  Ín”! Ín”& Ín"’” Ík
+” Ík’” Íf” Íf’” Ís” Ís–” Ís” Ís” Í}	” Í}” Í}” Í}š” Ís” Ís” Í~	” Í~” Í~” Í~” Í~” Í~”  Í~”" Í~”” Ít
+” Ít” Ít” Ít–” Ít
+” Ít” Íu” Íu” Íu” Íu–” Ít
+” Ít” Ív” Ív” Ív”2 Ív.’” Ít
+” Ít’” Íw
+” Íw–” Íw
+” Íw” Íw” Íw” Íw”  Íw ’” Íw
+” Íw” Íx
+” Íx” Íx” Íx” Íx”' Íx”( Íx”, Íx#”- Íx$”8 Íx/”9 Íx0”= Íx4”> Íx5–” Íx
+” Íx” Íy” Íy” Íy” Íy˜” Íx
+” Íx” Íz” Íz” Íz”& Íz"”' Íz#”+ Íz'˜” Íx
+” Íx” Í{” Í{” Í{”  Í{”! Í{”& Í{"’” Íx
+” Íx’” Ís” Ís’” Í€” Í€–” Í€” Í€” ÍŠ	” ÍŠ” ÍŠ” ÍŠš” Í€” Í€” Í‹	” Í‹” Í‹” Í‹” Í‹” Í‹”  Í‹”" Í‹”” Í
+” Í” Í” Í–” Í
+” Í” Í‚” Í‚” Í‚” Í‚–” Í
+” Í” Íƒ” Íƒ” Íƒ”2 Íƒ.’” Í
+” Í’” Í„
+” Í„–” Í„
+” Í„” Í„” Í„” Í„”  Í„ ’” Í„
+” Í„š” Í…
+” Í…” Í…” Í…” Í…”  Í…”+ Í…"”, Í…#”1 Í…(”3 Í…*–” Í…
+” Í…” Í†” Í†” Í†” Í†˜” Í…
+” Í…” Í‡” Í‡” Í‡”& Í‡"”' Í‡#”+ Í‡'–” Í…
+” Í…” Íˆ” Íˆ” Íˆ”$ Íˆ ’” Í…
+” Í…’” Í€” Í€’” ÍK” ÍK’” Í“” Í“	–” Í“” Í“	” Í¬” Í¬” Í¬” Í¬˜” Í“” Í“	” Í­” Í­” Í­”( Í­”) Í­ ”/ Í­&”” Í”” Í””# Í””) Í”–” Í”” Í”” Í•” Í•” Í•” Í•–” Í”” Í”” Í–” Í–” Í–” Í––” Í”” Í”” Í—”" Í—”# Í—”, Í—$–” Í”” Í”” Í˜” Í˜”  Í˜”" Í˜˜” Í”” Í”” Í™” Í™” Í™”" Í™”# Í™”( Í™ –” Í”” Í”” Íš” Íš” Íš” Íš—” Í”” Í”” Í›” Í›” Í›” Í›”  Í›—” Íœ” Íœ” Íœ” Íœ”" Íœ”' Íœ#”( Íœ$–” Í” Í” Í”! Í”# Í”$ Í ’” Í
+” Í’” Í”” Í””” Í ” Í ”# Í ”' Í –” Í ” Í ” Í¡” Í¡” Í¡” Í¡–” Í ” Í ” Í¢” Í¢” Í¢” Í¢–” Í ” Í ” Í£”" Í£”# Í£”: Í£2–” Í ” Í ” Í¤” Í¤”  Í¤”" Í¤˜” Í ” Í ” Í¥” Í¥” Í¥”" Í¥”# Í¥”( Í¥ –” Í ” Í ” Í¦” Í¦” Í¦” Í¦—” Í ” Í ” Í§” Í§” Í§” Í§”  Í§–” Í¨” Í¨” Í¨” Í¨” Í¨” Í¨’” Í©
+” Í©š” Í ” Í ” Íª” Íª” Íª” Íª”  Íª”" Íª”$ Íª”& Íª’” Í ” Í ’” Í“” Í“	’” Í@” Í@
+‘” Íµ’” Í¸” Í¸’” Í¹” Í¹
+–” Í¹” Í¹
+” ÍŞ” ÍŞ
+” ÍŞ” ÍŞ–” Í¹” Í¹
+” Íß” Íß” Íß” Íß–” Í¹” Í¹
+” Íà”" Íà”# Íà”: Íà,–” Í¹” Í¹
+” Íá” Íá”  Íá”" Íáš” Í¹” Í¹
+” Íâ” Íâ” Íâ” Íâ”" Íâ”$ Íâ”& Íâ”( Íâ”” Íº” Íº
+” Íº” Íº–” Íº” Íº
+” Í»	” Í»” Í»” Í»˜” Íº” Íº
+” Í¼	” Í¼” Í¼”  Í¼”! Í¼”& Í¼˜” Íº” Íº
+” Í½	” Í½” Í½”& Í½”' Í½”+ Í½#’” Íº” Íº
+–” Í¿” Í¿
+” Í¿” Í¿”" Í¿”$ Í¿’” ÍÀ” ÍÀš” ÍÀ” ÍÀ” ÍÏ	”" ÍÏ”# ÍÏ”% ÍÏ”( ÍÏ”* ÍÏ”, ÍÏ”. ÍÏ˜” ÍÁ
+” ÍÁ”$ ÍÁ”( ÍÁ”) ÍÁ”6 ÍÁ!”7 ÍÁ"”ÌB ÍÁ-–” ÍÁ
+” ÍÁ” ÍÂ”% ÍÂ”& ÍÂ”( ÍÂ–” ÍÁ
+” ÍÁ” ÍÃ”& ÍÃ”' ÍÃ”> ÍÃ.’” ÍÁ
+” ÍÁ”” ÍÅ
+” ÍÅ”$ ÍÅ”* ÍÅ–” ÍÅ
+” ÍÅ” ÍÆ”% ÍÆ”& ÍÆ”( ÍÆ–” ÍÅ
+” ÍÅ” ÍÇ”& ÍÇ”' ÍÇ”> ÍÇ.š” ÍÅ
+” ÍÅ” ÍÈ”# ÍÈ”$ ÍÈ”& ÍÈ”* ÍÈ”, ÍÈ”. ÍÈ”0 ÍÈ ’” ÍÅ
+” ÍÅ’” ÍÊ
+” ÍÊ’”? ÍÊÌH”ÌD ÍÊÌU™”  ÍË”$ ÍË”, ÍË”0 ÍË”1 ÍË”= ÍË"”> ÍË#”ÌC ÍË(”ÌD ÍË)–”  ÍË”$ ÍË”% ÍÌ”- ÍÌ”. ÍÌ”0 ÍÌ’” ÍË”  ÍËÜ ”; ÍÊ”? ÍÊ”Ì@ ÍÊ”ÌM ÍÊ$”ÌN ÍÊ%”Ì\ ÍÊ3”Ìv ÍÍ”Ìw ÍÍ”Ì| ÍÍ”Ì~ ÍÍ ”Ìƒ ÍÍ-”Ì… ÍÍ/”Ì‡ ÍÍ1”Ìˆ ÍÍ2”Ì ÍÍ7”Ì ÍÍ8”Ì– ÍÍÌ@”Ì˜ ÍÍÌB’” ÍÊ
+” ÍÊ’” ÍÀ” ÍÀ’” ÍÑ” ÍÑš” ÍÑ” ÍÑ” ÍÛ	”" ÍÛ”# ÍÛ”% ÍÛ”( ÍÛ”* ÍÛ”+ ÍÛ”- ÍÛÜ ” ÍÒ
+” ÍÒ”$ ÍÒ”+ ÍÒ”/ ÍÒ”0 ÍÒ”; ÍÒ&”< ÍÒ'”ÌM ÍÒ8”ÌQ ÍÒ<”ÌU ÍÒÌ@”ÌV ÍÒÌA”Ì` ÍÒÌK”Ìa ÍÒÌL”Ìg ÍÒÌR”Ìi ÍÒÌT–” ÍÒ
+” ÍÒ” ÍÓ”% ÍÓ”& ÍÓ”( ÍÓ–” ÍÒ
+” ÍÒ” ÍÔ”& ÍÔ”' ÍÔ”> ÍÔ.’” ÍÒ
+” ÍÒš” ÍÖ
+” ÍÖ”$ ÍÖ”+ ÍÖ”/ ÍÖ”0 ÍÖ”; ÍÖ&”< ÍÖ'”ÌD ÍÖ/”ÌF ÍÖ1–” ÍÖ
+” ÍÖ” Í×”% Í×”& Í×”( Í×Ü ” ÍÖ
+” ÍÖ” ÍØ”& ÍØ”' ÍØ”+ ÍØ”, ÍØ”7 ÍØ'”8 ÍØ(”Ì@ ÍØ0”ÌC ÍØ3”ÌD ÍØ4”ÌE ÍØ5”ÌF ÍØ6”ÌG ÍØ7”ÌP ÍØÌ@”ÌQ ÍØÌA”ÌR ÍØÌB”ÌS ÍØÌC”Ìj ÍØÌZš” ÍÖ
+” ÍÖ” ÍÙ”# ÍÙ”$ ÍÙ”& ÍÙ”* ÍÙ”, ÍÙ”. ÍÙ”0 ÍÙ ’” ÍÖ
+” ÍÖ’” ÍÑ” ÍÑ‘” ÍÜ‘” ÍÜ’” Í¹” Í¹
+‘” Íã’” Íæ” Íæ’” Íç” Íç
+–” Íç” Íç
+” Í” Í
+” Í” Í˜” Íç” Íç
+” Í”! Í”" Í”+ Í”, Í”2 Í$–” Íç” Íç
+” Í” Í” Í” Í–” Íç” Íç
+” Í”" Í”# Í”: Í,–” Íç” Íç
+” Í” Í”  Í”" Í’” Íè” Íè’” Íé” ÍéÜ ” Íé” Íé” Íÿ	” Íÿ” Íÿ”! Íÿ”$ Íÿ”& Íÿ”) Íÿ”. Íÿ”/ Íÿ ”0 Íÿ!”1 Íÿ"”2 Íÿ#”3 Íÿ$”4 Íÿ%”5 Íÿ&”6 Íÿ'”8 Íÿ)”: Íÿ+’” Íê
+” Íê’” Íë”" Íë–” Íë”" Íë”# Íï”( Íï”) Íï”+ Íï–” Íë”" Íë”# Íğ”) Íğ”* Íğ”, ÍğÜ ” Íë”" Íë”# Íñ”2 Íñ”3 Íñ”7 Íñ!”8 Íñ"”ÌE Íñ/”ÌF Íñ0”ÌJ Íñ4”ÌK Íñ5”ÌP Íñ:”ÌQ Íñ;”ÌT Íñ>”ÌW ÍñÌA”ÌX ÍñÌB”Ì[ ÍñÌE”Ì^ ÍñÌH”Ì_ ÍñÌI”Ìa ÍñÌK”Ìe ÍñÌO”Ìi ÍñÌS”Ìr ÍñÌ\”Ìs ÍñÌ]”Ìy ÍñÌc”Ìz ÍñÌd–” Íë”" Íë”# Íò”/ Íò”0 Íò”2 Íò˜” Íë”" Íë”# Íó”1 Íó”2 Íó”; Íó%”< Íó&”ÌB Íó,•” Íë”" Íë”# Íô”) Íô”* ÍôÜ ”  Íõ”% Íõ”' Íõ”+ Íõ”, Íõ”< Íõ*”ÌA Íõ/”ÌD Íõ2”ÌG Íõ5”ÌH Íõ6”ÌK Íõ9”ÌN Íõ<”ÌO Íõ=”ÌP Íõ>”ÌQ Íõ?”ÌR ÍõÌ@”ÌS ÍõÌA”ÌT ÍõÌB”ÌU ÍõÌC”ÌV ÍõÌDÜ ”  Íö”% Íö”' Íö”+ Íö”, Íö”< Íö*”ÌA Íö/”ÌD Íö2”ÌG Íö5”ÌH Íö6”ÌK Íö9”ÌN Íö<”ÌO Íö=”ÌP Íö>”ÌQ Íö?”ÌZ ÍöÌH”Ì[ ÍöÌI”Ì\ ÍöÌJ”Ì] ÍöÌK”Ìt ÍöÌb‘” Í÷Ü ” Íë”" Íë”# Íø”) Íø”* Íø”, Íø”2 Íø”4 Íø”5 Íø”7 Íø!”< Íø&”> Íø(”ÌO Íø9”ÌQ Íø;”ÌX ÍøÌB”ÌZ ÍøÌD”Ì[ ÍøÌE”Ì] ÍøÌG”Ìd ÍøÌN”Ìf ÍøÌP”Ìg ÍøÌQ”Ìi ÍøÌS—” Íë”" Íë”# Íù”* Íù”+ Íù”. Íù”0 Íùœ”  Íú”$ Íú”% Íú”7 Íú%”8 Íú&”; Íú)”> Íú,”? Íú-”ÌB Íú0”ÌE Íú3”ÌF Íú4”ÌG Íú5’” Íû” ÍûÜ ” Íë”" Íë”# Íü”) Íü”* Íü”, Íü”0 Íü”2 Íü”5 Íü”: Íü$”; Íü%”< Íü&”= Íü'”> Íü(”? Íü)”Ì@ Íü*”ÌA Íü+”ÌB Íü,”ÌD Íü.”ÌF Íü0Ü ” Íì”  Íì”( Íì”, Íì”- Íì”9 Íì$”: Íì%”> Íì)”? Íì*”ÌD Íì/”ÌE Íì0”ÌH Íì3”ÌK Íì6”ÌL Íì7”ÌO Íì:”ÌR Íì=”ÌS Íì>”ÌU ÍìÌ@”ÌY ÍìÌD”Ì] ÍìÌH”Ìf ÍìÌQ”Ìg ÍìÌR”Ìm ÍìÌX”Ìn ÍìÌY–” Íì”  Íì”! Íí”) Íí”* Íí”, Íí’” Íì” Íì’” Íë” ÍëÜ ”7 Íê”8 Íê”9 Íê”; Íê”< Íê”> Íê”? Íê”Ì@ Íê”ÌZ Íı”Ì[ Íı”Ì^ Íı”Ì` Íı”Ìb Íı”Ìc Íı”Ìf Íı!”Ìg Íı"”Ìo Íı*”Ìq Íı,’” Íê
+” Íê’” Íé” ÍéÜ ”/ Íè”0 Íè”1 Íè”3 Íè”4 Íè”6 Íè”7 Íè”8 Íè”ÌR Í 	”ÌS Í 
+”ÌV Í ”ÌX Í ”ÌZ Í ”Ì[ Í ”Ì^ Í ”Ì_ Í ”Ìg Í &”Ìi Í (’” Íè” Íè’” Íç” Íç
+‘” Í’” Í
+” Í
+’” Í” Í
+–” Í” Í
+” Í7” Í7
+” Í7” Í7–” Í” Í
+” Í8” Í8” Í8” Í8–” Í” Í
+” Í9”" Í9”# Í9”: Í9,–” Í” Í
+” Í:” Í:”  Í:”" Í:š” Í” Í
+” Í;” Í;” Í;” Í;” Í;”! Í;”# Í;”% Í;”” Í” Í
+” Í” Í–” Í” Í
+” Í	” Í” Í” Í˜” Í” Í
+” Í	” Í” Í”  Í”! Í”& Í˜” Í” Í
+” Í	” Í” Í”& Í”' Í”+ Í#š” Í” Í
+” Í	” Í” Í” Í”  Í”" Í”$ Í”& Í’” Í” Í
+’” Í” Í˜” Í” Í” Í3” Í3” Í3”- Í3!”. Í3"”8 Í3,–” Í” Í” Í4” Í4” Í4” Í4–” Í” Í” Í5” Í5” Í5” Í5’” Í” Í’” Í
+” Í’”3 Í5”8 ÍÌB’” Í” Í–” Í” Í” Í#”  Í#”! Í#”# Í#–” Í” Í” Í$”! Í$”" Í$”% Í$Ü ” Í” Í” Í%”* Í%”+ Í%”/ Í%!”0 Í%"”ÌA Í%3”ÌF Í%8”ÌK Í%=”ÌL Í%>”ÌM Í%?”ÌN Í%Ì@”ÌW Í%ÌI”ÌX Í%ÌJ”ÌY Í%ÌK”ÌZ Í%ÌL”Ìq Í%Ìc–” Í” Í” Í&”' Í&”( Í&”* Í&˜” Í” Í” Í'”) Í'”* Í'”3 Í'%”4 Í'&”: Í',•” Í” Í” Í(”! Í(”" Í(”” Í)” Í)” Í)”  Í)Ü ” Í*” Í*” Í*”# Í*”$ Í*”5 Í*+”: Í*0”? Í*5”Ì@ Í*6”ÌA Í*7”ÌB Í*8”ÌK Í*ÌA”ÌL Í*ÌB”ÌM Í*ÌC”ÌN Í*ÌD”Ìe Í*Ì[‘” Í+—” Í” Í” Í,”" Í,”# Í,”& Í,”( Í,˜” Í-” Í-” Í-”$ Í-”% Í-”* Í- ”+ Í-!”, Í-"’” Í.” Í.Ü ” Í” Í” Í/”! Í/”" Í/”$ Í/”( Í/”* Í/”/ Í/!”4 Í/&”5 Í/'”6 Í/(”7 Í/)”8 Í/*”9 Í/+”: Í/,”; Í/-”< Í/.”> Í/0”Ì@ Í/2–” Í” Í”  Í”$ Í”% Í”) Í–” Í” Í” Í”! Í”" Í”$ Í’” Í” Í–” Í” Í”  Í”$ Í”% Í”) Í–” Í” Í” Í”! Í”" Í”$ Í˜” Í” Í” Í”" Í”# Í”( Í ”) Í!”. Í&š” Í” Í” Í” Í”  Í”" Í”% Í”' Í”( Í ”* Í"’” Í” Í˜” Í” Í”  Í”' Í”+ Í”, Í”6 Í)”8 Í+–” Í” Í” Í”! Í”" Í”$ Í–” Í” Í” Í ”" Í ”# Í ”: Í 2š” Í” Í” Í!” Í!”  Í!”" Í!”% Í!”' Í!”( Í! ”* Í!"’” Í” Í’” Í” ÍÜ ”/ Í”3 Í”4 Í”= Í ”ÌW Í0”ÌX Í0”Ì\ Í0”Ì^ Í0 ”Ìc Í0-”Ìe Í0/”Ìg Í01”Ìh Í02”Ìm Í07”Ìn Í08”Ìv Í0Ì@”Ìx Í0ÌB’” Í
+” Í’” Í” Í’” Í” Í’” Í” Í
+‘” Í<’” Í>” Í>	’” Í@” Í@’” ÍA” ÍA
+–” ÍA” ÍA
+” Í­” Í­
+” Í­” Í­š” ÍA” ÍA
+” Í®”! Í®”" Í®”$ Í®”- Í®”/ Í®!”4 Í®&”6 Í®(–” ÍA” ÍA
+” Í¯” Í¯” Í¯” Í¯–” ÍA” ÍA
+” Í°”" Í°”# Í°”; Í°-–” ÍA” ÍA
+” Í±” Í±”  Í±”" Í±Ü ” ÍA” ÍA
+” Í²” Í²” Í²” Í²”" Í²”$ Í²”& Í²”( Í²”- Í²”/ Í²!”Ì@ Í²2”ÌB Í²4”ÌI Í²;”ÌK Í²=”ÌL Í²>”ÌN Í²Ì@”ÌU Í²ÌG”ÌW Í²ÌI”ÌY Í²ÌK”Ì[ Í²ÌM’” ÍB” ÍB’” ÍC” ÍC	’” ÍB” ÍB–” ÍC” ÍC	” ÍX” ÍX” ÍX” ÍX’” ÍB” ÍBš” ÍC” ÍC	” ÍY” ÍY” ÍY” ÍY” ÍY”! ÍY”# ÍY”% ÍY”” ÍD” ÍD” ÍD”! ÍD–” ÍD” ÍD” ÍE” ÍE” ÍE” ÍE˜” ÍD” ÍD” ÍF” ÍF” ÍF”& ÍF ”' ÍF!”+ ÍF%˜” ÍD” ÍD” ÍG” ÍG” ÍG”  ÍG”! ÍG”& ÍG ’” ÍD” ÍD’” ÍI” ÍI–” ÍI” ÍI” ÍI” ÍI” ÍI”  ÍI’” ÍI” ÍI’” ÍK” ÍK–” ÍK” ÍK” ÍP	” ÍP” ÍP” ÍP–” ÍK” ÍK” ÍQ	” ÍQ” ÍQ” ÍQ–” ÍK” ÍK” ÍR	”" ÍR”# ÍR”: ÍR0–” ÍK” ÍK” ÍS	” ÍS”  ÍS”" ÍS—” ÍK” ÍK” ÍT	” ÍT” ÍT” ÍT”  ÍT—” ÍU
+” ÍU” ÍU” ÍU”  ÍU”% ÍU”& ÍU ’” ÍV” ÍV	”” ÍL
+” ÍL” ÍL” ÍL–” ÍL
+” ÍL” ÍM” ÍM” ÍM” ÍM˜” ÍL
+” ÍL” ÍN” ÍN” ÍN”  ÍN”! ÍN”& ÍN"’” ÍL
+” ÍL’” ÍK” ÍK’” ÍB” ÍB’” ÍC” ÍC	’” Í[” Í[–” Í[” Í[” Íœ” Íœ”  Íœ”! Íœ˜” Í[” Í[” Í” Í” Í”% Í”& Í”* Í˜” Í[” Í[” Í” Í” Í”( Í”) Í”/ Í#’” Í\” Í\–” Í\” Í\” Íš	” Íš” Íš” Íš’” Í]
+” Í]—” Í^
+” Í^” Í^” Í^”) Í^ ”2 Í^)”4 Í^+’” Í_” Í_’” Í`” Í`’” Ía” Ía’”	 Íb”
+ Íb’” Íd
+” Íd—” Íe
+” Íe” Íe” Íe”) Íe ”2 Íe)”4 Íe+’” Íf” Íf’” Íg” Íg’” Íh” Íh’” Íi” Íi’”	 Íj”
+ Íj’” Íl
+” Íl’” Ím
+” Ím’” Íl
+” Íl–” Ím
+” Ím” Íz” Íz” Íz” Íz’” Íl
+” Íl–” Ím
+” Ím” Í{” Í{” Í{” Í{’” Íl
+” Íl–” Ím
+” Ím” Í|”" Í|”# Í|”: Í|2’” Íl
+” Íl–” Ím
+” Ím” Í}” Í}”  Í}”" Í}’” Íl
+” Ílš” Ím
+” Ím” Í~” Í~” Í~” Í~”" Í~”$ Í~”& Í~”( Í~ ”” Ín” Ín” Ín”! Ín–” Ín” Ín” Ío” Ío” Ío” Ío˜” Ín” Ín” Íp” Íp” Íp”& Íp$”' Íp%”+ Íp)˜” Ín” Ín” Íq” Íq” Íq”  Íq”! Íq”& Íq$–” Ín” Ín” Ír” Ír” Ír” Írš” Ín” Ín” Ís” Ís” Ís” Ís”  Ís”" Ís ”$ Ís"”& Ís$’” Ín” Ín›” Íu” Íu” Íu” Íu”& Íu”/ Íu(”1 Íu*”9 Íu2”; Íu4”ÌC Íu<”ÌD Íu=›” Ív” Ív” Ív” Ív”& Ív”/ Ív(”1 Ív*”9 Ív2”; Ív4”ÌF Ív?”ÌG ÍvÌ@›” Íw” Íw” Íw” Íw”& Íw”/ Íw(”1 Íw*”9 Íw2”; Íw4”ÌF Íw?”ÌG ÍwÌ@›” Íx” Íx” Íx” Íx”& Íx”4 Íx-”6 Íx/”> Íx7”Ì@ Íx9”ÌI ÍxÌB”ÌJ ÍxÌC’” Íl
+” Íl’” Ím
+” Ím’” Í€
+” Í€—” Í
+” Í” Í” Í”) Í ”2 Í)”4 Í+’” Í‚” Í‚’” Íƒ” Íƒ’” Í„” Í„’”	 Í…”
+ Í…’” Í‡
+” Í‡’” Íˆ
+” Íˆ’” Í‡
+” Í‡–” Íˆ
+” Íˆ” Í•” Í•” Í•” Í•’” Í‡
+” Í‡–” Íˆ
+” Íˆ” Í–” Í–” Í–” Í–’” Í‡
+” Í‡–” Íˆ
+” Íˆ” Í—”" Í—”# Í—”: Í—2’” Í‡
+” Í‡–” Íˆ
+” Íˆ” Í˜” Í˜”  Í˜”" Í˜”” Í‰” Í‰” Í‰”  Í‰–” Í‰” Í‰” ÍŠ” ÍŠ” ÍŠ” ÍŠ˜” Í‰” Í‰” Í‹” Í‹” Í‹”& Í‹$”' Í‹%”+ Í‹)–” Í‰” Í‰” ÍŒ” ÍŒ” ÍŒ”$ ÍŒ"–” Í‰” Í‰” Í” Í” Í” Íš” Í‰” Í‰” Í” Í” Í” Í”  Í”" Í ”# Í!”% Í#’” Í‰” Í‰”” Í” Í” Í”3 Í,–” Í” Í” Í‘” Í‘” Í‘” Í‘–” Í” Í” Í’” Í’” Í’”2 Í’0–” Í” Í” Í“” Í“” Í“” Í“’” Í” Í’” Í‡
+” Í‡’” Íˆ
+” Íˆ’” Í\” Í\’” Í[” Í[’” Í ” Í ”” Í¡” Í¡”# Í¡”( Í¡’” Í ” Í –” Í¡” Í¡” Í¢	” Í¢” Í¢” Í¢’” Í ” Í –” Í¡” Í¡” Í£	” Í£” Í£” Í£’” Í ” Í –” Í¡” Í¡” Í¤	”" Í¤”# Í¤”, Í¤"’” Í ” Í –” Í¡” Í¡” Í¥	” Í¥”  Í¥”" Í¥’” Í ” Í ˜” Í¡” Í¡” Í¦	” Í¦” Í¦”" Í¦”# Í¦”( Í¦’” Í ” Í –” Í¡” Í¡” Í§	” Í§” Í§” Í§’” Í ” Í š” Í¡” Í¡” Í¨	” Í¨” Í¨” Í¨” Í¨”! Í¨”# Í¨”% Í¨’” Í ” Í —” Í¡” Í¡” Í©	” Í©” Í©” Í©”  Í©—” Íª
+” Íª” Íª” Íª”  Íª”% Íª”& Íª ’” Í«” Í«	’” Í ” Í ’” Í¡” Í¡’” ÍA” ÍA
+‘” Í³–” Í¶” Í¶” Í¶” Í¶ ” Í¶"”! Í¶1’” Í·” Í·
+–” Í·” Í·
+” ÍÏ” ÍÏ
+” ÍÏ” ÍÏ–” Í·” Í·
+” ÍĞ” ÍĞ” ÍĞ” ÍĞ–” Í·” Í·
+” ÍÑ”" ÍÑ”# ÍÑ”: ÍÑ,–” Í·” Í·
+” ÍÒ” ÍÒ”  ÍÒ”" ÍÒš” Í·” Í·
+” ÍÓ” ÍÓ” ÍÓ” ÍÓ”" ÍÓ”$ ÍÓ”& ÍÓ”( ÍÓ”” Í¸” Í¸
+” Í¸” Í¸–” Í¸” Í¸
+” Í¹	” Í¹” Í¹” Í¹˜” Í¸” Í¸
+” Íº	” Íº” Íº”& Íº”' Íº”+ Íº#˜” Í¸” Í¸
+” Í»	” Í»” Í»”  Í»”! Í»”& Í»–” Í¸” Í¸
+” Í¼	” Í¼” Í¼” Í¼š” Í¸” Í¸
+” Í½	” Í½” Í½” Í½”  Í½”" Í½”$ Í½”& Í½’” Í¸” Í¸
+’” Í¿” Í¿’”3 Í¿$”8 Í¿1’” ÍÀ” ÍÀ–” ÍÀ” ÍÀ” ÍË	” ÍË” ÍË”$ ÍËš” ÍÀ” ÍÀ” ÍÌ	” ÍÌ” ÍÌ”! ÍÌ”' ÍÌ”) ÍÌ”* ÍÌ”, ÍÌ”” ÍÁ
+” ÍÁ”  ÍÁ”# ÍÁ–” ÍÁ
+” ÍÁ” ÍÂ”! ÍÂ”" ÍÂ”$ ÍÂ–” ÍÁ
+” ÍÁ” ÍÃ”" ÍÃ”# ÍÃ”: ÍÃ.’” ÍÁ
+” ÍÁ”” ÍÅ
+” ÍÅ”  ÍÅ”$ ÍÅ–” ÍÅ
+” ÍÅ” ÍÆ”! ÍÆ”" ÍÆ”$ ÍÆ–” ÍÅ
+” ÍÅ” ÍÇ”" ÍÇ”# ÍÇ”: ÍÇ.š” ÍÅ
+” ÍÅ” ÍÈ” ÍÈ”  ÍÈ”" ÍÈ”& ÍÈ”( ÍÈ”) ÍÈ”+ ÍÈ–” ÍÅ
+” ÍÅ” ÍÉ”% ÍÉ”& ÍÉ”' ÍÉ’” ÍÅ
+” ÍÅ’” ÍÀ” ÍÀ”/ Í¿”4 Í¿”ÌN ÍÍ	”ÌO ÍÍ
+”ÌS ÍÍ”ÌU ÍÍ”ÌZ ÍÍ%”Ì\ ÍÍ'”Ì^ ÍÍ)”Ì_ ÍÍ*”Ìd ÍÍ/”Ìe ÍÍ0”Ìm ÍÍ8”Ìo ÍÍ:’” Í¿” Í¿’” Í·” Í·
+‘” ÍÔ˜” Í×” Í×” Í×” Í×” Í×” Í×*” Í×,”! Í×7’” ÍØ” ÍØ–” ÍØ” ÍØ” Íê” Íê
+” Íê” Íê–” ÍØ” ÍØ” Íë” Íë” Íë” Íëš” ÍØ” ÍØ” Íì” Íì” Íì” Íì” Íì”! Íì”" Íì”$ Íì”” ÍÙ” ÍÙ
+” ÍÙ” ÍÙ–” ÍÙ” ÍÙ
+” ÍÚ	” ÍÚ” ÍÚ” ÍÚ–” ÍÙ” ÍÙ
+” ÍÛ	” ÍÛ” ÍÛ” ÍÛ’” ÍÙ” ÍÙ
+’” Íİ” Íİ˜” Íİ” Íİ” Íç” Íç” Íç”- Íç!”. Íç"”3 Íç'–” Íİ” Íİ” Íè” Íè”  Íè”! Íè”” ÍŞ” ÍŞ” ÍŞ” ÍŞ–” ÍŞ” ÍŞ” Íß” Íß” Íß” Íß˜” ÍŞ” ÍŞ” Íà” Íà” Íà”  Íà”! Íà”& Íà ’” ÍŞ” ÍŞ”” Íâ” Íâ” Íâ” Íâ–” Íâ” Íâ” Íã” Íã” Íã” Íã–” Íâ” Íâ” Íä” Íä” Íä”2 Íä,š” Íâ” Íâ” Íå” Íå” Íå” Íå” Íå” Íå”  Íå”" Íå’” Íâ” Íâ’” Íİ” Íİ’” ÍØ” ÍØ‘” ÍíÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ³ÌÕ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌºÌÀÔrL”¤type¥start£end¤nameªIdentifierÌºÌÀ¦routerÔrM•¤type¥start£end¥value£raw§LiteralÌÆÌÔ¬@ohos.router®'@ohos.router'J±ImportDeclarationÌ×Í‘ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÌàÌğLªIdentifierÌàÌğ°PuzzleGameEngineLªIdentifierÌàÌğ°PuzzleGameEngineM§LiteralÌøÍ¿../common/util/PuzzleGameEngineÙ!'../common/util/PuzzleGameEngine'J±ImportDeclarationÍÍƒ•N¯ImportSpecifierÍ%Í.LªIdentifierÍ%Í.©MedalTypeLªIdentifierÍ%Í.©MedalTypeN¯ImportSpecifierÍ0Í:LªIdentifierÍ0Í:ªActionTypeLªIdentifierÍ0Í:ªActionTypeN¯ImportSpecifierÍ<ÍDLªIdentifierÍ<ÍD¨GameModeLªIdentifierÍ<ÍD¨GameModeN¯ImportSpecifierÍFÍOLªIdentifierÍFÍO©GameStateLªIdentifierÍFÍO©GameStateN¯ImportSpecifierÍQÍ\LªIdentifierÍQÍ\«PlayerScoreLªIdentifierÍQÍ\«PlayerScoreM§LiteralÍdÍ‚¼../viewmodel/PuzzleGameModel¾'../viewmodel/PuzzleGameModel'

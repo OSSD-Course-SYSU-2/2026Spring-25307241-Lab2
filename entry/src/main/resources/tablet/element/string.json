@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "花样滑冰计算器 - 平板版"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "花样滑冰计算器应用 - 专为平板优化"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "滑冰计算器 HD"
+    },
+    {
+      "name": "MainPage_title",
+      "value": "花样滑冰计算器"
+    },
+    {
+      "name": "MainPage_subtitle",
+      "value": "专业的花样滑冰得分计算工具"
+    }
+  ]
+}

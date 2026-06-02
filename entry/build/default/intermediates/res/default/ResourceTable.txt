@@ -1,5 +1,7 @@
 string EntryAbility_desc 0x01000002
 string EntryAbility_label 0x01000003
+string MainPage_subtitle 0x01000031
+string MainPage_title 0x01000032
 string add_element 0x01000004
 string app_name 0x01000000
 string base_value 0x01000005

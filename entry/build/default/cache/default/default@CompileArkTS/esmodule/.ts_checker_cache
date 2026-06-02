@@ -192,7 +192,8 @@
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.web.webview.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cryptoFramework.d.ts",
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts"
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.print.d.ts",
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
       ],
       "error": false
     },
@@ -481,7 +482,8 @@
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\Context.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.common.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\app\\context.d.ts",
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts"
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.rdb.d.ts",
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
       ],
       "error": false
     },
@@ -594,7 +596,8 @@
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts"
       ],
       "parent": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts"
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\BreakpointSystem.ets"
       ],
       "error": false
     },
@@ -629,7 +632,14 @@
       ],
       "parent": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.arkui.UIContext.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameModePage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\PuzzleGamePage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LeaderboardPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameHelpPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
       ],
       "error": false
     },
@@ -1498,9 +1508,11 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets": {
-      "mtimeMs": 1776761322593.048,
+      "mtimeMs": 1780389894109.5957,
       "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\BreakpointSystem.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
       ],
       "parent": [],
       "error": true,
@@ -1515,7 +1527,9 @@
       ],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\FigureSkatingPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\FigureSkatingPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkatingSimulatorPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\SkatingSimulatorEngine.ets"
       ],
       "error": false
     },
@@ -1563,23 +1577,21 @@
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\FigureSkatingPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets"
       ],
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1776178951177.756,
+      "mtimeMs": 1779788274879.732,
       "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CalculateUtil.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\CheckEmptyUtil.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PresskeysViewModel.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PressKeysItem.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\constants\\CommonConstants.ets"
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets"
       ],
       "parent": [],
-      "error": false
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\ScoreCalculator.ets": {
       "mtimeMs": 1776761372905.3562,
@@ -1601,12 +1613,41 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\FigureSkatingPage.ets": {
-      "mtimeMs": 1776762868044.3342,
+      "mtimeMs": 1778580109271.0813,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\ScoreCalculator.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SkatingScoreModel.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\constants\\CommonConstants.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SkatingScoreModel.ets"
+      ],
+      "parent": [],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\SkatingSimulatorEngine.ets": {
+      "mtimeMs": 1778774864201.9978,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SkatingSimulatorModel.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkatingSimulatorPage.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SkatingSimulatorModel.ets": {
+      "mtimeMs": 1778776136910.241,
+      "children": [],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkatingSimulatorPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\SkatingSimulatorEngine.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkatingSimulatorPage.ets": {
+      "mtimeMs": 1778775106637.4504,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\SkatingSimulatorEngine.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SkatingSimulatorModel.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\Logger.ets"
       ],
       "parent": [],
       "error": false
@@ -2074,6 +2115,191 @@
       ],
       "parent": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.security.cert.d.ts"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets": {
+      "mtimeMs": 1779622012810.6233,
+      "children": [],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameModePage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\PuzzleGamePage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LeaderboardPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameModePage.ets": {
+      "mtimeMs": 1779639049739.6292,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets": {
+      "mtimeMs": 1779623524307.2363,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\PuzzleGamePage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\PuzzleGamePage.ets": {
+      "mtimeMs": 1779626208884.7292,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        151,
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets": {
+      "mtimeMs": 1779623890791.2417,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets",
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LeaderboardPage.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LeaderboardPage.ets": {
+      "mtimeMs": 1779622834011.2673,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts": {
+      "mtimeMs": 1774582692000,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.base.d.ts",
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\application\\BaseContext.d.ts"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameHelpPage.ets": {
+      "mtimeMs": 1779624036006.505,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets": {
+      "mtimeMs": 1779626751293.9778,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets": {
+      "mtimeMs": 1779638951077.2651,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets": {
+      "mtimeMs": 1779638123088.7832,
+      "children": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets": {
+      "mtimeMs": 1779639366833.0474,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets",
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets"
+      ],
+      "parent": [],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets": {
+      "mtimeMs": 1779786747548.8252,
+      "children": [],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
+      ],
+      "error": false
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\BreakpointSystem.ets": {
+      "mtimeMs": 1780389594986.5808,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.mediaquery.d.ts"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets"
+      ],
+      "error": true,
+      "errorCodes": [
+        28007
+      ]
+    },
+    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets": {
+      "mtimeMs": 1780391248233.701,
+      "children": [
+        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.deviceInfo.d.ts"
+      ],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets"
+      ],
+      "error": false
+    },
+    "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.deviceInfo.d.ts": {
+      "mtimeMs": 1774582692000,
+      "children": [],
+      "parent": [
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
       ],
       "error": false
     }

@@ -2,6 +2,11 @@
   "src": [
     "pages/MainPage",
     "pages/HomePage",
-    "pages/FigureSkatingPage"
+    "pages/GameModePage",
+    "pages/PuzzleGamePage",
+    "pages/LeaderboardPage",
+    "pages/GameHelpPage",
+    "pages/GameTutorialPage",
+    "pages/LevelSelectPage"
   ]
 }
