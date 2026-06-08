@@ -1,0 +1,1941 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚÇif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+import { IceNavBar } from '../common/components/IceNavBar';
+import { IceCard } from '../common/components/IceCard';
+class ScoreInterpreterPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__totalScore = new ObservedPropertySimplePU('', this, "totalScore");
+        this.__tesScore = new ObservedPropertySimplePU('', this, "tesScore");
+        this.__pcsScore = new ObservedPropertySimplePU('', this, "pcsScore");
+        this.__deductions = new ObservedPropertySimplePU('0', this, "deductions");
+        this.__showResult = new ObservedPropertySimplePU(false, this, "showResult");
+        this.exampleScores = [
+            {
+                skater: 'ç¾½ç”Ÿç»“å¼¦',
+                competition: '2019å¤§å¥–èµ›æ€»å†³èµ›',
+                segment: 'FS',
+                totalScore: 195.71,
+                tes: 106.02,
+                pcs: 90.69,
+                deductions: -1.00,
+                elements: [
+                    { name: '4T', baseValue: 9.50, goe: 2.85, finalValue: 12.35, quality: 'excellent' },
+                    { name: '4T+3T', baseValue: 13.50, goe: 3.80, finalValue: 17.30, quality: 'excellent' },
+                    { name: '3A', baseValue: 8.00, goe: 2.40, finalValue: 10.40, quality: 'good' },
+                    { name: '3F+3Lo', baseValue: 10.00, goe: 2.50, finalValue: 12.50, quality: 'good' }
+                ],
+                components: [
+                    { name: 'æ»‘è¡ŒæŠ€æœ¯', score: 9.25 },
+                    { name: 'åŠ¨ä½œè¡”æ¥', score: 9.00 },
+                    { name: 'è¡¨æ¼”è¡¨ç°', score: 9.25 },
+                    { name: 'ç¼–æ’æ„å›¾', score: 9.00 },
+                    { name: 'éŸ³ä¹è¯ é‡Š', score: 9.25 }
+                ]
+            }
+        ];
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.totalScore !== undefined) {
+            this.totalScore = params.totalScore;
+        }
+        if (params.tesScore !== undefined) {
+            this.tesScore = params.tesScore;
+        }
+        if (params.pcsScore !== undefined) {
+            this.pcsScore = params.pcsScore;
+        }
+        if (params.deductions !== undefined) {
+            this.deductions = params.deductions;
+        }
+        if (params.showResult !== undefined) {
+            this.showResult = params.showResult;
+        }
+        if (params.exampleScores !== undefined) {
+            this.exampleScores = params.exampleScores;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__totalScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__tesScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__pcsScore.purgeDependencyOnElmtId(rmElmtId);
+        this.__deductions.purgeDependencyOnElmtId(rmElmtId);
+        this.__showResult.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__totalScore.aboutToBeDeleted();
+        this.__tesScore.aboutToBeDeleted();
+        this.__pcsScore.aboutToBeDeleted();
+        this.__deductions.aboutToBeDeleted();
+        this.__showResult.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get totalScore() {
+        return this.__totalScore.get();
+    }
+    set totalScore(newValue) {
+        this.__totalScore.set(newValue);
+    }
+    get tesScore() {
+        return this.__tesScore.get();
+    }
+    set tesScore(newValue) {
+        this.__tesScore.set(newValue);
+    }
+    get pcsScore() {
+        return this.__pcsScore.get();
+    }
+    set pcsScore(newValue) {
+        this.__pcsScore.set(newValue);
+    }
+    get deductions() {
+        return this.__deductions.get();
+    }
+    set deductions(newValue) {
+        this.__deductions.set(newValue);
+    }
+    get showResult() {
+        return this.__showResult.get();
+    }
+    set showResult(newValue) {
+        this.__showResult.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.backgroundColor('#F5F5F5');
+        }, Column);
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new 
+                    // å¯¼èˆªæ 
+                    IceNavBar(this, {
+                        title: 'æ‰“åˆ†è§£è¯»',
+                        showBack: true,
+                        navBackgroundColor: '#E91E63'
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ScoreInterpreterPage.ets", line: 49, col: 7 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            title: 'æ‰“åˆ†è§£è¯»',
+                            showBack: true,
+                            navBackgroundColor: '#E91E63'
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        title: 'æ‰“åˆ†è§£è¯»',
+                        showBack: true,
+                        navBackgroundColor: '#E91E63'
+                    });
+                }
+            }, { name: "IceNavBar" });
+        }
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // å†…å®¹åŒº
+            Scroll.create();
+            // å†…å®¹åŒº
+            Scroll.layoutWeight(1);
+            // å†…å®¹åŒº
+            Scroll.scrollBar(BarState.Auto);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(16);
+        }, Column);
+        // ä»‹ç»æ¨ªå¹…
+        this.buildIntroBanner.bind(this)();
+        // è¾“å…¥åŒºåŸŸ
+        this.buildInputArea.bind(this)();
+        // ç¤ºä¾‹æ•°æ®
+        this.buildExampleData.bind(this)();
+        // è¯„åˆ†çŸ¥è¯†
+        this.buildScoringKnowledge.bind(this)();
+        Column.pop();
+        // å†…å®¹åŒº
+        Scroll.pop();
+        Column.pop();
+    }
+    // ä»‹ç»æ¨ªå¹…
+    buildIntroBanner(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height(150);
+            Column.justifyContent(FlexAlign.Center);
+            Column.linearGradient({
+                angle: 135,
+                colors: [['#E91E63', 0.0], ['#C2185B', 1.0]]
+            });
+            Column.borderRadius(16);
+            Column.margin({ bottom: 20 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ“Š æ‰“åˆ†è§£è¯»å·¥å…·');
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#FFFFFF');
+            Text.margin({ bottom: 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('è¾“å…¥åˆ†æ•°ï¼Œè‡ªåŠ¨æ‹†è§£æŠ€æœ¯åˆ†ä¸å†…å®¹åˆ†');
+            Text.fontSize(14);
+            Text.fontColor('rgba(255,255,255,0.8)');
+        }, Text);
+        Text.pop();
+        Column.pop();
+    }
+    // è¾“å…¥åŒºåŸŸ
+    buildInputArea(parent = null) {
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new IceCard(this, {
+                        title: 'âœï¸ è¾“å…¥åˆ†æ•°',
+                        content: () => {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width('100%');
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // æ€»åˆ†è¾“å…¥
+                                Row.create();
+                                // æ€»åˆ†è¾“å…¥
+                                Row.width('100%');
+                                // æ€»åˆ†è¾“å…¥
+                                Row.margin({ bottom: 16 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create('æ€»åˆ†');
+                                Text.fontSize(14);
+                                Text.fontColor('#333333');
+                                Text.width(80);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ placeholder: 'è¯·è¾“å…¥æ€»åˆ†', text: this.totalScore });
+                                TextInput.fontSize(14);
+                                TextInput.layoutWeight(1);
+                                TextInput.height(40);
+                                TextInput.backgroundColor('#F5F5F5');
+                                TextInput.borderRadius(8);
+                                TextInput.onChange((value) => {
+                                    this.totalScore = value;
+                                });
+                            }, TextInput);
+                            // æ€»åˆ†è¾“å…¥
+                            Row.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // æŠ€æœ¯åˆ†è¾“å…¥
+                                Row.create();
+                                // æŠ€æœ¯åˆ†è¾“å…¥
+                                Row.width('100%');
+                                // æŠ€æœ¯åˆ†è¾“å…¥
+                                Row.margin({ bottom: 16 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create('æŠ€æœ¯åˆ†TES');
+                                Text.fontSize(14);
+                                Text.fontColor('#333333');
+                                Text.width(80);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ placeholder: 'è¯·è¾“å…¥æŠ€æœ¯åˆ†', text: this.tesScore });
+                                TextInput.fontSize(14);
+                                TextInput.layoutWeight(1);
+                                TextInput.height(40);
+                                TextInput.backgroundColor('#F5F5F5');
+                                TextInput.borderRadius(8);
+                                TextInput.onChange((value) => {
+                                    this.tesScore = value;
+                                });
+                            }, TextInput);
+                            // æŠ€æœ¯åˆ†è¾“å…¥
+                            Row.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // å†…å®¹åˆ†è¾“å…¥
+                                Row.create();
+                                // å†…å®¹åˆ†è¾“å…¥
+                                Row.width('100%');
+                                // å†…å®¹åˆ†è¾“å…¥
+                                Row.margin({ bottom: 16 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create('å†…å®¹åˆ†PCS');
+                                Text.fontSize(14);
+                                Text.fontColor('#333333');
+                                Text.width(80);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ placeholder: 'è¯·è¾“å…¥å†…å®¹åˆ†', text: this.pcsScore });
+                                TextInput.fontSize(14);
+                                TextInput.layoutWeight(1);
+                                TextInput.height(40);
+                                TextInput.backgroundColor('#F5F5F5');
+                                TextInput.borderRadius(8);
+                                TextInput.onChange((value) => {
+                                    this.pcsScore = value;
+                                });
+                            }, TextInput);
+                            // å†…å®¹åˆ†è¾“å…¥
+                            Row.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // æ‰£åˆ†è¾“å…¥
+                                Row.create();
+                                // æ‰£åˆ†è¾“å…¥
+                                Row.width('100%');
+                                // æ‰£åˆ†è¾“å…¥
+                                Row.margin({ bottom: 20 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create('æ‰£åˆ†');
+                                Text.fontSize(14);
+                                Text.fontColor('#333333');
+                                Text.width(80);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                TextInput.create({ placeholder: 'è¯·è¾“å…¥æ‰£åˆ†ï¼ˆé»˜è®¤0ï¼‰', text: this.deductions });
+                                TextInput.fontSize(14);
+                                TextInput.layoutWeight(1);
+                                TextInput.height(40);
+                                TextInput.backgroundColor('#F5F5F5');
+                                TextInput.borderRadius(8);
+                                TextInput.onChange((value) => {
+                                    this.deductions = value;
+                                });
+                            }, TextInput);
+                            // æ‰£åˆ†è¾“å…¥
+                            Row.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                // è§£ææŒ‰é’®
+                                Button.createWithLabel('ğŸ” è§£æåˆ†æ•°');
+                                // è§£ææŒ‰é’®
+                                Button.width('100%');
+                                // è§£ææŒ‰é’®
+                                Button.height(48);
+                                // è§£ææŒ‰é’®
+                                Button.fontSize(16);
+                                // è§£ææŒ‰é’®
+                                Button.fontWeight(FontWeight.Bold);
+                                // è§£ææŒ‰é’®
+                                Button.backgroundColor('#E91E63');
+                                // è§£ææŒ‰é’®
+                                Button.fontColor('#FFFFFF');
+                                // è§£ææŒ‰é’®
+                                Button.borderRadius(24);
+                                // è§£ææŒ‰é’®
+                                Button.onClick(() => {
+                                    this.showResult = true;
+                                });
+                            }, Button);
+                            // è§£ææŒ‰é’®
+                            Button.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                If.create();
+                                // è§£æç»“æœ
+                                if (this.showResult && this.tesScore && this.pcsScore) {
+                                    this.ifElseBranchUpdateFunction(0, () => {
+                                        this.buildScoreResult.bind(this)();
+                                    });
+                                }
+                                else {
+                                    this.ifElseBranchUpdateFunction(1, () => {
+                                    });
+                                }
+                            }, If);
+                            If.pop();
+                            Column.pop();
+                        }
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ScoreInterpreterPage.ets", line: 109, col: 5 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            title: 'âœï¸ è¾“å…¥åˆ†æ•°',
+                            content: () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Column.create();
+                                    Column.width('100%');
+                                }, Column);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // æ€»åˆ†è¾“å…¥
+                                    Row.create();
+                                    // æ€»åˆ†è¾“å…¥
+                                    Row.width('100%');
+                                    // æ€»åˆ†è¾“å…¥
+                                    Row.margin({ bottom: 16 });
+                                }, Row);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('æ€»åˆ†');
+                                    Text.fontSize(14);
+                                    Text.fontColor('#333333');
+                                    Text.width(80);
+                                }, Text);
+                                Text.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    TextInput.create({ placeholder: 'è¯·è¾“å…¥æ€»åˆ†', text: this.totalScore });
+                                    TextInput.fontSize(14);
+                                    TextInput.layoutWeight(1);
+                                    TextInput.height(40);
+                                    TextInput.backgroundColor('#F5F5F5');
+                                    TextInput.borderRadius(8);
+                                    TextInput.onChange((value) => {
+                                        this.totalScore = value;
+                                    });
+                                }, TextInput);
+                                // æ€»åˆ†è¾“å…¥
+                                Row.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // æŠ€æœ¯åˆ†è¾“å…¥
+                                    Row.create();
+                                    // æŠ€æœ¯åˆ†è¾“å…¥
+                                    Row.width('100%');
+                                    // æŠ€æœ¯åˆ†è¾“å…¥
+                                    Row.margin({ bottom: 16 });
+                                }, Row);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('æŠ€æœ¯åˆ†TES');
+                                    Text.fontSize(14);
+                                    Text.fontColor('#333333');
+                                    Text.width(80);
+                                }, Text);
+                                Text.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    TextInput.create({ placeholder: 'è¯·è¾“å…¥æŠ€æœ¯åˆ†', text: this.tesScore });
+                                    TextInput.fontSize(14);
+                                    TextInput.layoutWeight(1);
+                                    TextInput.height(40);
+                                    TextInput.backgroundColor('#F5F5F5');
+                                    TextInput.borderRadius(8);
+                                    TextInput.onChange((value) => {
+                                        this.tesScore = value;
+                                    });
+                                }, TextInput);
+                                // æŠ€æœ¯åˆ†è¾“å…¥
+                                Row.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // å†…å®¹åˆ†è¾“å…¥
+                                    Row.create();
+                                    // å†…å®¹åˆ†è¾“å…¥
+                                    Row.width('100%');
+                                    // å†…å®¹åˆ†è¾“å…¥
+                                    Row.margin({ bottom: 16 });
+                                }, Row);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('å†…å®¹åˆ†PCS');
+                                    Text.fontSize(14);
+                                    Text.fontColor('#333333');
+                                    Text.width(80);
+                                }, Text);
+                                Text.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    TextInput.create({ placeholder: 'è¯·è¾“å…¥å†…å®¹åˆ†', text: this.pcsScore });
+                                    TextInput.fontSize(14);
+                                    TextInput.layoutWeight(1);
+                                    TextInput.height(40);
+                                    TextInput.backgroundColor('#F5F5F5');
+                                    TextInput.borderRadius(8);
+                                    TextInput.onChange((value) => {
+                                        this.pcsScore = value;
+                                    });
+                                }, TextInput);
+                                // å†…å®¹åˆ†è¾“å…¥
+                                Row.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // æ‰£åˆ†è¾“å…¥
+                                    Row.create();
+                                    // æ‰£åˆ†è¾“å…¥
+                                    Row.width('100%');
+                                    // æ‰£åˆ†è¾“å…¥
+                                    Row.margin({ bottom: 20 });
+                                }, Row);
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Text.create('æ‰£åˆ†');
+                                    Text.fontSize(14);
+                                    Text.fontColor('#333333');
+                                    Text.width(80);
+                                }, Text);
+                                Text.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    TextInput.create({ placeholder: 'è¯·è¾“å…¥æ‰£åˆ†ï¼ˆé»˜è®¤0ï¼‰', text: this.deductions });
+                                    TextInput.fontSize(14);
+                                    TextInput.layoutWeight(1);
+                                    TextInput.height(40);
+                                    TextInput.backgroundColor('#F5F5F5');
+                                    TextInput.borderRadius(8);
+                                    TextInput.onChange((value) => {
+                                        this.deductions = value;
+                                    });
+                                }, TextInput);
+                                // æ‰£åˆ†è¾“å…¥
+                                Row.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    // è§£ææŒ‰é’®
+                                    Button.createWithLabel('ğŸ” è§£æåˆ†æ•°');
+                                    // è§£ææŒ‰é’®
+                                    Button.width('100%');
+                                    // è§£ææŒ‰é’®
+                                    Button.height(48);
+                                    // è§£ææŒ‰é’®
+                                    Button.fontSize(16);
+                                    // è§£ææŒ‰é’®
+                                    Button.fontWeight(FontWeight.Bold);
+                                    // è§£ææŒ‰é’®
+                                    Button.backgroundColor('#E91E63');
+                                    // è§£ææŒ‰é’®
+                                    Button.fontColor('#FFFFFF');
+                                    // è§£ææŒ‰é’®
+                                    Button.borderRadius(24);
+                                    // è§£ææŒ‰é’®
+                                    Button.onClick(() => {
+                                        this.showResult = true;
+                                    });
+                                }, Button);
+                                // è§£ææŒ‰é’®
+                                Button.pop();
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    If.create();
+                                    // è§£æç»“æœ
+                                    if (this.showResult && this.tesScore && this.pcsScore) {
+                                        this.ifElseBranchUpdateFunction(0, () => {
+                                            this.buildScoreResult.bind(this)();
+                                        });
+                                    }
+                                    else {
+                                        this.ifElseBranchUpdateFunction(1, () => {
+                                        });
+                                    }
+                                }, If);
+                                If.pop();
+                                Column.pop();
+                            }
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        title: 'âœï¸ è¾“å…¥åˆ†æ•°'
+                    });
+                }
+            }, { name: "IceCard" });
+        }
+    }
+    // è§£æç»“æœ
+    buildScoreResult(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(16);
+            Column.backgroundColor('#FCE4EC');
+            Column.borderRadius(12);
+            Column.margin({ top: 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Divider.create();
+            Divider.color('#E0E0E0');
+            Divider.margin({ top: 20, bottom: 20 });
+        }, Divider);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ“Š åˆ†æ•°è§£æ');
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: 16 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // åˆ†æ•°æ„æˆ
+            Row.create();
+            // åˆ†æ•°æ„æˆ
+            Row.width('100%');
+            // åˆ†æ•°æ„æˆ
+            Row.margin({ bottom: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æŠ€æœ¯åˆ†TES');
+            Text.fontSize(14);
+            Text.fontColor('#666666');
+            Text.margin({ bottom: 4 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.tesScore);
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#E91E63');
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('+');
+            Text.fontSize(20);
+            Text.fontColor('#999999');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+            Column.margin({ left: 16, right: 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å†…å®¹åˆ†PCS');
+            Text.fontSize(14);
+            Text.fontColor('#666666');
+            Text.margin({ bottom: 4 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.pcsScore);
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#9C27B0');
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (parseFloat(this.deductions) !== 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('-');
+                        Text.fontSize(20);
+                        Text.fontColor('#999999');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.layoutWeight(1);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('æ‰£åˆ†');
+                        Text.fontSize(14);
+                        Text.fontColor('#666666');
+                        Text.margin({ bottom: 4 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(Math.abs(parseFloat(this.deductions)).toFixed(2));
+                        Text.fontSize(24);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#F44336');
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        // åˆ†æ•°æ„æˆ
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // è§£è¯»
+            Column.create();
+            // è§£è¯»
+            Column.width('100%');
+            // è§£è¯»
+            Column.alignItems(HorizontalAlign.Start);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ’¡ è§£è¯»');
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: 12 });
+        }, Text);
+        Text.pop();
+        this.InterpretationItem.bind(this)('æŠ€æœ¯åˆ†å æ¯”', (parseFloat(this.tesScore) / (parseFloat(this.tesScore) + parseFloat(this.pcsScore)) * 100).toFixed(1) + '%', 'æŠ€æœ¯åˆ†å æ¯”è¶Šé«˜ï¼Œè¯´æ˜è·³è·ƒã€æ—‹è½¬ç­‰éš¾åº¦åŠ¨ä½œå¾—åˆ†è¶Šé«˜');
+        this.InterpretationItem.bind(this)('å†…å®¹åˆ†å æ¯”', (parseFloat(this.pcsScore) / (parseFloat(this.tesScore) + parseFloat(this.pcsScore)) * 100).toFixed(1) + '%', 'å†…å®¹åˆ†å æ¯”è¶Šé«˜ï¼Œè¯´æ˜æ»‘è¡Œã€è¡¨æ¼”ã€ç¼–æ’ç­‰è‰ºæœ¯è¡¨ç°å¾—åˆ†è¶Šé«˜');
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (parseFloat(this.deductions) !== 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.InterpretationItem.bind(this)('æ‰£åˆ†åŸå› ', Math.abs(parseFloat(this.deductions)).toFixed(2) + 'åˆ†', 'å¯èƒ½åŒ…æ‹¬æ‘”å€’ã€è¶…æ—¶ã€è¿è§„ç­‰æ‰£åˆ†é¡¹');
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        // è§£è¯»
+        Column.pop();
+        Column.pop();
+    }
+    InterpretationItem(title, value, description, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.padding({ top: 8, bottom: 8 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.alignItems(HorizontalAlign.Start);
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(title);
+            Text.fontSize(14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(description);
+            Text.fontSize(12);
+            Text.fontColor('#666666');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(value);
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#E91E63');
+        }, Text);
+        Text.pop();
+        Row.pop();
+    }
+    // ç¤ºä¾‹æ•°æ®
+    buildExampleData(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.alignItems(HorizontalAlign.Start);
+            Column.margin({ top: 24 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('ğŸ“‹ ç¤ºä¾‹æ•°æ®');
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: 16 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const example = _item;
+                this.ExampleCard.bind(this)(example);
+            };
+            this.forEachUpdateFunction(elmtId, this.exampleScores, forEachItemGenFunction, (example) => example.skater + example.competition, false, false);
+        }, ForEach);
+        ForEach.pop();
+        Column.pop();
+    }
+    ExampleCard(example, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(16);
+            Column.backgroundColor('#FFFFFF');
+            Column.borderRadius(12);
+            Column.shadow({
+                radius: 8,
+                color: '#1A000000',
+                offsetX: 0,
+                offsetY: 2
+            });
+            Column.margin({ bottom: 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // é€‰æ‰‹ä¿¡æ¯
+            Row.create();
+            // é€‰æ‰‹ä¿¡æ¯
+            Row.width('100%');
+            // é€‰æ‰‹ä¿¡æ¯
+            Row.margin({ bottom: 16 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.alignItems(HorizontalAlign.Start);
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(example.skater);
+            Text.fontSize(16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(example.competition + ' - ' + (example.segment === 'SP' ? 'çŸ­èŠ‚ç›®' : 'è‡ªç”±æ»‘'));
+            Text.fontSize(12);
+            Text.fontColor('#999999');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(example.totalScore.toFixed(2));
+            Text.fontSize(24);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#E91E63');
+        }, Text);
+        Text.pop();
+        // é€‰æ‰‹ä¿¡æ¯
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // åˆ†æ•°æ„æˆ
+            Row.create();
+            // åˆ†æ•°æ„æˆ
+            Row.width('100%');
+            // åˆ†æ•°æ„æˆ
+            Row.margin({ bottom: 16 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æŠ€æœ¯åˆ†TES');
+            Text.fontSize(12);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(example.tes.toFixed(2));
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#E91E63');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('å†…å®¹åˆ†PCS');
+            Text.fontSize(12);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(example.pcs.toFixed(2));
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#9C27B0');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ‰£åˆ†');
+            Text.fontSize(12);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(Math.abs(example.deductions).toFixed(2));
+            Text.fontSize(18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#F44336');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        // åˆ†æ•°æ„æˆ
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.create();
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.width('100%');
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.alignItems(HorizontalAlign.Start);
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.padding(12);
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.backgroundColor('#F5F5F5');
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.borderRadius(8);
+            // æŠ€æœ¯åŠ¨ä½œ
+            Column.margin({ bottom: 12 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æŠ€æœ¯åŠ¨ä½œ');
+            Text.fontSize(14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const element = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width('100%');
+                    Row.padding({ top: 4, bottom: 4 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(element.name);
+                    Text.fontSize(14);
+                    Text.fontColor('#333333');
+                    Text.width(60);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create('åŸºç¡€: ' + element.baseValue.toFixed(2));
+                    Text.fontSize(12);
+                    Text.fontColor('#666666');
+                    Text.layoutWeight(1);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create('GOE: ' + (element.goe >= 0 ? '+' : '') + element.goe.toFixed(2));
+                    Text.fontSize(12);
+                    Text.fontColor(element.goe >= 0 ? '#4CAF50' : '#F44336');
+                    Text.width(70);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(element.finalValue.toFixed(2));
+                    Text.fontSize(14);
+                    Text.fontWeight(FontWeight.Bold);
+                    Text.fontColor('#E91E63');
+                    Text.width(50);
+                }, Text);
+                Text.pop();
+                Row.pop();
+            };
+            this.forEachUpdateFunction(elmtId, example.elements.slice(0, 3), forEachItemGenFunction, (element) => element.name, false, false);
+        }, ForEach);
+        ForEach.pop();
+        // æŠ€æœ¯åŠ¨ä½œ
+        Column.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.create();
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.width('100%');
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.alignItems(HorizontalAlign.Start);
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.padding(12);
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.backgroundColor('#F3E5F5');
+            // èŠ‚ç›®å†…å®¹åˆ†
+            Column.borderRadius(8);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('èŠ‚ç›®å†…å®¹åˆ†');
+            Text.fontSize(14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const component = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Row.create();
+                    Row.width('100%');
+                    Row.padding({ top: 4, bottom: 4 });
+                }, Row);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(component.name);
+                    Text.fontSize(14);
+                    Text.fontColor('#333333');
+                    Text.layoutWeight(1);
+                }, Text);
+                Text.pop();
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(component.score.toFixed(2));
+                    Text.fontSize(14);
+                    Text.fontWeight(FontWeight.Bold);
+                    Text.fontColor('#9C27B0');
+                }, Text);
+                Text.pop();
+                Row.pop();
+            };
+            this.forEachUpdateFunction(elmtId, example.components, forEachItemGenFunction, (component) => component.name, false, false);
+        }, ForEach);
+        ForEach.pop();
+        // èŠ‚ç›®å†…å®¹åˆ†
+        Column.pop();
+        Column.pop();
+    }
+    // è¯„åˆ†çŸ¥è¯†
+    buildScoringKnowledge(parent = null) {
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new IceCard(this, {
+                        title: 'ğŸ“š è¯„åˆ†çŸ¥è¯†',
+                        cardBackgroundColor: '#E8EAF6',
+                        content: () => {
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width('100%');
+                            }, Column);
+                            this.KnowledgeItem.bind(this)('æŠ€æœ¯åˆ†TES', 'è·³è·ƒã€æ—‹è½¬ã€æ­¥æ³•ç­‰åŠ¨ä½œçš„åŸºç¡€åˆ†å€¼ + GOEåŠ åˆ†');
+                            this.KnowledgeItem.bind(this)('GOEåŠ åˆ†', 'Grade of Executionï¼Œæ ¹æ®åŠ¨ä½œè´¨é‡ç»™äºˆ-5åˆ°+5çš„åŠ åˆ†');
+                            this.KnowledgeItem.bind(this)('å†…å®¹åˆ†PCS', 'Program Component Scoreï¼ŒåŒ…å«5é¡¹è¯„åˆ†æŒ‡æ ‡');
+                            this.KnowledgeItem.bind(this)('PCSäº”é¡¹', 'æ»‘è¡ŒæŠ€æœ¯ã€åŠ¨ä½œè¡”æ¥ã€è¡¨æ¼”è¡¨ç°ã€ç¼–æ’æ„å›¾ã€éŸ³ä¹è¯ é‡Š');
+                            this.KnowledgeItem.bind(this)('æ‰£åˆ†é¡¹', 'æ‘”å€’(-1)ã€è¶…æ—¶(-1)ã€è¿è§„åŠ¨ä½œç­‰');
+                            Column.pop();
+                        }
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ScoreInterpreterPage.ets", line: 520, col: 5 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            title: 'ğŸ“š è¯„åˆ†çŸ¥è¯†',
+                            cardBackgroundColor: '#E8EAF6',
+                            content: () => {
+                                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                    Column.create();
+                                    Column.width('100%');
+                                }, Column);
+                                this.KnowledgeItem.bind(this)('æŠ€æœ¯åˆ†TES', 'è·³è·ƒã€æ—‹è½¬ã€æ­¥æ³•ç­‰åŠ¨ä½œçš„åŸºç¡€åˆ†å€¼ + GOEåŠ åˆ†');
+                                this.KnowledgeItem.bind(this)('GOEåŠ åˆ†', 'Grade of Executionï¼Œæ ¹æ®åŠ¨ä½œè´¨é‡ç»™äºˆ-5åˆ°+5çš„åŠ åˆ†');
+                                this.KnowledgeItem.bind(this)('å†…å®¹åˆ†PCS', 'Program Component Scoreï¼ŒåŒ…å«5é¡¹è¯„åˆ†æŒ‡æ ‡');
+                                this.KnowledgeItem.bind(this)('PCSäº”é¡¹', 'æ»‘è¡ŒæŠ€æœ¯ã€åŠ¨ä½œè¡”æ¥ã€è¡¨æ¼”è¡¨ç°ã€ç¼–æ’æ„å›¾ã€éŸ³ä¹è¯ é‡Š');
+                                this.KnowledgeItem.bind(this)('æ‰£åˆ†é¡¹', 'æ‘”å€’(-1)ã€è¶…æ—¶(-1)ã€è¿è§„åŠ¨ä½œç­‰');
+                                Column.pop();
+                            }
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        title: 'ğŸ“š è¯„åˆ†çŸ¥è¯†',
+                        cardBackgroundColor: '#E8EAF6'
+                    });
+                }
+            }, { name: "IceCard" });
+        }
+    }
+    KnowledgeItem(title, description, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.padding({ top: 8, bottom: 8 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.alignItems(HorizontalAlign.Start);
+            Column.layoutWeight(1);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(title);
+            Text.fontSize(14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(description);
+            Text.fontSize(12);
+            Text.fontColor('#666666');
+            Text.margin({ top: 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+        Row.pop();
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "ScoreInterpreterPage";
+    }
+}
+registerNamedRoute(() => new ScoreInterpreterPage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/ScoreInterpreterPage", pageFullPath: "entry/src/main/ets/pages/ScoreInterpreterPage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=ScoreInterpreterPage.js.mapÂ’ÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceNavBar.etsÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceCard.etsÙdG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\ScoreInterpreterPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ<á/**
+ * å†°è¿¹èŠ±æ»‘ - æ‰“åˆ†è§£è¯»å·¥å…·
+ * ä¸Šä¼ æˆªå›¾ã€è‡ªåŠ¨æ‹†è§£åˆ†æ•°ã€è§£è¯»æ‰“åˆ†
+ */
+
+import router from '@ohos.router';
+import { IceNavBar } from '../common/components/IceNavBar';
+import { IceCard } from '../common/components/IceCard';
+import { IceTag } from '../common/components/IceTag';
+
+@Entry
+@Component
+struct ScoreInterpreterPage {
+  @State totalScore: string = '';
+  @State tesScore: string = '';
+  @State pcsScore: string = '';
+  @State deductions: string = '0';
+  @State showResult: boolean = false;
+  
+  // ç¤ºä¾‹æ•°æ®
+  private exampleScores: ExampleScore[] = [
+    {
+      skater: 'ç¾½ç”Ÿç»“å¼¦',
+      competition: '2019å¤§å¥–èµ›æ€»å†³èµ›',
+      segment: 'FS',
+      totalScore: 195.71,
+      tes: 106.02,
+      pcs: 90.69,
+      deductions: -1.00,
+      elements: [
+        { name: '4T', baseValue: 9.50, goe: 2.85, finalValue: 12.35, quality: 'excellent' },
+        { name: '4T+3T', baseValue: 13.50, goe: 3.80, finalValue: 17.30, quality: 'excellent' },
+        { name: '3A', baseValue: 8.00, goe: 2.40, finalValue: 10.40, quality: 'good' },
+        { name: '3F+3Lo', baseValue: 10.00, goe: 2.50, finalValue: 12.50, quality: 'good' }
+      ],
+      components: [
+        { name: 'æ»‘è¡ŒæŠ€æœ¯', score: 9.25 },
+        { name: 'åŠ¨ä½œè¡”æ¥', score: 9.00 },
+        { name: 'è¡¨æ¼”è¡¨ç°', score: 9.25 },
+        { name: 'ç¼–æ’æ„å›¾', score: 9.00 },
+        { name: 'éŸ³ä¹è¯ é‡Š', score: 9.25 }
+      ]
+    }
+  ];
+  
+  build() {
+    Column() {
+      // å¯¼èˆªæ 
+      IceNavBar({
+        title: 'æ‰“åˆ†è§£è¯»',
+        showBack: true,
+        navBackgroundColor: '#E91E63'
+      });
+      
+      // å†…å®¹åŒº
+      Scroll() {
+        Column() {
+          // ä»‹ç»æ¨ªå¹…
+          this.buildIntroBanner();
+          
+          // è¾“å…¥åŒºåŸŸ
+          this.buildInputArea();
+          
+          // ç¤ºä¾‹æ•°æ®
+          this.buildExampleData();
+          
+          // è¯„åˆ†çŸ¥è¯†
+          this.buildScoringKnowledge();
+        }
+        .width('100%')
+        .padding(16)
+      }
+      .layoutWeight(1)
+      .scrollBar(BarState.Auto)
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#F5F5F5')
+  }
+  
+  // ä»‹ç»æ¨ªå¹…
+  @Builder
+  buildIntroBanner() {
+    Column() {
+      Text('ğŸ“Š æ‰“åˆ†è§£è¯»å·¥å…·')
+        .fontSize(24)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#FFFFFF')
+        .margin({ bottom: 8 })
+      
+      Text('è¾“å…¥åˆ†æ•°ï¼Œè‡ªåŠ¨æ‹†è§£æŠ€æœ¯åˆ†ä¸å†…å®¹åˆ†')
+        .fontSize(14)
+        .fontColor('rgba(255,255,255,0.8)')
+    }
+    .width('100%')
+    .height(150)
+    .justifyContent(FlexAlign.Center)
+    .linearGradient({
+      angle: 135,
+      colors: [['#E91E63', 0.0], ['#C2185B', 1.0]]
+    })
+    .borderRadius(16)
+    .margin({ bottom: 20 })
+  }
+  
+  // è¾“å…¥åŒºåŸŸ
+  @Builder
+  buildInputArea() {
+    IceCard({
+      title: 'âœï¸ è¾“å…¥åˆ†æ•°'
+    }) {
+      Column() {
+        // æ€»åˆ†è¾“å…¥
+        Row() {
+          Text('æ€»åˆ†')
+            .fontSize(14)
+            .fontColor('#333333')
+            .width(80)
+          
+          TextInput({ placeholder: 'è¯·è¾“å…¥æ€»åˆ†', text: this.totalScore })
+            .fontSize(14)
+            .layoutWeight(1)
+            .height(40)
+            .backgroundColor('#F5F5F5')
+            .borderRadius(8)
+            .onChange((value: string) => {
+              this.totalScore = value;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 16 })
+        
+        // æŠ€æœ¯åˆ†è¾“å…¥
+        Row() {
+          Text('æŠ€æœ¯åˆ†TES')
+            .fontSize(14)
+            .fontColor('#333333')
+            .width(80)
+          
+          TextInput({ placeholder: 'è¯·è¾“å…¥æŠ€æœ¯åˆ†', text: this.tesScore })
+            .fontSize(14)
+            .layoutWeight(1)
+            .height(40)
+            .backgroundColor('#F5F5F5')
+            .borderRadius(8)
+            .onChange((value: string) => {
+              this.tesScore = value;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 16 })
+        
+        // å†…å®¹åˆ†è¾“å…¥
+        Row() {
+          Text('å†…å®¹åˆ†PCS')
+            .fontSize(14)
+            .fontColor('#333333')
+            .width(80)
+          
+          TextInput({ placeholder: 'è¯·è¾“å…¥å†…å®¹åˆ†', text: this.pcsScore })
+            .fontSize(14)
+            .layoutWeight(1)
+            .height(40)
+            .backgroundColor('#F5F5F5')
+            .borderRadius(8)
+            .onChange((value: string) => {
+              this.pcsScore = value;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 16 })
+        
+        // æ‰£åˆ†è¾“å…¥
+        Row() {
+          Text('æ‰£åˆ†')
+            .fontSize(14)
+            .fontColor('#333333')
+            .width(80)
+          
+          TextInput({ placeholder: 'è¯·è¾“å…¥æ‰£åˆ†ï¼ˆé»˜è®¤0ï¼‰', text: this.deductions })
+            .fontSize(14)
+            .layoutWeight(1)
+            .height(40)
+            .backgroundColor('#F5F5F5')
+            .borderRadius(8)
+            .onChange((value: string) => {
+              this.deductions = value;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 20 })
+        
+        // è§£ææŒ‰é’®
+        Button('ğŸ” è§£æåˆ†æ•°')
+          .width('100%')
+          .height(48)
+          .fontSize(16)
+          .fontWeight(FontWeight.Bold)
+          .backgroundColor('#E91E63')
+          .fontColor('#FFFFFF')
+          .borderRadius(24)
+          .onClick(() => {
+            this.showResult = true;
+          })
+        
+        // è§£æç»“æœ
+        if (this.showResult && this.tesScore && this.pcsScore) {
+          this.buildScoreResult();
+        }
+      }
+      .width('100%')
+    }
+  }
+  
+  // è§£æç»“æœ
+  @Builder
+  buildScoreResult() {
+    Column() {
+      Divider()
+        .color('#E0E0E0')
+        .margin({ top: 20, bottom: 20 })
+      
+      Text('ğŸ“Š åˆ†æ•°è§£æ')
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+        .margin({ bottom: 16 })
+      
+      // åˆ†æ•°æ„æˆ
+      Row() {
+        Column() {
+          Text('æŠ€æœ¯åˆ†TES')
+            .fontSize(14)
+            .fontColor('#666666')
+            .margin({ bottom: 4 })
+          
+          Text(this.tesScore)
+            .fontSize(24)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#E91E63')
+        }
+        .layoutWeight(1)
+        
+        Text('+')
+          .fontSize(20)
+          .fontColor('#999999')
+        
+        Column() {
+          Text('å†…å®¹åˆ†PCS')
+            .fontSize(14)
+            .fontColor('#666666')
+            .margin({ bottom: 4 })
+          
+          Text(this.pcsScore)
+            .fontSize(24)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#9C27B0')
+        }
+        .layoutWeight(1)
+        .margin({ left: 16, right: 16 })
+        
+        if (parseFloat(this.deductions) !== 0) {
+          Text('-')
+            .fontSize(20)
+            .fontColor('#999999')
+          
+          Column() {
+            Text('æ‰£åˆ†')
+              .fontSize(14)
+              .fontColor('#666666')
+              .margin({ bottom: 4 })
+            
+            Text(Math.abs(parseFloat(this.deductions)).toFixed(2))
+              .fontSize(24)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#F44336')
+          }
+          .layoutWeight(1)
+        }
+      }
+      .width('100%')
+      .margin({ bottom: 20 })
+      
+      // è§£è¯»
+      Column() {
+        Text('ğŸ’¡ è§£è¯»')
+          .fontSize(16)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+          .margin({ bottom: 12 })
+        
+        this.InterpretationItem('æŠ€æœ¯åˆ†å æ¯”', 
+          (parseFloat(this.tesScore) / (parseFloat(this.tesScore) + parseFloat(this.pcsScore)) * 100).toFixed(1) + '%',
+          'æŠ€æœ¯åˆ†å æ¯”è¶Šé«˜ï¼Œè¯´æ˜è·³è·ƒã€æ—‹è½¬ç­‰éš¾åº¦åŠ¨ä½œå¾—åˆ†è¶Šé«˜');
+        
+        this.InterpretationItem('å†…å®¹åˆ†å æ¯”', 
+          (parseFloat(this.pcsScore) / (parseFloat(this.tesScore) + parseFloat(this.pcsScore)) * 100).toFixed(1) + '%',
+          'å†…å®¹åˆ†å æ¯”è¶Šé«˜ï¼Œè¯´æ˜æ»‘è¡Œã€è¡¨æ¼”ã€ç¼–æ’ç­‰è‰ºæœ¯è¡¨ç°å¾—åˆ†è¶Šé«˜');
+        
+        if (parseFloat(this.deductions) !== 0) {
+          this.InterpretationItem('æ‰£åˆ†åŸå› ', 
+            Math.abs(parseFloat(this.deductions)).toFixed(2) + 'åˆ†',
+            'å¯èƒ½åŒ…æ‹¬æ‘”å€’ã€è¶…æ—¶ã€è¿è§„ç­‰æ‰£åˆ†é¡¹');
+        }
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+    }
+    .width('100%')
+    .padding(16)
+    .backgroundColor('#FCE4EC')
+    .borderRadius(12)
+    .margin({ top: 16 })
+  }
+  
+  @Builder
+  InterpretationItem(title: string, value: string, description: string) {
+    Row() {
+      Column() {
+        Text(title)
+          .fontSize(14)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+        
+        Text(description)
+          .fontSize(12)
+          .fontColor('#666666')
+          .margin({ top: 4 })
+      }
+      .alignItems(HorizontalAlign.Start)
+      .layoutWeight(1)
+      
+      Text(value)
+        .fontSize(16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#E91E63')
+    }
+    .width('100%')
+    .padding({ top: 8, bottom: 8 })
+  }
+  
+  // ç¤ºä¾‹æ•°æ®
+  @Builder
+  buildExampleData() {
+    Column() {
+      Text('ğŸ“‹ ç¤ºä¾‹æ•°æ®')
+        .fontSize(18)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+        .margin({ bottom: 16 })
+      
+      ForEach(this.exampleScores, (example: ExampleScore) => {
+        this.ExampleCard(example);
+      }, (example: ExampleScore) => example.skater + example.competition)
+    }
+    .width('100%')
+    .alignItems(HorizontalAlign.Start)
+    .margin({ top: 24 })
+  }
+  
+  @Builder
+  ExampleCard(example: ExampleScore) {
+    Column() {
+      // é€‰æ‰‹ä¿¡æ¯
+      Row() {
+        Column() {
+          Text(example.skater)
+            .fontSize(16)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#333333')
+          
+          Text(example.competition + ' - ' + (example.segment === 'SP' ? 'çŸ­èŠ‚ç›®' : 'è‡ªç”±æ»‘'))
+            .fontSize(12)
+            .fontColor('#999999')
+            .margin({ top: 4 })
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
+        
+        Text(example.totalScore.toFixed(2))
+          .fontSize(24)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#E91E63')
+      }
+      .width('100%')
+      .margin({ bottom: 16 })
+      
+      // åˆ†æ•°æ„æˆ
+      Row() {
+        Column() {
+          Text('æŠ€æœ¯åˆ†TES')
+            .fontSize(12)
+            .fontColor('#666666')
+          
+          Text(example.tes.toFixed(2))
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#E91E63')
+            .margin({ top: 4 })
+        }
+        .layoutWeight(1)
+        
+        Column() {
+          Text('å†…å®¹åˆ†PCS')
+            .fontSize(12)
+            .fontColor('#666666')
+          
+          Text(example.pcs.toFixed(2))
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#9C27B0')
+            .margin({ top: 4 })
+        }
+        .layoutWeight(1)
+        
+        Column() {
+          Text('æ‰£åˆ†')
+            .fontSize(12)
+            .fontColor('#666666')
+          
+          Text(Math.abs(example.deductions).toFixed(2))
+            .fontSize(18)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#F44336')
+            .margin({ top: 4 })
+        }
+        .layoutWeight(1)
+      }
+      .width('100%')
+      .margin({ bottom: 16 })
+      
+      // æŠ€æœ¯åŠ¨ä½œ
+      Column() {
+        Text('æŠ€æœ¯åŠ¨ä½œ')
+          .fontSize(14)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+          .margin({ bottom: 8 })
+        
+        ForEach(example.elements.slice(0, 3), (element: ElementScore) => {
+          Row() {
+            Text(element.name)
+              .fontSize(14)
+              .fontColor('#333333')
+              .width(60)
+            
+            Text('åŸºç¡€: ' + element.baseValue.toFixed(2))
+              .fontSize(12)
+              .fontColor('#666666')
+              .layoutWeight(1)
+            
+            Text('GOE: ' + (element.goe >= 0 ? '+' : '') + element.goe.toFixed(2))
+              .fontSize(12)
+              .fontColor(element.goe >= 0 ? '#4CAF50' : '#F44336')
+              .width(70)
+            
+            Text(element.finalValue.toFixed(2))
+              .fontSize(14)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#E91E63')
+              .width(50)
+          }
+          .width('100%')
+          .padding({ top: 4, bottom: 4 })
+        }, (element: ElementScore) => element.name)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+      .padding(12)
+      .backgroundColor('#F5F5F5')
+      .borderRadius(8)
+      .margin({ bottom: 12 })
+      
+      // èŠ‚ç›®å†…å®¹åˆ†
+      Column() {
+        Text('èŠ‚ç›®å†…å®¹åˆ†')
+          .fontSize(14)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+          .margin({ bottom: 8 })
+        
+        ForEach(example.components, (component: ComponentScore) => {
+          Row() {
+            Text(component.name)
+              .fontSize(14)
+              .fontColor('#333333')
+              .layoutWeight(1)
+            
+            Text(component.score.toFixed(2))
+              .fontSize(14)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('#9C27B0')
+          }
+          .width('100%')
+          .padding({ top: 4, bottom: 4 })
+        }, (component: ComponentScore) => component.name)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+      .padding(12)
+      .backgroundColor('#F3E5F5')
+      .borderRadius(8)
+    }
+    .width('100%')
+    .padding(16)
+    .backgroundColor('#FFFFFF')
+    .borderRadius(12)
+    .shadow({
+      radius: 8,
+      color: '#1A000000',
+      offsetX: 0,
+      offsetY: 2
+    })
+    .margin({ bottom: 16 })
+  }
+  
+  // è¯„åˆ†çŸ¥è¯†
+  @Builder
+  buildScoringKnowledge() {
+    IceCard({
+      title: 'ğŸ“š è¯„åˆ†çŸ¥è¯†',
+      cardBackgroundColor: '#E8EAF6'
+    }) {
+      Column() {
+        this.KnowledgeItem('æŠ€æœ¯åˆ†TES', 'è·³è·ƒã€æ—‹è½¬ã€æ­¥æ³•ç­‰åŠ¨ä½œçš„åŸºç¡€åˆ†å€¼ + GOEåŠ åˆ†');
+        this.KnowledgeItem('GOEåŠ åˆ†', 'Grade of Executionï¼Œæ ¹æ®åŠ¨ä½œè´¨é‡ç»™äºˆ-5åˆ°+5çš„åŠ åˆ†');
+        this.KnowledgeItem('å†…å®¹åˆ†PCS', 'Program Component Scoreï¼ŒåŒ…å«5é¡¹è¯„åˆ†æŒ‡æ ‡');
+        this.KnowledgeItem('PCSäº”é¡¹', 'æ»‘è¡ŒæŠ€æœ¯ã€åŠ¨ä½œè¡”æ¥ã€è¡¨æ¼”è¡¨ç°ã€ç¼–æ’æ„å›¾ã€éŸ³ä¹è¯ é‡Š');
+        this.KnowledgeItem('æ‰£åˆ†é¡¹', 'æ‘”å€’(-1)ã€è¶…æ—¶(-1)ã€è¿è§„åŠ¨ä½œç­‰');
+      }
+      .width('100%')
+    }
+  }
+  
+  @Builder
+  KnowledgeItem(title: string, description: string) {
+    Row() {
+      Column() {
+        Text(title)
+          .fontSize(14)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+        
+        Text(description)
+          .fontSize(12)
+          .fontColor('#666666')
+          .margin({ top: 4 })
+      }
+      .alignItems(HorizontalAlign.Start)
+      .layoutWeight(1)
+    }
+    .width('100%')
+    .padding({ top: 8, bottom: 8 })
+  }
+}
+
+// æ•°æ®ç±»å‹å®šä¹‰
+interface ExampleScore {
+  skater: string;
+  competition: string;
+  segment: 'SP' | 'FS';
+  totalScore: number;
+  tes: number;
+  pcs: number;
+  deductions: number;
+  elements: ElementScore[];
+  components: ComponentScore[];
+}
+
+interface ElementScore {
+  name: string;
+  baseValue: number;
+  goe: number;
+  finalValue: number;
+  quality: string;
+}
+
+interface ComponentScore {
+  name: string;
+  score: number;
+}
+ÀÔrD’¾../common/components/IceNavBar¼../common/components/IceCardÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceNavBar.etsAÃªoh-resolveÂEAÂÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceCard.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings·ScoreInterpreterPage.js ‘¸ScoreInterpreterPage.etsÜ2˜”   ” ”	 	” ” ” ”: :”; ;˜”   ” ”	 	” ” ” ”6 6”7 7’” ” ‘” 
+ ’”9 ”;  ’”7 ”9 ’”7 ”9 ’”9 ”< !’”9 ”> $‘” *‘” ”” ” ” ” ”” ” ” ”) ”” ” ” ” ”” ” ” ”" ”” ” 	” ” ”” ” 	” ” •” ” ” ” ”! “” ” ” Ü ” ” 
+” ” ”  ”" ”+ ”- !”1 %”3 '”6 *”8 ,”< 0”> 2”ÌH <”ÌJ >”ÌO ÌC”ÌQ ÌE”ÌX ÌL”ÌZ ÌN”Ìe ÌY”Ìg Ì[Ü ” ” 
+” ” ”# ”% ”. "”0 $”5 )”7 +”: .”< 0”Ì@ 4”ÌB 6”ÌL Ì@”ÌN ÌB”ÌS ÌG”ÌU ÌI”Ì\ ÌP”Ì^ ÌR”Ìi Ì]”Ìk Ì_Ü ”  ”  
+”  ”  ”   ”"  ”+  ”-  !”1  %”3  '”6  *”8  ,”<  0”>  2”ÌH  <”ÌJ  >”ÌO  ÌC”ÌQ  ÌE”ÌX  ÌL”ÌZ  ÌN”Ì`  ÌT”Ìb  ÌVÜ ” !” !
+” !” !”$ !”& !”/ !#”1 !%”6 !*”8 !,”; !/”= !1”ÌA !5”ÌC !7”ÌM !ÌA”ÌO !ÌC”ÌT !ÌH”ÌV !ÌJ”Ì] !ÌQ”Ì_ !ÌS”Ìe !ÌY”Ìg !Ì[‘” "“” #” #” #š” $” $
+” $” $”" $”$ $”) $”+ $”/ $#”1 $%š” %” %
+” %” %”" %”$ %”) %”+ %”/ %#”1 %%š” &” &
+” &” &”" &”$ &”) &”+ &”/ &#”1 &%š” '” '
+” '” '”" '”$ '”) '”+ '”/ '#”1 '%š” (” (
+” (” (”" (”$ (”) (”+ (”/ (#”1 (%‘” )‘” *‘”	 +‘” 5’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” -’” .” .
+–” .” .
+” ÌK” ÌK
+” ÌK” ÌK–” .” .
+” ÌL” ÌL” ÌL”  ÌL–” .” .
+” ÌM”" ÌM”# ÌM”, ÌM’” /” /“” 0” 0”$ 0”” 1” 1” 1”% 1”” 2”  2”" 2”& 2”” 3”* 3”, 3”5 3%‘” 4”” 1”! 1”# 1”) 1”” 2”$ 2”& 2”* 2”” 3”. 3”0 3”9 3%”” 1” 1” 1”% 1”” 2”  2”" 2”& 2”” 3”* 3”, 3”5 3%’” 6” 6’” 7” 7’” 6” 6–” 7” 7” ÌH” ÌH”  ÌH”! ÌH’” 6” 6˜” 7” 7” ÌI” ÌI” ÌI”% ÌI”& ÌI”* ÌI’” 8” 8–” 8” 8” ÌE	” ÌE” ÌE” ÌE–” 8” 8” ÌF	” ÌF” ÌF” ÌF’” 9
+” 9•” :
+” :” :” :”* :!’” <
+” <•” =
+” =” =” =”( =’” ?
+” ?•” Ì@
+” Ì@” Ì@” Ì@”* Ì@!’” ÌB
+” ÌB•” ÌC
+” ÌC” ÌC”" ÌC$”/ ÌC&’” 8” 8’” 6” 6’” 7” 7’” .” .
+‘” ÌN’” ÌP” ÌP	’” ÌR” ÌR’” ÌS” ÌS
+–” ÌS” ÌS
+” Ì^” Ì^
+” Ì^” Ì^–” ÌS” ÌS
+” Ì_” Ì_” Ì_” Ì_˜” ÌS” ÌS
+” Ì`”! Ì`”" Ì`”+ Ì`”, Ì`”2 Ì`$•” ÌS” ÌS
+” Ìa”! Ìa”" Ìa”” Ìb” Ìb” Ìb” ÌbÜ ” Ìc” Ìc” Ìc” Ìc” Ìc”# Ìc”% Ìc”( Ìc”) Ìc”+ Ìc!”, Ìc"”5 Ìc+”7 Ìc-”: Ìc0”; Ìc1”< Ìc2‘” Ìd–” ÌS” ÌS
+” Ìe” Ìe”  Ìe”" Ìeš” ÌS” ÌS
+” Ìf” Ìf” Ìf” Ìf”" Ìf”$ Ìf”& Ìf”( Ìf”” ÌT” ÌT
+” ÌT”# ÌT–” ÌT” ÌT
+” ÌU	” ÌU” ÌU” ÌU˜” ÌT” ÌT
+” ÌV	” ÌV” ÌV”& ÌV”' ÌV”+ ÌV#–” ÌT” ÌT
+” ÌW	” ÌW” ÌW”$ ÌWš” ÌT” ÌT
+” ÌX	” ÌX” ÌX” ÌX”  ÌX”" ÌX”# ÌX”% ÌX’” ÌT” ÌT
+”” ÌZ” ÌZ
+” ÌZ”* ÌZ–” ÌZ” ÌZ
+” Ì[	” Ì[” Ì[” Ì[–” ÌZ” ÌZ
+” Ì\	” Ì\” Ì\”2 Ì\*’” ÌZ” ÌZ
+’” ÌS” ÌS
+‘” Ìg’” Ìi” Ìi	’” Ìk” Ìk’”, Ìl”3 Ìl”” Ìm” Ìm” Ìm”( Ìm’”  Ìo”& Ìo–”  Ìo”& Ìo”' ÌÒ”, ÌÒ”- ÌÒ”3 ÌÒ’”  Ìp”' Ìp’”  Ìq”# Ìq’”  Ìp”' Ìp–”  Ìq”# Ìq”$ Ì	”) Ì”* Ì”0 Ì’”  Ìp”' Ìpš”  Ìq”# Ìq”$ Ì‚	”* Ì‚”+ Ì‚”- Ì‚”3 Ì‚”5 Ì‚”7 Ì‚”9 Ì‚””  Ìr
+”$ Ìr”, Ìr”0 Ìr–”  Ìr
+”$ Ìr”% Ìs”- Ìs”. Ìs”0 Ìs–”  Ìr
+”$ Ìr”% Ìt”. Ìt”/ Ìt”8 Ìt –”  Ìr
+”$ Ìr”% Ìu”* Ìu”+ Ìu”- Ìu’” Ìr
+”  Ìr”  Ìw
+”) Ìw”1 Ìw”3 Ìw”> Ìw!”Ì@ Ìw#”ÌG Ìw*”ÌI Ìw,”ÌM Ìw0”ÌO Ìw2”ÌS Ìw6”ÌT Ìw7”Ì^ ÌwÌA”Ì` ÌwÌC–”  Ìw
+”) Ìw”* Ìx”2 Ìx”3 Ìx”5 Ìx–”  Ìw
+”) Ìw”* Ìy”6 Ìy”7 Ìy”8 Ìy–”  Ìw
+”) Ìw”* Ìz”0 Ìz”1 Ìz”3 Ìz–”  Ìw
+”) Ìw”* Ì{”9 Ì{”: Ì{”ÌC Ì{&–”  Ìw
+”) Ìw”* Ì|”6 Ì|”7 Ì|”8 Ì|™”  Ìw
+”) Ìw”* Ì}”2 Ì}”3 Ì}”4 Ì}”9 Ì}$”; Ì}&”= Ì}(—”$ Ì~”( Ì~”) Ì~”3 Ì~”6 Ì~ ”; Ì~%”< Ì~&’”  Ì”! Ì’” Ìp”# Ìp’” Ìq” Ìq’”  Ì„”( Ì„’”  Ì…”# Ì…’”  Ì„”( Ì„–”  Ì…”# Ì…”$ Ì•	”) Ì•”* Ì•”0 Ì•’”  Ì„”( Ì„š”  Ì…”# Ì…”$ Ì–	”* Ì–”+ Ì–”- Ì–”3 Ì–”5 Ì–”7 Ì–”9 Ì–””  Ì†
+”$ Ì†”, Ì†”4 Ì†–”  Ì†
+”$ Ì†”% Ì‡”- Ì‡”. Ì‡”0 Ì‡–”  Ì†
+”$ Ì†”% Ìˆ”. Ìˆ”/ Ìˆ”8 Ìˆ –”  Ì†
+”$ Ì†”% Ì‰”* Ì‰”+ Ì‰”- Ì‰’” Ì†
+”  Ì†”  Ì‹
+”) Ì‹”1 Ì‹”3 Ì‹”> Ì‹!”Ì@ Ì‹#”ÌH Ì‹+”ÌJ Ì‹-”ÌN Ì‹1”ÌP Ì‹3”ÌT Ì‹7”ÌU Ì‹8”Ì] Ì‹Ì@”Ì_ Ì‹ÌB–”  Ì‹
+”) Ì‹”* ÌŒ”2 ÌŒ”3 ÌŒ”5 ÌŒ–”  Ì‹
+”) Ì‹”* Ì”6 Ì”7 Ì”8 Ì–”  Ì‹
+”) Ì‹”* Ì”0 Ì”1 Ì”3 Ì–”  Ì‹
+”) Ì‹”* Ì”9 Ì”: Ì”ÌC Ì&–”  Ì‹
+”) Ì‹”* Ì”6 Ì”7 Ì”8 Ì™”  Ì‹
+”) Ì‹”* Ì‘”2 Ì‘”3 Ì‘”4 Ì‘”9 Ì‘$”; Ì‘&”= Ì‘(—”$ Ì’”( Ì’”) Ì’”1 Ì’”4 Ì’”9 Ì’#”: Ì’$’”  Ì“”! Ì“’” Ì„”$ Ì„’” Ì…” Ì…’”  Ì˜”( Ì˜’”  Ì™”# Ì™’”  Ì˜”( Ì˜–”  Ì™”# Ì™”$ Ì©	”) Ì©”* Ì©”0 Ì©’”  Ì˜”( Ì˜š”  Ì™”# Ì™”$ Ìª	”* Ìª”+ Ìª”- Ìª”3 Ìª”5 Ìª”7 Ìª”9 Ìª””  Ìš
+”$ Ìš”, Ìš”4 Ìš–”  Ìš
+”$ Ìš”% Ì›”- Ì›”. Ì›”0 Ì›–”  Ìš
+”$ Ìš”% Ìœ”. Ìœ”/ Ìœ”8 Ìœ –”  Ìš
+”$ Ìš”% Ì”* Ì”+ Ì”- Ì’” Ìš
+”  Ìš”  ÌŸ
+”) ÌŸ”1 ÌŸ”3 ÌŸ”> ÌŸ!”Ì@ ÌŸ#”ÌH ÌŸ+”ÌJ ÌŸ-”ÌN ÌŸ1”ÌP ÌŸ3”ÌT ÌŸ7”ÌU ÌŸ8”Ì] ÌŸÌ@”Ì_ ÌŸÌB–”  ÌŸ
+”) ÌŸ”* Ì ”2 Ì ”3 Ì ”5 Ì –”  ÌŸ
+”) ÌŸ”* Ì¡”6 Ì¡”7 Ì¡”8 Ì¡–”  ÌŸ
+”) ÌŸ”* Ì¢”0 Ì¢”1 Ì¢”3 Ì¢–”  ÌŸ
+”) ÌŸ”* Ì£”9 Ì£”: Ì£”ÌC Ì£&–”  ÌŸ
+”) ÌŸ”* Ì¤”6 Ì¤”7 Ì¤”8 Ì¤™”  ÌŸ
+”) ÌŸ”* Ì¥”2 Ì¥”3 Ì¥”4 Ì¥”9 Ì¥$”; Ì¥&”= Ì¥(—”$ Ì¦”( Ì¦”) Ì¦”1 Ì¦”4 Ì¦”9 Ì¦#”: Ì¦$’”  Ì§”! Ì§’” Ì˜”$ Ì˜’” Ì™” Ì™’”  Ì¬”' Ì¬’”  Ì­”# Ì­’”  Ì¬”' Ì¬–”  Ì­”# Ì­”$ Ì½	”) Ì½”* Ì½”0 Ì½’”  Ì¬”' Ì¬š”  Ì­”# Ì­”$ Ì¾	”* Ì¾”+ Ì¾”- Ì¾”3 Ì¾”5 Ì¾”7 Ì¾”9 Ì¾””  Ì®
+”$ Ì®”, Ì®”0 Ì®–”  Ì®
+”$ Ì®”% Ì¯”- Ì¯”. Ì¯”0 Ì¯–”  Ì®
+”$ Ì®”% Ì°”. Ì°”/ Ì°”8 Ì° –”  Ì®
+”$ Ì®”% Ì±”* Ì±”+ Ì±”- Ì±’” Ì®
+”  Ì®”  Ì³
+”) Ì³”1 Ì³”3 Ì³”> Ì³!”Ì@ Ì³#”ÌL Ì³/”ÌN Ì³1”ÌR Ì³5”ÌT Ì³7”ÌX Ì³;”ÌY Ì³<”Ìc Ì³ÌF”Ìe Ì³ÌH–”  Ì³
+”) Ì³”* Ì´”2 Ì´”3 Ì´”5 Ì´–”  Ì³
+”) Ì³”* Ìµ”6 Ìµ”7 Ìµ”8 Ìµ–”  Ì³
+”) Ì³”* Ì¶”0 Ì¶”1 Ì¶”3 Ì¶–”  Ì³
+”) Ì³”* Ì·”9 Ì·”: Ì·”ÌC Ì·&–”  Ì³
+”) Ì³”* Ì¸”6 Ì¸”7 Ì¸”8 Ì¸™”  Ì³
+”) Ì³”* Ì¹”2 Ì¹”3 Ì¹”4 Ì¹”9 Ì¹$”; Ì¹&”= Ì¹(—”$ Ìº”( Ìº”) Ìº”3 Ìº”6 Ìº ”; Ìº%”< Ìº&’”  Ì»”! Ì»’” Ì¬”# Ì¬’” Ì­” Ì­’”  ÌÀ”' ÌÀ””  ÌÁ”& ÌÁ”7 ÌÁ”Ì@ ÌÁ’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÂ”, ÌÂ”- ÌÂ”3 ÌÂ’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÃ”- ÌÃ”. ÌÃ”0 ÌÃ’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÄ”/ ÌÄ”0 ÌÄ”2 ÌÄ’”  ÌÀ”' ÌÀ˜”  ÌÁ”& ÌÁ”' ÌÅ”1 ÌÅ”2 ÌÅ”< ÌÅ ”= ÌÅ!”ÌA ÌÅ%’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÆ”6 ÌÆ”7 ÌÆ”Ì@ ÌÆ$’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÇ”0 ÌÇ”1 ÌÇ”: ÌÇ’”  ÌÀ”' ÌÀ–”  ÌÁ”& ÌÁ”' ÌÈ”3 ÌÈ”4 ÌÈ”6 ÌÈ’”  ÌÀ”' ÌÀ—”  ÌÁ”& ÌÁ”' ÌÉ”. ÌÉ”/ ÌÉ”2 ÌÉ”4 ÌÉ—”$ ÌÊ”( ÌÊ”) ÌÊ”3 ÌÊ”6 ÌÊ”: ÌÊ"”; ÌÊ#’”  ÌË
+”! ÌË’” ÌÀ”# ÌÀ’” ÌÁ”" ÌÁ’”  ÌÍ”' ÌÍ”  ÌÎ”$ ÌÎ”( ÌÎ”) ÌÎ”3 ÌÎ”7 ÌÎ”; ÌÎ#”< ÌÎ$”ÌD ÌÎ,”ÌH ÌÎ0”ÌL ÌÎ4”ÌM ÌÎ5”ÌU ÌÎ=”ÌW ÌÎ?•”( ÌÏ
+”, ÌÏ”- ÌÏ”= ÌÏ”ÌJ ÌÏ!‘”! ÌĞ	‘”! ÌĞ	’” Ìo”" Ìo”” Ìm”! Ìm”# Ìm”, Ìm’”$ Ìo”* Ìo–”$ Ìo”* Ìo”+ ÌÒ”0 ÌÒ”1 ÌÒ”7 ÌÒ’”$ Ìp”+ Ìp’”$ Ìq”' Ìq’”$ Ìp”+ Ìp–”$ Ìq”' Ìq”( Ì	”- Ì”. Ì”4 Ì’”$ Ìp”+ Ìpš”$ Ìq”' Ìq”( Ì‚	”. Ì‚”/ Ì‚”1 Ì‚”7 Ì‚”9 Ì‚”; Ì‚”= Ì‚””$ Ìr
+”( Ìr”0 Ìr”4 Ìr–”$ Ìr
+”( Ìr”) Ìs”1 Ìs”2 Ìs”4 Ìs–”$ Ìr
+”( Ìr”) Ìt”2 Ìt”3 Ìt”< Ìt –”$ Ìr
+”( Ìr”) Ìu”. Ìu”/ Ìu”1 Ìu’”  Ìr
+”$ Ìr”$ Ìw
+”- Ìw”5 Ìw”7 Ìw”ÌB Ìw!”ÌD Ìw#”ÌK Ìw*”ÌM Ìw,”ÌQ Ìw0”ÌS Ìw2”ÌW Ìw6”ÌX Ìw7”Ìb ÌwÌA”Ìd ÌwÌC–”$ Ìw
+”- Ìw”. Ìx”6 Ìx”7 Ìx”9 Ìx–”$ Ìw
+”- Ìw”. Ìy”: Ìy”; Ìy”< Ìy–”$ Ìw
+”- Ìw”. Ìz”4 Ìz”5 Ìz”7 Ìz–”$ Ìw
+”- Ìw”. Ì{”= Ì{”> Ì{”ÌG Ì{&–”$ Ìw
+”- Ìw”. Ì|”: Ì|”; Ì|”< Ì|™”$ Ìw
+”- Ìw”. Ì}”6 Ì}”7 Ì}”8 Ì}”= Ì}$”? Ì}&”ÌA Ì}(—”( Ì~”, Ì~”- Ì~”7 Ì~”: Ì~ ”? Ì~%”Ì@ Ì~&’”$ Ì”% Ì’”  Ìp”' Ìp’”  Ìq”# Ìq’”$ Ì„”, Ì„’”$ Ì…”' Ì…’”$ Ì„”, Ì„–”$ Ì…”' Ì…”( Ì•	”- Ì•”. Ì•”4 Ì•’”$ Ì„”, Ì„š”$ Ì…”' Ì…”( Ì–	”. Ì–”/ Ì–”1 Ì–”7 Ì–”9 Ì–”; Ì–”= Ì–””$ Ì†
+”( Ì†”0 Ì†”8 Ì†–”$ Ì†
+”( Ì†”) Ì‡”1 Ì‡”2 Ì‡”4 Ì‡–”$ Ì†
+”( Ì†”) Ìˆ”2 Ìˆ”3 Ìˆ”< Ìˆ –”$ Ì†
+”( Ì†”) Ì‰”. Ì‰”/ Ì‰”1 Ì‰’”  Ì†
+”$ Ì†”$ Ì‹
+”- Ì‹”5 Ì‹”7 Ì‹”ÌB Ì‹!”ÌD Ì‹#”ÌL Ì‹+”ÌN Ì‹-”ÌR Ì‹1”ÌT Ì‹3”ÌX Ì‹7”ÌY Ì‹8”Ìa Ì‹Ì@”Ìc Ì‹ÌB–”$ Ì‹
+”- Ì‹”. ÌŒ”6 ÌŒ”7 ÌŒ”9 ÌŒ–”$ Ì‹
+”- Ì‹”. Ì”: Ì”; Ì”< Ì–”$ Ì‹
+”- Ì‹”. Ì”4 Ì”5 Ì”7 Ì–”$ Ì‹
+”- Ì‹”. Ì”= Ì”> Ì”ÌG Ì&–”$ Ì‹
+”- Ì‹”. Ì”: Ì”; Ì”< Ì™”$ Ì‹
+”- Ì‹”. Ì‘”6 Ì‘”7 Ì‘”8 Ì‘”= Ì‘$”? Ì‘&”ÌA Ì‘(—”( Ì’”, Ì’”- Ì’”5 Ì’”8 Ì’”= Ì’#”> Ì’$’”$ Ì“”% Ì“’”  Ì„”( Ì„’”  Ì…”# Ì…’”$ Ì˜”, Ì˜’”$ Ì™”' Ì™’”$ Ì˜”, Ì˜–”$ Ì™”' Ì™”( Ì©	”- Ì©”. Ì©”4 Ì©’”$ Ì˜”, Ì˜š”$ Ì™”' Ì™”( Ìª	”. Ìª”/ Ìª”1 Ìª”7 Ìª”9 Ìª”; Ìª”= Ìª””$ Ìš
+”( Ìš”0 Ìš”8 Ìš–”$ Ìš
+”( Ìš”) Ì›”1 Ì›”2 Ì›”4 Ì›–”$ Ìš
+”( Ìš”) Ìœ”2 Ìœ”3 Ìœ”< Ìœ –”$ Ìš
+”( Ìš”) Ì”. Ì”/ Ì”1 Ì’”  Ìš
+”$ Ìš”$ ÌŸ
+”- ÌŸ”5 ÌŸ”7 ÌŸ”ÌB ÌŸ!”ÌD ÌŸ#”ÌL ÌŸ+”ÌN ÌŸ-”ÌR ÌŸ1”ÌT ÌŸ3”ÌX ÌŸ7”ÌY ÌŸ8”Ìa ÌŸÌ@”Ìc ÌŸÌB–”$ ÌŸ
+”- ÌŸ”. Ì ”6 Ì ”7 Ì ”9 Ì –”$ ÌŸ
+”- ÌŸ”. Ì¡”: Ì¡”; Ì¡”< Ì¡–”$ ÌŸ
+”- ÌŸ”. Ì¢”4 Ì¢”5 Ì¢”7 Ì¢–”$ ÌŸ
+”- ÌŸ”. Ì£”= Ì£”> Ì£”ÌG Ì£&–”$ ÌŸ
+”- ÌŸ”. Ì¤”: Ì¤”; Ì¤”< Ì¤™”$ ÌŸ
+”- ÌŸ”. Ì¥”6 Ì¥”7 Ì¥”8 Ì¥”= Ì¥$”? Ì¥&”ÌA Ì¥(—”( Ì¦”, Ì¦”- Ì¦”5 Ì¦”8 Ì¦”= Ì¦#”> Ì¦$’”$ Ì§”% Ì§’”  Ì˜”( Ì˜’”  Ì™”# Ì™’”$ Ì¬”+ Ì¬’”$ Ì­”' Ì­’”$ Ì¬”+ Ì¬–”$ Ì­”' Ì­”( Ì½	”- Ì½”. Ì½”4 Ì½’”$ Ì¬”+ Ì¬š”$ Ì­”' Ì­”( Ì¾	”. Ì¾”/ Ì¾”1 Ì¾”7 Ì¾”9 Ì¾”; Ì¾”= Ì¾””$ Ì®
+”( Ì®”0 Ì®”4 Ì®–”$ Ì®
+”( Ì®”) Ì¯”1 Ì¯”2 Ì¯”4 Ì¯–”$ Ì®
+”( Ì®”) Ì°”2 Ì°”3 Ì°”< Ì° –”$ Ì®
+”( Ì®”) Ì±”. Ì±”/ Ì±”1 Ì±’”  Ì®
+”$ Ì®”$ Ì³
+”- Ì³”5 Ì³”7 Ì³”ÌB Ì³!”ÌD Ì³#”ÌP Ì³/”ÌR Ì³1”ÌV Ì³5”ÌX Ì³7”Ì\ Ì³;”Ì] Ì³<”Ìg Ì³ÌF”Ìi Ì³ÌH–”$ Ì³
+”- Ì³”. Ì´”6 Ì´”7 Ì´”9 Ì´–”$ Ì³
+”- Ì³”. Ìµ”: Ìµ”; Ìµ”< Ìµ–”$ Ì³
+”- Ì³”. Ì¶”4 Ì¶”5 Ì¶”7 Ì¶–”$ Ì³
+”- Ì³”. Ì·”= Ì·”> Ì·”ÌG Ì·&–”$ Ì³
+”- Ì³”. Ì¸”: Ì¸”; Ì¸”< Ì¸™”$ Ì³
+”- Ì³”. Ì¹”6 Ì¹”7 Ì¹”8 Ì¹”= Ì¹$”? Ì¹&”ÌA Ì¹(—”( Ìº”, Ìº”- Ìº”7 Ìº”: Ìº ”? Ìº%”Ì@ Ìº&’”$ Ì»”% Ì»’”  Ì¬”' Ì¬’”  Ì­”# Ì­’”$ ÌÀ”+ ÌÀ””$ ÌÁ”* ÌÁ”; ÌÁ”ÌD ÌÁ’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÂ”0 ÌÂ”1 ÌÂ”7 ÌÂ’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÃ”1 ÌÃ”2 ÌÃ”4 ÌÃ’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÄ”3 ÌÄ”4 ÌÄ”6 ÌÄ’”$ ÌÀ”+ ÌÀ˜”$ ÌÁ”* ÌÁ”+ ÌÅ”5 ÌÅ”6 ÌÅ”Ì@ ÌÅ ”ÌA ÌÅ!”ÌE ÌÅ%’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÆ”: ÌÆ”; ÌÆ”ÌD ÌÆ$’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÇ”4 ÌÇ”5 ÌÇ”> ÌÇ’”$ ÌÀ”+ ÌÀ–”$ ÌÁ”* ÌÁ”+ ÌÈ”7 ÌÈ”8 ÌÈ”: ÌÈ’”$ ÌÀ”+ ÌÀ—”$ ÌÁ”* ÌÁ”+ ÌÉ”2 ÌÉ”3 ÌÉ”6 ÌÉ”8 ÌÉ—”( ÌÊ”, ÌÊ”- ÌÊ”7 ÌÊ”: ÌÊ”> ÌÊ"”? ÌÊ#’”$ ÌË
+”% ÌË’”  ÌÀ”' ÌÀ’”  ÌÁ”& ÌÁ’”$ ÌÍ”+ ÌÍ”$ ÌÎ”( ÌÎ”, ÌÎ”- ÌÎ”7 ÌÎ”; ÌÎ”? ÌÎ#”Ì@ ÌÎ$”ÌH ÌÎ,”ÌL ÌÎ0”ÌP ÌÎ4”ÌQ ÌÎ5”ÌY ÌÎ=”Ì[ ÌÎ?•”, ÌÏ
+”0 ÌÏ”1 ÌÏ”ÌA ÌÏ”ÌN ÌÏ!‘”% ÌĞ	‘”% ÌĞ	’”  Ìo”& Ìo”” Ìm” Ìm” Ìm”( Ìm‘” ÌÔ’” ÌÖ” ÌÖ	’” ÌØ” ÌØ’” ÌÙ” ÌÙ
+–” ÌÙ” ÌÙ
+” Í4” Í4
+” Í4” Í4–” ÌÙ” ÌÙ
+” Í5” Í5” Í5” Í5–” ÌÙ” ÌÙ
+” Í6”" Í6”# Í6”, Í6–” ÌÙ” ÌÙ
+” Í7” Í7”  Í7”" Í7š” ÌÙ” ÌÙ
+” Í8” Í8” Í8” Í8” Í8”! Í8”# Í8”% Í8’” ÌÚ” ÌÚ–” ÌÚ” ÌÚ” ÌÛ	” ÌÛ” ÌÛ”# ÌÛ” ÌÚ” ÌÚ” ÌÜ	” ÌÜ” ÌÜ” ÌÜ”  ÌÜ”" ÌÜ”$ ÌÜ”& ÌÜ”, ÌÜ!”. ÌÜ#”0 ÌÜ%”2 ÌÜ'”” ÌŞ” ÌŞ
+” ÌŞ”! ÌŞ–” ÌŞ” ÌŞ
+” Ìß	” Ìß” Ìß” Ìß˜” ÌŞ” ÌŞ
+” Ìà	” Ìà” Ìà”& Ìà”' Ìà”+ Ìà#–” ÌŞ” ÌŞ
+” Ìá	” Ìá” Ìá”$ Ìáš” ÌŞ” ÌŞ
+” Ìâ	” Ìâ” Ìâ” Ìâ”  Ìâ”" Ìâ”$ Ìâ”& Ìâ’” ÌŞ” ÌŞ
+’” Ìä” Ìä’” Ìå” Ìå	’” Ìä” Ìä–” Ìå” Ìå	” Í” Í” Í” Í’” Ìä” Ìäš” Ìå” Ìå	” Í” Í” Í” Í” Í”! Í”# Í”% Í’” Ìæ” Ìæ–” Ìæ” Ìæ” Ìñ	” Ìñ”  Ìñ”! Ìñ”” Ìç
+” Ìç” Ìç”  Ìç–” Ìç
+” Ìç” Ìè” Ìè” Ìè” Ìè–” Ìç
+” Ìç” Ìé” Ìé” Ìé”$ Ìé š” Ìç
+” Ìç” Ìê” Ìê” Ìê” Ìê”  Ìê”" Ìê”# Ìê”% Ìê!’” Ìç
+” Ìç–” Ìì
+” Ìì” Ìì” Ìì” Ìì”% Ìì–” Ìì
+” Ìì” Ìí” Ìí” Ìí” Ìí˜” Ìì
+” Ìì” Ìî” Ìî” Ìî”& Ìî"”' Ìî#”+ Ìî'–” Ìì
+” Ìì” Ìï” Ìï” Ìï”$ Ìï ’” Ìì
+” Ìì’” Ìæ” Ìæ”” Ìó” Ìó” Ìó” Ìó–” Ìó” Ìó” Ìô” Ìô” Ìô” Ìô–” Ìó” Ìó” Ìõ” Ìõ” Ìõ”$ Ìõ’” Ìó” Ìó’” Ì÷” Ì÷–” Ì÷” Ì÷” Í	” Í”  Í”! Í” Ì÷” Ì÷” Í	” Í” Í” Í”  Í”" Í”$ Í”& Í”+ Í!”- Í#”/ Í%”1 Í'”” Ìø
+” Ìø” Ìø”  Ìø–” Ìø
+” Ìø” Ìù” Ìù” Ìù” Ìù–” Ìø
+” Ìø” Ìú” Ìú” Ìú”$ Ìú š” Ìø
+” Ìø” Ìû” Ìû” Ìû” Ìû”  Ìû”" Ìû”# Ìû”% Ìû!’” Ìø
+” Ìø–” Ìı
+” Ìı” Ìı” Ìı” Ìı”% Ìı–” Ìı
+” Ìı” Ìş” Ìş” Ìş” Ìş˜” Ìı
+” Ìı” Ìÿ” Ìÿ” Ìÿ”& Ìÿ"”' Ìÿ#”+ Ìÿ'–” Ìı
+” Ìı” Í ” Í ” Í ”$ Í  ’” Ìı
+” Ìı’” Ì÷” Ì÷›” Í” Í” Í” Í” Í”  Í”* Í&”+ Í'”0 Í,”1 Í-”3 Í/”” Í
+” Í”$ Í”' Í–” Í
+” Í” Í”% Í”& Í”( Í–” Í
+” Í” Í”& Í”' Í”0 Í ’” Í
+” Í’” Í
+
+” Í
+–” Í
+
+” Í
+” Í”+ Í”, Í”- Í”” Í” Í”$ Í”( Í–” Í” Í” Í”% Í”& Í”( Í–” Í” Í” Í”& Í”' Í”0 Í"š” Í” Í” Í”# Í”$ Í”& Í”, Í”. Í ”/ Í!”1 Í#’” Í” ÍÜ ” Í” Í”$ Í”( Í”) Í”, Í”- Í”7 Í$”8 Í%”< Í)”= Í*”ÌG Í4”ÌH Í5”ÌI Í6”ÌJ Í7”ÌQ Í>”ÌR Í?”ÌS ÍÌ@”ÌT ÍÌA–” Í” Í” Í”% Í”& Í”( Í˜” Í” Í” Í”' Í”( Í”2 Í$”3 Í%”7 Í)–” Í” Í” Í”& Í”' Í”0 Í"’” Í” Í’” Í
+
+” Í
+‘” Í	‘” Í	’” Ìä” Ìä’” Ìå” Ìå	’” Í” Í’” Í” Í’” Í” Í–” Í” Í” Í1” Í1” Í1” Í1’” Í” Í˜” Í” Í” Í2” Í2” Í2”- Í2!”. Í2"”3 Í2'”” Í” Í” Í” Í–” Í” Í” Í” Í” Í” Í˜” Í” Í” Í” Í” Í”& Í ”' Í!”+ Í%–” Í” Í” Í ” Í ” Í ”$ Í š” Í” Í” Í!” Í!” Í!” Í!”  Í!”" Í!”$ Í!”& Í! ’” Í” ÍÜ +” Í#” Í#” Í#” Í#”+ Í# ”2 Í#'”4 Í$
+”5 Í$”? Í$”Ì@ Í$”ÌD Í$”ÌE Í$”ÌM Í$#”ÌN Í$$”ÌQ Í$'”ÌR Í$(”Ì\ Í$2”Ì] Í$3”Ìa Í$7”Ìb Í$8”Ìj Í$Ì@”Ìk Í$ÌA”Ìn Í$ÌD”Ìx Í$ÌN”Ìy Í$ÌO”Ì} Í$ÌS”Ì~ Í$ÌT”Ì† Í$Ì\”Ì‡ Í$Ì]”Ìˆ Í$Ì^”Ì‹ Í$Ìa”Ì Í$Ìd”Ì Í$Ìe”Ì Í$Ìf”Ì— Í$Ìm”Ì˜ Í$Ìn”Ì™ Í$Ìo”Ìš Í$Ìp”Ì Í$Ìs”Ì  Í$Ìv”Ì¢ Í%
+”Ì¼ Í%$”Ì½ Í%%Ü +” Í'” Í'” Í'” Í'”+ Í' ”2 Í''”4 Í(
+”5 Í(”? Í(”Ì@ Í(”ÌD Í(”ÌE Í(”ÌM Í(#”ÌN Í($”ÌQ Í('”ÌR Í((”Ì\ Í(2”Ì] Í(3”Ìa Í(7”Ìb Í(8”Ìj Í(Ì@”Ìk Í(ÌA”Ìn Í(ÌD”Ìx Í(ÌN”Ìy Í(ÌO”Ì} Í(ÌS”Ì~ Í(ÌT”Ì† Í(Ì\”Ì‡ Í(Ì]”Ìˆ Í(Ì^”Ì‹ Í(Ìa”Ì Í(Ìd”Ì Í(Ìe”Ì Í(Ìf”Ì— Í(Ìm”Ì˜ Í(Ìn”Ì™ Í(Ìo”Ìš Í(Ìp”Ì Í(Ìs”Ì  Í(Ìv”Ì¢ Í)
+”Ì¿ Í)'”ÌÀ Í)(›” Í+” Í+” Í+” Í+” Í+”  Í+”* Í+&”+ Í+'”0 Í+,”1 Í+-”3 Í+/Ü ” Í,
+” Í,” Í,”+ Í,!”7 Í,"”= Í,(”? Í-”ÌC Í-”ÌD Í-”ÌG Í-”ÌH Í-”ÌR Í-”ÌS Í- ”ÌW Í-$”ÌX Í-%”Ìb Í-/”Ìc Í-0”Ìd Í-1”Ìe Í-2”Ìl Í-9”Ìm Í-:”Ìn Í-;”Ìo Í-<”Ìr Í-?”Ìu Í-ÌB”Ìw Í.”Ì‰ Í.”ÌŠ Í.‘” Í/	‘” Í/	’” Í” Í’” Í” Í’” ÌÙ” ÌÙ
+‘” Í9˜” Í<” Í<” Í<” Í<"” Í<$”# Í<1”% Í<3”0 Í<ÌF’” Í=” Í=–” Í=” Í=” ÍQ” ÍQ
+” ÍQ” ÍQ” Í=” Í=” ÍR” ÍR” ÍR” ÍR” ÍR” ÍR”  ÍR”" ÍR”( ÍR”* ÍR”+ ÍR ”- ÍR"’” Í>” Í>˜” Í>” Í>” ÍI” ÍI” ÍI”- ÍI!”. ÍI"”3 ÍI'–” Í>” Í>” ÍJ” ÍJ”  ÍJ”! ÍJ”” Í?” Í?” Í?” Í?–” Í?” Í?” Í@” Í@” Í@” Í@˜” Í?” Í?” ÍA” ÍA” ÍA”& ÍA ”' ÍA!”+ ÍA%–” Í?” Í?” ÍB” ÍB” ÍB”$ ÍB’” Í?” Í?”” ÍD” ÍD” ÍD”# ÍD–” ÍD” ÍD” ÍE” ÍE” ÍE” ÍE–” ÍD” ÍD” ÍF” ÍF” ÍF”$ ÍFš” ÍD” ÍD” ÍG” ÍG” ÍG” ÍG” ÍG” ÍG”  ÍG”" ÍG’” ÍD” ÍD’” Í>” Í>”” ÍL” ÍL
+” ÍL” ÍL–” ÍL” ÍL
+” ÍM	” ÍM” ÍM” ÍM˜” ÍL” ÍL
+” ÍN	” ÍN” ÍN”& ÍN”' ÍN”+ ÍN#–” ÍL” ÍL
+” ÍO	” ÍO” ÍO”$ ÍO’” ÍL” ÍL
+’” Í=” Í=‘” ÍS’” ÍU” ÍU	’” ÍW” ÍW’” ÍX” ÍX
+–” ÍX” ÍX
+” Íc” Íc
+” Íc” Íc˜” ÍX” ÍX
+” Íd” Íd” Íd”- Íd”. Íd ”3 Íd%š” ÍX” ÍX
+” Íe” Íe” Íe” Íe” Íe”! Íe”# Íe”% Íe”” ÍY” ÍY
+” ÍY”! ÍY–” ÍY” ÍY
+” ÍZ	” ÍZ” ÍZ” ÍZ˜” ÍY” ÍY
+” Í[	” Í[” Í[”& Í[”' Í[”+ Í[#–” ÍY” ÍY
+” Í\	” Í\” Í\”$ Í\š” ÍY” ÍY
+” Í]	” Í]” Í]” Í]”  Í]”" Í]”$ Í]”& Í]’” ÍY” ÍY
+’” Í_” Í_—” Í`” Í`” Í`”  Í`”, Í`”3 Í` ”4 Í`!Ü ”/ Í_”3 Í_”4 Í_”ÌA Í_ ”Ì[ Ía	”Ì\ Ía
+”Ìc Ía”Ìe Ía!”Ìg Ía#”Ìh Ía$”Ìo Ía+”Ìp Ía,”Ìv Ía2”Ìy Ía5”Ì€ Ía<”Ì Ía=”ÌŒ ÍaÌH’” Í_” Í_’” ÍX” ÍX
+‘” Íf”” Íi” Íi” Íi” Íi#’” Íj” Íj
+–” Íj” Íj
+” Í÷” Í÷
+” Í÷” Í÷–” Íj” Íj
+” Íø” Íø” Íø” Íø–” Íj” Íj
+” Íù”" Íù”# Íù”, Íù–” Íj” Íj
+” Íú” Íú”  Íú”" Íú•” Íj” Íj
+” Íû” Íû” Íû”” Íü” Íü” Íü” Íü”” Íı” Íı” Íı”" Íı”” Íş” Íş” Íş” Íş”” Íÿ” Íÿ” Íÿ” Íÿ‘” Í š” Íj” Íj
+” Í” Í” Í” Í”" Í”$ Í”& Í”( Í’” Ík” Ík’” Íl” Íl	’” Ík” Ík–” Íl” Íl	” Í€” Í€” Í€” Í€’” Ík” Íkš” Íl” Íl	” Í” Í” Í” Í” Í”! Í”# Í”% Í’” Ím” Ím˜” Ím” Ím” Íx	” Íx” Íx”- Íx#”. Íx$”3 Íx)–” Ím” Ím” Íy	” Íy”  Íy”! Íy–” Ín
+” Ín” Ín” Ín”  Ín”& Ín–” Ín
+” Ín” Ío” Ío” Ío” Ío˜” Ín
+” Ín” Íp” Íp” Íp”& Íp"”' Íp#”+ Íp'–” Ín
+” Ín” Íq” Íq” Íq”$ Íq ’” Ín
+” ÍnÜ ” Ís
+” Ís” Ís” Ís”  Ís”+ Ís"”. Ís%”3 Ís*”6 Ís-”7 Ís.”> Ís5”? Ís6”ÌF Ís=”ÌK ÍsÌB”ÌO ÍsÌF”ÌP ÍsÌG”ÌQ ÍsÌH”ÌR ÍsÌI”ÌW ÍsÌN”ÌX ÍsÌO”ÌY ÍsÌP”ÌZ ÍsÌQ”Ì_ ÍsÌV”Ì` ÍsÌW–” Ís
+” Ís” Ít” Ít” Ít” Ít–” Ís
+” Ís” Íu” Íu” Íu”$ Íu š” Ís
+” Ís” Ív” Ív” Ív” Ív” Ív” Ív”  Ív”" Ív’” Ís
+” Ís’” Ím” Ím›” Í{” Í{” Í{” Í{”  Í{”* Í{”+ Í{ ”2 Í{'”3 Í{(”4 Í{)”5 Í{*–” Í{” Í{” Í|” Í|” Í|” Í|˜” Í{” Í{” Í}” Í}” Í}”& Í} ”' Í}!”+ Í}%–” Í{” Í{” Í~” Í~” Í~”$ Í~’” Í{” Í{’” Ík” Ík’” Íl” Íl	’” Íƒ” Íƒ’” Í„” Í„	’” Íƒ” Íƒ–” Í„” Í„	” Í¬” Í¬” Í¬” Í¬’” Íƒ” Íƒš” Í„” Í„	” Í­” Í­” Í­” Í­” Í­”! Í­”# Í­”% Í­’” Í…” Í…–” Í…” Í…” Í	” Í”  Í”! Í”” Í†
+” Í†” Í†”  Í†–” Í†
+” Í†” Í‡” Í‡” Í‡” Í‡–” Í†
+” Í†” Íˆ” Íˆ” Íˆ”$ Íˆ ’” Í†
+” Í†›” ÍŠ
+” ÍŠ” ÍŠ” ÍŠ”  ÍŠ”# ÍŠ”$ ÍŠ”+ ÍŠ"”, ÍŠ#”- ÍŠ$”. ÍŠ%–” ÍŠ
+” ÍŠ” Í‹” Í‹” Í‹” Í‹˜” ÍŠ
+” ÍŠ” ÍŒ” ÍŒ” ÍŒ”& ÍŒ"”' ÍŒ#”+ ÍŒ'–” ÍŠ
+” ÍŠ” Í” Í” Í”$ Í š” ÍŠ
+” ÍŠ” Í” Í” Í” Í” Í” Í”  Í”" Í’” ÍŠ
+” ÍŠ’” Í…” Í…’” Í’” Í’–” Í’” Í’” Í	” Í”  Í”! Í”” Í“
+” Í“” Í“”  Í“–” Í“
+” Í“” Í”” Í”” Í”” Í”–” Í“
+” Í“” Í•” Í•” Í•”$ Í• ’” Í“
+” Í“›” Í—
+” Í—” Í—” Í—”  Í—”# Í—”$ Í—”+ Í—"”, Í—#”- Í—$”. Í—%–” Í—
+” Í—” Í˜” Í˜” Í˜” Í˜˜” Í—
+” Í—” Í™” Í™” Í™”& Í™"”' Í™#”+ Í™'–” Í—
+” Í—” Íš” Íš” Íš”$ Íš š” Í—
+” Í—” Í›” Í›” Í›” Í›” Í›” Í›”  Í›”" Í›’” Í—
+” Í—’” Í’” Í’’” ÍŸ” ÍŸ–” ÍŸ” ÍŸ” Íª	” Íª”  Íª”! Íª”” Í 
+” Í ” Í ” Í –” Í 
+” Í ” Í¡” Í¡” Í¡” Í¡–” Í 
+” Í ” Í¢” Í¢” Í¢”$ Í¢ ’” Í 
+” Í Ü ” Í¤
+” Í¤” Í¤” Í¤” Í¤”  Í¤”! Í¤”( Í¤”) Í¤ ”3 Í¤*”4 Í¤+”5 Í¤,”< Í¤3”= Í¤4”> Í¤5”? Í¤6–” Í¤
+” Í¤” Í¥” Í¥” Í¥” Í¥˜” Í¤
+” Í¤” Í¦” Í¦” Í¦”& Í¦"”' Í¦#”+ Í¦'–” Í¤
+” Í¤” Í§” Í§” Í§”$ Í§ š” Í¤
+” Í¤” Í¨” Í¨” Í¨” Í¨” Í¨” Í¨”  Í¨”" Í¨’” Í¤
+” Í¤’” ÍŸ” ÍŸ’” Íƒ” Íƒ’” Í„” Í„	’” Í¯” Í¯’” Í°” Í°’” Í¯” Í¯–” Í°” Í°” ÍÒ” ÍÒ” ÍÒ” ÍÒ’” Í¯” Í¯˜” Í°” Í°” ÍÓ” ÍÓ” ÍÓ”- ÍÓ!”. ÍÓ"”3 ÍÓ'’” Í¯” Í¯–” Í°” Í°” ÍÔ” ÍÔ” ÍÔ” ÍÔ’” Í¯” Í¯–” Í°” Í°” ÍÕ”" ÍÕ”# ÍÕ”, ÍÕ ’” Í¯” Í¯–” Í°” Í°” ÍÖ” ÍÖ”  ÍÖ”! ÍÖ’” Í¯” Í¯š” Í°” Í°” Í×” Í×” Í×” Í×”" Í×”$ Í×”& Í×”( Í×”” Í±” Í±” Í±” Í±–” Í±” Í±” Í²” Í²” Í²” Í²˜” Í±” Í±” Í³” Í³” Í³”& Í³ ”' Í³!”+ Í³%–” Í±” Í±” Í´” Í´” Í´”$ Í´š” Í±” Í±” Íµ” Íµ” Íµ” Íµ”  Íµ”" Íµ”# Íµ”% Íµ’” Í±” Í±’” Í·” Í·’” Í¸
+” Í¸–” Í¸
+” Í¸” ÍÎ” ÍÎ” ÍÎ”$ ÍÎ” Í¸
+” Í¸” ÍÏ” ÍÏ”  ÍÏ”" ÍÏ”% ÍÏ”' ÍÏ”( ÍÏ”* ÍÏ”0 ÍÏ#”2 ÍÏ%”3 ÍÏ&”5 ÍÏ(–” Í¹” Í¹”  Í¹”' Í¹”( Í¹”, Í¹–” Í¹” Í¹” Íº”! Íº”" Íº”$ Íº–” Í¹” Í¹” Í»”" Í»”# Í»”, Í»"–” Í¹” Í¹” Í¼” Í¼” Í¼”! Í¼’” Í¹” Í¹” Í¾” Í¾”  Í¾”& Í¾”) Í¾”0 Í¾!”1 Í¾"”: Í¾+”; Í¾,”ÌB Í¾3”ÌC Í¾4”ÌD Í¾5”ÌE Í¾6–” Í¾” Í¾” Í¿”! Í¿”" Í¿”$ Í¿–” Í¾” Í¾” ÍÀ”" ÍÀ”# ÍÀ”, ÍÀ"–” Í¾” Í¾” ÍÁ”% ÍÁ”& ÍÁ”' ÍÁ’” Í¾” Í¾Ü ” ÍÃ” ÍÃ”  ÍÃ”' ÍÃ”* ÍÃ”+ ÍÃ”2 ÍÃ#”3 ÍÃ$”6 ÍÃ'”: ÍÃ+”; ÍÃ,”< ÍÃ-”= ÍÃ.”> ÍÃ/”ÌA ÍÃ2”ÌB ÍÃ3”ÌC ÍÃ4”ÌD ÍÃ5”ÌF ÍÃ7”ÌG ÍÃ8”ÌJ ÍÃ;”ÌQ ÍÃÌB”ÌR ÍÃÌC”ÌU ÍÃÌF”ÌV ÍÃÌG”Ì] ÍÃÌN”Ì^ ÍÃÌO”Ì_ ÍÃÌP”Ì` ÍÃÌQ–” ÍÃ” ÍÃ” ÍÄ”! ÍÄ”" ÍÄ”$ ÍÄÜ ” ÍÃ” ÍÃ” ÍÅ”" ÍÅ”# ÍÅ”* ÍÅ ”+ ÍÅ!”. ÍÅ$”2 ÍÅ(”3 ÍÅ)”4 ÍÅ*”5 ÍÅ+”6 ÍÅ,”? ÍÅ5”Ì@ ÍÅ6”ÌA ÍÅ7”ÌB ÍÅ8”ÌK ÍÅÌA–” ÍÃ” ÍÃ” ÍÆ” ÍÆ” ÍÆ”! ÍÆ’” ÍÃ” ÍÃ›” ÍÈ” ÍÈ”  ÍÈ”' ÍÈ”( ÍÈ”2 ÍÈ#”3 ÍÈ$”: ÍÈ+”; ÍÈ,”< ÍÈ-”= ÍÈ.–” ÍÈ” ÍÈ” ÍÉ”! ÍÉ”" ÍÉ”$ ÍÉ˜” ÍÈ” ÍÈ” ÍÊ”# ÍÊ”$ ÍÊ”. ÍÊ$”/ ÍÊ%”3 ÍÊ)–” ÍÈ” ÍÈ” ÍË”" ÍË”# ÍË”, ÍË"–” ÍÈ” ÍÈ” ÍÌ” ÍÌ” ÍÌ”! ÍÌ’” ÍÈ” ÍÈ’” Í¸
+” Í¸Ü ”/ Í·”6 Í·”7 Í·”? Í· ”Ì@ Í·!”ÌE Í·&”ÌF Í·'”ÌG Í·(”ÌI Í·*”ÌJ Í·+”ÌK Í·,”Ìe ÍĞ”Ìf ÍĞ”Ìm ÍĞ!”Ìo ÍĞ#”Ìq ÍĞ%”Ìr ÍĞ&”Ìy ÍĞ-”Ìz ÍĞ.”Ì~ ÍĞ2’” Í·” Í·’” Í¯” Í¯’” Í°” Í°’” ÍÙ” ÍÙ’” ÍÚ” ÍÚ’” ÍÙ” ÍÙ–” ÍÚ” ÍÚ” Íñ” Íñ” Íñ” Íñ’” ÍÙ” ÍÙ˜” ÍÚ” ÍÚ” Íò” Íò” Íò”- Íò!”. Íò"”3 Íò'’” ÍÙ” ÍÙ–” ÍÚ” ÍÚ” Íó” Íó” Íó” Íó’” ÍÙ” ÍÙ–” ÍÚ” ÍÚ” Íô”" Íô”# Íô”, Íô ’” ÍÙ” ÍÙ–” ÍÚ” ÍÚ” Íõ” Íõ”  Íõ”! Íõ”” ÍÛ” ÍÛ” ÍÛ” ÍÛ–” ÍÛ” ÍÛ” ÍÜ” ÍÜ” ÍÜ” ÍÜ˜” ÍÛ” ÍÛ” Íİ” Íİ” Íİ”& Íİ ”' Íİ!”+ Íİ%–” ÍÛ” ÍÛ” ÍŞ” ÍŞ” ÍŞ”$ ÍŞš” ÍÛ” ÍÛ” Íß” Íß” Íß” Íß”  Íß”" Íß”# Íß”% Íß’” ÍÛ” ÍÛ’” Íá” Íá’” Íâ
+” Íâ–” Íâ
+” Íâ” Íí” Íí” Íí”$ Íí” Íâ
+” Íâ” Íî” Íî”  Íî”" Íî”% Íî”' Íî”( Íî”* Íî”0 Íî#”2 Íî%”3 Íî&”5 Íî(–” Íã” Íã”  Íã”) Íã”* Íã”. Íã–” Íã” Íã” Íä”! Íä”" Íä”$ Íä–” Íã” Íã” Íå”" Íå”# Íå”, Íå"–” Íã” Íã” Íæ”% Íæ”& Íæ”' Íæ’” Íã” Íã›” Íè” Íè”  Íè”) Íè”* Íè”/ Íè ”0 Íè!”7 Íè(”8 Íè)”9 Íè*”: Íè+–” Íè” Íè” Íé”! Íé”" Íé”$ Íé˜” Íè” Íè” Íê”# Íê”$ Íê”. Íê$”/ Íê%”3 Íê)–” Íè” Íè” Íë”" Íë”# Íë”, Íë"’” Íè” Íè’” Íâ
+” Íâ”/ Íá”6 Íá”7 Íá”ÌA Íá"”Ì[ Íï”Ì\ Íï”Ìe Íï%”Ìg Íï'”Ìi Íï)”Ìj Íï*”Ìs Íï3”Ìt Íï4”Ìx Íï8’” Íá” Íá’” ÍÙ” ÍÙ’” ÍÚ” ÍÚ’” Íj” Íj
+‘” Í’” Í” Í	’” Í” Í’”, Í”3 Í”” Í” Í” Í”( Í”” Í	”+ Í	”- Í	”6 Í	$’”  Í”& Í–”  Í”& Í”' Í”, Í”- Í”3 Í™” Í”  Í”! Í”. Í”: Í”ÌB Í#”ÌD Í%”Ì^ Í?”Ì_ ÍÌ@™” Í”  Í”! Í”. Í”: Í”ÌA Í"”ÌC Í$”Ìh ÍÌI”Ìi ÍÌJ™” Í”  Í”! Í”. Í”: Í”ÌB Í#”ÌD Í%”Ìf ÍÌG”Ìg ÍÌH™” Í”  Í”! Í”. Í”: Í”ÌA Í"”ÌC Í$”Ì] Í>”Ì^ Í?™” Í”  Í”! Í”. Í”: Í”? Í ”ÌA Í"”ÌV Í7”ÌW Í8’” Í”" Í”” Í”! Í”# Í”, Í”” Í	”/ Í	”1 Í	”: Í	$’”$ Í”* Í–”$ Í”* Í”+ Í”0 Í”1 Í”7 Í™”  Í”$ Í”% Í”2 Í”> Í”ÌF Í#”ÌH Í%”Ìb Í?”Ìc ÍÌ@™”  Í”$ Í”% Í”2 Í”> Í”ÌE Í"”ÌG Í$”Ìl ÍÌI”Ìm ÍÌJ™”  Í”$ Í”% Í”2 Í”> Í”ÌF Í#”ÌH Í%”Ìj ÍÌG”Ìk ÍÌH™”  Í”$ Í”% Í”2 Í”> Í”ÌE Í"”ÌG Í$”Ìa Í>”Ìb Í?™”  Í”$ Í”% Í”2 Í”> Í”ÌC Í ”ÌE Í"”ÌZ Í7”Ì[ Í8’”  Í”& Í”” Í” Í” Í”( Í”” Í	”+ Í	”- Í	”6 Í	$‘” Í–” Í” Í” Í” Í” Í”$ Í2’” Í” Í–” Í” Í” Í'” Í'
+” Í'” Í'” Í” Í” Í(” Í(” Í(” Í(” Í(” Í(”  Í(”" Í(”( Í(”* Í(”+ Í( ”- Í("’” Í” Í˜” Í” Í” Í$” Í$” Í$”- Í$!”. Í$"”3 Í$'–” Í” Í” Í%” Í%”  Í%”! Í%”” Í” Í” Í” Í–” Í” Í” Í” Í” Í” Í˜” Í” Í” Í” Í” Í”& Í ”' Í!”+ Í%–” Í” Í” Í” Í” Í”$ Í’” Í” Í”” Í” Í” Í”# Í–” Í” Í” Í ” Í ” Í ” Í –” Í” Í” Í!” Í!” Í!”$ Í!š” Í” Í” Í"” Í"” Í"” Í"” Í"” Í"”  Í"”" Í"’” Í” Í’” Í” Í’” Í” Í‘” Í)ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ;‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌĞ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  Ìİ ‘”  ÌŞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìğ ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìı ‘”  Ìş ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Í ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍĞ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  Íİ ‘”  ÍŞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íğ ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íı ‘”  Íş ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ€Ì»‘ÔrK•¤type¥start£end¨imported¥local¯ImportSpecifierÌ‰Ì’ÔrL”¤type¥start£end¤nameªIdentifierÌ‰Ì’©IceNavBarLªIdentifierÌ‰Ì’©IceNavBarÔrM•¤type¥start£end¥value£raw§LiteralÌšÌº¾../common/components/IceNavBarÙ '../common/components/IceNavBar'J±ImportDeclarationÌ½Ìô‘K¯ImportSpecifierÌÆÌÍLªIdentifierÌÆÌÍ§IceCardLªIdentifierÌÆÌÍ§IceCardM§LiteralÌÕÌó¼../common/components/IceCard¾'../common/components/IceCard'

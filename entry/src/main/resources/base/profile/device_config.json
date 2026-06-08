@@ -1,0 +1,152 @@
+{
+  "sm": {
+    "description": "小屏设备配置（手机）",
+    "designWidth": 360,
+    "gridColumns": 4,
+    "fontSize": {
+      "xs": 10,
+      "sm": 12,
+      "md": 14,
+      "lg": 16,
+      "xl": 18,
+      "xxl": 20
+    },
+    "spacing": {
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 20,
+      "xxl": 24
+    },
+    "button": {
+      "height": 48,
+      "minWidth": 80,
+      "borderRadius": 24
+    },
+    "card": {
+      "padding": 16,
+      "borderRadius": 12
+    }
+  },
+  "md": {
+    "description": "中屏设备配置（折叠屏、小平板）",
+    "designWidth": 600,
+    "gridColumns": 8,
+    "fontSize": {
+      "xs": 11,
+      "sm": 13,
+      "md": 15,
+      "lg": 17,
+      "xl": 19,
+      "xxl": 22
+    },
+    "spacing": {
+      "xs": 6,
+      "sm": 10,
+      "md": 14,
+      "lg": 18,
+      "xl": 22,
+      "xxl": 28
+    },
+    "button": {
+      "height": 52,
+      "minWidth": 90,
+      "borderRadius": 26
+    },
+    "card": {
+      "padding": 20,
+      "borderRadius": 14
+    }
+  },
+  "lg": {
+    "description": "大屏设备配置（平板）",
+    "designWidth": 840,
+    "gridColumns": 12,
+    "fontSize": {
+      "xs": 12,
+      "sm": 14,
+      "md": 16,
+      "lg": 18,
+      "xl": 20,
+      "xxl": 24
+    },
+    "spacing": {
+      "xs": 8,
+      "sm": 12,
+      "md": 16,
+      "lg": 20,
+      "xl": 24,
+      "xxl": 32
+    },
+    "button": {
+      "height": 56,
+      "minWidth": 100,
+      "borderRadius": 28
+    },
+    "card": {
+      "padding": 24,
+      "borderRadius": 16
+    }
+  },
+  "xl": {
+    "description": "超大屏设备配置（PC/2in1）",
+    "designWidth": 1440,
+    "gridColumns": 12,
+    "fontSize": {
+      "xs": 13,
+      "sm": 15,
+      "md": 17,
+      "lg": 19,
+      "xl": 22,
+      "xxl": 26
+    },
+    "spacing": {
+      "xs": 10,
+      "sm": 14,
+      "md": 18,
+      "lg": 22,
+      "xl": 28,
+      "xxl": 36
+    },
+    "button": {
+      "height": 60,
+      "minWidth": 110,
+      "borderRadius": 30
+    },
+    "card": {
+      "padding": 28,
+      "borderRadius": 18
+    }
+  },
+  "wearable": {
+    "description": "穿戴设备配置（手表）",
+    "designWidth": 192,
+    "gridColumns": 3,
+    "fontSize": {
+      "xs": 8,
+      "sm": 10,
+      "md": 12,
+      "lg": 14,
+      "xl": 16,
+      "xxl": 18
+    },
+    "spacing": {
+      "xs": 2,
+      "sm": 4,
+      "md": 6,
+      "lg": 8,
+      "xl": 10,
+      "xxl": 12
+    },
+    "button": {
+      "height": 36,
+      "minWidth": 60,
+      "borderRadius": 18
+    },
+    "card": {
+      "padding": 8,
+      "borderRadius": 8
+    }
+  }
+}

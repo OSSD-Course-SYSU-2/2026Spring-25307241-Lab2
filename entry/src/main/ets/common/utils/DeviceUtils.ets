@@ -76,7 +76,9 @@ export class DeviceUtils {
    * 根据设备类型获取合适的间距
    */
   static getSpacing(): number {
-    if (DeviceUtils.isPhone()) {
+    if (DeviceUtils.isWearable()) {
+      return 8; // 手表使用最小间距
+    } else if (DeviceUtils.isPhone()) {
       return 16; // 手机使用较小间距
     } else if (DeviceUtils.isTablet()) {
       return 24; // 平板使用中等间距
@@ -91,7 +93,9 @@ export class DeviceUtils {
    * 根据设备类型获取合适的按钮高度
    */
   static getButtonHeight(): number {
-    if (DeviceUtils.isPhone()) {
+    if (DeviceUtils.isWearable()) {
+      return 36; // 手表使用较小的按钮高度
+    } else if (DeviceUtils.isPhone()) {
       return 48;
     } else if (DeviceUtils.isTablet()) {
       return 56;
@@ -106,7 +110,9 @@ export class DeviceUtils {
    * 根据设备类型获取合适的卡片圆角
    */
   static getCardRadius(): number {
-    if (DeviceUtils.isPhone()) {
+    if (DeviceUtils.isWearable()) {
+      return 8; // 手表使用较小的圆角
+    } else if (DeviceUtils.isPhone()) {
       return 12;
     } else if (DeviceUtils.isTablet()) {
       return 16;
@@ -115,6 +121,30 @@ export class DeviceUtils {
     } else {
       return 12;
     }
+  }
+  
+  /**
+   * 根据设备类型获取合适的字体大小缩放比例
+   */
+  static getFontScale(): number {
+    if (DeviceUtils.isWearable()) {
+      return 0.8; // 手表字体缩小
+    } else if (DeviceUtils.isPhone()) {
+      return 1.0;
+    } else if (DeviceUtils.isTablet()) {
+      return 1.1;
+    } else if (DeviceUtils.is2In1()) {
+      return 1.2;
+    } else {
+      return 1.0;
+    }
+  }
+  
+  /**
+   * 判断是否为小屏设备（手表或手机）
+   */
+  static isSmallScreen(): boolean {
+    return DeviceUtils.isWearable() || DeviceUtils.isPhone();
   }
   
   /**

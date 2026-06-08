@@ -7,6 +7,7 @@ string app_name 0x01000000
 string base_value 0x01000005
 string calculate_total 0x01000006
 string clear 0x01000007
+string distributed_datasync_reason 0x01000033
 string error 0x01000008
 string goe_score 0x01000009
 string main_page_title 0x0100000a
@@ -48,4 +49,5 @@ media ic_equ 0x0100002c
 media ic_min 0x0100002d
 media ic_mul 0x0100002e
 media icon 0x0100002f
+profile device_config 0x01000034
 profile main_pages 0x01000030

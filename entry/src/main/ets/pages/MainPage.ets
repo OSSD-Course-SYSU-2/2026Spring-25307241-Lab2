@@ -82,19 +82,6 @@ struct MainPage {
             'pages/HomePage'
           )
         }
-        
-        // 花样滑冰解谜游戏卡片
-        GridCol({ 
-          span: { sm: 4, md: 4, lg: 6, xl: 6 },
-          offset: { sm: 0, md: 0, lg: 0, xl: 0 }
-        }) {
-          this.CalculatorCard(
-            '⛸️',
-            '花样滑冰解谜',
-            '3×3棋盘解谜游戏',
-            'pages/GameModePage'
-          )
-        }
       }
       .width('100%')
       .padding({ left: this.getSidePadding(), right: this.getSidePadding() })

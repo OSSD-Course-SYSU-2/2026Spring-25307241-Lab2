@@ -1,12 +1,10 @@
 {
   "src": [
-    "pages/MainPage",
-    "pages/HomePage",
-    "pages/GameModePage",
-    "pages/PuzzleGamePage",
-    "pages/LeaderboardPage",
-    "pages/GameHelpPage",
-    "pages/GameTutorialPage",
-    "pages/LevelSelectPage"
+    "pages/EdgeFlowMainPage",
+    "pages/MoveDetailPage",
+    "pages/ScoringSimulatorPage",
+    "pages/ScoreInterpreterPage",
+    "pages/AchievementPage",
+    "pages/HomePage"
   ]
 }

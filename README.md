@@ -1,55 +1,134 @@
-# 多功能计算器应用
-
-## 项目概述
-
-基于HarmonyOS ArkTS开发的多功能计算器应用，包含技术元素计算器和花样滑冰解谜游戏两大功能模块。
-
-![主页面](screenshots/main_page.png)
-
-## 功能特性
-
-### 一、花样滑冰技术元素计算器 ⛸️
-
-基于ISU（国际滑冰联盟）官方评分系统的技术元素计算器，支持：
-- **跳跃元素计算**：1-4周的Toe Loop、Salchow、Loop、Flip、Lutz、Axel
-- **旋转元素计算**：直立旋转、蹲转、驼转、弓身旋转等
-- **步法序列计算**：Level 1-4的步法序列
-- **GOE评分系统**：-5到+5的GOE评分调整
-- **实时得分计算**：基础分值 + GOE调整分 = 最终得分
-- **多元素累加**：支持添加多个技术元素并计算总分
-
-#### 界面展示
+# 冰迹·EdgeFlow - 花样滑冰训练助手
 
 <div align="center">
-  <img src="screenshots/technical_calculator_home.png" width="300" alt="技术元素计算器主界面"/>
-  <p><em>技术元素计算器主界面</em></p>
+
+![HarmonyOS](https://img.shields.io/badge/HarmonyOS-5.0%2B-blue)
+![ArkTS](https://img.shields.io/badge/ArkTS-TypeScript-orange)
+![License](https://img.shields.io/badge/License-Apache%202.0-green)
+
+**专业的花样滑冰训练记录与分析工具**
+
+[功能介绍](#功能介绍) • [截图展示](#截图展示) • [快速开始](#快速开始) • [技术架构](#技术架构)
+
 </div>
 
-<div align="center">
-  <img src="screenshots/technical_element_select.png" width="300" alt="元素选择"/>
-  <img src="screenshots/technical_goe_select.png" width="300" alt="GOE选择"/>
-  <p><em>元素选择与GOE评分</em></p>
-</div>
+---
 
-#### 使用说明
+## 📖 项目简介
 
-1. 在主页面选择"技术元素计算器"
-2. 选择技术元素类型（跳跃/旋转/步法）
-3. 从列表中选择具体的技术元素
-4. 选择GOE评分（-5到+5）
-5. 查看计算结果并点击"添加元素"
-6. 继续添加其他元素或查看总分
+**冰迹·EdgeFlow** 是一款基于 HarmonyOS 开发的花样滑冰训练辅助应用，为花滑爱好者提供全方位的训练记录、技术分析、计分模拟等功能。应用采用多设备适配设计，支持手机、平板、2in1设备、智能手表等多种设备形态。
 
-#### 计算规则
+### 核心特性
 
-- **基础分值**：根据ISU官方技术手册确定
-- **GOE调整分** = GOE × 基础分值 × 0.1
-- **最终得分** = 基础分值 + GOE调整分
-- **技术分总分** = 所有技术元素得分之和
+- 🎯 **训练计时** - 精确记录训练时长与动作组合
+- 📊 **数据分析** - 可视化统计训练成果与进步曲线
+- ⛸️ **动作库管理** - 完整的花滑动作库与自定义扩展
+- 📰 **资讯聚合** - 实时花滑新闻与科普知识
+- 🏆 **计分模拟** - 基于ISU规则的官方计分系统
+- 📱 **多设备适配** - 响应式布局，支持多种设备形态
+- 🔄 **跨设备流转** - HarmonyOS分布式能力，无缝切换设备
+
+---
+
+## 🎯 功能介绍
+
+### 一、训练台（首页）
+
+训练台是应用的核心功能模块，提供完整的训练记录与管理功能。
+
+#### 主要功能
+
+| 功能 | 描述 |
+|------|------|
+| **计时训练** | 实时计时、暂停、结束训练 |
+| **动作选择** | 选择本次训练的动作组合（跳跃/旋转/步法） |
+| **疲劳度计算** | 根据动作类型自动计算训练疲劳度 |
+| **历史记录** | 查看今日训练历史，支持删除记录 |
+| **周训练计划** | 制定每周训练计划，设置每日目标 |
+
+#### 支持的动作类型
+
+- **跳跃动作**：1A-4A, 1Lz-3Lz, 1F-3F, 1Lo-3Lo, 1S-3S, 1T-3T
+- **旋转动作**：USp, SSp, CSp, LSp, CCoSp
+- **步法序列**：StSq, CiSt, RoLi, SlSt
+
+---
+
+### 二、动作库
+
+技战术档案与笔记沉淀中心，帮助用户系统管理花滑技术动作。
+
+#### 功能特性
+
+- ✅ **分类浏览** - 按跳跃/旋转/步法分类查看
+- ✅ **掌握度评级** - S/A/B/C四级掌握度标记
+- ✅ **搜索筛选** - 快速搜索动作名称或缩写
+- ✅ **自定义动作** - 添加个人动作笔记与要点
+- ✅ **详情查看** - 查看练习历史时间轴与动作要点
+
+---
+
+### 三、冰闻
+
+每日新闻与科普聚合页，紧跟花滑圈动态。
+
+#### 内容模块
+
+| 模块 | 内容 |
+|------|------|
+| **热点Banner** | 轮播展示重要花滑新闻 |
+| **每日知识** | 每日一条花滑知识问答 |
+| **今日赛程** | 显示即将开始的比赛信息 |
+| **新闻列表** | 赛事、选手、规则等多类新闻 |
+| **科普专栏** | 技术解剖、装备保养、体能训练、运动康复 |
+
+---
+
+### 四、成就
+
+数据可视化统计页面，直观展示训练成果。
+
+#### 统计维度
+
+- 📈 **总冰时** - 累计训练时长统计
+- 🎯 **总训练次数** - 累计训练场次
+- 📊 **动作类型分布** - 跳跃/旋转/步法训练比例
+- 🏆 **高频动作TOP8** - 柱状图展示最常练习的动作
+- 📅 **每日练习热力图** - 30天训练方块展示（类似GitHub贡献图）
+
+---
+
+### 五、我的
+
+个人中心，管理装备、歌单与设置。
+
+#### 管理功能
+
+- ⛸️ **装备管理** - 冰鞋、冰刀使用时长追踪与磨刀提醒
+- 🎵 **训练歌单** - 短节目/自由滑音乐管理
+- ⚙️ **训练设置** - 计时提醒、音乐绑定配置
+- 🔔 **通知设置** - 磨刀提醒、训练提醒
+- 📊 **数据管理** - 导出、备份、清除数据
+- 🎨 **主题设置** - 冰蓝、极光、深空主题切换
+
+---
+
+### 六、计分模拟器
+
+复刻ISU官方计分规则，帮助理解花滑评分系统。
+
+#### 计分功能
+
+- 📝 **节目类型选择** - 短节目(SP) / 自由滑(FS)
+- 🎯 **技术元素添加** - 跳跃、旋转、步法序列
+- 📊 **GOE评分** - -5到+5的执行等级评分
+- 💯 **PCS输入** - 五大节目内容分（手表端隐藏）
+- 📈 **实时计算** - 自动计算TES、PCS、总分
 
 #### 支持的技术元素
 
-**跳跃元素（基础分值）**
+**跳跃元素（基础分值示例）**
+
 | 元素 | 1周 | 2周 | 3周 | 4周 |
 |------|-----|-----|-----|-----|
 | Toe Loop (T) | 0.40 | 1.30 | 3.00 | 5.40 |
@@ -59,323 +138,287 @@
 | Lutz (Lz) | 0.60 | 2.10 | 5.00 | 6.60 |
 | Axel (A) | 1.10 | 3.30 | 6.40 | 8.50 |
 
-**旋转元素（基础分值）**
-| 元素 | Level 1 | Level 2 | Level 3 | Level 4 |
-|------|---------|---------|---------|---------|
-| Upright Spin (USp) | 1.50 | 2.00 | 2.50 | 3.00 |
-| Sit Spin (SSp) | 1.70 | 2.50 | 3.00 | 3.50 |
-| Camel Spin (CSp) | 1.80 | 2.50 | 3.00 | 3.50 |
-| Layback Spin (LSp) | 1.70 | 2.50 | 3.00 | 3.50 |
+---
 
-**步法序列（基础分值）**
-| 元素 | Level 1 | Level 2 | Level 3 | Level 4 |
-|------|---------|---------|---------|---------|
-| Step Sequence (StSq) | 1.50 | 2.00 | 2.50 | 3.00 |
+### 七、打分解读
+
+输入分数，自动拆解技术分与内容分，深入理解评分构成。
+
+#### 功能特点
+
+- 📊 **分数拆解** - 输入总分，自动拆解TES与PCS
+- 📋 **元素分析** - 展示每个技术元素的得分详情
+- 🎭 **节目内容分** - 五大项评分明细
+- 💡 **评分知识** - ISU评分规则科普
 
 ---
 
-### 二、花样滑冰解谜游戏 ⛸️
+### 八、多设备自由流转 📱⇄📟
 
-基于花样滑冰主题的3×3棋盘解谜游戏，包含以下功能模块：
+应用支持在手机和平板等不同设备上自由运行，界面自动适配设备屏幕，提供一致的用户体验。
 
-#### 游戏模式选择
+#### 设备适配能力
 
-<div align="center">
-  <img src="screenshots/game_mode.png" width="300" alt="游戏模式选择"/>
-  <p><em>游戏模式选择页面</em></p>
-</div>
+| 设备类型 | 适配特点 |
+|----------|----------|
+| 📱 **手机** | 单列布局，适合单手操作，紧凑的界面设计 |
+| 📟 **平板** | 多列布局，充分利用大屏空间，更丰富的信息展示 |
+| ⌚ **手表** | 简化界面，核心功能优先，适合快速查看 |
 
-#### 2.1 关卡模式 🎯
+#### 自由流转场景
 
-- 从简单到困难的渐进式关卡设计
-- 6个难度等级：教程、简单、普通、困难、专家、大师
-- 每个关卡有独特的目标图案
-- 关卡进度保存和解锁机制
+**场景一：手机端使用**
+- 适合移动场景，随时记录训练
+- 单手操作便捷
+- 紧凑高效的界面布局
 
-<div align="center">
-  <img src="screenshots/level_select.png" width="300" alt="关卡选择"/>
-  <p><em>关卡选择页面</em></p>
-</div>
+**场景二：平板端使用**
+- 大屏展示更多训练数据
+- 多列布局信息一目了然
+- 适合深度分析和规划
 
-#### 2.2 新手教程 📖
-
-- 自动演示游戏玩法
-- 分步骤讲解游戏规则
-- 交互式教学体验
-- 快速上手指导
-
-<div align="center">
-  <img src="screenshots/tutorial_page.png" width="300" alt="新手教程"/>
-  <p><em>新手教程页面</em></p>
-</div>
-
-> **💡 提示**：新手教程支持自动演示游戏玩法，建议录制GIF动图或视频展示教程流程。详见 `VIDEO_EMBED_GUIDE.md`
-
-#### 2.3 经典模式 🎮
-
-- 随机生成关卡
-- 自由练习模式
-- 无时间限制
-- 适合熟悉游戏机制
-
-<div align="center">
-  <img src="screenshots/classic_mode.png" width="300" alt="经典模式"/>
-  <p><em>经典模式界面</em></p>
-</div>
-
-#### 2.4 每日挑战 🏆
-
-- 每日更新的固定关卡
-- 全球玩家排名竞争
-- 限时挑战机制
-- 丰厚奖励系统
-
-<div align="center">
-  <img src="screenshots/daily_challenge.png" width="300" alt="每日挑战"/>
-  <p><em>每日挑战界面</em></p>
-</div>
-
-#### 2.5 排行榜 📊
-
-- 全球排名展示
-- 今日排名筛选
-- 成绩详情查看
-- 排名图标和奖牌展示
-
-<div align="center">
-  <img src="screenshots/leaderboard.png" width="300" alt="排行榜"/>
-  <p><em>排行榜页面</em></p>
-</div>
-
-#### 2.6 游戏帮助 ❓
-
-- 详细的游戏规则说明
-- 15种动作卡牌介绍
-- 评分机制说明
-- 游戏模式介绍
-
-<div align="center">
-  <img src="screenshots/game_help.png" width="300" alt="游戏帮助"/>
-  <p><em>游戏帮助页面</em></p>
-</div>
+**场景三：设备切换**
+- 数据自动同步
+- 界面自动适配
+- 无缝切换体验
 
 ---
 
-### 核心玩法展示
+## 📸 截图展示
 
-#### 游戏主界面
-
-<div align="center">
-  <img src="screenshots/puzzle_game.png" width="300" alt="解谜游戏主界面"/>
-  <p><em>解谜游戏主界面</em></p>
-</div>
-
-#### 棋盘系统
+### 主界面截图
 
 <div align="center">
-  <img src="screenshots/game_board.png" width="300" alt="3×3棋盘"/>
-  <p><em>3×3滑冰场地棋盘</em></p>
+
+| 训练台 | 动作库 | 冰闻 |
+|:------:|:------:|:------:|
+| <img src="screenshots/training_home.png" width="250" alt="训练台"/> | <img src="screenshots/move_library.png" width="250" alt="动作库"/> | <img src="screenshots/ice_news.png" width="250" alt="冰闻"/> |
+
+| 成就 | 我的 | 计分模拟器 |
+|:------:|:------:|:------:|
+| <img src="screenshots/achievement.png" width="250" alt="成就"/> | <img src="screenshots/profile.png" width="250" alt="我的"/> | <img src="screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
+
 </div>
 
-**棋盘说明：**
-- 3×3的滑冰场地，每个格子放置不同奖牌
-- 🥇 金牌、🥈 银牌、🥉 铜牌
-- 需要通过动作卡牌改变棋盘状态
-
-#### 动作卡牌系统
+### 功能详情截图
 
 <div align="center">
-  <img src="screenshots/action_cards.png" width="300" alt="动作卡牌"/>
-  <p><em>动作卡牌展示</em></p>
+
+| 训练计时中 | 历史记录 | 周训练计划 |
+|:----------:|:--------:|:----------:|
+| <img src="screenshots/training_running.png" width="250" alt="训练计时中"/> | <img src="screenshots/training_history.png" width="250" alt="历史记录"/> | <img src="screenshots/weekly_plan.png" width="250" alt="周训练计划"/> |
+
+| 动作详情 | 动作筛选 | 添加自定义动作 |
+|:--------:|:--------:|:--------------:|
+| <img src="screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="screenshots/move_filter.png" width="250" alt="动作筛选"/> | <img src="screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
+
+| 新闻详情 | 科普文章 | 打分解读 |
+|:--------:|:--------:|:--------:|
+| <img src="screenshots/news_detail.png" width="250" alt="新闻详情"/> | <img src="screenshots/science_article.png" width="250" alt="科普文章"/> | <img src="screenshots/score_interpreter.png" width="250" alt="打分解读"/> |
+
 </div>
 
-#### 目标图案系统
+### 多设备适配截图（自由流转）
 
 <div align="center">
-  <img src="screenshots/target_pattern.png" width="300" alt="目标图案"/>
-  <p><em>目标图案展示</em></p>
+
+| 手机端 - 训练台 | 平板端 - 训练台 | 手机端 - 成就页 |
+|:---------------:|:---------------:|:---------------:|
+| <img src="screenshots/device_phone.png" width="200" alt="手机端训练台"/> | <img src="screenshots/device_tablet.png" width="280" alt="平板端训练台"/> | <img src="screenshots/device_phone_achievement.png" width="200" alt="手机端成就页"/> |
+
+| 平板端 - 成就页 | 手机端 - 动作库 | 平板端 - 动作库 |
+|:---------------:|:---------------:|:---------------:|
+| <img src="screenshots/device_tablet_achievement.png" width="280" alt="平板端成就页"/> | <img src="screenshots/device_phone_moves.png" width="200" alt="手机端动作库"/> | <img src="screenshots/device_tablet_moves.png" width="280" alt="平板端动作库"/> |
+
 </div>
 
-#### 关卡完成
-
-<div align="center">
-  <img src="screenshots/level_complete.png" width="300" alt="关卡完成"/>
-  <p><em>关卡完成界面</em></p>
-</div>
+**自由流转说明：**
+- 📱 手机端：单列布局，紧凑高效
+- 📟 平板端：多列布局，信息丰富
+- 🔄 同一应用在不同设备上自动适配界面
+- ✅ 数据同步，无缝切换
 
 ---
 
-### 动作卡牌类型详解
+## 🚀 快速开始
 
-游戏包含15种动作卡牌，每种代表不同的花样滑冰动作：
-
-| 卡牌类型 | 图标 | 功能描述 | 消耗步数 |
-|---------|------|----------|---------|
-| Spin（旋转） | 🔄 | 翻转整列奖牌 | 2 |
-| Jump（跳跃） | 🦘 | 交换两堆奖牌 | 3 |
-| Pose（姿势） | 💃 | 堆叠相邻奖牌 | 2 |
-| Step Sequence（步法序列） | 👟 | 移动奖牌位置 | 2 |
-| Spiral（螺旋） | 🌀 | 旋转奖牌方向 | 3 |
-| Lift（托举） | 🤼 | 提升奖牌等级 | 4 |
-| Twizzle（旋转步） | 💫 | 快速旋转 | 2 |
-| Combination（组合） | 🔀 | 组合动作 | 3 |
-| Transition（过渡） | ➡️ | 平滑移动 | 1 |
-| Spin Combination（旋转组合） | 🌀🔄 | 多次旋转 | 4 |
-| Jump Combination（跳跃组合） | 🦘🦘 | 连续跳跃 | 5 |
-| Change Edge（变刃） | ↔️ | 改变方向 | 2 |
-| Spread Eagle（展翅） | 🦅 | 扩展范围 | 3 |
-| Ina Bauer（伊娜鲍尔） | ⛸️ | 特殊姿势 | 3 |
-| Cantilever（悬臂） | ⚖️ | 平衡动作 | 4 |
-
----
-
-## 项目结构
-
-```
-entry/src/main/ets/
-├── pages/
-│   ├── MainPage.ets              # 主页面（功能选择）
-│   ├── HomePage.ets              # 普通计算器页面
-│   ├── GameModePage.ets          # 游戏模式选择页面
-│   ├── LevelSelectPage.ets       # 关卡选择页面
-│   ├── PuzzleGamePage.ets        # 解谜游戏主页面
-│   ├── GameTutorialPage.ets      # 新手教程页面
-│   ├── LeaderboardPage.ets       # 排行榜页面
-│   └── GameHelpPage.ets          # 游戏帮助页面
-├── viewmodel/
-│   ├── PressKeysItem.ets         # 按键数据模型
-│   ├── PresskeysViewModel.ets    # 按键视图模型
-│   ├── PuzzleGameModel.ets       # 解谜游戏数据模型
-│   ├── LevelModel.ets            # 关卡数据模型
-│   └── LevelData.ets             # 关卡配置数据
-└── common/
-    ├── constants/
-    │   └── CommonConstants.ets   # 公共常量
-    └── util/
-        ├── CalculateUtil.ets     # 计算工具
-        ├── CheckEmptyUtil.ets    # 空值检查工具
-        ├── Logger.ets            # 日志工具
-        ├── PuzzleGameEngine.ets  # 解谜游戏引擎
-        ├── LeaderboardManager.ets# 排行榜管理器
-        └── DataExporter.ets      # 数据导出工具
-```
-
----
-
-## 技术实现
-
-### 核心技术
-
-- **HarmonyOS SDK** - 原生应用开发框架
-- **ArkTS语言** - TypeScript的扩展语言
-- **ArkUI组件** - 声明式UI开发
-- **状态管理** - @State、@Prop装饰器
-
-### 关键特性
-
-- **ForEach循环渲染** - 动态列表渲染
-- **TextInput组件** - 表达式输入
-- **Image组件** - 图形显示
-- **路由导航** - 页面跳转管理
-- **数据持久化** - 本地数据存储
-
-### 游戏引擎架构
-
-```typescript
-// 游戏状态管理
-class PuzzleGameEngine {
-  initializeGame(mode: GameMode)  // 初始化游戏
-  startGame()                     // 开始游戏
-  executeAction(card, params)     // 执行动作
-  checkCompletion()               // 检查完成
-  calculateScore()                // 计算得分
-}
-```
-
----
-
-## 开发环境
-
-### 基础要求
+### 环境要求
 
 | 项目 | 版本要求 |
-|-----|---------|
+|------|----------|
 | HarmonyOS | HarmonyOS 5.0.5 Release 或更高版本 |
 | DevEco Studio | DevEco Studio 6.0.2 Release 或更高版本 |
 | HarmonyOS SDK | HarmonyOS 6.0.2 Release SDK 或更高版本 |
 
 ### 支持设备
 
-- 华为手机（标准系统）
+- 📱 华为手机（标准系统）
+- 📟 华为平板
+- 💻 2in1设备
+- ⌚ 华为智能手表
+
+### 安装运行
+
+1. **克隆项目**
+   ```bash
+   git clone <repository-url>
+   cd SimpleCalculator-master
+   ```
+
+2. **打开项目**
+   - 使用 DevEco Studio 打开项目根目录
+   - 等待项目同步完成
+
+3. **运行应用**
+   - 连接 HarmonyOS 设备或启动模拟器
+   - 点击运行按钮安装应用
 
 ---
 
-## 使用指南
+## 🏗️ 技术架构
 
-### 快速开始
+### 项目结构
 
-1. 启动应用后显示主页面
-2. 选择"普通计算器"或"花样滑冰解谜"
-3. 根据选择的模式进入相应功能
-
-### 解谜游戏流程
-
-```mermaid
-graph TD
-    A[启动应用] --> B[选择游戏模式]
-    B --> C{首次游玩?}
-    C -->|是| D[查看新手教程]
-    C -->|否| E[直接开始游戏]
-    D --> E
-    E --> F[查看目标图案]
-    F --> G[选择动作卡牌]
-    G --> H[点击棋盘位置]
-    H --> I{是否完成目标?}
-    I -->|否| G
-    I -->|是| J[关卡完成]
-    J --> K[查看排名]
+```
+entry/src/main/
+├── ets/
+│   ├── pages/                    # 页面组件
+│   │   ├── EdgeFlowMainPage.ets  # 主导航页面（底部五Tab）
+│   │   ├── MoveLibraryPage.ets   # 动作库页面
+│   │   ├── IceNewsPage.ets       # 冰闻页面
+│   │   ├── AchievementPage.ets   # 成就页面
+│   │   ├── ProfilePage.ets       # 我的页面
+│   │   ├── ScoringSimulatorPage.ets  # 计分模拟器
+│   │   ├── ScoreInterpreterPage.ets  # 打分解读
+│   │   └── MoveDetailPage.ets    # 动作详情页
+│   ├── common/
+│   │   ├── components/           # 公共组件
+│   │   │   ├── IceNavBar.ets     # 导航栏组件
+│   │   │   ├── IceCard.ets       # 卡片组件
+│   │   │   ├── IceTag.ets        # 标签组件
+│   │   │   ├── IceFilterBar.ets  # 筛选栏组件
+│   │   │   ├── IceSearchBar.ets  # 搜索栏组件
+│   │   │   ├── IceLoading.ets    # 加载组件
+│   │   │   └── IceEmpty.ets      # 空状态组件
+│   │   ├── constants/            # 常量定义
+│   │   └── utils/                # 工具类
+│   │       ├── DeviceUtils.ets   # 设备适配工具
+│   │       ├── ResponsiveLayout.ets  # 响应式布局
+│   │       └── BreakpointSystem.ets  # 断点系统
+│   ├── models/                   # 数据模型
+│   │   └── IceTraceData.ets      # 核心数据结构
+│   ├── services/                 # 服务层
+│   │   ├── DataStore.ets         # 数据存储服务
+│   │   └── DistributedDataManager.ets  # 分布式数据管理
+│   ├── viewmodel/                # 视图模型
+│   │   ├── TechnicalElementModel.ets  # 技术元素模型
+│   │   └── PageModels.ets        # 页面数据模型
+│   └── utils/                    # 工具类
+│       └── TestDataGenerator.ets # 测试数据生成器
+├── resources/                    # 资源文件
+│   ├── base/
+│   │   ├── element/              # 字符串、颜色等资源
+│   │   ├── media/                # 图片资源
+│   │   └── profile/              # 配置文件
+│   │       └── main_pages.json   # 页面路由配置
+└── module.json5                  # 模块配置
 ```
 
-### 游戏技巧
+### 核心技术
 
-- 🎯 **仔细观察目标图案**，规划最优路径
-- 🃏 **合理使用卡牌**，不同卡牌有不同效果
-- ⏱️ **注意步数限制**，追求高分
-- 🎮 **多练习经典模式**，熟悉各种卡牌效果
-- 📊 **查看排行榜**，学习高手策略
+| 技术 | 应用场景 |
+|------|----------|
+| **ArkTS** | 应用开发语言，TypeScript扩展 |
+| **ArkUI** | 声明式UI开发框架 |
+| **@State/@Prop** | 状态管理与数据传递 |
+| **LocalStorage** | 本地数据持久化 |
+| **分布式数据** | 多设备数据同步 |
+| **响应式布局** | 多设备适配 |
 
----
+### 设计模式
 
-## 版本信息
-
-| 项目 | 内容 |
-|-----|------|
-| 版本 | 1.0.0 |
-| 更新日期 | 2024 |
-| 开发者 | 基于SimpleCalculator项目扩展 |
-
----
-
-## 许可证
-
-Apache License 2.0
+- **单例模式** - DataStore数据存储服务
+- **MVVM架构** - 页面与数据分离
+- **组件化设计** - 可复用UI组件库
 
 ---
 
-## 贡献指南
+## 📋 权限说明
 
-欢迎提交Issue和Pull Request来帮助改进这个项目！
+应用需要以下权限：
 
-### 如何贡献
+| 权限 | 类型 | 用途 |
+|------|------|------|
+| `ohos.permission.DISTRIBUTED_DATASYNC` | system_grant | 分布式数据同步，支持多设备数据同步 |
+
+---
+
+## 🎨 设计规范
+
+### 配色方案
+
+- **主色调**：冰蓝色系 (#4FC3F7, #29B6F6, #03A9F4)
+- **辅助色**：渐变紫 (#667eea, #764ba2)
+- **强调色**：活力橙 (#FF6B6B)
+- **背景色**：浅灰 (#F5F5F5)
+
+### 设计原则
+
+- 遵循 HarmonyOS Design Language
+- 卡片式布局，层次分明
+- 冰雪主题视觉元素
+- 流畅的动画过渡
+
+---
+
+## 📝 更新日志
+
+### v1.0.0 (2024)
+
+**新增功能**
+- ✨ 训练计时与记录功能
+- ✨ 动作库管理系统
+- ✨ 冰闻资讯聚合
+- ✨ 成就数据统计
+- ✨ 计分模拟器
+- ✨ 打分解读工具
+- ✨ 多设备适配（手机、平板、手表）
+- ✨ 自由流转（界面自动适配不同设备）
+
+---
+
+## 🤝 贡献指南
+
+欢迎提交 Issue 和 Pull Request 来帮助改进这个项目！
+
+### 贡献流程
 
 1. Fork 本仓库
-2. 创建新的功能分支 (`git checkout -b feature/AmazingFeature`)
+2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 提交 Pull Request
 
 ---
 
-**注意**: 本项目仅供学习和演示使用，基于HarmonyOS官方示例SimpleCalculator扩展开发。
+## 📄 许可证
 
-**截图说明**: 请将实际的界面截图保存到 `screenshots/` 文件夹中，并确保文件名与README中引用的路径一致。详细的截图需求列表请查看 `screenshots/README.md`。
+本项目基于 [Apache License 2.0](LICENSE) 许可证开源。
+
+---
+
+## 🙏 致谢
+
+- 感谢 HarmonyOS 官方提供的开发框架与文档
+- 感谢 ISU（国际滑冰联盟）提供的官方评分规则
+- 感谢所有贡献者的支持
+
+---
+
+<div align="center">
+
+**⛸️ 冰迹·EdgeFlow - 记录每一次冰上足迹**
+
+Made with ❤️ for Figure Skating
+
+</div>

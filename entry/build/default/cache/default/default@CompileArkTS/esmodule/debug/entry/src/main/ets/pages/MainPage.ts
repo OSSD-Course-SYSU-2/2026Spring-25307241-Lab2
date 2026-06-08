@@ -125,16 +125,6 @@ class MainPage extends ViewPU {
         this.CalculatorCard.bind(this)('⛸️', '技术元素计算器', '计算跳跃、旋转、步法得分', 'pages/HomePage');
         // 技术元素计算器卡片
         GridCol.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 花样滑冰解谜游戏卡片
-            GridCol.create({
-                span: { sm: 4, md: 4, lg: 6, xl: 6 },
-                offset: { sm: 0, md: 0, lg: 0, xl: 0 }
-            });
-        }, GridCol);
-        this.CalculatorCard.bind(this)('⛸️', '花样滑冰解谜', '3×3棋盘解谜游戏', 'pages/GameModePage');
-        // 花样滑冰解谜游戏卡片
-        GridCol.pop();
         // 计算器选择区域 - 使用栅格布局实现响应式
         GridRow.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {

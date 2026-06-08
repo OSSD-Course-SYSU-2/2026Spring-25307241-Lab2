@@ -1,0 +1,1437 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚˆ[if (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/**
+ * å†°è¿¹èŠ±æ»‘ - è®¡åˆ†æ¨¡æ‹Ÿå™¨
+ * å¤åˆ»ISUå®˜æ–¹è®¡åˆ†è§„åˆ™
+ * æ”¯æŒå¤šè®¾å¤‡é€‚é…
+ */
+import { IceNavBar } from '../common/components/IceNavBar';
+import { createTechnicalElement, getAllJumps, getAllSpins, getAllSteps } from '../viewmodel/TechnicalElementModel';
+import { DeviceUtils } from '../common/utils/DeviceUtils';
+class ScoringSimulatorPage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__elements = new ObservedPropertyObjectPU([], this, "elements");
+        this.__selectedType = new ObservedPropertySimplePU('jump', this, "selectedType");
+        this.__selectedElement = new ObservedPropertySimplePU('', this, "selectedElement");
+        this.__selectedGOE = new ObservedPropertySimplePU(0, this, "selectedGOE");
+        this.__totalTES = new ObservedPropertySimplePU(0, this, "totalTES");
+        this.__totalPCS = new ObservedPropertySimplePU(0, this, "totalPCS");
+        this.__programType = new ObservedPropertySimplePU('SP', this, "programType");
+        this.jumps = getAllJumps();
+        this.spins = getAllSpins();
+        this.steps = getAllSteps();
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.elements !== undefined) {
+            this.elements = params.elements;
+        }
+        if (params.selectedType !== undefined) {
+            this.selectedType = params.selectedType;
+        }
+        if (params.selectedElement !== undefined) {
+            this.selectedElement = params.selectedElement;
+        }
+        if (params.selectedGOE !== undefined) {
+            this.selectedGOE = params.selectedGOE;
+        }
+        if (params.totalTES !== undefined) {
+            this.totalTES = params.totalTES;
+        }
+        if (params.totalPCS !== undefined) {
+            this.totalPCS = params.totalPCS;
+        }
+        if (params.programType !== undefined) {
+            this.programType = params.programType;
+        }
+        if (params.jumps !== undefined) {
+            this.jumps = params.jumps;
+        }
+        if (params.spins !== undefined) {
+            this.spins = params.spins;
+        }
+        if (params.steps !== undefined) {
+            this.steps = params.steps;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__elements.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedType.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedElement.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedGOE.purgeDependencyOnElmtId(rmElmtId);
+        this.__totalTES.purgeDependencyOnElmtId(rmElmtId);
+        this.__totalPCS.purgeDependencyOnElmtId(rmElmtId);
+        this.__programType.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__elements.aboutToBeDeleted();
+        this.__selectedType.aboutToBeDeleted();
+        this.__selectedElement.aboutToBeDeleted();
+        this.__selectedGOE.aboutToBeDeleted();
+        this.__totalTES.aboutToBeDeleted();
+        this.__totalPCS.aboutToBeDeleted();
+        this.__programType.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get elements() {
+        return this.__elements.get();
+    }
+    set elements(newValue) {
+        this.__elements.set(newValue);
+    }
+    get selectedType() {
+        return this.__selectedType.get();
+    }
+    set selectedType(newValue) {
+        this.__selectedType.set(newValue);
+    }
+    get selectedElement() {
+        return this.__selectedElement.get();
+    }
+    set selectedElement(newValue) {
+        this.__selectedElement.set(newValue);
+    }
+    get selectedGOE() {
+        return this.__selectedGOE.get();
+    }
+    set selectedGOE(newValue) {
+        this.__selectedGOE.set(newValue);
+    }
+    get totalTES() {
+        return this.__totalTES.get();
+    }
+    set totalTES(newValue) {
+        this.__totalTES.set(newValue);
+    }
+    get totalPCS() {
+        return this.__totalPCS.get();
+    }
+    set totalPCS(newValue) {
+        this.__totalPCS.set(newValue);
+    }
+    get programType() {
+        return this.__programType.get();
+    }
+    set programType(newValue) {
+        this.__programType.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.backgroundColor('#F5F5F5');
+        }, Column);
+        {
+            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                if (isInitialRender) {
+                    let componentCall = new 
+                    // å¯¼èˆªæ 
+                    IceNavBar(this, {
+                        title: 'è®¡åˆ†æ¨¡æ‹Ÿå™¨',
+                        showBack: true,
+                        navBackgroundColor: '#4FC3F7'
+                    }, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/ScoringSimulatorPage.ets", line: 31, col: 7 });
+                    ViewPU.create(componentCall);
+                    let paramsLambda = () => {
+                        return {
+                            title: 'è®¡åˆ†æ¨¡æ‹Ÿå™¨',
+                            showBack: true,
+                            navBackgroundColor: '#4FC3F7'
+                        };
+                    };
+                    componentCall.paramsGenerator_ = paramsLambda;
+                }
+                else {
+                    this.updateStateVarsOfChildByElmtId(elmtId, {
+                        title: 'è®¡åˆ†æ¨¡æ‹Ÿå™¨',
+                        showBack: true,
+                        navBackgroundColor: '#4FC3F7'
+                    });
+                }
+            }, { name: "IceNavBar" });
+        }
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // å†…å®¹åŒº
+            Scroll.create();
+            // å†…å®¹åŒº
+            Scroll.layoutWeight(1);
+            // å†…å®¹åŒº
+            Scroll.scrollBar(BarState.Auto);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(DeviceUtils.isWearable() ? 8 : 16);
+        }, Column);
+        // èŠ‚ç›®ç±»åž‹é€‰æ‹©
+        this.buildProgramTypeSelector.bind(this)();
+        // åŠ¨ä½œæ·»åŠ åŒº
+        this.buildElementAdder.bind(this)();
+        // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+        this.buildElementList.bind(this)();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // PCSè¾“å…¥åŒºï¼ˆæ‰‹è¡¨ç«¯éšè—ï¼‰
+            if (!DeviceUtils.isWearable()) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.buildPCSInput.bind(this)();
+                });
+            }
+            // æ€»åˆ†æ˜¾ç¤º
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        // æ€»åˆ†æ˜¾ç¤º
+        this.buildTotalScore.bind(this)();
+        Column.pop();
+        // å†…å®¹åŒº
+        Scroll.pop();
+        Column.pop();
+    }
+    // èŠ‚ç›®ç±»åž‹é€‰æ‹©
+    buildProgramTypeSelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.margin({ bottom: DeviceUtils.isWearable() ? 10 : 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('çŸ­èŠ‚ç›® (SP)');
+            Button.layoutWeight(1);
+            Button.height(DeviceUtils.isWearable() ? 32 : 40);
+            Button.backgroundColor(this.programType === 'SP' ? '#4FC3F7' : '#FFFFFF');
+            Button.fontColor(this.programType === 'SP' ? '#FFFFFF' : '#666666');
+            Button.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Button.borderRadius(DeviceUtils.isWearable() ? 16 : 20);
+            Button.onClick(() => {
+                this.programType = 'SP';
+            });
+        }, Button);
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('è‡ªç”±æ»‘ (FS)');
+            Button.layoutWeight(1);
+            Button.height(DeviceUtils.isWearable() ? 32 : 40);
+            Button.backgroundColor(this.programType === 'FS' ? '#4FC3F7' : '#FFFFFF');
+            Button.fontColor(this.programType === 'FS' ? '#FFFFFF' : '#666666');
+            Button.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Button.borderRadius(DeviceUtils.isWearable() ? 16 : 20);
+            Button.margin({ left: DeviceUtils.isWearable() ? 6 : 12 });
+            Button.onClick(() => {
+                this.programType = 'FS';
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
+    }
+    // åŠ¨ä½œæ·»åŠ å™¨
+    buildElementAdder(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(DeviceUtils.isWearable() ? 10 : 16);
+            Column.backgroundColor('#FFFFFF');
+            Column.borderRadius(DeviceUtils.isWearable() ? 8 : 12);
+            Column.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ·»åŠ åŠ¨ä½œ');
+            Text.fontSize(DeviceUtils.isWearable() ? 14 : 16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // ç±»åž‹é€‰æ‹©
+            Row.create();
+            // ç±»åž‹é€‰æ‹©
+            Row.width('100%');
+            // ç±»åž‹é€‰æ‹©
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+            // ç±»åž‹é€‰æ‹©
+            Row.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+        }, Row);
+        this.TypeButton.bind(this)('è·³è·ƒ', 'jump', 'ðŸ¦˜');
+        this.TypeButton.bind(this)('æ—‹è½¬', 'spin', 'ðŸ”„');
+        this.TypeButton.bind(this)('æ­¥æ³•', 'step', 'ðŸ‘Ÿ');
+        // ç±»åž‹é€‰æ‹©
+        Row.pop();
+        // åŠ¨ä½œé€‰æ‹©
+        this.buildElementSelector.bind(this)();
+        // GOEé€‰æ‹©
+        this.buildGOESelector.bind(this)();
+        // æ·»åŠ æŒ‰é’®
+        this.buildAddButton.bind(this)();
+        Column.pop();
+    }
+    TypeButton(name, type, icon, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(DeviceUtils.isWearable() ? 55 : 70);
+            Column.height(DeviceUtils.isWearable() ? 45 : 60);
+            Column.backgroundColor(this.selectedType === type ? '#E3F2FD' : '#F5F5F5');
+            Column.borderRadius(DeviceUtils.isWearable() ? 8 : 12);
+            Column.justifyContent(FlexAlign.Center);
+            Column.onClick(() => {
+                this.selectedType = type;
+                this.selectedElement = '';
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(icon);
+            Text.fontSize(DeviceUtils.isWearable() ? 18 : 24);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(name);
+            Text.fontSize(DeviceUtils.isWearable() ? 10 : 12);
+            Text.fontColor(this.selectedType === type ? '#4FC3F7' : '#666666');
+            Text.margin({ top: DeviceUtils.isWearable() ? 2 : 4 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+    }
+    buildElementSelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('é€‰æ‹©åŠ¨ä½œ');
+            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Text.fontColor('#666666');
+            Text.margin({ bottom: DeviceUtils.isWearable() ? 6 : 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Grid.create();
+            Grid.columnsTemplate(DeviceUtils.isWearable() ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr');
+            Grid.rowsGap(DeviceUtils.isWearable() ? 6 : 8);
+            Grid.columnsGap(DeviceUtils.isWearable() ? 6 : 8);
+            Grid.width('100%');
+            Grid.height(DeviceUtils.isWearable() ? 100 : 120);
+        }, Grid);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const element = _item;
+                {
+                    const itemCreation2 = (elmtId, isInitialRender) => {
+                        GridItem.create(() => { }, false);
+                    };
+                    const observedDeepRender = () => {
+                        this.observeComponentCreation2(itemCreation2, GridItem);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.width('100%');
+                            Column.height(DeviceUtils.isWearable() ? 32 : 40);
+                            Column.backgroundColor(this.selectedElement === element ? '#E3F2FD' : '#F5F5F5');
+                            Column.borderRadius(DeviceUtils.isWearable() ? 6 : 8);
+                            Column.justifyContent(FlexAlign.Center);
+                            Column.onClick(() => {
+                                this.selectedElement = element;
+                            });
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(element);
+                            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+                            Text.fontColor(this.selectedElement === element ? '#1976D2' : '#333333');
+                            Text.fontWeight(this.selectedElement === element ? FontWeight.Bold : FontWeight.Normal);
+                        }, Text);
+                        Text.pop();
+                        Column.pop();
+                        GridItem.pop();
+                    };
+                    observedDeepRender();
+                }
+            };
+            this.forEachUpdateFunction(elmtId, this.getCurrentElements(), forEachItemGenFunction, (element) => element, false, false);
+        }, ForEach);
+        ForEach.pop();
+        Grid.pop();
+        Column.pop();
+    }
+    buildGOESelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('GOEè¯„åˆ†');
+            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Text.fontColor('#666666');
+            Text.margin({ bottom: DeviceUtils.isWearable() ? 6 : 8 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // æ‰‹è¡¨ç«¯ç®€åŒ–GOEé€‰æ‹©ï¼Œåªæ˜¾ç¤ºå¸¸ç”¨å€¼
+            if (DeviceUtils.isWearable()) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                        Row.justifyContent(FlexAlign.SpaceBetween);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = _item => {
+                            const goe = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width(24);
+                                Column.height(28);
+                                Column.backgroundColor(this.selectedGOE === goe ? '#4FC3F7' : '#F5F5F5');
+                                Column.borderRadius(5);
+                                Column.justifyContent(FlexAlign.Center);
+                                Column.onClick(() => {
+                                    this.selectedGOE = goe;
+                                });
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(goe > 0 ? `+${goe}` : `${goe}`);
+                                Text.fontSize(10);
+                                Text.fontColor(this.selectedGOE === goe ? '#FFFFFF' : '#333333');
+                                Text.fontWeight(FontWeight.Bold);
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, [-3, -1, 0, 1, 3], forEachItemGenFunction, (goe) => goe.toString(), false, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                        Row.justifyContent(FlexAlign.SpaceBetween);
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = _item => {
+                            const goe = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Column.create();
+                                Column.width(28);
+                                Column.height(32);
+                                Column.backgroundColor(this.selectedGOE === goe ? '#4FC3F7' : '#F5F5F5');
+                                Column.borderRadius(6);
+                                Column.justifyContent(FlexAlign.Center);
+                                Column.onClick(() => {
+                                    this.selectedGOE = goe;
+                                });
+                            }, Column);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(goe > 0 ? `+${goe}` : `${goe}`);
+                                Text.fontSize(12);
+                                Text.fontColor(this.selectedGOE === goe ? '#FFFFFF' : '#333333');
+                                Text.fontWeight(FontWeight.Bold);
+                            }, Text);
+                            Text.pop();
+                            Column.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], forEachItemGenFunction, (goe) => goe.toString(), false, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Row.pop();
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+    }
+    buildAddButton(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('æ·»åŠ åŠ¨ä½œ');
+            Button.width('100%');
+            Button.height(DeviceUtils.isWearable() ? 36 : 45);
+            Button.backgroundColor('#4CAF50');
+            Button.fontColor('#FFFFFF');
+            Button.fontSize(DeviceUtils.isWearable() ? 14 : 16);
+            Button.fontWeight(FontWeight.Bold);
+            Button.borderRadius(DeviceUtils.isWearable() ? 18 : 22);
+            Button.enabled(this.selectedElement !== '');
+            Button.onClick(() => {
+                this.addElement();
+            });
+        }, Button);
+        Button.pop();
+    }
+    // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+    buildElementList(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.elements.length > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.padding(DeviceUtils.isWearable() ? 10 : 16);
+                        Column.backgroundColor('#FFFFFF');
+                        Column.borderRadius(DeviceUtils.isWearable() ? 8 : 12);
+                        Column.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                        Row.margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('æŠ€æœ¯åŠ¨ä½œåˆ—è¡¨');
+                        Text.fontSize(DeviceUtils.isWearable() ? 14 : 16);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#333333');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Blank.create();
+                    }, Blank);
+                    Blank.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel('æ¸…ç©º');
+                        Button.height(DeviceUtils.isWearable() ? 24 : 30);
+                        Button.backgroundColor('#FFEBEE');
+                        Button.fontColor('#F44336');
+                        Button.fontSize(DeviceUtils.isWearable() ? 10 : 12);
+                        Button.borderRadius(DeviceUtils.isWearable() ? 12 : 15);
+                        Button.onClick(() => {
+                            this.elements = [];
+                            this.calculateTotal();
+                        });
+                    }, Button);
+                    Button.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const element = _item;
+                            this.ElementItem.bind(this)(element, index);
+                        };
+                        this.forEachUpdateFunction(elmtId, this.elements, forEachItemGenFunction, (element, index) => index.toString(), true, true);
+                    }, ForEach);
+                    ForEach.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        // TESæ€»åˆ†
+                        Row.create();
+                        // TESæ€»åˆ†
+                        Row.width('100%');
+                        // TESæ€»åˆ†
+                        Row.padding({ top: DeviceUtils.isWearable() ? 8 : 12 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('æŠ€æœ¯åˆ† (TES)');
+                        Text.fontSize(DeviceUtils.isWearable() ? 14 : 16);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#333333');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Blank.create();
+                    }, Blank);
+                    Blank.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.totalTES.toFixed(2));
+                        Text.fontSize(DeviceUtils.isWearable() ? 16 : 20);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.fontColor('#FF6B6B');
+                    }, Text);
+                    Text.pop();
+                    // TESæ€»åˆ†
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+    }
+    ElementItem(element, index, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.padding({ top: DeviceUtils.isWearable() ? 6 : 8, bottom: DeviceUtils.isWearable() ? 6 : 8 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(element.name);
+            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.layoutWeight(1);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // æ‰‹è¡¨ç«¯ç®€åŒ–æ˜¾ç¤º
+            if (!DeviceUtils.isWearable()) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`åŸºç¡€: ${element.baseValue.toFixed(2)}`);
+                        Text.fontSize(12);
+                        Text.fontColor('#999999');
+                        Text.margin({ right: 8 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`GOE: ${element.goe > 0 ? '+' : ''}${element.goe}`);
+                        Text.fontSize(12);
+                        Text.fontColor(element.goe > 0 ? '#4CAF50' : element.goe < 0 ? '#F44336' : '#999999');
+                        Text.margin({ right: 8 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(element.finalScore.toFixed(2));
+            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#1976D2');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithLabel('Ã—');
+            Button.width(DeviceUtils.isWearable() ? 20 : 24);
+            Button.height(DeviceUtils.isWearable() ? 20 : 24);
+            Button.backgroundColor('#FFEBEE');
+            Button.fontColor('#F44336');
+            Button.fontSize(DeviceUtils.isWearable() ? 10 : 12);
+            Button.borderRadius(DeviceUtils.isWearable() ? 10 : 12);
+            Button.margin({ left: DeviceUtils.isWearable() ? 4 : 8 });
+            Button.onClick(() => {
+                this.elements.splice(index, 1);
+                this.calculateTotal();
+            });
+        }, Button);
+        Button.pop();
+        Row.pop();
+    }
+    // PCSè¾“å…¥åŒº
+    buildPCSInput(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(DeviceUtils.isWearable() ? 10 : 16);
+            Column.backgroundColor('#FFFFFF');
+            Column.borderRadius(DeviceUtils.isWearable() ? 8 : 12);
+            Column.margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('èŠ‚ç›®å†…å®¹åˆ† (PCS)');
+            Text.fontSize(DeviceUtils.isWearable() ? 14 : 16);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+            Text.margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æ€»åˆ†');
+            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            Text.fontColor('#666666');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            TextInput.create({ placeholder: 'è¾“å…¥PCSåˆ†æ•°', text: this.totalPCS.toString() });
+            TextInput.layoutWeight(1);
+            TextInput.height(DeviceUtils.isWearable() ? 32 : 40);
+            TextInput.backgroundColor('#F5F5F5');
+            TextInput.borderRadius(DeviceUtils.isWearable() ? 6 : 8);
+            TextInput.margin({ left: DeviceUtils.isWearable() ? 8 : 12 });
+            TextInput.fontSize(DeviceUtils.isWearable() ? 12 : 14);
+            TextInput.type(InputType.Number);
+            TextInput.onChange((value) => {
+                this.totalPCS = parseFloat(value) || 0;
+            });
+        }, TextInput);
+        Row.pop();
+        Column.pop();
+    }
+    // æ€»åˆ†æ˜¾ç¤º
+    buildTotalScore(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(DeviceUtils.isWearable() ? 12 : 20);
+            Column.backgroundColor('#E3F2FD');
+            Column.borderRadius(DeviceUtils.isWearable() ? 8 : 12);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('èŠ‚ç›®æ€»åˆ†');
+            Text.fontSize(DeviceUtils.isWearable() ? 16 : 18);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#333333');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.alignItems(HorizontalAlign.End);
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create((this.totalTES + this.totalPCS).toFixed(2));
+            Text.fontSize(DeviceUtils.isWearable() ? 24 : 32);
+            Text.fontWeight(FontWeight.Bold);
+            Text.fontColor('#FF6B6B');
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            // æ‰‹è¡¨ç«¯ç®€åŒ–æ˜¾ç¤º
+            if (!DeviceUtils.isWearable()) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(`TES: ${this.totalTES.toFixed(2)} + PCS: ${this.totalPCS.toFixed(2)}`);
+                        Text.fontSize(12);
+                        Text.fontColor('#999999');
+                        Text.margin({ top: 4 });
+                    }, Text);
+                    Text.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+        Column.pop();
+        Row.pop();
+        Column.pop();
+    }
+    // è¾…åŠ©æ–¹æ³•
+    getCurrentElements() {
+        switch (this.selectedType) {
+            case 'jump':
+                return this.jumps;
+            case 'spin':
+                return this.spins;
+            case 'step':
+                return this.steps;
+            default:
+                return this.jumps;
+        }
+    }
+    addElement() {
+        if (this.selectedElement) {
+            const element = createTechnicalElement(this.selectedElement);
+            if (element) {
+                element.goe = this.selectedGOE;
+                element.calculateFinalScore();
+                this.elements.push(element);
+                this.calculateTotal();
+                this.selectedElement = '';
+                this.selectedGOE = 0;
+            }
+        }
+    }
+    calculateTotal() {
+        this.totalTES = this.elements.reduce((sum, element) => sum + element.finalScore, 0);
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "ScoringSimulatorPage";
+    }
+}
+registerNamedRoute(() => new ScoringSimulatorPage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/ScoringSimulatorPage", pageFullPath: "entry/src/main/ets/pages/ScoringSimulatorPage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=ScoringSimulatorPage.js.mapÂ“ÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceNavBar.etsÙiG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\TechnicalElementModel.etsÙbG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\utils\DeviceUtils.etsÙdG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\ScoringSimulatorPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ9/**
+ * å†°è¿¹èŠ±æ»‘ - è®¡åˆ†æ¨¡æ‹Ÿå™¨
+ * å¤åˆ»ISUå®˜æ–¹è®¡åˆ†è§„åˆ™
+ * æ”¯æŒå¤šè®¾å¤‡é€‚é…
+ */
+
+import { IceNavBar } from '../common/components/IceNavBar';
+import { IceCard } from '../common/components/IceCard';
+import { IceTag } from '../common/components/IceTag';
+import { TechnicalElement, createTechnicalElement, getAllJumps, getAllSpins, getAllSteps } from '../viewmodel/TechnicalElementModel';
+import { DeviceUtils } from '../common/utils/DeviceUtils';
+
+@Entry
+@Component
+struct ScoringSimulatorPage {
+  @State elements: TechnicalElement[] = [];
+  @State selectedType: string = 'jump';
+  @State selectedElement: string = '';
+  @State selectedGOE: number = 0;
+  @State totalTES: number = 0;
+  @State totalPCS: number = 0;
+  @State programType: string = 'SP'; // SP, FS
+  
+  private jumps: string[] = getAllJumps();
+  private spins: string[] = getAllSpins();
+  private steps: string[] = getAllSteps();
+  
+  build() {
+    Column() {
+      // å¯¼èˆªæ 
+      IceNavBar({
+        title: 'è®¡åˆ†æ¨¡æ‹Ÿå™¨',
+        showBack: true,
+        navBackgroundColor: '#4FC3F7'
+      });
+      
+      // å†…å®¹åŒº
+      Scroll() {
+        Column() {
+          // èŠ‚ç›®ç±»åž‹é€‰æ‹©
+          this.buildProgramTypeSelector();
+          
+          // åŠ¨ä½œæ·»åŠ åŒº
+          this.buildElementAdder();
+          
+          // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+          this.buildElementList();
+          
+          // PCSè¾“å…¥åŒºï¼ˆæ‰‹è¡¨ç«¯éšè—ï¼‰
+          if (!DeviceUtils.isWearable()) {
+            this.buildPCSInput();
+          }
+          
+          // æ€»åˆ†æ˜¾ç¤º
+          this.buildTotalScore();
+        }
+        .width('100%')
+        .padding(DeviceUtils.isWearable() ? 8 : 16)
+      }
+      .layoutWeight(1)
+      .scrollBar(BarState.Auto)
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#F5F5F5')
+  }
+  
+  // èŠ‚ç›®ç±»åž‹é€‰æ‹©
+  @Builder
+  buildProgramTypeSelector() {
+    Row() {
+      Button('çŸ­èŠ‚ç›® (SP)')
+        .layoutWeight(1)
+        .height(DeviceUtils.isWearable() ? 32 : 40)
+        .backgroundColor(this.programType === 'SP' ? '#4FC3F7' : '#FFFFFF')
+        .fontColor(this.programType === 'SP' ? '#FFFFFF' : '#666666')
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .borderRadius(DeviceUtils.isWearable() ? 16 : 20)
+        .onClick(() => {
+          this.programType = 'SP';
+        })
+      
+      Button('è‡ªç”±æ»‘ (FS)')
+        .layoutWeight(1)
+        .height(DeviceUtils.isWearable() ? 32 : 40)
+        .backgroundColor(this.programType === 'FS' ? '#4FC3F7' : '#FFFFFF')
+        .fontColor(this.programType === 'FS' ? '#FFFFFF' : '#666666')
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .borderRadius(DeviceUtils.isWearable() ? 16 : 20)
+        .margin({ left: DeviceUtils.isWearable() ? 6 : 12 })
+        .onClick(() => {
+          this.programType = 'FS';
+        })
+    }
+    .width('100%')
+    .margin({ bottom: DeviceUtils.isWearable() ? 10 : 20 })
+  }
+  
+  // åŠ¨ä½œæ·»åŠ å™¨
+  @Builder
+  buildElementAdder() {
+    Column() {
+      Text('æ·»åŠ åŠ¨ä½œ')
+        .fontSize(DeviceUtils.isWearable() ? 14 : 16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+        .margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 })
+      
+      // ç±»åž‹é€‰æ‹©
+      Row() {
+        this.TypeButton('è·³è·ƒ', 'jump', 'ðŸ¦˜');
+        this.TypeButton('æ—‹è½¬', 'spin', 'ðŸ”„');
+        this.TypeButton('æ­¥æ³•', 'step', 'ðŸ‘Ÿ');
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceEvenly)
+      .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+      
+      // åŠ¨ä½œé€‰æ‹©
+      this.buildElementSelector();
+      
+      // GOEé€‰æ‹©
+      this.buildGOESelector();
+      
+      // æ·»åŠ æŒ‰é’®
+      this.buildAddButton();
+    }
+    .width('100%')
+    .padding(DeviceUtils.isWearable() ? 10 : 16)
+    .backgroundColor('#FFFFFF')
+    .borderRadius(DeviceUtils.isWearable() ? 8 : 12)
+    .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+  }
+  
+  @Builder
+  TypeButton(name: string, type: string, icon: string) {
+    Column() {
+      Text(icon)
+        .fontSize(DeviceUtils.isWearable() ? 18 : 24)
+      Text(name)
+        .fontSize(DeviceUtils.isWearable() ? 10 : 12)
+        .fontColor(this.selectedType === type ? '#4FC3F7' : '#666666')
+        .margin({ top: DeviceUtils.isWearable() ? 2 : 4 })
+    }
+    .width(DeviceUtils.isWearable() ? 55 : 70)
+    .height(DeviceUtils.isWearable() ? 45 : 60)
+    .backgroundColor(this.selectedType === type ? '#E3F2FD' : '#F5F5F5')
+    .borderRadius(DeviceUtils.isWearable() ? 8 : 12)
+    .justifyContent(FlexAlign.Center)
+    .onClick(() => {
+      this.selectedType = type;
+      this.selectedElement = '';
+    })
+  }
+  
+  @Builder
+  buildElementSelector() {
+    Column() {
+      Text('é€‰æ‹©åŠ¨ä½œ')
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .fontColor('#666666')
+        .margin({ bottom: DeviceUtils.isWearable() ? 6 : 8 })
+      
+      Grid() {
+        ForEach(this.getCurrentElements(), (element: string) => {
+          GridItem() {
+            Column() {
+              Text(element)
+                .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+                .fontColor(this.selectedElement === element ? '#1976D2' : '#333333')
+                .fontWeight(this.selectedElement === element ? FontWeight.Bold : FontWeight.Normal)
+            }
+            .width('100%')
+            .height(DeviceUtils.isWearable() ? 32 : 40)
+            .backgroundColor(this.selectedElement === element ? '#E3F2FD' : '#F5F5F5')
+            .borderRadius(DeviceUtils.isWearable() ? 6 : 8)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.selectedElement = element;
+            })
+          }
+        }, (element: string) => element)
+      }
+      .columnsTemplate(DeviceUtils.isWearable() ? '1fr 1fr 1fr' : '1fr 1fr 1fr 1fr')
+      .rowsGap(DeviceUtils.isWearable() ? 6 : 8)
+      .columnsGap(DeviceUtils.isWearable() ? 6 : 8)
+      .width('100%')
+      .height(DeviceUtils.isWearable() ? 100 : 120)
+    }
+    .width('100%')
+    .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+  }
+  
+  @Builder
+  buildGOESelector() {
+    Column() {
+      Text('GOEè¯„åˆ†')
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .fontColor('#666666')
+        .margin({ bottom: DeviceUtils.isWearable() ? 6 : 8 })
+      
+      // æ‰‹è¡¨ç«¯ç®€åŒ–GOEé€‰æ‹©ï¼Œåªæ˜¾ç¤ºå¸¸ç”¨å€¼
+      if (DeviceUtils.isWearable()) {
+        Row() {
+          ForEach([-3, -1, 0, 1, 3], (goe: number) => {
+            Column() {
+              Text(goe > 0 ? `+${goe}` : `${goe}`)
+                .fontSize(10)
+                .fontColor(this.selectedGOE === goe ? '#FFFFFF' : '#333333')
+                .fontWeight(FontWeight.Bold)
+            }
+            .width(24)
+            .height(28)
+            .backgroundColor(this.selectedGOE === goe ? '#4FC3F7' : '#F5F5F5')
+            .borderRadius(5)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.selectedGOE = goe;
+            })
+          }, (goe: number) => goe.toString())
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
+      } else {
+        Row() {
+          ForEach([-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5], (goe: number) => {
+            Column() {
+              Text(goe > 0 ? `+${goe}` : `${goe}`)
+                .fontSize(12)
+                .fontColor(this.selectedGOE === goe ? '#FFFFFF' : '#333333')
+                .fontWeight(FontWeight.Bold)
+            }
+            .width(28)
+            .height(32)
+            .backgroundColor(this.selectedGOE === goe ? '#4FC3F7' : '#F5F5F5')
+            .borderRadius(6)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.selectedGOE = goe;
+            })
+          }, (goe: number) => goe.toString())
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
+      }
+    }
+    .width('100%')
+    .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+  }
+  
+  @Builder
+  buildAddButton() {
+    Button('æ·»åŠ åŠ¨ä½œ')
+      .width('100%')
+      .height(DeviceUtils.isWearable() ? 36 : 45)
+      .backgroundColor('#4CAF50')
+      .fontColor('#FFFFFF')
+      .fontSize(DeviceUtils.isWearable() ? 14 : 16)
+      .fontWeight(FontWeight.Bold)
+      .borderRadius(DeviceUtils.isWearable() ? 18 : 22)
+      .enabled(this.selectedElement !== '')
+      .onClick(() => {
+        this.addElement();
+      })
+  }
+  
+  // å·²æ·»åŠ åŠ¨ä½œåˆ—è¡¨
+  @Builder
+  buildElementList() {
+    if (this.elements.length > 0) {
+      Column() {
+        Row() {
+          Text('æŠ€æœ¯åŠ¨ä½œåˆ—è¡¨')
+            .fontSize(DeviceUtils.isWearable() ? 14 : 16)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#333333')
+          
+          Blank()
+          
+          Button('æ¸…ç©º')
+            .height(DeviceUtils.isWearable() ? 24 : 30)
+            .backgroundColor('#FFEBEE')
+            .fontColor('#F44336')
+            .fontSize(DeviceUtils.isWearable() ? 10 : 12)
+            .borderRadius(DeviceUtils.isWearable() ? 12 : 15)
+            .onClick(() => {
+              this.elements = [];
+              this.calculateTotal();
+            })
+        }
+        .width('100%')
+        .margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 })
+        
+        ForEach(this.elements, (element: TechnicalElement, index: number) => {
+          this.ElementItem(element, index);
+        }, (element: TechnicalElement, index: number) => index.toString())
+        
+        // TESæ€»åˆ†
+        Row() {
+          Text('æŠ€æœ¯åˆ† (TES)')
+            .fontSize(DeviceUtils.isWearable() ? 14 : 16)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#333333')
+          
+          Blank()
+          
+          Text(this.totalTES.toFixed(2))
+            .fontSize(DeviceUtils.isWearable() ? 16 : 20)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#FF6B6B')
+        }
+        .width('100%')
+        .padding({ top: DeviceUtils.isWearable() ? 8 : 12 })
+      }
+      .width('100%')
+      .padding(DeviceUtils.isWearable() ? 10 : 16)
+      .backgroundColor('#FFFFFF')
+      .borderRadius(DeviceUtils.isWearable() ? 8 : 12)
+      .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+    }
+  }
+  
+  @Builder
+  ElementItem(element: TechnicalElement, index: number) {
+    Row() {
+      Text(element.name)
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+        .layoutWeight(1)
+      
+      // æ‰‹è¡¨ç«¯ç®€åŒ–æ˜¾ç¤º
+      if (!DeviceUtils.isWearable()) {
+        Text(`åŸºç¡€: ${element.baseValue.toFixed(2)}`)
+          .fontSize(12)
+          .fontColor('#999999')
+          .margin({ right: 8 })
+        
+        Text(`GOE: ${element.goe > 0 ? '+' : ''}${element.goe}`)
+          .fontSize(12)
+          .fontColor(element.goe > 0 ? '#4CAF50' : element.goe < 0 ? '#F44336' : '#999999')
+          .margin({ right: 8 })
+      }
+      
+      Text(element.finalScore.toFixed(2))
+        .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#1976D2')
+      
+      Button('Ã—')
+        .width(DeviceUtils.isWearable() ? 20 : 24)
+        .height(DeviceUtils.isWearable() ? 20 : 24)
+        .backgroundColor('#FFEBEE')
+        .fontColor('#F44336')
+        .fontSize(DeviceUtils.isWearable() ? 10 : 12)
+        .borderRadius(DeviceUtils.isWearable() ? 10 : 12)
+        .margin({ left: DeviceUtils.isWearable() ? 4 : 8 })
+        .onClick(() => {
+          this.elements.splice(index, 1);
+          this.calculateTotal();
+        })
+    }
+    .width('100%')
+    .padding({ top: DeviceUtils.isWearable() ? 6 : 8, bottom: DeviceUtils.isWearable() ? 6 : 8 })
+  }
+  
+  // PCSè¾“å…¥åŒº
+  @Builder
+  buildPCSInput() {
+    Column() {
+      Text('èŠ‚ç›®å†…å®¹åˆ† (PCS)')
+        .fontSize(DeviceUtils.isWearable() ? 14 : 16)
+        .fontWeight(FontWeight.Bold)
+        .fontColor('#333333')
+        .margin({ bottom: DeviceUtils.isWearable() ? 8 : 12 })
+      
+      Row() {
+        Text('æ€»åˆ†')
+          .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+          .fontColor('#666666')
+        
+        TextInput({ placeholder: 'è¾“å…¥PCSåˆ†æ•°', text: this.totalPCS.toString() })
+          .layoutWeight(1)
+          .height(DeviceUtils.isWearable() ? 32 : 40)
+          .backgroundColor('#F5F5F5')
+          .borderRadius(DeviceUtils.isWearable() ? 6 : 8)
+          .margin({ left: DeviceUtils.isWearable() ? 8 : 12 })
+          .fontSize(DeviceUtils.isWearable() ? 12 : 14)
+          .type(InputType.Number)
+          .onChange((value: string) => {
+            this.totalPCS = parseFloat(value) || 0;
+          })
+      }
+      .width('100%')
+    }
+    .width('100%')
+    .padding(DeviceUtils.isWearable() ? 10 : 16)
+    .backgroundColor('#FFFFFF')
+    .borderRadius(DeviceUtils.isWearable() ? 8 : 12)
+    .margin({ bottom: DeviceUtils.isWearable() ? 10 : 16 })
+  }
+  
+  // æ€»åˆ†æ˜¾ç¤º
+  @Builder
+  buildTotalScore() {
+    Column() {
+      Row() {
+        Text('èŠ‚ç›®æ€»åˆ†')
+          .fontSize(DeviceUtils.isWearable() ? 16 : 18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#333333')
+        
+        Blank()
+        
+        Column() {
+          Text((this.totalTES + this.totalPCS).toFixed(2))
+            .fontSize(DeviceUtils.isWearable() ? 24 : 32)
+            .fontWeight(FontWeight.Bold)
+            .fontColor('#FF6B6B')
+          
+          // æ‰‹è¡¨ç«¯ç®€åŒ–æ˜¾ç¤º
+          if (!DeviceUtils.isWearable()) {
+            Text(`TES: ${this.totalTES.toFixed(2)} + PCS: ${this.totalPCS.toFixed(2)}`)
+              .fontSize(12)
+              .fontColor('#999999')
+              .margin({ top: 4 })
+          }
+        }
+        .alignItems(HorizontalAlign.End)
+      }
+      .width('100%')
+    }
+    .width('100%')
+    .padding(DeviceUtils.isWearable() ? 12 : 20)
+    .backgroundColor('#E3F2FD')
+    .borderRadius(DeviceUtils.isWearable() ? 8 : 12)
+  }
+  
+  // è¾…åŠ©æ–¹æ³•
+  private getCurrentElements(): string[] {
+    switch (this.selectedType) {
+      case 'jump':
+        return this.jumps;
+      case 'spin':
+        return this.spins;
+      case 'step':
+        return this.steps;
+      default:
+        return this.jumps;
+    }
+  }
+  
+  private addElement() {
+    if (this.selectedElement) {
+      const element = createTechnicalElement(this.selectedElement);
+      if (element) {
+        element.goe = this.selectedGOE;
+        element.calculateFinalScore();
+        this.elements.push(element);
+        this.calculateTotal();
+        this.selectedElement = '';
+        this.selectedGOE = 0;
+      }
+    }
+  }
+  
+  private calculateTotal() {
+    this.totalTES = this.elements.reduce((sum, element) => sum + element.finalScore, 0);
+  }
+}
+ÀÔrD“»../common/utils/DeviceUtilsÙ"../viewmodel/TechnicalElementModel¾../common/components/IceNavBarÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÂÙbG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\utils\DeviceUtils.etsAÃªoh-resolveÂEAÂÙiG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\TechnicalElementModel.etsAÃªoh-resolveÂEAÂÙeG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\components\IceNavBar.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings·ScoringSimulatorPage.js ‘¸ScoringSimulatorPage.etsÜÿ‘”    ‘” ˜”   ” ”	 	” ” ” ”: :”; ;ž”  	 ” 	”	 	” 	1”! 	3”, 	>”. 	Ì@”9 	ÌK”; 	ÌM”ÌF 	ÌX”ÌH 	ÌZ”ÌN 	Ì`”Ìr 	Ì„”Ìs 	Ì…˜”  
+ ” 
+”	 
+	” 
+” 
+” 
+”9 
+9”: 
+:’” ” ‘”  ’”7 (”9 *’”;  ”ÌA &’”> #”Ì@ %’”: ”;  ’”7 ”8 ’”7 ”8 ’”: ”> #“” ”  '”" )“” ”  '”" )“” ”  '”" )‘” 
+:’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” ’” ” 
+–” ” 
+” >” >
+” >” >–” ” 
+” ?” ?” ?”  ?–” ” 
+” Ì@”" Ì@”# Ì@”, Ì@’” ” “” ” ”$ ”” ” ” ”& ””  ”   ”"  ”&  ”” !”* !”, !”5 !%‘” "”” ”! ”# ”* ””  ”$  ”&  ”*  ”” !”. !”0 !”9 !%”” ” ” ”& ””  ”   ”"  ”&  ”” !”* !”, !”5 !%’” $” $’” %” %’” $” $–” %” %” ;” ;”  ;”! ;’” $” $˜” %” %” <” <” <”% <”& <”* <’” &” &–” &” &” 8	” 8” 8” 8Ü ” &” &” 9	” 9” 9”& 9”' 9”1 9'”3 9)”4 9*”5 9+”6 9,”7 9-”8 9.”9 9/”: 90”< 92’” '
+” '•” (
+” (” (”% ('”2 ()’” *
+” *•” +
+” +” +” + ”+ +"’” -
+” -•” .
+” .” .” .”* .!’” 0
+” 0˜” 1
+” 1” 1” 1” 1”' 1%”) 1'”+ 1)•” 2” 2” 2”& 2”3 2 ‘” 3’” 5
+” 5‘” 3’” 5
+” 5•” 6
+” 6” 6” 6”) 6 ’” &” &’” $” $’” %” %’” ” 
+‘” ÌA’” ÌC” ÌC’” ÌE” ÌE’” ÌF” ÌF–” ÌF” ÌF” Ì^” Ì^
+” Ì^” Ì^Ü ” ÌF” ÌF” Ì_” Ì_” Ì_” Ì_” Ì_”! Ì_”, Ì_!”- Ì_"”7 Ì_,”9 Ì_.”: Ì_/”; Ì_0”< Ì_1”> Ì_3”? Ì_4”Ì@ Ì_5”ÌA Ì_6”ÌC Ì_8”ÌE Ì_:”” ÌG” ÌG”# ÌG”- ÌG–” ÌG” ÌG” ÌH	” ÌH”  ÌH”! ÌHÜ ” ÌG” ÌG” ÌI	” ÌI” ÌI”% ÌI”& ÌI”0 ÌI&”2 ÌI(”3 ÌI)”4 ÌI*”5 ÌI+”7 ÌI-”8 ÌI.”9 ÌI/”: ÌI0”< ÌI2Ü ” ÌG” ÌG” ÌJ	”" ÌJ”# ÌJ”' ÌJ”( ÌJ”3 ÌJ)”8 ÌJ.”< ÌJ2”= ÌJ3”> ÌJ4”? ÌJ5”ÌH ÌJ>”ÌI ÌJ?”ÌJ ÌJÌ@”ÌK ÌJÌA”ÌT ÌJÌJÜ ” ÌG” ÌG” ÌK	” ÌK” ÌK”! ÌK”" ÌK”- ÌK#”2 ÌK(”6 ÌK,”7 ÌK-”8 ÌK.”9 ÌK/”ÌB ÌK8”ÌC ÌK9”ÌD ÌK:”ÌE ÌK;”ÌN ÌKÌDÜ ” ÌG” ÌG” ÌL	” ÌL” ÌL”' ÌL”( ÌL”2 ÌL(”4 ÌL*”5 ÌL+”6 ÌL,”7 ÌL-”9 ÌL/”: ÌL0”; ÌL1”< ÌL2”> ÌL4Ü ” ÌG” ÌG” ÌM	” ÌM”  ÌM”+ ÌM!”, ÌM"”6 ÌM,”8 ÌM.”9 ÌM/”: ÌM0”; ÌM1”= ÌM3”> ÌM4”? ÌM5”Ì@ ÌM6”ÌB ÌM8—” ÌG” ÌG” ÌN	” ÌN” ÌN” ÌN”  ÌN—” ÌO
+” ÌO” ÌO”  ÌO”# ÌO”' ÌO!”( ÌO"’” ÌP” ÌP	’” ÌG” ÌG”” ÌR” ÌR”# ÌR”- ÌR–” ÌR” ÌR” ÌS	” ÌS”  ÌS”! ÌSÜ ” ÌR” ÌR” ÌT	” ÌT” ÌT”% ÌT”& ÌT”0 ÌT&”2 ÌT(”3 ÌT)”4 ÌT*”5 ÌT+”7 ÌT-”8 ÌT.”9 ÌT/”: ÌT0”< ÌT2Ü ” ÌR” ÌR” ÌU	”" ÌU”# ÌU”' ÌU”( ÌU”3 ÌU)”8 ÌU.”< ÌU2”= ÌU3”> ÌU4”? ÌU5”ÌH ÌU>”ÌI ÌU?”ÌJ ÌUÌ@”ÌK ÌUÌA”ÌT ÌUÌJÜ ” ÌR” ÌR” ÌV	” ÌV” ÌV”! ÌV”" ÌV”- ÌV#”2 ÌV(”6 ÌV,”7 ÌV-”8 ÌV.”9 ÌV/”ÌB ÌV8”ÌC ÌV9”ÌD ÌV:”ÌE ÌV;”ÌN ÌVÌDÜ ” ÌR” ÌR” ÌW	” ÌW” ÌW”' ÌW”( ÌW”2 ÌW(”4 ÌW*”5 ÌW+”6 ÌW,”7 ÌW-”9 ÌW/”: ÌW0”; ÌW1”< ÌW2”> ÌW4Ü ” ÌR” ÌR” ÌX	” ÌX”  ÌX”+ ÌX!”, ÌX"”6 ÌX,”8 ÌX.”9 ÌX/”: ÌX0”; ÌX1”= ÌX3”> ÌX4”? ÌX5”Ì@ ÌX6”ÌB ÌX8Ü ” ÌR” ÌR” ÌY	” ÌY” ÌY” ÌY”  ÌY”" ÌY”- ÌY#”. ÌY$”8 ÌY.”: ÌY0”; ÌY1”< ÌY2”= ÌY3”> ÌY4”? ÌY5”Ì@ ÌY6”ÌA ÌY7”ÌC ÌY9”ÌE ÌY;—” ÌR” ÌR” ÌZ	” ÌZ” ÌZ” ÌZ”  ÌZ—” Ì[
+” Ì[” Ì[”  Ì[”# Ì[”' Ì[!”( Ì["’” Ì\” Ì\	’” ÌR” ÌR’” ÌF” ÌF‘” Ì`’” Ìb” Ìb
+’” Ìd” Ìd’” Ìe” Ìe
+–” Ìe” Ìe
+” Ì” Ì
+” Ì” ÌÜ ” Ìe” Ìe
+” Ì€” Ì€” Ì€”& Ì€”' Ì€”1 Ì€#”3 Ì€%”4 Ì€&”5 Ì€'”6 Ì€(”8 Ì€*”9 Ì€+”: Ì€,”; Ì€-”= Ì€/–” Ìe” Ìe
+” Ì”" Ì”# Ì”, ÌÜ ” Ìe” Ìe
+” Ì‚” Ì‚”  Ì‚”+ Ì‚”, Ì‚”6 Ì‚(”8 Ì‚*”9 Ì‚+”: Ì‚,”; Ì‚-”< Ì‚.”= Ì‚/”> Ì‚0”? Ì‚1”ÌA Ì‚3Ü ” Ìe” Ìe
+” Ìƒ” Ìƒ” Ìƒ” Ìƒ”" Ìƒ”$ Ìƒ”/ Ìƒ!”0 Ìƒ"”: Ìƒ,”< Ìƒ.”= Ìƒ/”> Ìƒ0”? Ìƒ1”ÌA Ìƒ3”ÌB Ìƒ4”ÌC Ìƒ5”ÌD Ìƒ6”ÌF Ìƒ8”ÌH Ìƒ:”” Ìf” Ìf
+” Ìf” ÌfÜ ” Ìf” Ìf
+” Ìg	” Ìg” Ìg”% Ìg”& Ìg”0 Ìg(”2 Ìg*”3 Ìg+”4 Ìg,”5 Ìg-”7 Ìg/”8 Ìg0”9 Ìg1”: Ìg2”< Ìg4˜” Ìf” Ìf
+” Ìh	” Ìh” Ìh”& Ìh”' Ìh”+ Ìh#–” Ìf” Ìf
+” Ìi	” Ìi” Ìi”$ ÌiÜ ” Ìf” Ìf
+” Ìj	” Ìj” Ìj” Ìj”  Ìj”" Ìj”- Ìj%”. Ìj&”8 Ìj0”: Ìj2”; Ìj3”< Ìj4”= Ìj5”> Ìj6”? Ìj7”Ì@ Ìj8”ÌA Ìj9”ÌC Ìj;”ÌE Ìj=’” Ìf” Ìf
+’” Ìl” Ìl’” Ìm” Ìm	’” Ìl” Ìl–” Ìm” Ìm	” Ìr” Ìr” Ìr” Ìr’” Ìl” Ìl˜” Ìm” Ìm	” Ìs” Ìs” Ìs”( Ìs”) Ìs ”4 Ìs+’” Ìl” ÌlÜ ” Ìm” Ìm	” Ìt” Ìt” Ìt” Ìt” Ìt”! Ìt”, Ìt#”- Ìt$”7 Ìt.”9 Ìt0”: Ìt1”; Ìt2”< Ìt3”> Ìt5”? Ìt6”Ì@ Ìt7”ÌA Ìt8”ÌC Ìt:”ÌE Ìt<›” Ìn” Ìn” Ìn” Ìn”# Ìn”' Ìn”) Ìn”/ Ìn$”1 Ìn&”5 Ìn*”6 Ìn+›” Ìo” Ìo” Ìo” Ìo”# Ìo”' Ìo”) Ìo”/ Ìo$”1 Ìo&”5 Ìo*”6 Ìo+›” Ìp” Ìp” Ìp” Ìp”# Ìp”' Ìp”) Ìp”/ Ìp$”1 Ìp&”5 Ìp*”6 Ìp+’” Ìl” Ìl’” Ìm” Ìm	’” Ìv” Ìv•” Ìw” Ìw
+” Ìw”! Ìw”. Ìw!’” Ìy” Ìy•” Ìz” Ìz
+” Ìz” Ìz”* Ìz’” Ì|” Ì|•” Ì}” Ì}
+” Ì}” Ì}”( Ì}’” Ìe” Ìe
+‘” Ì„˜” Ì‡” Ì‡” Ì‡” Ì‡” Ì‡” Ì‡'” Ì‡)” Ì‡5’” Ìˆ” Ìˆ
+Ü ” Ìˆ” Ìˆ
+” Ì” Ì
+” Ì”$ Ì”% Ì”/ Ì!”1 Ì#”2 Ì$”3 Ì%”4 Ì&”6 Ì(”7 Ì)”8 Ì*”9 Ì+”; Ì-Ü ” Ìˆ” Ìˆ
+” Ì‘” Ì‘” Ì‘”% Ì‘”& Ì‘”0 Ì‘"”2 Ì‘$”3 Ì‘%”4 Ì‘&”5 Ì‘'”7 Ì‘)”8 Ì‘*”9 Ì‘+”: Ì‘,”< Ì‘.Ü ” Ìˆ” Ìˆ
+” Ì’”" Ì’”# Ì’”' Ì’”( Ì’”4 Ì’&”9 Ì’+”= Ì’/”> Ì’0”? Ì’1”Ì@ Ì’2”ÌI Ì’;”ÌJ Ì’<”ÌK Ì’=”ÌL Ì’>”ÌU Ì’ÌGÜ ” Ìˆ” Ìˆ
+” Ì“” Ì“”  Ì“”+ Ì“”, Ì“”6 Ì“(”8 Ì“*”9 Ì“+”: Ì“,”; Ì“-”< Ì“.”= Ì“/”> Ì“0”? Ì“1”ÌA Ì“3˜” Ìˆ” Ìˆ
+” Ì””! Ì””" Ì””+ Ì””, Ì””2 Ì”$—” Ìˆ” Ìˆ
+” Ì•” Ì•” Ì•” Ì•”  Ì•—” Ì–” Ì–
+” Ì–”! Ì–”$ Ì–”( Ì–”) Ì–—” Ì—” Ì—
+” Ì—”$ Ì—”' Ì—”) Ì—”* Ì— ’” Ì˜” Ì˜”” Ì‰” Ì‰
+” Ì‰” Ì‰Ü ” Ì‰” Ì‰
+” ÌŠ	” ÌŠ” ÌŠ”% ÌŠ”& ÌŠ”0 ÌŠ(”2 ÌŠ*”3 ÌŠ+”4 ÌŠ,”5 ÌŠ-”7 ÌŠ/”8 ÌŠ0”9 ÌŠ1”: ÌŠ2”< ÌŠ4’” Ì‰” Ì‰
+”” Ì‹” Ì‹
+” Ì‹” Ì‹Ü ” Ì‹” Ì‹
+” ÌŒ	” ÌŒ” ÌŒ”% ÌŒ”& ÌŒ”0 ÌŒ(”2 ÌŒ*”3 ÌŒ+”4 ÌŒ,”5 ÌŒ-”7 ÌŒ/”8 ÌŒ0”9 ÌŒ1”: ÌŒ2”< ÌŒ4Ü ” Ì‹” Ì‹
+” Ì	” Ì” Ì” Ì”  Ì”, Ì$”1 Ì)”5 Ì-”6 Ì.”7 Ì/”8 Ì0”ÌA Ì9”ÌB Ì:”ÌC Ì;”ÌD Ì<”ÌM ÌÌEÜ ” Ì‹” Ì‹
+” ÌŽ	” ÌŽ” ÌŽ” ÌŽ” ÌŽ” ÌŽ”* ÌŽ"”+ ÌŽ#”5 ÌŽ-”7 ÌŽ/”8 ÌŽ0”9 ÌŽ1”: ÌŽ2”; ÌŽ3”< ÌŽ4”= ÌŽ5”> ÌŽ6”? ÌŽ7”ÌA ÌŽ9’” Ì‹” Ì‹
+’” Ìˆ” Ìˆ
+‘” Ì™’” Ìœ” Ìœ’” Ì” Ì
+–” Ì” Ì
+” Ì½” Ì½
+” Ì½” Ì½Ü ” Ì” Ì
+” Ì¾” Ì¾” Ì¾” Ì¾”" Ì¾”$ Ì¾”/ Ì¾!”0 Ì¾"”: Ì¾,”< Ì¾.”= Ì¾/”> Ì¾0”? Ì¾1”ÌA Ì¾3”ÌB Ì¾4”ÌC Ì¾5”ÌD Ì¾6”ÌF Ì¾8”ÌH Ì¾:”” Ìž” Ìž
+” Ìž” ÌžÜ ” Ìž” Ìž
+” ÌŸ	” ÌŸ” ÌŸ”% ÌŸ”& ÌŸ”0 ÌŸ(”2 ÌŸ*”3 ÌŸ+”4 ÌŸ,”5 ÌŸ-”7 ÌŸ/”8 ÌŸ0”9 ÌŸ1”: ÌŸ2”< ÌŸ4–” Ìž” Ìž
+” Ì 	” Ì ” Ì ”$ Ì Ü ” Ìž” Ìž
+” Ì¡	” Ì¡” Ì¡” Ì¡”  Ì¡”" Ì¡”- Ì¡%”. Ì¡&”8 Ì¡0”: Ì¡2”; Ì¡3”< Ì¡4”= Ì¡5”> Ì¡6”? Ì¡7”Ì@ Ì¡8”ÌA Ì¡9”ÌB Ì¡:”ÌD Ì¡<’” Ìž” Ìž
+’” Ì£” Ì£
+Ü ” Ì£” Ì£
+” Ì·”  Ì·”! Ì·”, Ì·"”- Ì·#”7 Ì·-”9 Ì·/”: Ì·0”; Ì·1”< Ì·2”ÌI Ì·?”ÌJ Ì·Ì@”ÌK Ì·ÌA”ÌL Ì·ÌB”Ì] Ì·ÌSÜ ” Ì£” Ì£
+” Ì¸” Ì¸” Ì¸”$ Ì¸”% Ì¸”/ Ì¸%”1 Ì¸'”2 Ì¸(”3 Ì¸)”4 Ì¸*”5 Ì¸+”6 Ì¸,”7 Ì¸-”8 Ì¸.”9 Ì¸/Ü ” Ì£” Ì£
+” Ì¹” Ì¹” Ì¹”' Ì¹”( Ì¹”2 Ì¹(”4 Ì¹*”5 Ì¹+”6 Ì¹,”7 Ì¹-”8 Ì¹.”9 Ì¹/”: Ì¹0”; Ì¹1”< Ì¹2–” Ì£” Ì£
+” Ìº” Ìº” Ìº” ÌºÜ ” Ì£” Ì£
+” Ì»” Ì»” Ì»”# Ì»”$ Ì»”. Ì»$”0 Ì»&”1 Ì»'”2 Ì»(”3 Ì»)”6 Ì»,”7 Ì»-”8 Ì».”9 Ì»/”< Ì»2’” Ì¤” Ì¤’” Ì¦”" Ì¦–” Ì¦”" Ì¦”# Ì¬”( Ì¬”) Ì¬”/ Ì¬Ü ” Ì¦”" Ì¦”# Ì­”) Ì­”* Ì­”5 Ì­”6 Ì­ ”Ì@ Ì­*”ÌB Ì­,”ÌC Ì­-”ÌD Ì­.”ÌE Ì­/”ÌG Ì­1”ÌH Ì­2”ÌI Ì­3”ÌJ Ì­4”ÌL Ì­6Ü ” Ì¦”" Ì¦”# Ì®”2 Ì®”3 Ì®”7 Ì®!”8 Ì®"”ÌG Ì®1”ÌL Ì®6”ÌS Ì®=”ÌT Ì®>”ÌU Ì®?”ÌV Ì®Ì@”Ì_ Ì®ÌI”Ì` Ì®ÌJ”Ìa Ì®ÌK”Ìb Ì®ÌL”Ìk Ì®ÌUÜ ” Ì¦”" Ì¦”# Ì¯”/ Ì¯”0 Ì¯”; Ì¯%”< Ì¯&”ÌF Ì¯0”ÌH Ì¯2”ÌI Ì¯3”ÌJ Ì¯4”ÌK Ì¯5”ÌL Ì¯6”ÌM Ì¯7”ÌN Ì¯8”ÌO Ì¯9”ÌP Ì¯:˜” Ì¦”" Ì¦”# Ì°”1 Ì°”2 Ì°”; Ì°%”< Ì°&”ÌB Ì°,—” Ì¦”" Ì¦”# Ì±”* Ì±”+ Ì±”. Ì±”0 Ì±—”  Ì²”$ Ì²”% Ì²”4 Ì²"”7 Ì²%”> Ì²,”? Ì²-’” Ì³” Ì³”” Ì§”  Ì§”( Ì§”/ Ì§Ü ” Ì§”  Ì§”! Ì¨”) Ì¨”* Ì¨”5 Ì¨%”6 Ì¨&”Ì@ Ì¨0”ÌB Ì¨2”ÌC Ì¨3”ÌD Ì¨4”ÌE Ì¨5”ÌG Ì¨7”ÌH Ì¨8”ÌI Ì¨9”ÌJ Ì¨:”ÌL Ì¨<Ü ” Ì§”  Ì§”! Ì©”* Ì©”+ Ì©”/ Ì©”0 Ì© ”? Ì©/”ÌD Ì©4”ÌK Ì©;”ÌL Ì©<”ÌM Ì©=”ÌN Ì©>”ÌW Ì©ÌG”ÌX Ì©ÌH”ÌY Ì©ÌI”ÌZ Ì©ÌJ”Ìc Ì©ÌSÜ ” Ì§”  Ì§”! Ìª”+ Ìª”, Ìª”0 Ìª ”1 Ìª!”Ì@ Ìª0”ÌE Ìª5”ÌL Ìª<”ÌM Ìª=”ÌN Ìª>”ÌO Ìª?”ÌY ÌªÌI”ÌZ ÌªÌJ”Ì^ ÌªÌN”Ì_ ÌªÌO”Ì` ÌªÌP”Ìa ÌªÌQ”Ìk ÌªÌ[”Ìl ÌªÌ\”Ìr ÌªÌb’” Ì§” Ì§’” Ì¦” Ì¦’” Ì¥
+”  Ì¥œ”/ Ì¤”3 Ì¤”4 Ì¤”ÌF Ì¤'”ÌH Ì¤)”Ìb Ìµ”Ìc Ìµ”Ìj Ìµ”Ìl Ìµ”Ìn Ìµ”Ìo Ìµ ”Ìv Ìµ'’” Ì¤” Ì¤’” Ì£” Ì£
+’” Ì” Ì
+‘” Ì¿’” ÌÂ” ÌÂ’” ÌÃ” ÌÃ
+–” ÌÃ” ÌÃ
+” Ìö” Ìö
+” Ìö” ÌöÜ ” ÌÃ” ÌÃ
+” Ì÷” Ì÷” Ì÷” Ì÷”" Ì÷”$ Ì÷”/ Ì÷!”0 Ì÷"”: Ì÷,”< Ì÷.”= Ì÷/”> Ì÷0”? Ì÷1”ÌA Ì÷3”ÌB Ì÷4”ÌC Ì÷5”ÌD Ì÷6”ÌF Ì÷8”ÌH Ì÷:”” ÌÄ” ÌÄ
+” ÌÄ” ÌÄÜ ” ÌÄ” ÌÄ
+” ÌÅ	” ÌÅ” ÌÅ”% ÌÅ”& ÌÅ”0 ÌÅ(”2 ÌÅ*”3 ÌÅ+”4 ÌÅ,”5 ÌÅ-”7 ÌÅ/”8 ÌÅ0”9 ÌÅ1”: ÌÅ2”< ÌÅ4–” ÌÄ” ÌÄ
+” ÌÆ	” ÌÆ” ÌÆ”$ ÌÆÜ ” ÌÄ” ÌÄ
+” ÌÇ	” ÌÇ” ÌÇ” ÌÇ”  ÌÇ”" ÌÇ”- ÌÇ%”. ÌÇ&”8 ÌÇ0”: ÌÇ2”; ÌÇ3”< ÌÇ4”= ÌÇ5”> ÌÇ6”? ÌÇ7”Ì@ ÌÇ8”ÌA ÌÇ9”ÌB ÌÇ:”ÌD ÌÇ<’” ÌÄ” ÌÄ
+’” ÌÉ”  ÌÉ—” ÌÊ” ÌÊ
+” ÌÊ” ÌÊ”& ÌÊ ”( ÌÊ"”* ÌÊ$’” ÌË” ÌË–” ÌË” ÌË” ÌÝ	”! ÌÝ”" ÌÝ”( ÌÝ˜” ÌË” ÌË” ÌÞ	”* ÌÞ”+ ÌÞ”4 ÌÞ!”5 ÌÞ"”ÌA ÌÞ.’” ÌÌ
+” ÌÌ’”  ÌÍ”& ÌÍ–”  ÌÍ”& ÌÍ”' ÌÓ”, ÌÓ”- ÌÓ”/ ÌÓ–”  ÌÍ”& ÌÍ”' ÌÔ”- ÌÔ”. ÌÔ”0 ÌÔÜ ”  ÌÍ”& ÌÍ”' ÌÕ”6 ÌÕ”7 ÌÕ”; ÌÕ!”< ÌÕ"”ÌG ÌÕ-”ÌL ÌÕ2”ÌO ÌÕ5”ÌP ÌÕ6”ÌQ ÌÕ7”ÌR ÌÕ8”Ì[ ÌÕÌA”Ì\ ÌÕÌB”Ì] ÌÕÌC”Ì^ ÌÕÌD”Ìg ÌÕÌM–”  ÌÍ”& ÌÍ”' ÌÖ”3 ÌÖ”4 ÌÖ”5 ÌÖ˜”  ÌÍ”& ÌÍ”' Ì×”5 Ì×”6 Ì×”? Ì×%”Ì@ Ì×&”ÌF Ì×,—”  ÌÍ”& ÌÍ”' ÌØ”. ÌØ”/ ÌØ”2 ÌØ”4 ÌØ—”$ ÌÙ”( ÌÙ”) ÌÙ”4 ÌÙ”7 ÌÙ!”: ÌÙ$”; ÌÙ%’”  ÌÚ”! ÌÚÜ ”  ÌÎ”$ ÌÎ”, ÌÎ”/ ÌÎ”2 ÌÎ”3 ÌÎ”4 ÌÎ”5 ÌÎ”6 ÌÎ”: ÌÎ!”= ÌÎ$”? ÌÎ&”Ì@ ÌÎ'”ÌA ÌÎ(”ÌB ÌÎ)”ÌE ÌÎ,”ÌH ÌÎ/”ÌJ ÌÎ1–”  ÌÎ”$ ÌÎ”% ÌÏ”- ÌÏ”. ÌÏ”0 ÌÏÜ ”  ÌÎ”$ ÌÎ”% ÌÐ”. ÌÐ”/ ÌÐ”3 ÌÐ”4 ÌÐ ”? ÌÐ+”ÌD ÌÐ0”ÌG ÌÐ3”ÌH ÌÐ4”ÌI ÌÐ5”ÌJ ÌÐ6”ÌS ÌÐ?”ÌT ÌÐÌ@”ÌU ÌÐÌA”ÌV ÌÐÌB”Ì_ ÌÐÌK˜”  ÌÎ”$ ÌÎ”% ÌÑ”/ ÌÑ”0 ÌÑ”: ÌÑ&”; ÌÑ'”? ÌÑ+’” ÌÎ”  ÌÎ’” ÌÍ”" ÌÍÜ ”; ÌÌ”< ÌÌ”= ÌÌ”> ÌÌ”Ì@ ÌÌ”ÌA ÌÌ”ÌB ÌÌ”ÌD ÌÌ”ÌE ÌÌ”ÌG ÌÌ”ÌH ÌÌ”ÌJ ÌÌ!”ÌK ÌÌ"”ÌL ÌÌ#”Ìf ÌÛ”Ìg ÌÛ”Ìj ÌÛ”Ìl ÌÛ”Ìn ÌÛ”Ìo ÌÛ”Ìr ÌÛ!”Ìs ÌÛ"”Ì{ ÌÛ*”Ì} ÌÛ,’” ÌÌ
+” ÌÌ’” ÌË” ÌË‘” Ìß‘” Ìß’” Ìà” Ìà–” Ìà” Ìà” Ìò	”! Ìò”" Ìò”( Ìò˜” Ìà” Ìà” Ìó	”* Ìó”+ Ìó”4 Ìó!”5 Ìó"”ÌA Ìó.’” Ìá
+” Ìá’”  Ìâ”& Ìâ–”  Ìâ”& Ìâ”' Ìè”, Ìè”- Ìè”/ Ìè–”  Ìâ”& Ìâ”' Ìé”- Ìé”. Ìé”0 ÌéÜ ”  Ìâ”& Ìâ”' Ìê”6 Ìê”7 Ìê”; Ìê!”< Ìê"”ÌG Ìê-”ÌL Ìê2”ÌO Ìê5”ÌP Ìê6”ÌQ Ìê7”ÌR Ìê8”Ì[ ÌêÌA”Ì\ ÌêÌB”Ì] ÌêÌC”Ì^ ÌêÌD”Ìg ÌêÌM–”  Ìâ”& Ìâ”' Ìë”3 Ìë”4 Ìë”5 Ìë˜”  Ìâ”& Ìâ”' Ìì”5 Ìì”6 Ìì”? Ìì%”Ì@ Ìì&”ÌF Ìì,—”  Ìâ”& Ìâ”' Ìí”. Ìí”/ Ìí”2 Ìí”4 Ìí—”$ Ìî”( Ìî”) Ìî”4 Ìî”7 Ìî!”: Ìî$”; Ìî%’”  Ìï”! ÌïÜ ”  Ìã”$ Ìã”, Ìã”/ Ìã”2 Ìã”3 Ìã”4 Ìã”5 Ìã”6 Ìã”: Ìã!”= Ìã$”? Ìã&”Ì@ Ìã'”ÌA Ìã(”ÌB Ìã)”ÌE Ìã,”ÌH Ìã/”ÌJ Ìã1–”  Ìã”$ Ìã”% Ìä”- Ìä”. Ìä”0 ÌäÜ ”  Ìã”$ Ìã”% Ìå”. Ìå”/ Ìå”3 Ìå”4 Ìå ”? Ìå+”ÌD Ìå0”ÌG Ìå3”ÌH Ìå4”ÌI Ìå5”ÌJ Ìå6”ÌS Ìå?”ÌT ÌåÌ@”ÌU ÌåÌA”ÌV ÌåÌB”Ì_ ÌåÌK˜”  Ìã”$ Ìã”% Ìæ”/ Ìæ”0 Ìæ”: Ìæ&”; Ìæ'”? Ìæ+’” Ìã”  Ìã’” Ìâ”" ÌâÜ '”; Ìá”< Ìá”= Ìá”> Ìá”Ì@ Ìá”ÌA Ìá”ÌB Ìá”ÌD Ìá”ÌE Ìá”ÌF Ìá”ÌH Ìá”ÌI Ìá ”ÌJ Ìá!”ÌL Ìá#”ÌM Ìá$”ÌN Ìá%”ÌP Ìá'”ÌQ Ìá(”ÌS Ìá*”ÌT Ìá+”ÌV Ìá-”ÌW Ìá.”ÌY Ìá0”ÌZ Ìá1”Ì\ Ìá3”Ì] Ìá4”Ì_ Ìá6”Ì` Ìá7”Ìa Ìá8”Ì{ Ìð”Ì| Ìð”Ì Ìð”Ì Ìð”Ìƒ Ìð”Ì„ Ìð”Ì‡ Ìð!”Ìˆ Ìð"”Ì Ìð*”Ì’ Ìð,’” Ìá
+” Ìá’” Ìà” Ìà‘” Ìô’” ÌÃ” ÌÃ
+‘” Ìø’” Ìû” Ìû”” Ìü” Ìü
+”# Ìü”) Ìü–” Ìü” Ìü
+” Ìý” Ìý” Ìý” ÌýÜ ” Ìü” Ìü
+” Ìþ” Ìþ” Ìþ”% Ìþ”& Ìþ”0 Ìþ$”2 Ìþ&”3 Ìþ'”4 Ìþ(”5 Ìþ)”7 Ìþ+”8 Ìþ,”9 Ìþ-”: Ìþ.”< Ìþ0–” Ìü” Ìü
+” Ìÿ”" Ìÿ”# Ìÿ”, Ìÿ –” Ìü” Ìü
+” Í ” Í ” Í ”& Í Ü ” Ìü” Ìü
+” Í” Í” Í”' Í”( Í”2 Í&”4 Í(”5 Í)”6 Í*”7 Í+”9 Í-”: Í.”; Í/”< Í0”> Í2˜” Ìü” Ìü
+” Í” Í” Í”( Í”) Í”- Í!Ü ” Ìü” Ìü
+” Í” Í”  Í”+ Í”, Í ”6 Í*”8 Í,”9 Í-”: Í.”; Í/”= Í1”> Í2”? Í3”Ì@ Í4”ÌB Í6š” Ìü” Ìü
+” Í” Í” Í” Í”  Í”/ Í#”4 Í(”6 Í*—” Ìü” Ìü
+” Í” Í” Í” Í”  Í–” Í” Í” Í” Í”! Í”" Í’” Í” Í’” Ìü” Ìü
+‘” Í’” Í
+” Í
+’” Í” Íš” Í” Í” Í” Í” Í” Í”$ Í”' Í”( Í ”* Í"’” Í” Í–” Í” Í” Í:”$ Í:”% Í:”+ Í:Ü ” Í” Í” Í;”& Í;”' Í;”2 Í;”3 Í;”= Í;%”? Í;'”Ì@ Í;(”ÌA Í;)”ÌB Í;*”ÌD Í;,”ÌE Í;-”ÌF Í;.”ÌG Í;/”ÌI Í;1–” Í” Í” Í<”. Í<”/ Í<”8 Í< Ü ” Í” Í” Í=”+ Í=”, Í=”7 Í=”8 Í= ”ÌB Í=*”ÌD Í=,”ÌE Í=-”ÌF Í=.”ÌG Í=/”ÌH Í=0”ÌI Í=1”ÌJ Í=2”ÌK Í=3”ÌM Í=5Ü ” Í” Í” Í>”% Í>”& Í>”( Í>”. Í>”0 Í>”; Í>#”< Í>$”ÌF Í>.”ÌH Í>0”ÌI Í>1”ÌJ Í>2”ÌK Í>3”ÌM Í>5”ÌN Í>6”ÌO Í>7”ÌP Í>8”ÌR Í>:”ÌT Í><’” Í” Í–” Í” Í” Í"	”! Í"”" Í"”( Í"Ü ” Í” Í” Í#	”" Í#”# Í#”% Í#”+ Í#”- Í#”8 Í#%”9 Í#&”ÌC Í#0”ÌE Í#2”ÌF Í#3”ÌG Í#4”ÌH Í#5”ÌI Í#6”ÌJ Í#7”ÌK Í#8”ÌL Í#9”ÌN Í#;”ÌP Í#=”” Í
+” Í”$ Í”, ÍÜ ” Í
+” Í” Í”% Í”& Í”1 Í!”2 Í"”< Í,”> Í.”? Í/”Ì@ Í0”ÌA Í1”ÌC Í3”ÌD Í4”ÌE Í5”ÌF Í6”ÌH Í8˜” Í
+” Í” Í”' Í”( Í”2 Í"”3 Í#”7 Í'–” Í
+” Í” Í”& Í”' Í”0 Í ’” Í
+” Í’” Í
+” Í’” Í
+” Í”” Í
+” Í”/ Í”3 ÍÜ ” Í
+” Í” Í”% Í”& Í”1 Í”2 Í ”< Í*”> Í,”? Í-”Ì@ Í.”ÌA Í/”ÌC Í1”ÌD Í2”ÌE Í3”ÌF Í4”ÌH Í6–” Í
+” Í” Í”. Í”/ Í”8 Í&–” Í
+” Í” Í”( Í”) Í”2 Í Ü ” Í
+” Í” Í”' Í”( Í”3 Í!”4 Í"”> Í,”Ì@ Í.”ÌA Í/”ÌB Í0”ÌC Í1”ÌE Í3”ÌF Í4”ÌG Í5”ÌH Í6”ÌJ Í8Ü ” Í
+” Í” Í”+ Í”, Í”7 Í%”8 Í&”ÌB Í0”ÌD Í2”ÌE Í3”ÌF Í4”ÌG Í5”ÌI Í7”ÌJ Í8”ÌK Í9”ÌL Í:”ÌN Í<—” Í
+” Í” Í”& Í”' Í”* Í”, Í—” Í”  Í”! Í”) Í”, Í”. Í ”/ Í!–” Í”  Í”! Í”/ Í!”1 Í#”2 Í$’” Í ” Í ’” Í
+” Í’” Í” Í’” Í%” Í%’”? Í%;”ÌD Í%ÌH™” Í&
+”  Í&”! Í&”, Í&”8 Í&”? Í&"”ÌA Í&$”ÌF Í&)”ÌG Í&*Ü ”; Í%”? Í%”Ì@ Í%”ÌH Í%”Ìb Í'”Ìc Í'”Ìj Í'%”Ìl Í''”Ìq Í'4”Ìs Í'6”Ìu Í'8”Ìv Í'9”Ì{ Í'>”Ì| Í'?”Ì„ Í'ÌG”Ì† Í'ÌI’” Í%” Í%’” Í)”  Í)’” Í*” Í*’” Í)”  Í)–” Í*” Í*” Í7	”! Í7”" Í7”( Í7’” Í)”  Í)Ü ” Í*” Í*” Í8	”# Í8”$ Í8”& Í8”) Í8”+ Í8”6 Í8#”7 Í8$”ÌA Í8.”ÌC Í80”ÌD Í81”ÌE Í82”ÌF Í83”ÌG Í84”ÌH Í85”ÌI Í86”ÌJ Í87”ÌL Í89”ÌN Í8;”” Í+
+” Í+”$ Í+”/ Í+Ü ” Í+
+” Í+” Í,”% Í,”& Í,”1 Í,!”2 Í,"”< Í,,”> Í,.”? Í,/”Ì@ Í,0”ÌA Í,1”ÌC Í,3”ÌD Í,4”ÌE Í,5”ÌF Í,6”ÌH Í,8˜” Í+
+” Í+” Í-”' Í-”( Í-”2 Í-"”3 Í-#”7 Í-'–” Í+
+” Í+” Í.”& Í.”' Í.”0 Í. ’” Í+
+” Í+’” Í0
+” Í0’” Í0
+” Í0›” Í2
+” Í2”$ Í2”( Í2”) Í2”1 Í2”2 Í2”9 Í2$”: Í2%”; Í2&”< Í2'Ü ” Í2
+” Í2” Í3”% Í3”& Í3”1 Í3!”2 Í3"”< Í3,”> Í3.”? Í3/”Ì@ Í30”ÌA Í31”ÌC Í33”ÌD Í34”ÌE Í35”ÌF Í36”ÌH Í38˜” Í2
+” Í2” Í4”' Í4”( Í4”2 Í4"”3 Í4#”7 Í4'–” Í2
+” Í2” Í5”& Í5”' Í5”0 Í5 ’” Í2
+” Í2’” Í)” Í)’” Í*” Í*’” Í” Í‘” Í?‘” Í?‘” Í@–” ÍC” ÍC” ÍC” ÍC'” ÍC)” ÍC6’” ÍD” ÍD–” ÍD” ÍD” Íj” Íj
+” Íj” ÍjÜ $” ÍD” ÍD” Ík” Ík” Ík” Ík” Ík” Ík”* Ík”+ Ík ”5 Ík*”7 Ík,”8 Ík-”9 Ík.”: Ík/”; Ík0”< Ík1”= Ík2”> Ík3”? Ík4”ÌA Ík6”ÌG Ík<”ÌI Ík>”ÌT ÍkÌI”ÌU ÍkÌJ”Ì_ ÍkÌT”Ìa ÍkÌV”Ìb ÍkÌW”Ìc ÍkÌX”Ìd ÍkÌY”Ìe ÍkÌZ”Ìf ÍkÌ[”Ìg ÍkÌ\”Ìh ÍkÌ]”Ìi ÍkÌ^”Ìk ÍkÌ`–” ÍE” ÍE
+” ÍE” ÍE”  ÍE”$ ÍEÜ ” ÍE” ÍE
+” ÍF	” ÍF” ÍF”% ÍF”& ÍF”0 ÍF(”2 ÍF*”3 ÍF+”4 ÍF,”5 ÍF-”7 ÍF/”8 ÍF0”9 ÍF1”: ÍF2”< ÍF4˜” ÍE” ÍE
+” ÍG	” ÍG” ÍG”& ÍG”' ÍG”+ ÍG#–” ÍE” ÍE
+” ÍH	” ÍH” ÍH”$ ÍH–” ÍE” ÍE
+” ÍI	” ÍI” ÍI” ÍI’” ÍE” ÍE
+’” ÍK” ÍK˜” ÍL” ÍL
+” ÍL” ÍL” ÍL”' ÍL!”) ÍL#”+ ÍL%” ÍM” ÍM”$ ÍM”+ ÍM”2 ÍM”3 ÍM”< ÍM%”= ÍM&”ÌD ÍM-”ÌE ÍM.”ÌF ÍM/”ÌG ÍM0”ÌI ÍM2–” ÍM” ÍM” ÍN”% ÍN”& ÍN”( ÍN–” ÍM” ÍM” ÍO”& ÍO”' ÍO”0 ÍOš” ÍM” ÍM” ÍP”# ÍP”$ ÍP”& ÍP”+ ÍP”- ÍP”. ÍP”0 ÍP’” ÍM” ÍMÜ ” ÍR” ÍR”$ ÍR”, ÍR”3 ÍR”4 ÍR”7 ÍR ”: ÍR#”; ÍR$”< ÍR%”= ÍR&”> ÍR'”ÌA ÍR*”ÌB ÍR+”ÌC ÍR,”ÌD ÍR-”ÌF ÍR/”ÌI ÍR2”ÌP ÍR9”ÌQ ÍR:”ÌT ÍR=”ÌV ÍR?–” ÍR” ÍR” ÍS”% ÍS”& ÍS”( ÍSÜ ” ÍR” ÍR” ÍT”& ÍT”' ÍT”. ÍT”/ ÍT”2 ÍT ”5 ÍT#”6 ÍT$”7 ÍT%”8 ÍT&”9 ÍT'”ÌB ÍT0”ÌC ÍT1”ÌD ÍT2”ÌE ÍT3”ÌL ÍT:”ÌM ÍT;”ÌP ÍT>”ÌS ÍTÌA”ÌT ÍTÌB”ÌU ÍTÌC”ÌV ÍTÌD”ÌW ÍTÌE”Ì` ÍTÌN”Ìa ÍTÌO”Ìb ÍTÌP”Ìc ÍTÌQ”Ìl ÍTÌZš” ÍR” ÍR” ÍU”# ÍU”$ ÍU”& ÍU”+ ÍU”- ÍU”. ÍU”0 ÍU’” ÍR” ÍR‘” ÍV‘” ÍV›” ÍX” ÍX
+” ÍX” ÍX”  ÍX”* ÍX”+ ÍX”2 ÍX%”3 ÍX&”4 ÍX'”5 ÍX(Ü ” ÍX” ÍX
+” ÍY	” ÍY” ÍY”% ÍY”& ÍY”0 ÍY(”2 ÍY*”3 ÍY+”4 ÍY,”5 ÍY-”7 ÍY/”8 ÍY0”9 ÍY1”: ÍY2”< ÍY4˜” ÍX” ÍX
+” ÍZ	” ÍZ” ÍZ”& ÍZ”' ÍZ”+ ÍZ#–” ÍX” ÍX
+” Í[	” Í[” Í[”$ Í[’” ÍX” ÍX
+”” Í]” Í]”# Í]”& Í]Ü ” Í]” Í]” Í^	” Í^” Í^”$ Í^”% Í^”/ Í^%”1 Í^'”2 Í^(”3 Í^)”4 Í^*”6 Í^,”7 Í^-”8 Í^.”9 Í^/”; Í^1Ü ” Í]” Í]” Í_	” Í_” Í_”% Í_”& Í_”0 Í_&”2 Í_(”3 Í_)”4 Í_*”5 Í_+”7 Í_-”8 Í_.”9 Í_/”: Í_0”< Í_2–” Í]” Í]” Í`	”" Í`”# Í`”, Í`"–” Í]” Í]” Ía	” Ía” Ía”& ÍaÜ ” Í]” Í]” Íb	” Íb” Íb”' Íb”( Íb”2 Íb(”4 Íb*”5 Íb+”6 Íb,”7 Íb-”9 Íb/”: Íb0”; Íb1”< Íb2”> Íb4Ü ” Í]” Í]” Íc	” Íc”  Íc”+ Íc!”, Íc"”6 Íc,”8 Íc.”9 Íc/”: Íc0”; Íc1”= Íc3”> Íc4”? Íc5”Ì@ Íc6”ÌB Íc8Ü ” Í]” Í]” Íd	” Íd” Íd” Íd”  Íd”" Íd”- Íd#”. Íd$”8 Íd.”: Íd0”; Íd1”< Íd2”= Íd3”> Íd4”? Íd5”Ì@ Íd6”ÌA Íd7”ÌB Íd8”ÌD Íd:—” Í]” Í]” Íe	” Íe” Íe” Íe”  Íeœ” Íf
+” Íf” Íf” Íf” Íf”$ Íf”% Íf”* Íf$”, Íf&”- Íf'”. Íf(”/ Íf)–” Íg
+” Íg” Íg”# Íg”% Íg”& Íg ’” Íh” Íh	’” Í]” Í]’” ÍD” ÍD‘” Íl’” Ín” Ín’” Íp” Íp’” Íq” Íq
+–” Íq” Íq
+” Í‹” Í‹
+” Í‹” Í‹Ü ” Íq” Íq
+” ÍŒ” ÍŒ” ÍŒ”& ÍŒ”' ÍŒ”1 ÍŒ#”3 ÍŒ%”4 ÍŒ&”5 ÍŒ'”6 ÍŒ(”8 ÍŒ*”9 ÍŒ+”: ÍŒ,”; ÍŒ-”= ÍŒ/–” Íq” Íq
+” Í”" Í”# Í”, ÍÜ ” Íq” Íq
+” ÍŽ” ÍŽ”  ÍŽ”+ ÍŽ”, ÍŽ”6 ÍŽ(”8 ÍŽ*”9 ÍŽ+”: ÍŽ,”; ÍŽ-”< ÍŽ.”= ÍŽ/”> ÍŽ0”? ÍŽ1”ÌA ÍŽ3Ü ” Íq” Íq
+” Í” Í” Í” Í”" Í”$ Í”/ Í!”0 Í"”: Í,”< Í.”= Í/”> Í0”? Í1”ÌA Í3”ÌB Í4”ÌC Í5”ÌD Í6”ÌF Í8”ÌH Í:”” Ír” Ír
+” Ír”% ÍrÜ ” Ír” Ír
+” Ís	” Ís” Ís”% Ís”& Ís”0 Ís(”2 Ís*”3 Ís+”4 Ís,”5 Ís-”7 Ís/”8 Ís0”9 Ís1”: Ís2”< Ís4˜” Ír” Ír
+” Ít	” Ít” Ít”& Ít”' Ít”+ Ít#–” Ír” Ír
+” Íu	” Íu” Íu”$ ÍuÜ ” Ír” Ír
+” Ív	” Ív” Ív” Ív”  Ív”" Ív”- Ív%”. Ív&”8 Ív0”: Ív2”; Ív3”< Ív4”= Ív5”> Ív6”? Ív7”Ì@ Ív8”ÌA Ív9”ÌC Ív;”ÌE Ív=’” Ír” Ír
+’” Íx” Íx	–” Íx” Íx	” Í‰” Í‰” Í‰” Í‰”” Íy” Íy” Íy” ÍyÜ ” Íy” Íy” Íz” Íz” Íz”% Íz”& Íz ”0 Íz*”2 Íz,”3 Íz-”4 Íz.”5 Íz/”7 Íz1”8 Íz2”9 Íz3”: Íz4”< Íz6–” Íy” Íy” Í{” Í{” Í{”$ Í{’” Íy” ÍyÜ ” Í}” Í}” Í}” Í}”* Í}”, Í}!”5 Í}*”7 Í},”; Í}0”= Í}2”ÌA Í}6”ÌB Í}7”ÌJ Í}?”ÌK Í}Ì@”ÌS Í}ÌH”ÌU Í}ÌJ”ÌW Í}ÌL–” Í}” Í}” Í~”" Í~”# Í~”$ Í~Ü ” Í}” Í}” Í” Í” Í”( Í”) Í”3 Í(”5 Í*”6 Í+”7 Í,”8 Í-”: Í/”; Í0”< Í1”= Í2”? Í4–” Í}” Í}” Í€”% Í€”& Í€”/ Í€$Ü ” Í}” Í}” Í”" Í”# Í”. Í#”/ Í$”9 Í.”; Í0”< Í1”= Í2”> Í3”? Í4”Ì@ Í5”ÌA Í6”ÌB Í7”ÌC Í8Ü ” Í}” Í}” Í‚” Í‚” Í‚” Í‚”# Í‚”% Í‚”0 Í‚%”1 Í‚&”; Í‚0”= Í‚2”> Í‚3”? Í‚4”Ì@ Í‚5”ÌA Í‚6”ÌB Í‚7”ÌC Í‚8”ÌD Í‚9”ÌF Í‚;”ÌH Í‚=Ü ” Í}” Í}” Íƒ” Íƒ” Íƒ”* Íƒ”+ Íƒ ”5 Íƒ*”7 Íƒ,”8 Íƒ-”9 Íƒ.”: Íƒ/”< Íƒ1”= Íƒ2”> Íƒ3”? Íƒ4”ÌA Íƒ6˜” Í}” Í}” Í„” Í„” Í„”$ Í„”% Í„”+ Í„ ™” Í}” Í}” Í…” Í…” Í…”  Í…”% Í…"”' Í…$”) Í…&œ” Í†” Í†” Í†” Í†”  Í†”* Í†&”+ Í†'”0 Í†,”1 Í†-”5 Í†1”6 Í†2”7 Í†3’” Í‡
+” Í‡’” Íx” Íx	’” Íq” Íq
+‘” Í’” Í’” Í’	’” Í”” Í”’” Í•” Í•
+–” Í•” Í•
+” Í°” Í°
+” Í°” Í°Ü ” Í•” Í•
+” Í±” Í±” Í±”& Í±”' Í±”1 Í±#”3 Í±%”4 Í±&”5 Í±'”6 Í±(”8 Í±*”9 Í±+”: Í±,”; Í±-”= Í±/–” Í•” Í•
+” Í²”" Í²”# Í²”, Í²Ü ” Í•” Í•
+” Í³” Í³”  Í³”+ Í³”, Í³”6 Í³(”8 Í³*”9 Í³+”: Í³,”; Í³-”< Í³.”= Í³/”> Í³0”? Í³1”ÌA Í³3’” Í–” Í–	–” Í–” Í–	” Í®” Í®” Í®” Í®”” Í—” Í—” Í—” Í—Ü ” Í—” Í—” Í˜” Í˜” Í˜”% Í˜”& Í˜ ”0 Í˜*”2 Í˜,”3 Í˜-”4 Í˜.”5 Í˜/”7 Í˜1”8 Í˜2”9 Í˜3”: Í˜4”< Í˜6˜” Í—” Í—” Í™” Í™” Í™”& Í™ ”' Í™!”+ Í™%–” Í—” Í—” Íš” Íš” Íš”$ Íš’” Í—” Í—’” Íœ” Íœ’” Íœ” Íœ’” Íž” Íž˜” Íž” Íž” Í¬	” Í¬” Í¬”- Í¬#”. Í¬$”1 Í¬'Ü ” ÍŸ
+” ÍŸ” ÍŸ” ÍŸ” ÍŸ” ÍŸ”& ÍŸ”) ÍŸ ”- ÍŸ$”. ÍŸ%”6 ÍŸ-”7 ÍŸ.”8 ÍŸ/”? ÍŸ6”Ì@ ÍŸ7”ÌA ÍŸ8”ÌB ÍŸ9Ü ” ÍŸ
+” ÍŸ” Í ” Í ” Í ”% Í !”& Í "”0 Í ,”2 Í .”3 Í /”4 Í 0”5 Í 1”7 Í 3”8 Í 4”9 Í 5”: Í 6”< Í 8˜” ÍŸ
+” ÍŸ” Í¡” Í¡” Í¡”& Í¡"”' Í¡#”+ Í¡'–” ÍŸ
+” ÍŸ” Í¢” Í¢” Í¢”$ Í¢ ’” ÍŸ
+” ÍŸ’” Í¤
+” Í¤˜” Í¥
+” Í¥” Í¥” Í¥” Í¥”' Í¥%”) Í¥'”+ Í¥)Ü ” Í¦” Í¦”$ Í¦”, Í¦”0 Í¦”1 Í¦”9 Í¦&”: Í¦'”ÌA Í¦.”ÌB Í¦/”ÌC Í¦0”ÌD Í¦1”ÌO Í¦<”ÌS Í¦Ì@”ÌT Í¦ÌA”Ì\ Í¦ÌI”Ì] Í¦ÌJ”Ìd Í¦ÌQ”Ìe Í¦ÌR”Ìf Í¦ÌS”Ìg Í¦ÌT”Ìi Í¦ÌV–” Í¦” Í¦” Í§”% Í§”& Í§”( Í§–” Í¦” Í¦” Í¨”& Í¨”' Í¨”0 Í¨"š” Í¦” Í¦” Í©”# Í©”$ Í©”& Í©”) Í©”+ Í©”, Í©”. Í© ’” Í¦” Í¦‘” Íª‘” Íª’” Íž” Íž’” Í–” Í–	’” Í•” Í•
+‘” Í´’” Í¶” Í¶	’” Í·
+” Í·–” Í¸” Í¸” Í¸” Í¸”! Í¸”# Í¸“” Í¹” Í¹” Í¹–” Íº” Íº” Íº” Íº”! Íº”" Íº“” Í»” Í»” Í»–” Í¼” Í¼” Í¼” Í¼”! Í¼”" Í¼“” Í½” Í½” Í½–” Í¾” Í¾” Í¾” Í¾”! Í¾”" Í¾‘” Í¿–” ÍÀ” ÍÀ” ÍÀ” ÍÀ”! ÍÀ”" ÍÀ‘”	 ÍÁ’” ÍÂ” ÍÂ’” ÍÄ
+” ÍÄ–” ÍÅ” ÍÅ” ÍÅ” ÍÅ”  ÍÅ”" ÍÅ›” ÍÆ” ÍÆ” ÍÆ” ÍÆ”2 ÍÆ,”3 ÍÆ-”7 ÍÆ1”8 ÍÆ2”ÌG ÍÆÌA”ÌH ÍÆÌB”ÌI ÍÆÌC”” ÍÇ” ÍÇ
+” ÍÇ” ÍÇ™” ÍÈ” ÍÈ” ÍÈ” ÍÈ” ÍÈ”" ÍÈ”# ÍÈ”. ÍÈ&”/ ÍÈ'–” ÍÉ” ÍÉ” ÍÉ”+ ÍÉ#”- ÍÉ%”. ÍÉ&š” ÍÊ” ÍÊ” ÍÊ” ÍÊ” ÍÊ”" ÍÊ”# ÍÊ”* ÍÊ"”+ ÍÊ#”, ÍÊ$–” ÍË” ÍË” ÍË”# ÍË”% ÍË”& ÍË—” ÍÌ” ÍÌ” ÍÌ”$ ÍÌ”' ÍÌ”) ÍÌ!”* ÍÌ"—” ÍÍ” ÍÍ” ÍÍ”  ÍÍ”# ÍÍ”$ ÍÍ”% ÍÍ‘” ÍÎ‘”	 ÍÏ’” ÍÐ” ÍÐ’” ÍÒ
+” ÍÒÜ ” ÍÓ” ÍÓ” ÍÓ	” ÍÓ” ÍÓ” ÍÓ” ÍÓ”% ÍÓ!”& ÍÓ"”, ÍÓ(”- ÍÓ)”. ÍÓ*”1 ÍÓ-”3 ÍÓ/”: ÍÓ6”< ÍÓ8”> ÍÓ:”? ÍÓ;”ÌB ÍÓ>”ÌE ÍÓÌA”ÌL ÍÓÌH”ÌM ÍÓÌI”ÌW ÍÓÌS”ÌY ÍÓÌU”ÌZ ÍÓÌV”Ì[ ÍÓÌW”Ì\ ÍÓÌX’” ÍÔ” ÍÔÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  ÌŽ ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ìž ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌÐ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  ÌÝ ‘”  ÌÞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìð ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìý ‘”  Ìþ ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍÐ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  ÍÝ ‘”  ÍÞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íð ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íý ‘”  Íþ ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍÐ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  ÍÝ ‘”  ÍÞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íð ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íý ‘”  Íþ ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ·Ìò‘ÔrK•¤type¥start£end¨imported¥local¯ImportSpecifierÌÀÌÉÔrL”¤type¥start£end¤nameªIdentifierÌÀÌÉ©IceNavBarLªIdentifierÌÀÌÉ©IceNavBarÔrM•¤type¥start£end¥value£raw§LiteralÌÑÌñ¾../common/components/IceNavBarÙ '../common/components/IceNavBar'J±ImportDeclarationÌôÍg”K¯ImportSpecifierÌýÍLªIdentifierÌýÍ¶createTechnicalElementLªIdentifierÌýÍ¶createTechnicalElementK¯ImportSpecifierÍÍ LªIdentifierÍÍ «getAllJumpsLªIdentifierÍÍ «getAllJumpsK¯ImportSpecifierÍ"Í-LªIdentifierÍ"Í-«getAllSpinsLªIdentifierÍ"Í-«getAllSpinsK¯ImportSpecifierÍ/Í:LªIdentifierÍ/Í:«getAllStepsLªIdentifierÍ/Í:«getAllStepsM§LiteralÍBÍfÙ"../viewmodel/TechnicalElementModelÙ$'../viewmodel/TechnicalElementModel'J±ImportDeclarationÍiÍ£‘K¯ImportSpecifierÍrÍ}LªIdentifierÍrÍ}«DeviceUtilsLªIdentifierÍrÍ}«DeviceUtilsM§LiteralÍ…Í¢»../common/utils/DeviceUtils½'../common/utils/DeviceUtils'
