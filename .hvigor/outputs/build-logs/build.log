@@ -6965,3 +6965,970 @@ Require stack:
 [2026-06-02T17:25:32.795] [DEBUG] debug-file - worker[20] exits with exit code 1.
 [2026-06-02T17:25:32.800] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
 [2026-06-02T17:25:32.801] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:09:15.335] [DEBUG] debug-file - java daemon tryConnect failed Error: connect ECONNREFUSED 127.0.0.1:45050
+[2026-06-08T21:09:15.394] [DEBUG] debug-file - java daemon started at port 45050 pid 4484
+[2026-06-08T21:09:10.165] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2026-06-08T21:09:10.422] [DEBUG] debug-file - env: daemon=true
+[2026-06-08T21:09:10.167] [DEBUG] debug-file - env: hvigor-config.json5 content = { modelVersion: '5.0.5', dependencies: {} }
+[2026-06-08T21:09:18.318] [DEBUG] debug-file - session manager: set active socket. socketId=KGprn3rOr_ZG0nSbAAAB
+[2026-06-08T21:09:18.344] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:09:18.348] [DEBUG] debug-file - Since there is no instance or instance is terminated, create a new worker pool.
+[2026-06-08T21:09:18.349] [DEBUG] debug-file - Worker pool is initialized with config:  {
+  minPoolNum: 2,
+  maxPoolNum: undefined,
+  maxCoreSize: undefined,
+  cacheCapacity: undefined,
+  cacheTtl: undefined
+}
+[2026-06-08T21:09:18.350] [DEBUG] debug-file - Create  resident worker with id: 0.
+[2026-06-08T21:09:18.353] [DEBUG] debug-file - Create  resident worker with id: 1.
+[2026-06-08T21:09:18.356] [DEBUG] debug-file - Workers' log level updated to INFO
+[2026-06-08T21:09:18.365] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined,
+  customizedParam: undefined
+}
+[2026-06-08T21:09:18.414] [DEBUG] debug-file - Cache service initialization finished in 49 ms 
+[2026-06-08T21:09:18.418] [DEBUG] debug-file - hvigorfile, resolving G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+[2026-06-08T21:10:10.421] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2026-06-08T21:10:10.422] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2026-06-08T21:10:10.424] [DEBUG] debug-file - Starting plugin build process
+[2026-06-08T21:10:10.424] [DEBUG] debug-file - App plugin prepare start...
+[2026-06-08T21:10:10.424] [DEBUG] debug-file - App plugin prepare end...
+[2026-06-08T21:10:10.424] [DEBUG] debug-file - App plugin creating...
+[2026-06-08T21:10:10.822] [DEBUG] debug-file - App plugin register hook start...
+[2026-06-08T21:10:10.823] [DEBUG] debug-file - App plugin register hook end...
+[2026-06-08T21:10:10.823] [DEBUG] debug-file - Plugin build process completed
+[2026-06-08T21:10:10.825] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2026-06-08T21:10:10.825] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2026-06-08T21:10:10.826] [DEBUG] debug-file - Product 'default' build option initialized
+[2026-06-08T21:10:10.826] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2026-06-08T21:10:10.829] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2026-06-08T21:10:10.831] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2026-06-08T21:10:10.854] [DEBUG] debug-file - Local scan or download HarmonyOS sdk components toolchains,ets,js,native,previewer
+[2026-06-08T21:10:10.927] [DEBUG] debug-file - Local scan or download hmscore sdk components toolchains,ets,native
+[2026-06-08T21:10:10.941] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2026-06-08T21:10:11.023] [DEBUG] debug-file - Sdk init in 172 ms 
+[2026-06-08T21:10:11.032] [DEBUG] debug-file - Project task initialization takes 7 ms 
+[2026-06-08T21:10:11.032] [DEBUG] debug-file - hvigorfile, resolve finished G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+[2026-06-08T21:10:11.034] [DEBUG] debug-file - hvigorfile, resolving G:\SimpleCalculator-master\SimpleCalculator-master\entry\hvigorfile.ts
+[2026-06-08T21:10:11.065] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2026-06-08T21:10:11.066] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2026-06-08T21:10:11.066] [DEBUG] debug-file - Starting plugin build process
+[2026-06-08T21:10:11.066] [DEBUG] debug-file - Hap plugin creating...
+[2026-06-08T21:10:11.068] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\hooks\cangjie-register.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\strategy\stage-init-strategy.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\builder\abstract-plugin-builder.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\builder\app-plugin-builder.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js
+- G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\boot\index.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2026-06-08T21:10:11.090] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2026-06-08T21:10:11.091] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:10:11.092] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:10:11.093] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:10:11.093] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-06-08T21:10:11.093] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:10:11.094] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:10:11.094] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:10:11.094] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-06-08T21:10:11.094] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:10:11.095] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:10:11.095] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:10:11.095] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2026-06-08T21:10:11.106] [DEBUG] debug-file - Module entry task initialization takes 7 ms 
+[2026-06-08T21:10:11.106] [DEBUG] debug-file - Hap plugin register hook start...
+[2026-06-08T21:10:11.106] [DEBUG] debug-file - Hap plugin register hook end...
+[2026-06-08T21:10:11.106] [DEBUG] debug-file - Plugin build process completed
+[2026-06-08T21:10:11.106] [DEBUG] debug-file - hvigorfile, resolve finished G:\SimpleCalculator-master\SimpleCalculator-master\entry\hvigorfile.ts
+[2026-06-08T21:10:11.131] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 24 ms 
+[2026-06-08T21:10:11.132] [DEBUG] debug-file - project has submodules:entry
+[2026-06-08T21:10:11.156] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2026-06-08T21:10:11.166] [DEBUG] debug-file - load to the disk finished
+[2026-06-08T21:10:11.168] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-06-08T21:10:11.172] [DEBUG] debug-file - Module SimpleCalculator-master Collected Dependency: 
+[2026-06-08T21:10:11.172] [DEBUG] debug-file - Module SimpleCalculator-master's total dependency: 0
+[2026-06-08T21:10:11.174] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-06-08T21:10:11.178] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2026-06-08T21:10:11.178] [DEBUG] debug-file - Module entry's total dependency: 0
+[2026-06-08T21:10:11.206] [DEBUG] debug-file - Configuration phase cost:52 s 791 ms 
+[2026-06-08T21:10:11.211] [DEBUG] debug-file - Configuration task cost before running: 52 s 855 ms 
+[2026-06-08T21:10:11.213] [DEBUG] debug-file - Executing task :entry:init
+[2026-06-08T21:10:11.214] [DEBUG] debug-file - entry : init cost memory 0.01642608642578125
+[2026-06-08T21:10:11.214] [DEBUG] debug-file - runTaskFromQueue task cost before running: 52 s 858 ms 
+[2026-06-08T21:10:11.215] [INFO] debug-file - Finished :entry:init... after 2 ms 
+[2026-06-08T21:10:11.217] [DEBUG] debug-file - Executing task ::init
+[2026-06-08T21:10:11.217] [DEBUG] debug-file - SimpleCalculator-master : init cost memory 0.01378631591796875
+[2026-06-08T21:10:11.217] [DEBUG] debug-file - runTaskFromQueue task cost before running: 52 s 861 ms 
+[2026-06-08T21:10:11.218] [INFO] debug-file - Finished ::init... after 1 ms 
+[2026-06-08T21:10:11.232] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2026-06-08T21:10:11.237] [DEBUG] debug-file - Cleanup worker 0.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Worker 0 has been cleaned up.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Current idle worker size: 1.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Current resident worker size: 2.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Cleanup worker 1.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Worker 1 has been cleaned up.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Current idle worker size: 0.
+[2026-06-08T21:10:11.238] [DEBUG] debug-file - Current resident worker size: 2.
+[2026-06-08T21:10:11.239] [DEBUG] debug-file - hvigor build process will be closed.
+[2026-06-08T21:10:11.250] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-06-08T21:10:11.250] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-06-08T21:10:11.257] [DEBUG] debug-file - worker[1] exits with exit code 1.
+[2026-06-08T21:10:11.257] [DEBUG] debug-file - worker[0] exits with exit code 1.
+[2026-06-08T21:10:11.259] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:10:11.260] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:20:01.395] [DEBUG] debug-file - env: nodejsVersion=v18.20.1
+[2026-06-08T21:20:01.913] [DEBUG] debug-file - env: daemon=true
+[2026-06-08T21:20:01.397] [DEBUG] debug-file - env: hvigor-config.json5 content = { modelVersion: '5.0.5', dependencies: {} }
+[2026-06-08T21:20:12.662] [DEBUG] debug-file - session manager: set active socket. socketId=ellZgBMLpYRxiySpAAAD
+[2026-06-08T21:20:12.678] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:20:12.683] [DEBUG] debug-file - Workers' log level updated to INFO
+[2026-06-08T21:20:12.702] [DEBUG] debug-file - Hvigor init with startParameters:{
+  hvigorfileTypeCheck: false,
+  parallelExecution: true,
+  incrementalExecution: true,
+  printStackTrace: false,
+  daemon: true,
+  analyze: 0,
+  logLevel: Level { level: 20000, levelStr: 'INFO', colour: 'green' },
+  optimizationStrategy: 'memory',
+  hotCompile: undefined,
+  hotReloadBuild: undefined,
+  customizedParam: undefined
+}
+[2026-06-08T21:20:12.740] [DEBUG] debug-file - Cache service initialization finished in 38 ms 
+[2026-06-08T21:20:12.742] [DEBUG] debug-file - hvigorfile, resolving G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+[2026-06-08T21:20:12.765] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2026-06-08T21:20:12.765] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2026-06-08T21:20:12.766] [DEBUG] debug-file - Starting plugin build process
+[2026-06-08T21:20:12.766] [DEBUG] debug-file - App plugin prepare start...
+[2026-06-08T21:20:12.766] [DEBUG] debug-file - App plugin prepare end...
+[2026-06-08T21:20:12.766] [DEBUG] debug-file - App plugin creating...
+[2026-06-08T21:20:12.816] [DEBUG] debug-file - App plugin register hook start...
+[2026-06-08T21:20:12.816] [DEBUG] debug-file - App plugin register hook end...
+[2026-06-08T21:20:12.816] [DEBUG] debug-file - Plugin build process completed
+[2026-06-08T21:20:12.816] [DEBUG] debug-file - Start initialize project's product build option map with build mode debug.
+[2026-06-08T21:20:12.817] [DEBUG] debug-file - Picking option from product 'default' with build mode 'debug'.
+[2026-06-08T21:20:12.817] [DEBUG] debug-file - Product 'default' build option initialized
+[2026-06-08T21:20:12.817] [DEBUG] debug-file - End initialize project's product build option map with build mode 'debug'.
+[2026-06-08T21:20:12.818] [DEBUG] debug-file - Obtain build option for product 'default'in this build.
+[2026-06-08T21:20:12.840] [DEBUG] debug-file - No signingConfig found, initRemoteHspCache failed.
+[2026-06-08T21:20:12.865] [DEBUG] debug-file - Start recording SDK configuration permission data.
+[2026-06-08T21:20:12.907] [DEBUG] debug-file - Sdk init in 46 ms 
+[2026-06-08T21:20:12.913] [DEBUG] debug-file - Project task initialization takes 5 ms 
+[2026-06-08T21:20:12.913] [DEBUG] debug-file - hvigorfile, resolve finished G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+[2026-06-08T21:20:12.913] [DEBUG] debug-file - hvigorfile, resolving G:\SimpleCalculator-master\SimpleCalculator-master\entry\hvigorfile.ts
+[2026-06-08T21:20:12.946] [DEBUG] debug-file - hvigorfile, require result:  {}
+[2026-06-08T21:20:12.946] [DEBUG] debug-file - hvigorfile, binding system plugins {}
+[2026-06-08T21:20:12.946] [DEBUG] debug-file - Starting plugin build process
+[2026-06-08T21:20:12.946] [DEBUG] debug-file - Hap plugin creating...
+[2026-06-08T21:20:12.948] [DEBUG] debug-file - failed to load cangjie to dynamically generate schemas: Error: Cannot find module '@ohos/cangjie-build-support/index'
+Require stack:
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\hooks\cangjie-register.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\strategy\stage-init-strategy.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\builder\abstract-plugin-builder.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\builder\app-plugin-builder.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\src\plugin\factory\plugin-factory.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\index.js
+- G:\SimpleCalculator-master\SimpleCalculator-master\hvigorfile.ts
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\internal\lifecycle\configuration.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\boot\index.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\cluster\worker-process-lifecycle.js
+- G:\DevEco program\DevEco Studio\tools\hvigor\hvigor\src\base\daemon\process\daemon-process-boot-script.js
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=release
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-06-08T21:20:12.950] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:20:12.951] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:20:12.951] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:20:12.952] [DEBUG] debug-file - Start initialize module-target build option map, moduleName=entry, buildMode=debug
+[2026-06-08T21:20:12.952] [DEBUG] debug-file - Target 'default' config initialized
+[2026-06-08T21:20:12.952] [DEBUG] debug-file - Module 'entry' target 'default' build option initialized
+[2026-06-08T21:20:12.952] [DEBUG] debug-file - End initialize module-target build option map, moduleName=entry
+[2026-06-08T21:20:12.952] [DEBUG] debug-file - Obtain build option for module 'entry' target 'default'in this build.
+[2026-06-08T21:20:12.954] [DEBUG] debug-file - Module entry task initialization takes 2 ms 
+[2026-06-08T21:20:12.954] [DEBUG] debug-file - Hap plugin register hook start...
+[2026-06-08T21:20:12.955] [DEBUG] debug-file - Hap plugin register hook end...
+[2026-06-08T21:20:12.955] [DEBUG] debug-file - Plugin build process completed
+[2026-06-08T21:20:12.955] [DEBUG] debug-file - hvigorfile, resolve finished G:\SimpleCalculator-master\SimpleCalculator-master\entry\hvigorfile.ts
+[2026-06-08T21:20:12.990] [DEBUG] debug-file - hvigorfile, resolve hvigorfile dependencies in 35 ms 
+[2026-06-08T21:20:12.990] [DEBUG] debug-file - project has submodules:entry
+[2026-06-08T21:20:12.993] [DEBUG] debug-file - start to load updatedOhPackageInfo to the disk
+[2026-06-08T21:20:13.017] [DEBUG] debug-file - load to the disk finished
+[2026-06-08T21:20:13.018] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-06-08T21:20:13.019] [DEBUG] debug-file - Module SimpleCalculator-master Collected Dependency: 
+[2026-06-08T21:20:13.019] [DEBUG] debug-file - Module SimpleCalculator-master's total dependency: 0
+[2026-06-08T21:20:13.021] [DEBUG] debug-file - Start to initialize dependency information.
+[2026-06-08T21:20:13.023] [DEBUG] debug-file - Module entry Collected Dependency: 
+[2026-06-08T21:20:13.023] [DEBUG] debug-file - Module entry's total dependency: 0
+[2026-06-08T21:20:13.046] [DEBUG] debug-file - Configuration phase cost:306 ms 
+[2026-06-08T21:20:13.048] [DEBUG] debug-file - Configuration task cost before running: 364 ms 
+[2026-06-08T21:20:13.056] [DEBUG] debug-file - Executing task :entry:default@PreBuild
+[2026-06-08T21:20:13.059] [DEBUG] debug-file - Task 'entry:default@PreBuild' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.065] [DEBUG] debug-file - entry:default@PreBuild is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5' has been changed.
+[2026-06-08T21:20:13.065] [DEBUG] debug-file - Incremental task entry:default@PreBuild pre-execution cost: 4 ms .
+[2026-06-08T21:20:13.384] [DEBUG] debug-file - current product is not Atomic service.
+[2026-06-08T21:20:13.386] [DEBUG] debug-file - Use tool [win32: JAVA_HOME, CLASSPATH]
+ [
+  { JAVA_HOME: 'G:\\DevEco program\\DevEco Studio\\jbr' },
+  { CLASSPATH: undefined }
+]
+[2026-06-08T21:20:13.387] [DEBUG] debug-file - Use tool [win32: NODE_HOME]
+ [ { NODE_HOME: 'G:\\DevEco program\\DevEco Studio\\tools\\node' } ]
+[2026-06-08T21:20:13.390] [DEBUG] debug-file - entry : default@PreBuild cost memory 13.395439147949219
+[2026-06-08T21:20:13.390] [DEBUG] debug-file - runTaskFromQueue task cost before running: 707 ms 
+[2026-06-08T21:20:13.393] [INFO] debug-file - Finished :entry:default@PreBuild... after 335 ms 
+[2026-06-08T21:20:13.394] [DEBUG] debug-file - Executing task :entry:default@CreateModuleInfo
+[2026-06-08T21:20:13.394] [DEBUG] debug-file - Task 'entry:default@CreateModuleInfo' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.395] [DEBUG] debug-file - entry : default@CreateModuleInfo cost memory 0.04192352294921875
+[2026-06-08T21:20:13.395] [DEBUG] debug-file - runTaskFromQueue task cost before running: 711 ms 
+[2026-06-08T21:20:13.395] [INFO] debug-file - Finished :entry:default@CreateModuleInfo... after 2 ms 
+[2026-06-08T21:20:13.397] [DEBUG] debug-file - Executing task :entry:default@GenerateMetadata
+[2026-06-08T21:20:13.398] [DEBUG] debug-file - Task 'entry:default@GenerateMetadata' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.399] [DEBUG] debug-file - entry:default@GenerateMetadata is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5' has been changed.
+[2026-06-08T21:20:13.399] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.401] [DEBUG] debug-file - entry : default@GenerateMetadata cost memory 0.0855560302734375
+[2026-06-08T21:20:13.401] [DEBUG] debug-file - runTaskFromQueue task cost before running: 717 ms 
+[2026-06-08T21:20:13.402] [INFO] debug-file - Finished :entry:default@GenerateMetadata... after 4 ms 
+[2026-06-08T21:20:13.412] [DEBUG] debug-file - Executing task :entry:default@ConfigureCmake
+[2026-06-08T21:20:13.413] [DEBUG] debug-file - entry : default@ConfigureCmake cost memory 0.01805877685546875
+[2026-06-08T21:20:13.413] [DEBUG] debug-file - runTaskFromQueue task cost before running: 729 ms 
+[2026-06-08T21:20:13.414] [INFO] debug-file - Finished :entry:default@ConfigureCmake... after 1 ms 
+[2026-06-08T21:20:13.416] [DEBUG] debug-file - Executing task :entry:default@MergeProfile
+[2026-06-08T21:20:13.416] [DEBUG] debug-file - Task 'entry:default@MergeProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.418] [DEBUG] debug-file - entry:default@MergeProfile is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5' has been changed.
+[2026-06-08T21:20:13.418] [DEBUG] debug-file - Incremental task entry:default@MergeProfile pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.418] [DEBUG] debug-file - Change app api release type with 'Release'
+[2026-06-08T21:20:13.419] [DEBUG] debug-file - Change app compile API version with '6.0.2.130'
+[2026-06-08T21:20:13.419] [DEBUG] debug-file - Change app target API version with '60002022'
+[2026-06-08T21:20:13.419] [DEBUG] debug-file - Change app minimum API version with '50005017'
+[2026-06-08T21:20:13.419] [DEBUG] debug-file - Use cli appEnvironment
+[2026-06-08T21:20:13.436] [DEBUG] debug-file - entry : default@MergeProfile cost memory 0.35619354248046875
+[2026-06-08T21:20:13.437] [DEBUG] debug-file - runTaskFromQueue task cost before running: 753 ms 
+[2026-06-08T21:20:13.438] [INFO] debug-file - Finished :entry:default@MergeProfile... after 21 ms 
+[2026-06-08T21:20:13.440] [DEBUG] debug-file - Executing task :entry:default@CreateBuildProfile
+[2026-06-08T21:20:13.441] [DEBUG] debug-file - Task 'entry:default@CreateBuildProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.442] [DEBUG] debug-file - entry:default@CreateBuildProfile is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5' has been changed.
+[2026-06-08T21:20:13.442] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.444] [DEBUG] debug-file - entry : default@CreateBuildProfile cost memory 0.11505126953125
+[2026-06-08T21:20:13.444] [DEBUG] debug-file - runTaskFromQueue task cost before running: 760 ms 
+[2026-06-08T21:20:13.444] [INFO] debug-file - Finished :entry:default@CreateBuildProfile... after 4 ms 
+[2026-06-08T21:20:13.446] [DEBUG] debug-file - Executing task :entry:default@PreCheckSyscap
+[2026-06-08T21:20:13.447] [DEBUG] debug-file - entry : default@PreCheckSyscap cost memory 0.01476287841796875
+[2026-06-08T21:20:13.447] [DEBUG] debug-file - runTaskFromQueue task cost before running: 763 ms 
+[2026-06-08T21:20:13.447] [INFO] debug-file - Finished :entry:default@PreCheckSyscap... after 1 ms 
+[2026-06-08T21:20:13.449] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgContextInfo
+[2026-06-08T21:20:13.460] [DEBUG] debug-file - Task 'entry:default@GeneratePkgContextInfo' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.461] [DEBUG] debug-file - entry : default@GeneratePkgContextInfo cost memory 0.34633636474609375
+[2026-06-08T21:20:13.461] [DEBUG] debug-file - runTaskFromQueue task cost before running: 777 ms 
+[2026-06-08T21:20:13.461] [INFO] debug-file - Finished :entry:default@GeneratePkgContextInfo... after 12 ms 
+[2026-06-08T21:20:13.466] [DEBUG] debug-file - Executing task :entry:default@ProcessIntegratedHsp
+[2026-06-08T21:20:13.466] [DEBUG] debug-file - entry:default@ProcessIntegratedHsp is not up-to-date, since the output file 'G:\SimpleCalculator-master\SimpleCalculator-master\build\cache\default\integrated_hsp\integratedHspCache.json' does not exist.
+[2026-06-08T21:20:13.466] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.467] [DEBUG] debug-file - entry : default@ProcessIntegratedHsp cost memory 0.1168212890625
+[2026-06-08T21:20:13.467] [DEBUG] debug-file - runTaskFromQueue task cost before running: 783 ms 
+[2026-06-08T21:20:13.467] [INFO] debug-file - Finished :entry:default@ProcessIntegratedHsp... after 2 ms 
+[2026-06-08T21:20:13.468] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithCmake
+[2026-06-08T21:20:13.469] [DEBUG] debug-file - entry : default@BuildNativeWithCmake cost memory 0.015228271484375
+[2026-06-08T21:20:13.469] [DEBUG] debug-file - runTaskFromQueue task cost before running: 785 ms 
+[2026-06-08T21:20:13.469] [INFO] debug-file - Finished :entry:default@BuildNativeWithCmake... after 1 ms 
+[2026-06-08T21:20:13.471] [DEBUG] debug-file - Executing task :entry:default@MakePackInfo
+[2026-06-08T21:20:13.474] [DEBUG] debug-file - entry:default@MakePackInfo is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5' has been changed.
+[2026-06-08T21:20:13.474] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.475] [DEBUG] debug-file - Module Pack Info:  {
+  summary: {
+    app: { bundleName: 'c***r', bundleType: 'app', version: [Object] },
+    modules: [ [Object] ]
+  },
+  packages: [
+    {
+      deviceType: [Array],
+      moduleType: 'entry',
+      deliveryWithInstall: true,
+      name: 'entry-default'
+    }
+  ]
+}
+[2026-06-08T21:20:13.476] [DEBUG] debug-file - entry : default@MakePackInfo cost memory 0.18529510498046875
+[2026-06-08T21:20:13.476] [DEBUG] debug-file - runTaskFromQueue task cost before running: 793 ms 
+[2026-06-08T21:20:13.477] [INFO] debug-file - Finished :entry:default@MakePackInfo... after 5 ms 
+[2026-06-08T21:20:13.478] [DEBUG] debug-file - Executing task :entry:default@SyscapTransform
+[2026-06-08T21:20:13.479] [DEBUG] debug-file - File: 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\syscap.json' from 'sysCapJsonPath' is not exists, just ignore.
+[2026-06-08T21:20:13.481] [DEBUG] debug-file - Task 'entry:default@SyscapTransform' cost while wrapping incremental declarations: 3 ms 
+[2026-06-08T21:20:13.500] [DEBUG] debug-file - entry:default@SyscapTransform is not up-to-date, since the output file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\syscap\default\rpcid.sc' does not exist.
+[2026-06-08T21:20:13.500] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform pre-execution cost: 19 ms .
+[2026-06-08T21:20:13.500] [DEBUG] debug-file - entry : default@SyscapTransform cost memory 0.15770721435546875
+[2026-06-08T21:20:13.500] [DEBUG] debug-file - runTaskFromQueue task cost before running: 817 ms 
+[2026-06-08T21:20:13.501] [INFO] debug-file - Finished :entry:default@SyscapTransform... after 23 ms 
+[2026-06-08T21:20:13.505] [DEBUG] debug-file - Executing task :entry:default@ProcessProfile
+[2026-06-08T21:20:13.507] [DEBUG] debug-file - Task 'entry:default@ProcessProfile' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:13.508] [DEBUG] debug-file - entry:default@ProcessProfile is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\merge_profile\default\module.json' has been changed.
+[2026-06-08T21:20:13.508] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile pre-execution cost: 1 ms .
+[2026-06-08T21:20:13.512] [DEBUG] debug-file - [
+  'G:\\DevEco program\\DevEco Studio\\tools\\node\\node.exe',
+  'G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader\\bin\\ark\\ts2abc.js',
+  '--target-api-version',
+  '17'
+]
+[2026-06-08T21:20:14.428] [DEBUG] debug-file - 12.0.6.0
+[2026-06-08T21:20:14.431] [DEBUG] debug-file - No need to add fake ui ability because of not in preview process.
+[2026-06-08T21:20:14.432] [DEBUG] debug-file - entry : default@ProcessProfile cost memory 2.2412033081054688
+[2026-06-08T21:20:14.433] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 749 ms 
+[2026-06-08T21:20:14.433] [INFO] debug-file - Finished :entry:default@ProcessProfile... after 928 ms 
+[2026-06-08T21:20:14.437] [DEBUG] debug-file - Executing task :entry:default@ProcessRouterMap
+[2026-06-08T21:20:14.440] [DEBUG] debug-file - entry:default@ProcessRouterMap is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\oh-package.json5' has been changed.
+[2026-06-08T21:20:14.440] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap pre-execution cost: 2 ms .
+[2026-06-08T21:20:14.442] [DEBUG] debug-file - entry : default@ProcessRouterMap cost memory 0.10350799560546875
+[2026-06-08T21:20:14.443] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 759 ms 
+[2026-06-08T21:20:14.443] [INFO] debug-file - Finished :entry:default@ProcessRouterMap... after 6 ms 
+[2026-06-08T21:20:14.445] [DEBUG] debug-file - Executing task :entry:default@ProcessShareConfig
+[2026-06-08T21:20:14.446] [DEBUG] debug-file - entry:default@ProcessShareConfig is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\oh-package.json5' has been changed.
+[2026-06-08T21:20:14.446] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig pre-execution cost: 1 ms .
+[2026-06-08T21:20:14.449] [DEBUG] debug-file - entry : default@ProcessShareConfig cost memory 0.0900421142578125
+[2026-06-08T21:20:14.449] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 765 ms 
+[2026-06-08T21:20:14.450] [INFO] debug-file - Finished :entry:default@ProcessShareConfig... after 5 ms 
+[2026-06-08T21:20:14.452] [DEBUG] debug-file - Executing task :entry:default@ProcessStartupConfig
+[2026-06-08T21:20:14.452] [DEBUG] debug-file - Task 'entry:default@ProcessStartupConfig' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:14.453] [DEBUG] debug-file - entry:default@ProcessStartupConfig is not up-to-date, since the output file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\startup\default\startup_config.json' does not exist.
+[2026-06-08T21:20:14.453] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig pre-execution cost: 1 ms .
+[2026-06-08T21:20:14.455] [DEBUG] debug-file - entry : default@ProcessStartupConfig cost memory 0.028656005859375
+[2026-06-08T21:20:14.455] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 771 ms 
+[2026-06-08T21:20:14.456] [INFO] debug-file - Finished :entry:default@ProcessStartupConfig... after 4 ms 
+[2026-06-08T21:20:14.458] [DEBUG] debug-file - Executing task :entry:default@BuildNativeWithNinja
+[2026-06-08T21:20:14.459] [DEBUG] debug-file - entry : default@BuildNativeWithNinja cost memory 0.02295684814453125
+[2026-06-08T21:20:14.459] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 775 ms 
+[2026-06-08T21:20:14.460] [INFO] debug-file - Finished :entry:default@BuildNativeWithNinja... after 1 ms 
+[2026-06-08T21:20:14.462] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@ProcessResource
+[2026-06-08T21:20:14.484] [DEBUG] debug-file - Executing task :entry:default@ProcessResource
+[2026-06-08T21:20:14.484] [DEBUG] debug-file - Task 'entry:default@ProcessResource' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:14.486] [DEBUG] debug-file - entry:default@ProcessResource is not up-to-date, since the output file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resConfig.json' has been changed.
+[2026-06-08T21:20:14.486] [DEBUG] debug-file - Incremental task entry:default@ProcessResource pre-execution cost: 1 ms .
+[2026-06-08T21:20:14.489] [DEBUG] debug-file - entry : default@ProcessResource cost memory 0.17425537109375
+[2026-06-08T21:20:14.490] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 806 ms 
+[2026-06-08T21:20:14.491] [INFO] debug-file - Finished :entry:default@ProcessResource... after 27 ms 
+[2026-06-08T21:20:14.495] [DEBUG] debug-file - Executing task :entry:default@GenerateLoaderJson
+[2026-06-08T21:20:14.496] [DEBUG] debug-file - Task 'entry:default@GenerateLoaderJson' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:14.504] [DEBUG] debug-file - entry:default@GenerateLoaderJson is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\router_map\default\temp-router-map.json' has been changed.
+[2026-06-08T21:20:14.505] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson pre-execution cost: 4 ms .
+[2026-06-08T21:20:14.510] [DEBUG] debug-file - entry : default@GenerateLoaderJson cost memory 0.6495285034179688
+[2026-06-08T21:20:14.510] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 826 ms 
+[2026-06-08T21:20:14.513] [INFO] debug-file - Finished :entry:default@GenerateLoaderJson... after 16 ms 
+[2026-06-08T21:20:14.514] [DEBUG] debug-file - Executing task :entry:default@ProcessLibs
+[2026-06-08T21:20:14.517] [DEBUG] debug-file - entry:default@ProcessLibs is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build-profile.json5' has been changed.
+[2026-06-08T21:20:14.517] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs pre-execution cost: 1 ms .
+[2026-06-08T21:20:14.522] [DEBUG] debug-file - Worker dispatch failed, running processLibs on main thread.
+[2026-06-08T21:20:14.524] [DEBUG] debug-file - entry : default@ProcessLibs cost memory 0.35576629638671875
+[2026-06-08T21:20:14.525] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 s 841 ms 
+[2026-06-08T21:20:14.525] [INFO] debug-file - Finished :entry:default@ProcessLibs... after 10 ms 
+[2026-06-08T21:20:14.527] [DEBUG] debug-file - restool module names: entry; moduleName=entry, taskName=default@CompileResource
+[2026-06-08T21:20:14.528] [DEBUG] debug-file - Executing task :entry:default@CompileResource
+[2026-06-08T21:20:14.537] [DEBUG] debug-file - entry:default@CompileResource is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources' has been changed.
+[2026-06-08T21:20:14.537] [DEBUG] debug-file - Incremental task entry:default@CompileResource pre-execution cost: 8 ms .
+[2026-06-08T21:20:14.546] [DEBUG] debug-file - Use tool [G:\DevEco program\DevEco Studio\sdk\default\openharmony\toolchains\restool.exe]
+ [
+  'G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\restool.exe',
+  '-l',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resConfig.json'
+]
+[2026-06-08T21:20:14.547] [DEBUG] debug-file - current process  memoryUsage: {
+  rss: 196583424,
+  heapTotal: 153907200,
+  heapUsed: 110479688,
+  external: 3186374,
+  arrayBuffers: 80667
+} os memoryUsage :12.155624389648438
+[2026-06-08T21:20:14.849] [DEBUG] debug-file - Info: Pack: normal pack mode
+
+[2026-06-08T21:20:16.144] [DEBUG] debug-file - Info: hardware concurrency count is : 22
+Info: thread count is : 22
+
+[2026-06-08T21:20:16.145] [DEBUG] debug-file - Info: thread pool is started
+
+[2026-06-08T21:20:16.164] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2026-06-08T21:20:16.295] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2026-06-08T21:20:16.301] [DEBUG] debug-file - Info: GenericCompiler::CompileFiles
+
+[2026-06-08T21:20:16.307] [DEBUG] debug-file - 06-08 21:20:16.308 11788 20528 E C01400/ImageTranscoderUtils: DecodeToRGBA IN
+06-08 21:20:16.308 11788 20528 E C01400/ImageTranscoderUtils: ImageFilter IN G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\resources\base\media\app_icon.png
+
+[2026-06-08T21:20:16.334] [DEBUG] debug-file - 06-08 21:20:16.334 11788 20528 E C01400/ImageTranscoder: TranscodeSLR Only zoom-out is supported.
+
+[2026-06-08T21:20:16.334] [DEBUG] debug-file - Warning: ScaleImage failed, error message: INVALID_PARAMETERS, file path = G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\resources\base\media\app_icon.png
+
+[2026-06-08T21:20:16.335] [DEBUG] debug-file - 06-08 21:20:16.336 11788 20528 E C01400/ImageTranscoderUtils: DecodeToRGBA IN
+
+[2026-06-08T21:20:16.335] [DEBUG] debug-file - 06-08 21:20:16.336 11788 20528 E C01400/ImageTranscoderUtils: ImageFilter IN G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources\base\media\icon.png
+
+[2026-06-08T21:20:16.338] [DEBUG] debug-file - 06-08 21:20:16.338 11788 20528 E C01400/ImageTranscoder: TranscodeSLR Only zoom-out is supported.
+
+[2026-06-08T21:20:16.338] [DEBUG] debug-file - Warning: ScaleImage failed, error message: INVALID_PARAMETERS, file path = G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources\base\media\icon.png
+
+[2026-06-08T21:20:16.339] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the icon exceeds the limit (41 pixels)
+at G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\resources\base\media\app_icon.png
+
+[2026-06-08T21:20:16.339] [DEBUG] debug-file - Warning: The width or height of the png file referenced by the icon exceeds the limit (41 pixels)
+at G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources\base\media\icon.png
+
+[2026-06-08T21:20:16.341] [DEBUG] debug-file - Info: restool resources compile success.
+
+[2026-06-08T21:20:16.342] [DEBUG] debug-file - Info: thread pool is stopped
+
+[2026-06-08T21:20:16.421] [WARN] debug-file - Warning: the string of 'add_element' does not have a base resource.
+Warning: the string of 'base_value' does not have a base resource.
+Warning: the string of 'calculate_total' does not have a base resource.
+Warning: the string of 'clear' does not have a base resource.
+Warning: the string of 'goe_score' does not have a base resource.
+Warning: the string of 'main_page_title' does not have a base resource.
+Warning: the string of 'select_element' does not have a base resource.
+Warning: the string of 'skating_title' does not have a base resource.
+Warning: the string of 'total_score' does not have a base resource.
+Warning: the string of 'MainPage_subtitle' does not have a base resource.
+Warning: the string of 'MainPage_title' does not have a base resource.
+
+[2026-06-08T21:20:16.424] [DEBUG] debug-file - entry : default@CompileResource cost memory -5.068061828613281
+[2026-06-08T21:20:16.424] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 740 ms 
+[2026-06-08T21:20:16.425] [INFO] debug-file - Finished :entry:default@CompileResource... after 1 s 897 ms 
+[2026-06-08T21:20:16.427] [DEBUG] debug-file - Executing task :entry:default@DoNativeStrip
+[2026-06-08T21:20:16.427] [DEBUG] debug-file - Task 'entry:default@DoNativeStrip' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:16.429] [DEBUG] debug-file - Incremental task entry:default@DoNativeStrip pre-execution cost: 2 ms .
+[2026-06-08T21:20:16.430] [DEBUG] debug-file - entry : default@DoNativeStrip cost memory 0.09755706787109375
+[2026-06-08T21:20:16.430] [INFO] debug-file - UP-TO-DATE :entry:default@DoNativeStrip...  
+[2026-06-08T21:20:16.432] [DEBUG] debug-file - Executing task :entry:default@CompileArkTS
+[2026-06-08T21:20:16.434] [DEBUG] debug-file - obfuscationOptions: undefined
+[2026-06-08T21:20:16.436] [DEBUG] debug-file - Task 'entry:default@CompileArkTS' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:16.442] [DEBUG] debug-file - entry:default@CompileArkTS is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader\default' has been changed.
+[2026-06-08T21:20:16.442] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS pre-execution cost: 4 ms .
+[2026-06-08T21:20:16.469] [DEBUG] debug-file - build config:
+[2026-06-08T21:20:16.470] [DEBUG] debug-file - {
+  moduleType: 'entry',
+  perf: 0,
+  targetName: '.default',
+  packageManagerType: 'ohpm',
+  localPropertiesPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\local.properties',
+  isPreview: false,
+  isOhosTest: false,
+  isLocalTest: false,
+  buildMode: 'Debug',
+  hotReloadBuild: undefined,
+  watchMode: 'false',
+  aceProfilePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resources\\base\\profile',
+  etsLoaderPath: 'G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\build-tools\\ets-loader',
+  modulePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry',
+  testFrameworkPar: {
+    testMode: undefined,
+    coveragePathFilter: undefined,
+    coverageMode: undefined
+  },
+  needCoverageInsert: false,
+  debugLine: false,
+  projectTopDir: 'G:\\SimpleCalculator-master\\SimpleCalculator-master',
+  compileSdkVersion: 22,
+  compatibleSdkVersion: 17,
+  originCompatibleSdkVersion: '5.0.5(17)',
+  compatibleSdkVersionStage: undefined,
+  bundleName: 'c***r',
+  etsLoaderVersion: '6.0.2.130',
+  etsLoaderReleaseType: 'Release',
+  aotCompileMode: 'type',
+  apPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\modules.ap',
+  entryModuleName: 'entry',
+  entryModuleVersion: '1.0.0',
+  entryPackageName: 'entry',
+  allModuleNameHash: '6144674ea9eedab29a401dfefcc9135db745177f29c485a81b9a53d1e7c9469b',
+  externalApiPaths: [ 'G:\\DevEco program\\DevEco Studio\\sdk\\default\\hms\\ets' ],
+  compilerTypes: [],
+  isCrossplatform: false,
+  hvigorPluginFile: undefined,
+  compilePluginPath: undefined,
+  buildGeneratedProfilePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\generated\\profile\\default',
+  bundleType: 'app',
+  arkTSVersion: undefined,
+  apiVersion: 22,
+  needCompleteSourcesMap: false,
+  isFaMode: false,
+  buildDir: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build',
+  deviceTypes: [ 'phone', 'tablet', '2in1' ],
+  pkgContextInfo: undefined,
+  ohPackagePathMap: {},
+  dependencyAliasMap: {},
+  permission: { requestPermissions: [ [Object] ], definePermissions: undefined },
+  useGetCurrentBundleName: false,
+  projectArkOption: undefined,
+  sourceMapDir: undefined,
+  branchElimination: false,
+  transformLib: undefined,
+  tsImportSendable: false,
+  resolveConflictMode: true,
+  depName2RootPath: {},
+  depName2DepInfo: {},
+  rootPathSet: [ 'G:\\SimpleCalculator-master\\SimpleCalculator-master' ],
+  useNativeResolver: true,
+  shouldEmitJs: true,
+  useTscResolve: false,
+  singleFileEmit: false,
+  userProjectConfig: {
+    autoLazyImport: false,
+    allowEmptyBundleName: false,
+    reExportCheckMode: 'noCheck',
+    executionMode: 'memory',
+    usePathPlaceholder: false,
+    writeRollupCache: true,
+    isExpandImportEnabled: false,
+    expandImportExclude: '',
+    lazyImportExclude: '',
+    lazyImportInclude: '',
+    ignoreCrossplatformCheck: false,
+    isHarDeduplicateEnabled: false,
+    skipOhModulesLint: false,
+    enableStrictCheckOHModule: false,
+    disableSendableCheckRules: [],
+    useDeclarationFileSignature: false,
+    customizedOptions: undefined,
+    integratedHsp: false,
+    isPreloadSoEnabled: false
+  },
+  executionMode: 'memory',
+  arkCompileCachePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule',
+  autoLazyFilter: undefined,
+  isHarDeduplicateEnabled: false,
+  intermediateHarDuplicateDirPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\har_duplicate\\default',
+  autoLazyImport: false,
+  allowEmptyBundleName: false,
+  reExportCheckMode: 'noCheck',
+  usePathPlaceholder: false,
+  writeRollupCache: true,
+  isExpandImportEnabled: false,
+  expandImportExclude: '',
+  lazyImportExclude: '',
+  lazyImportInclude: '',
+  ignoreCrossplatformCheck: false,
+  skipOhModulesLint: false,
+  enableStrictCheckOHModule: false,
+  disableSendableCheckRules: [],
+  useDeclarationFileSignature: false,
+  customizedOptions: undefined,
+  integratedHsp: false,
+  isPreloadSoEnabled: false,
+  strictMode: undefined,
+  useNormalizedOHMUrl: false,
+  caseSensitiveCheck: false,
+  aceModuleJsonPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\ark_module.json',
+  appResource: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\ResourceTable.txt',
+  rawFileResource: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resources\\rawfile',
+  resourceTableHash: '4b17c055369a9b2fef67a6e0c052b0adf6e9d3f070b46df4868f34ed2495a887',
+  runtimeOS: 'HarmonyOS',
+  sdkInfo: 'false:22:6.0.2.130:Release',
+  aceModuleRoot: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets',
+  compileMode: 'esmodule',
+  aceSuperVisualPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\supervisual',
+  aceBuildJson: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader\\default\\loader.json',
+  cachePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\cache\\default\\default@CompileArkTS\\esmodule\\debug',
+  aceModuleBuild: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out\\default\\ets',
+  supportChunks: true,
+  declaredFilesPath: undefined,
+  shouldCollectDirectImportees: false,
+  isByteCodeHarOptimize: false,
+  expandImportPath: undefined,
+  pkgNameToPkgBriefInfo: {
+    entry: {
+      pkgRoot: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry',
+      originalSourceRoots: undefined,
+      sourceRoots: [Array],
+      pkgName: 'entry'
+    }
+  },
+  projectModel: {
+    'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main': {
+      moduleName: 'entry',
+      modulePkgPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry',
+      belongProjectPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master'
+    },
+    'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry': {
+      moduleName: 'entry',
+      modulePkgPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry',
+      belongProjectPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master'
+    },
+    'G:\\SimpleCalculator-master\\SimpleCalculator-master': {
+      moduleName: 'SimpleCalculator-master',
+      modulePkgPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master',
+      belongProjectPath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master'
+    }
+  },
+  pkgJsonFileHash: '111ac8cee10a09a109c42f0cd9169f33639b0239e0736c979377d8f652fa2892',
+  allModulePaths: [ 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry' ],
+  routerMap: {},
+  obfuscationOptions: undefined,
+  byteCodeHarToDependencyKeys: undefined,
+  compileBlockPkg: [],
+  mockParams: {
+    decorator: '@MockSetup',
+    packageName: '@ohos/hamock',
+    etsSourceRootPath: 'src/main/ets',
+    mockConfigPath: undefined,
+    mockConfigKey2ModuleInfo: {},
+    source2ModuleIdMap: {}
+  },
+  copyCodeResourceEnable: true,
+  copyCodeResourceExcludes: [],
+  copyCodeResourceIncludes: undefined,
+  uiTransformOptimization: false,
+  sdkPath: 'G:/DevEco program/DevEco Studio/sdk',
+  needPreloadSoFileSet: {},
+  preloadSoFilePath: 'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\preload\\default\\preload.json',
+  useSourceHash: false,
+  localModuleParamMap: {},
+  otherPaths: {
+    'entry/*': [
+      '..\\*',
+      '..\\..\\..\\build\\default\\generated\\profile\\default\\*'
+    ]
+  },
+  collectImportersConfig: undefined
+}
+[2026-06-08T21:20:16.470] [DEBUG] debug-file - Compile arkts with external api path: G:\DevEco program\DevEco Studio\sdk\default\hms\ets
+[2026-06-08T21:20:16.474] [DEBUG] debug-file - default@CompileArkTS work[0] is submitted.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - default@CompileArkTS work[0] is pushed to ready queue.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - A work dispatched to worker[21] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - A work dispatched to worker[20] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - A work dispatched to worker[19] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - A work dispatched to worker[18] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.475] [DEBUG] debug-file - A work dispatched to worker[17] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[16] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[15] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[14] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[13] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[12] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[11] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[10] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[9] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[8] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[7] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[6] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.476] [DEBUG] debug-file - A work dispatched to worker[5] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.477] [DEBUG] debug-file - Create  resident worker with id: 4.
+[2026-06-08T21:20:16.480] [DEBUG] debug-file - default@CompileArkTS work[0] has been dispatched to worker[4].
+[2026-06-08T21:20:16.480] [DEBUG] debug-file - default@CompileArkTS work[0] is dispatched.
+[2026-06-08T21:20:16.481] [DEBUG] debug-file - CopyResources startTime: 914273983200
+[2026-06-08T21:20:16.481] [DEBUG] debug-file - default@CompileArkTS work[1] is submitted.
+[2026-06-08T21:20:16.481] [DEBUG] debug-file - default@CompileArkTS work[1] is pushed to ready queue.
+[2026-06-08T21:20:16.481] [DEBUG] debug-file - A work dispatched to worker[21] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.481] [DEBUG] debug-file - Create  resident worker with id: 20.
+[2026-06-08T21:20:16.483] [DEBUG] debug-file - default@CompileArkTS work[1] has been dispatched to worker[20].
+[2026-06-08T21:20:16.483] [DEBUG] debug-file - default@CompileArkTS work[1] is dispatched.
+[2026-06-08T21:20:16.483] [DEBUG] debug-file - entry : default@CompileArkTS cost memory 1.569671630859375
+[2026-06-08T21:20:16.485] [DEBUG] debug-file - Executing task :entry:default@BuildJS
+[2026-06-08T21:20:16.486] [DEBUG] debug-file - Task 'entry:default@BuildJS' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:16.489] [DEBUG] debug-file - entry : default@BuildJS cost memory 0.1501922607421875
+[2026-06-08T21:20:16.489] [DEBUG] debug-file - runTaskFromQueue task cost before running: 3 s 805 ms 
+[2026-06-08T21:20:16.489] [INFO] debug-file - Finished :entry:default@BuildJS... after 4 ms 
+[2026-06-08T21:20:16.491] [DEBUG] debug-file - Executing task :entry:default@CacheNativeLibs
+[2026-06-08T21:20:16.491] [DEBUG] debug-file - Task 'entry:default@CacheNativeLibs' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:20:16.493] [DEBUG] debug-file - entry:default@CacheNativeLibs is not up-to-date, since the output file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\patch\default\base_native_libs.json' has been changed.
+[2026-06-08T21:20:16.493] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs pre-execution cost: 1 ms .
+[2026-06-08T21:20:16.493] [DEBUG] debug-file - default@CacheNativeLibs work[2] is submitted.
+[2026-06-08T21:20:16.494] [DEBUG] debug-file - default@CacheNativeLibs work[2] is pushed to ready queue.
+[2026-06-08T21:20:16.494] [DEBUG] debug-file - A work dispatched to worker[21] failed because unable to get work from ready queue.
+[2026-06-08T21:20:16.494] [DEBUG] debug-file - A work dispatched to worker[20] failed because of worker busy.
+[2026-06-08T21:20:16.494] [DEBUG] debug-file - Create  resident worker with id: 19.
+[2026-06-08T21:20:16.495] [DEBUG] debug-file - default@CacheNativeLibs work[2] has been dispatched to worker[19].
+[2026-06-08T21:20:16.495] [DEBUG] debug-file - default@CacheNativeLibs work[2] is dispatched.
+[2026-06-08T21:20:16.495] [DEBUG] debug-file - entry : default@CacheNativeLibs cost memory 0.2288665771484375
+[2026-06-08T21:20:19.181] [DEBUG] debug-file - worker[20] has one work done.
+[2026-06-08T21:20:19.182] [DEBUG] debug-file - CopyResources is end, endTime: 916975121500
+[2026-06-08T21:20:19.182] [DEBUG] debug-file - default@CompileArkTS work[1] done.
+[2026-06-08T21:20:19.183] [DEBUG] debug-file - A work dispatched to worker[20] failed because unable to get work from ready queue.
+[2026-06-08T21:20:19.304] [DEBUG] debug-file - worker[19] has one work done.
+[2026-06-08T21:20:19.305] [DEBUG] debug-file - default@CacheNativeLibs work[2] done.
+[2026-06-08T21:20:19.305] [DEBUG] debug-file - A work dispatched to worker[19] failed because unable to get work from ready queue.
+[2026-06-08T21:20:19.306] [INFO] debug-file - Finished :entry:default@CacheNativeLibs... after 13 ms 
+[2026-06-08T21:21:53.213] [WARN] debug-file - [33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/PuzzleGamePage.ets:91:11
+ Usage of 'ESObject' type is restricted (arkts-limited-esobj)
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/PuzzleGamePage.ets:104:9
+ Usage of 'ESObject' type is restricted (arkts-limited-esobj)
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN: For details about ArkTS syntax errors, see FAQs[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/entryability/EntryAbility.ts:115:5
+ Function may throw exceptions. Special handling is required.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/common/utils/BreakpointSystem.ets:51:34
+ 'matchMediaSync' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/MainPage.ets:28:36
+ 'getContext' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/MainPage.ets:158:14
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/HomePage.ets:41:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:26:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:53:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:64:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:75:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:89:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:103:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameModePage.ets:114:22
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/PuzzleGamePage.ets:34:27
+ 'getParams' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/PuzzleGamePage.ets:227:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/PuzzleGamePage.ets:425:20
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/LeaderboardPage.ets:67:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameHelpPage.ets:27:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/GameTutorialPage.ets:202:18
+ 'replaceUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/LevelSelectPage.ets:76:18
+ 'back' has been deprecated.
+[39m[39m
+[33mWARN: [33m[33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/pages/LevelSelectPage.ets:301:16
+ 'pushUrl' has been deprecated.
+[39m[39m
+[33mWARN: [33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/entryability/EntryAbility.ts:42:22
+ Cannot find name 'UIContext'.[39m[39m
+[33mWARN: [33mArkTS:WARN File: G:/SimpleCalculator-master/SimpleCalculator-master/entry/src/main/ets/entryability/EntryAbility.ts:165:22
+ Cannot find name 'UIContext'.[39m[39m
+
+[2026-06-08T21:21:53.216] [DEBUG] debug-file - Ark compile task finished.finished time is 1011007713900
+[2026-06-08T21:21:53.219] [DEBUG] debug-file - worker[4] has one work done.
+[2026-06-08T21:21:53.224] [DEBUG] debug-file - default@CompileArkTS work[0] done.
+[2026-06-08T21:21:53.225] [DEBUG] debug-file - A work dispatched to worker[4] failed because unable to get work from ready queue.
+[2026-06-08T21:21:53.229] [INFO] debug-file - Finished :entry:default@CompileArkTS... after 53 s 242 ms 
+[2026-06-08T21:21:53.231] [DEBUG] debug-file - Executing task :entry:default@GeneratePkgModuleJson
+[2026-06-08T21:21:53.232] [DEBUG] debug-file - File: 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2026-06-08T21:21:53.234] [DEBUG] debug-file - Error occurs while handling @Input 'shouldDeduplicateHar': The "data" argument must be of type string or an instance of Buffer, TypedArray, or DataView. Received undefined
+[2026-06-08T21:21:53.234] [DEBUG] debug-file - Task 'entry:default@GeneratePkgModuleJson' cost while wrapping incremental declarations: 3 ms 
+[2026-06-08T21:21:53.236] [DEBUG] debug-file - entry:default@GeneratePkgModuleJson is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\module.json' has been changed.
+[2026-06-08T21:21:53.236] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson pre-execution cost: 1 ms .
+[2026-06-08T21:21:53.240] [DEBUG] debug-file - entry : default@GeneratePkgModuleJson cost memory 0.19913482666015625
+[2026-06-08T21:21:53.240] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 40 s 556 ms 
+[2026-06-08T21:21:53.241] [INFO] debug-file - Finished :entry:default@GeneratePkgModuleJson... after 9 ms 
+[2026-06-08T21:21:53.246] [DEBUG] debug-file - Executing task :entry:default@ProcessCompiledResources
+[2026-06-08T21:21:53.247] [DEBUG] debug-file - File: 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\preload\default\preload.json' from 'preloadSoJsonPath' is not exists, just ignore.
+[2026-06-08T21:21:53.247] [DEBUG] debug-file - Task 'entry:default@ProcessCompiledResources' cost while wrapping incremental declarations: 1 ms 
+[2026-06-08T21:21:53.248] [DEBUG] debug-file - entry : default@ProcessCompiledResources cost memory 0.06063079833984375
+[2026-06-08T21:21:53.249] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 40 s 564 ms 
+[2026-06-08T21:21:53.250] [INFO] debug-file - Finished :entry:default@ProcessCompiledResources... after 4 ms 
+[2026-06-08T21:21:53.256] [DEBUG] debug-file - Executing task :entry:default@PackageHap
+[2026-06-08T21:21:53.264] [DEBUG] debug-file - entry:default@PackageHap is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\module.json' has been changed.
+[2026-06-08T21:21:53.264] [DEBUG] debug-file - Incremental task entry:default@PackageHap pre-execution cost: 5 ms .
+[2026-06-08T21:21:53.269] [DEBUG] debug-file - Use tool [G:\DevEco program\DevEco Studio\sdk\default\openharmony\toolchains\lib\app_packing_tool.jar]
+ [
+  'java',
+  '-Dfile.encoding=GBK',
+  '-jar',
+  'G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\toolchains\\lib\\app_packing_tool.jar',
+  '--mode',
+  'hap',
+  '--force',
+  'true',
+  '--lib-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\stripped_native_libs\\default',
+  '--json-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\package\\default\\module.json',
+  '--resources-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resources',
+  '--index-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\res\\default\\resources.index',
+  '--pack-info-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\outputs\\default\\pack.info',
+  '--out-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\outputs\\default\\entry-default-unsigned.hap',
+  '--ets-path',
+  'G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\build\\default\\intermediates\\loader_out\\default\\ets'
+]
+[2026-06-08T21:21:54.737] [DEBUG] debug-file - java daemon socket received message:{"code":0,"message":"pack success"}
+[2026-06-08T21:21:54.751] [DEBUG] debug-file - entry : default@PackageHap cost memory 0.6247940063476562
+[2026-06-08T21:21:54.751] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 42 s 67 ms 
+[2026-06-08T21:21:54.754] [INFO] debug-file - Finished :entry:default@PackageHap... after 1 s 496 ms 
+[2026-06-08T21:21:54.757] [DEBUG] debug-file - Executing task :entry:default@PackingCheck
+[2026-06-08T21:21:54.774] [DEBUG] debug-file - entry : default@PackingCheck cost memory 0.663970947265625
+[2026-06-08T21:21:54.775] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 42 s 90 ms 
+[2026-06-08T21:21:54.775] [INFO] debug-file - Finished :entry:default@PackingCheck... after 18 ms 
+[2026-06-08T21:21:54.779] [DEBUG] debug-file - Executing task :entry:default@SignHap
+[2026-06-08T21:21:54.780] [WARN] debug-file - Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5.
+[2026-06-08T21:21:54.783] [DEBUG] debug-file - entry:default@SignHap is not up-to-date, since the input file 'G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\entry-default-unsigned.hap' has been changed.
+[2026-06-08T21:21:54.783] [DEBUG] debug-file - Incremental task entry:default@SignHap pre-execution cost: 2 ms .
+[2026-06-08T21:21:54.785] [DEBUG] debug-file - entry : default@SignHap cost memory 0.10572052001953125
+[2026-06-08T21:21:54.785] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 42 s 101 ms 
+[2026-06-08T21:21:54.786] [INFO] debug-file - Finished :entry:default@SignHap... after 6 ms 
+[2026-06-08T21:21:54.789] [DEBUG] debug-file - Executing task :entry:default@CollectDebugSymbol
+[2026-06-08T21:21:54.791] [DEBUG] debug-file - entry : default@CollectDebugSymbol cost memory 0.09136962890625
+[2026-06-08T21:21:54.792] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 42 s 107 ms 
+[2026-06-08T21:21:54.792] [INFO] debug-file - Finished :entry:default@CollectDebugSymbol... after 3 ms 
+[2026-06-08T21:21:54.793] [DEBUG] debug-file - Executing task :entry:assembleHap
+[2026-06-08T21:21:54.793] [DEBUG] debug-file - entry : assembleHap cost memory 0.0128326416015625
+[2026-06-08T21:21:54.793] [DEBUG] debug-file - runTaskFromQueue task cost before running: 1 min 42 s 109 ms 
+[2026-06-08T21:21:54.794] [INFO] debug-file - Finished :entry:assembleHap... after 1 ms 
+[2026-06-08T21:21:54.818] [INFO] debug-file - BUILD SUCCESSFUL in 1 min 42 s 133 ms 
+[2026-06-08T21:21:54.821] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5 cache from map.
+[2026-06-08T21:21:54.822] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache by regenerate.
+[2026-06-08T21:21:54.822] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.823] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.823] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources\base\profile\main_pages.json cache by regenerate.
+[2026-06-08T21:21:54.824] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\hvigor\hvigor-config.json5 cache by regenerate.
+[2026-06-08T21:21:54.824] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\oh-package.json5 cache by regenerate.
+[2026-06-08T21:21:54.825] [DEBUG] debug-file - Update task entry:default@PreBuild input file:G:\SimpleCalculator-master\SimpleCalculator-master\oh-package.json5 cache by regenerate.
+[2026-06-08T21:21:54.826] [DEBUG] debug-file - Incremental task entry:default@PreBuild post-execution cost:7 ms .
+[2026-06-08T21:21:54.826] [DEBUG] debug-file - Update task entry:default@CreateModuleInfo output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\profile\default\ModuleInfo.ts cache.
+[2026-06-08T21:21:54.827] [DEBUG] debug-file - Incremental task entry:default@CreateModuleInfo post-execution cost:1 ms .
+[2026-06-08T21:21:54.827] [DEBUG] debug-file - Update task entry:default@GenerateMetadata input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache from map.
+[2026-06-08T21:21:54.827] [DEBUG] debug-file - Update task entry:default@GenerateMetadata output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\hap_metadata\default\output_metadata.json cache.
+[2026-06-08T21:21:54.828] [DEBUG] debug-file - Incremental task entry:default@GenerateMetadata post-execution cost:1 ms .
+[2026-06-08T21:21:54.828] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5 cache from map.
+[2026-06-08T21:21:54.828] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.829] [DEBUG] debug-file - Update task entry:default@MergeProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache by regenerate.
+[2026-06-08T21:21:54.830] [DEBUG] debug-file - Update task entry:default@MergeProfile output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\merge_profile\default\module.json cache.
+[2026-06-08T21:21:54.830] [DEBUG] debug-file - Incremental task entry:default@MergeProfile post-execution cost:2 ms .
+[2026-06-08T21:21:54.831] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5 cache from map.
+[2026-06-08T21:21:54.831] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.831] [DEBUG] debug-file - Update task entry:default@CreateBuildProfile output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\profile\default\BuildProfile.ets cache.
+[2026-06-08T21:21:54.832] [DEBUG] debug-file - Incremental task entry:default@CreateBuildProfile post-execution cost:2 ms .
+[2026-06-08T21:21:54.832] [DEBUG] debug-file - Update task entry:default@GeneratePkgContextInfo output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader\default\pkgContextInfo.json cache.
+[2026-06-08T21:21:54.833] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgContextInfo post-execution cost:1 ms .
+[2026-06-08T21:21:54.833] [DEBUG] debug-file - Update task entry:default@ProcessIntegratedHsp output file:G:\SimpleCalculator-master\SimpleCalculator-master\build\cache\default\integrated_hsp\integratedHspCache.json cache.
+[2026-06-08T21:21:54.834] [DEBUG] debug-file - Incremental task entry:default@ProcessIntegratedHsp post-execution cost:1 ms .
+[2026-06-08T21:21:54.834] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\app.json5 cache from map.
+[2026-06-08T21:21:54.834] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache by regenerate.
+[2026-06-08T21:21:54.834] [DEBUG] debug-file - Update task entry:default@MakePackInfo input file:G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.835] [DEBUG] debug-file - Update task entry:default@MakePackInfo output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\pack.info cache.
+[2026-06-08T21:21:54.836] [DEBUG] debug-file - Incremental task entry:default@MakePackInfo post-execution cost:3 ms .
+[2026-06-08T21:21:54.836] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:G:\DevEco program\DevEco Studio\sdk\default\openharmony\toolchains\syscap_tool.exe cache by regenerate.
+[2026-06-08T21:21:54.837] [DEBUG] debug-file - Update task entry:default@SyscapTransform input file:G:\DevEco program\DevEco Studio\sdk\default\openharmony\ets\api\device-define cache by regenerate.
+[2026-06-08T21:21:54.839] [DEBUG] debug-file - Update task entry:default@SyscapTransform output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\syscap\default\rpcid.sc cache.
+[2026-06-08T21:21:54.840] [DEBUG] debug-file - Incremental task entry:default@SyscapTransform post-execution cost:4 ms .
+[2026-06-08T21:21:54.840] [DEBUG] debug-file - Update task entry:default@ProcessProfile input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\merge_profile\default\module.json cache from map.
+[2026-06-08T21:21:54.840] [DEBUG] debug-file - Update task entry:default@ProcessProfile output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\process_profile\default\module.json cache.
+[2026-06-08T21:21:54.841] [DEBUG] debug-file - Incremental task entry:default@ProcessProfile post-execution cost:1 ms .
+[2026-06-08T21:21:54.841] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\oh-package.json5 cache from map.
+[2026-06-08T21:21:54.842] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:G:\SimpleCalculator-master\SimpleCalculator-master\oh-package.json5 cache by regenerate.
+[2026-06-08T21:21:54.842] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache by regenerate.
+[2026-06-08T21:21:54.842] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\router_map\default\temp-router-map.json cache.
+[2026-06-08T21:21:54.843] [DEBUG] debug-file - Update task entry:default@ProcessRouterMap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\router_map\default\loader-router-map.json cache.
+[2026-06-08T21:21:54.844] [DEBUG] debug-file - Incremental task entry:default@ProcessRouterMap post-execution cost:3 ms .
+[2026-06-08T21:21:54.844] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\oh-package.json5 cache from map.
+[2026-06-08T21:21:54.844] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:G:\SimpleCalculator-master\SimpleCalculator-master\oh-package.json5 cache by regenerate.
+[2026-06-08T21:21:54.845] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\module.json5 cache by regenerate.
+[2026-06-08T21:21:54.845] [DEBUG] debug-file - Update task entry:default@ProcessShareConfig output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\share_config\default\temp-share-config.json cache.
+[2026-06-08T21:21:54.846] [DEBUG] debug-file - Incremental task entry:default@ProcessShareConfig post-execution cost:2 ms .
+[2026-06-08T21:21:54.846] [DEBUG] debug-file - Update task entry:default@ProcessStartupConfig output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\startup\default\startup_config.json cache.
+[2026-06-08T21:21:54.847] [DEBUG] debug-file - Incremental task entry:default@ProcessStartupConfig post-execution cost:2 ms .
+[2026-06-08T21:21:54.848] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resConfig.json cache.
+[2026-06-08T21:21:54.848] [DEBUG] debug-file - Update task entry:default@ProcessResource output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\opt-compression.json cache.
+[2026-06-08T21:21:54.849] [DEBUG] debug-file - Incremental task entry:default@ProcessResource post-execution cost:2 ms .
+[2026-06-08T21:21:54.851] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\router_map\default\temp-router-map.json cache from map.
+[2026-06-08T21:21:54.851] [DEBUG] debug-file - Update task entry:default@GenerateLoaderJson output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader\default\loader.json cache.
+[2026-06-08T21:21:54.852] [DEBUG] debug-file - Incremental task entry:default@GenerateLoaderJson post-execution cost:3 ms .
+[2026-06-08T21:21:54.853] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:G:\SimpleCalculator-master\SimpleCalculator-master\build-profile.json5 cache by regenerate.
+[2026-06-08T21:21:54.853] [DEBUG] debug-file - Update task entry:default@ProcessLibs input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build-profile.json5 cache from map.
+[2026-06-08T21:21:54.854] [DEBUG] debug-file - Update task entry:default@ProcessLibs output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\libs\default cache.
+[2026-06-08T21:21:54.854] [DEBUG] debug-file - Incremental task entry:default@ProcessLibs post-execution cost:2 ms .
+[2026-06-08T21:21:54.857] [DEBUG] debug-file - Update task entry:default@CompileResource input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\resources cache from map.
+[2026-06-08T21:21:54.857] [DEBUG] debug-file - Update task entry:default@CompileResource input file:G:\SimpleCalculator-master\SimpleCalculator-master\AppScope\resources cache by regenerate.
+[2026-06-08T21:21:54.859] [DEBUG] debug-file - Update task entry:default@CompileResource input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\process_profile\default\module.json cache by regenerate.
+[2026-06-08T21:21:54.859] [DEBUG] debug-file - Update task entry:default@CompileResource input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resConfig.json cache by regenerate.
+[2026-06-08T21:21:54.860] [DEBUG] debug-file - Update task entry:default@CompileResource output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default cache.
+[2026-06-08T21:21:54.868] [DEBUG] debug-file - Update task entry:default@CompileResource output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\r\default\ResourceTable.h cache.
+[2026-06-08T21:21:54.869] [DEBUG] debug-file - Update task entry:default@CompileResource output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\r\default cache.
+[2026-06-08T21:21:54.870] [DEBUG] debug-file - Incremental task entry:default@CompileResource post-execution cost:16 ms .
+[2026-06-08T21:21:54.870] [DEBUG] debug-file - There is no need to refresh cache, since the incremental task entry:default@DoNativeStrip is up-to-date.
+[2026-06-08T21:21:54.874] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader\default cache from map.
+[2026-06-08T21:21:54.874] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2026-06-08T21:21:54.874] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2026-06-08T21:21:54.875] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2026-06-08T21:21:54.876] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets cache by regenerate.
+[2026-06-08T21:21:54.885] [DEBUG] debug-file - Update task entry:default@CompileArkTS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2026-06-08T21:21:54.886] [DEBUG] debug-file - Update task entry:default@CompileArkTS output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader_out\default\ets cache.
+[2026-06-08T21:21:54.887] [DEBUG] debug-file - Incremental task entry:default@CompileArkTS post-execution cost:17 ms .
+[2026-06-08T21:21:54.889] [DEBUG] debug-file - Update task entry:default@BuildJS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader\default cache by regenerate.
+[2026-06-08T21:21:54.890] [DEBUG] debug-file - Update task entry:default@BuildJS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\ResourceTable.txt cache by regenerate.
+[2026-06-08T21:21:54.891] [DEBUG] debug-file - Update task entry:default@BuildJS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\ark_module.json cache by regenerate.
+[2026-06-08T21:21:54.891] [DEBUG] debug-file - Update task entry:default@BuildJS input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resources\base\profile cache by regenerate.
+[2026-06-08T21:21:54.892] [DEBUG] debug-file - Update task entry:default@BuildJS output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader_out\default\js cache.
+[2026-06-08T21:21:54.893] [DEBUG] debug-file - Incremental task entry:default@BuildJS post-execution cost:6 ms .
+[2026-06-08T21:21:54.893] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2026-06-08T21:21:54.893] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\libs\default cache by regenerate.
+[2026-06-08T21:21:54.894] [DEBUG] debug-file - Update task entry:default@CacheNativeLibs output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\patch\default\base_native_libs.json cache.
+[2026-06-08T21:21:54.894] [DEBUG] debug-file - Incremental task entry:default@CacheNativeLibs post-execution cost:2 ms .
+[2026-06-08T21:21:54.895] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\module.json cache from map.
+[2026-06-08T21:21:54.895] [DEBUG] debug-file - Update task entry:default@GeneratePkgModuleJson output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\package\default\module.json cache.
+[2026-06-08T21:21:54.895] [DEBUG] debug-file - Incremental task entry:default@GeneratePkgModuleJson post-execution cost:1 ms .
+[2026-06-08T21:21:54.895] [DEBUG] debug-file - Incremental task entry:default@ProcessCompiledResources post-execution cost:1 ms .
+[2026-06-08T21:21:54.898] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\stripped_native_libs\default cache by regenerate.
+[2026-06-08T21:21:54.899] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\module.json cache from map.
+[2026-06-08T21:21:54.899] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resources cache by regenerate.
+[2026-06-08T21:21:54.903] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\res\default\resources.index cache by regenerate.
+[2026-06-08T21:21:54.904] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\pack.info cache by regenerate.
+[2026-06-08T21:21:54.904] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader_out\default\ets cache by regenerate.
+[2026-06-08T21:21:54.905] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2026-06-08T21:21:54.906] [DEBUG] debug-file - Update task entry:default@PackageHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\generated\profile\default\BuildProfile.ets cache by regenerate.
+[2026-06-08T21:21:54.906] [DEBUG] debug-file - Update task entry:default@PackageHap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\entry-default-unsigned.hap cache.
+[2026-06-08T21:21:54.907] [DEBUG] debug-file - Update task entry:default@PackageHap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\source_map\default\sourceMaps.map cache.
+[2026-06-08T21:21:54.907] [DEBUG] debug-file - Update task entry:default@PackageHap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\mapping\sourceMaps.map cache.
+[2026-06-08T21:21:54.907] [DEBUG] debug-file - Incremental task entry:default@PackageHap post-execution cost:12 ms .
+[2026-06-08T21:21:54.908] [DEBUG] debug-file - Update task entry:default@SignHap input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\entry-default-unsigned.hap cache from map.
+[2026-06-08T21:21:54.908] [DEBUG] debug-file - Update task entry:default@SignHap output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\entry-default-signed.hap cache.
+[2026-06-08T21:21:54.909] [DEBUG] debug-file - Incremental task entry:default@SignHap post-execution cost:1 ms .
+[2026-06-08T21:21:54.909] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\loader_out\default\ets\sourceMaps.map cache by regenerate.
+[2026-06-08T21:21:54.910] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol input file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\intermediates\libs\default cache by regenerate.
+[2026-06-08T21:21:54.910] [DEBUG] debug-file - Update task entry:default@CollectDebugSymbol output file:G:\SimpleCalculator-master\SimpleCalculator-master\entry\build\default\outputs\default\symbol cache.
+[2026-06-08T21:21:54.911] [DEBUG] debug-file - Incremental task entry:default@CollectDebugSymbol post-execution cost:2 ms .
+[2026-06-08T21:21:54.970] [DEBUG] debug-file - Cleanup worker 20.
+[2026-06-08T21:21:54.971] [DEBUG] debug-file - Worker 20 has been cleaned up.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Current idle worker size: 2.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Current resident worker size: 3.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Cleanup worker 19.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Worker 19 has been cleaned up.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Current idle worker size: 1.
+[2026-06-08T21:21:54.972] [DEBUG] debug-file - Current resident worker size: 3.
+[2026-06-08T21:21:54.976] [DEBUG] debug-file - hvigor build process will be closed.
+[2026-06-08T21:21:54.978] [DEBUG] debug-file - java daemon socket close code:1000 reason:close by user
+[2026-06-08T21:21:54.983] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-06-08T21:21:54.985] [DEBUG] debug-file - session manager: send message to worker process.
+[2026-06-08T21:21:54.985] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:21:54.985] [DEBUG] debug-file - worker[20] exits with exit code 1.
+[2026-06-08T21:21:54.986] [DEBUG] debug-file - watch worker: worker id should be larger than 0. Nothing will be sent to any worker thread.
+[2026-06-08T21:21:54.988] [DEBUG] debug-file - worker[19] exits with exit code 1.
