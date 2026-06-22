@@ -1,1248 +1,0 @@
-Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚlif (!("finalizeConstruction" in ViewPU.prototype)) {
-    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
-}
-/*
- * èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆ - æ–°æ‰‹æ•™ç¨‹
- * è‡ªåŠ¨æ¼”ç¤ºæ¸¸æˆçŽ©æ³•
- */
-import router from '@ohos.router';
-import { PuzzleGameEngine } from '../common/util/PuzzleGameEngine';
-import { Medal, MedalType, ActionType, ActionCard, TargetPattern, GameMode } from '../viewmodel/PuzzleGameModel';
-class GameTutorialPage extends ViewPU {
-    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
-        super(parent, __localStorage, elmtId, extraInfo);
-        if (typeof paramsLambda === "function") {
-            this.paramsGenerator_ = paramsLambda;
-        }
-        this.gameEngine = new PuzzleGameEngine();
-        this.__board = new ObservedPropertyObjectPU([], this, "board");
-        this.__handCards = new ObservedPropertyObjectPU([], this, "handCards");
-        this.__currentTarget = new ObservedPropertyObjectPU(null, this, "currentTarget");
-        this.__tutorialStep = new ObservedPropertySimplePU(0, this, "tutorialStep");
-        this.__isPlaying = new ObservedPropertySimplePU(false, this, "isPlaying");
-        this.__showTip = new ObservedPropertySimplePU(true, this, "showTip");
-        this.__highlightPositions = new ObservedPropertyObjectPU([], this, "highlightPositions");
-        this.__highlightCard = new ObservedPropertySimplePU(-1, this, "highlightCard");
-        this.__animationProgress = new ObservedPropertySimplePU(0, this, "animationProgress");
-        this.timer = -1;
-        this.animationTimer = -1;
-        this.tutorialSteps = [
-            'æ¬¢è¿Žæ¥åˆ°èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆï¼\nè®©æˆ‘ä»¬å­¦ä¹ å¦‚ä½•çŽ©è¿™ä¸ªæ¸¸æˆã€‚',
-            'è¿™æ˜¯3Ã—3çš„æ»‘å†°åœºåœ°ï¼Œæ¯ä¸ªæ ¼å­ä¸Šæ”¾ç€ä¸åŒçš„å¥–ç‰Œã€‚',
-            'è¿™æ˜¯ç›®æ ‡å›¾æ¡ˆï¼Œæˆ‘ä»¬éœ€è¦åœ¨æ£‹ç›˜ä¸Šå‡‘å‡ºè¿™ä¸ªå›¾æ¡ˆæ‰èƒ½è¿‡å…³ã€‚',
-            'è¿™äº›æ˜¯åŠ¨ä½œå¡ç‰Œï¼Œæ¯ä¸ªå¡ç‰Œä»£è¡¨ä¸€ä¸ªèŠ±æ ·æ»‘å†°åŠ¨ä½œã€‚',
-            'è®©æˆ‘ä»¬ä½¿ç”¨ Spinï¼ˆæ—‹è½¬ï¼‰å¡ç‰Œæ¥ç¿»è½¬ä¸€åˆ—å¥–ç‰Œã€‚',
-            'ç‚¹å‡»å¡ç‰ŒåŽï¼Œå†ç‚¹å‡»æ£‹ç›˜ä½ç½®æ¥æ‰§è¡ŒåŠ¨ä½œã€‚',
-            'å¤ªæ£’äº†ï¼æˆ‘ä»¬æˆåŠŸå®Œæˆäº†ç›®æ ‡å›¾æ¡ˆï¼',
-            'çŽ°åœ¨ä½ å·²ç»å­¦ä¼šäº†åŸºæœ¬æ“ä½œï¼Œå¼€å§‹ä½ çš„è¡¨æ¼”å§ï¼'
-        ];
-        this.setInitiallyProvidedValue(params);
-        this.finalizeConstruction();
-    }
-    setInitiallyProvidedValue(params) {
-        if (params.gameEngine !== undefined) {
-            this.gameEngine = params.gameEngine;
-        }
-        if (params.board !== undefined) {
-            this.board = params.board;
-        }
-        if (params.handCards !== undefined) {
-            this.handCards = params.handCards;
-        }
-        if (params.currentTarget !== undefined) {
-            this.currentTarget = params.currentTarget;
-        }
-        if (params.tutorialStep !== undefined) {
-            this.tutorialStep = params.tutorialStep;
-        }
-        if (params.isPlaying !== undefined) {
-            this.isPlaying = params.isPlaying;
-        }
-        if (params.showTip !== undefined) {
-            this.showTip = params.showTip;
-        }
-        if (params.highlightPositions !== undefined) {
-            this.highlightPositions = params.highlightPositions;
-        }
-        if (params.highlightCard !== undefined) {
-            this.highlightCard = params.highlightCard;
-        }
-        if (params.animationProgress !== undefined) {
-            this.animationProgress = params.animationProgress;
-        }
-        if (params.timer !== undefined) {
-            this.timer = params.timer;
-        }
-        if (params.animationTimer !== undefined) {
-            this.animationTimer = params.animationTimer;
-        }
-        if (params.tutorialSteps !== undefined) {
-            this.tutorialSteps = params.tutorialSteps;
-        }
-    }
-    updateStateVars(params) {
-    }
-    purgeVariableDependenciesOnElmtId(rmElmtId) {
-        this.__board.purgeDependencyOnElmtId(rmElmtId);
-        this.__handCards.purgeDependencyOnElmtId(rmElmtId);
-        this.__currentTarget.purgeDependencyOnElmtId(rmElmtId);
-        this.__tutorialStep.purgeDependencyOnElmtId(rmElmtId);
-        this.__isPlaying.purgeDependencyOnElmtId(rmElmtId);
-        this.__showTip.purgeDependencyOnElmtId(rmElmtId);
-        this.__highlightPositions.purgeDependencyOnElmtId(rmElmtId);
-        this.__highlightCard.purgeDependencyOnElmtId(rmElmtId);
-        this.__animationProgress.purgeDependencyOnElmtId(rmElmtId);
-    }
-    aboutToBeDeleted() {
-        this.__board.aboutToBeDeleted();
-        this.__handCards.aboutToBeDeleted();
-        this.__currentTarget.aboutToBeDeleted();
-        this.__tutorialStep.aboutToBeDeleted();
-        this.__isPlaying.aboutToBeDeleted();
-        this.__showTip.aboutToBeDeleted();
-        this.__highlightPositions.aboutToBeDeleted();
-        this.__highlightCard.aboutToBeDeleted();
-        this.__animationProgress.aboutToBeDeleted();
-        SubscriberManager.Get().delete(this.id__());
-        this.aboutToBeDeletedInternal();
-    }
-    get board() {
-        return this.__board.get();
-    }
-    set board(newValue) {
-        this.__board.set(newValue);
-    }
-    get handCards() {
-        return this.__handCards.get();
-    }
-    set handCards(newValue) {
-        this.__handCards.set(newValue);
-    }
-    get currentTarget() {
-        return this.__currentTarget.get();
-    }
-    set currentTarget(newValue) {
-        this.__currentTarget.set(newValue);
-    }
-    get tutorialStep() {
-        return this.__tutorialStep.get();
-    }
-    set tutorialStep(newValue) {
-        this.__tutorialStep.set(newValue);
-    }
-    get isPlaying() {
-        return this.__isPlaying.get();
-    }
-    set isPlaying(newValue) {
-        this.__isPlaying.set(newValue);
-    }
-    get showTip() {
-        return this.__showTip.get();
-    }
-    set showTip(newValue) {
-        this.__showTip.set(newValue);
-    }
-    get highlightPositions() {
-        return this.__highlightPositions.get();
-    }
-    set highlightPositions(newValue) {
-        this.__highlightPositions.set(newValue);
-    }
-    get highlightCard() {
-        return this.__highlightCard.get();
-    }
-    set highlightCard(newValue) {
-        this.__highlightCard.set(newValue);
-    }
-    get animationProgress() {
-        return this.__animationProgress.get();
-    }
-    set animationProgress(newValue) {
-        this.__animationProgress.set(newValue);
-    }
-    aboutToAppear() {
-        this.initDemoGame();
-    }
-    aboutToDisappear() {
-        this.stopAnimation();
-    }
-    initDemoGame() {
-        // åˆ›å»ºä¸€ä¸ªç®€å•çš„æ¼”ç¤ºæ£‹ç›˜
-        this.board = [
-            new Medal(MedalType.GOLD, '0'),
-            new Medal(MedalType.SILVER, '1'),
-            new Medal(MedalType.BRONZE, '2'),
-            new Medal(MedalType.SILVER, '3'),
-            new Medal(MedalType.GOLD, '4'),
-            new Medal(MedalType.BRONZE, '5'),
-            new Medal(MedalType.BRONZE, '6'),
-            new Medal(MedalType.SILVER, '7'),
-            new Medal(MedalType.GOLD, '8')
-        ];
-        // åˆ›å»ºæ¼”ç¤ºå¡ç‰Œ
-        this.handCards = [
-            new ActionCard(ActionType.SPIN, 'Spin', 'ç¿»è½¬æ•´åˆ—å¥–ç‰Œ', 2, 'ðŸ”„'),
-            new ActionCard(ActionType.JUMP, 'Jump', 'äº¤æ¢ä¸¤å †å¥–ç‰Œ', 3, 'ðŸ¦˜'),
-            new ActionCard(ActionType.POSE, 'Pose', 'å †å ç›¸é‚»å¥–ç‰Œ', 2, 'ðŸ’ƒ')
-        ];
-        // åˆ›å»ºæ¼”ç¤ºç›®æ ‡
-        this.currentTarget = new TargetPattern([0, 1, 2], [MedalType.GOLD, MedalType.GOLD, MedalType.GOLD], 'ç¬¬ä¸€è¡Œå…¨æ˜¯é‡‘ç‰Œ');
-    }
-    startAutoPlay() {
-        this.isPlaying = true;
-        this.tutorialStep = 0;
-        this.playNextStep();
-    }
-    playNextStep() {
-        if (this.tutorialStep >= this.tutorialSteps.length) {
-            this.isPlaying = false;
-            return;
-        }
-        // æ¸…é™¤ä¹‹å‰çš„é«˜äº®
-        this.highlightPositions = [];
-        this.highlightCard = -1;
-        // æ ¹æ®æ­¥éª¤è®¾ç½®æ¼”ç¤ºæ•ˆæžœ
-        switch (this.tutorialStep) {
-            case 1: // å±•ç¤ºæ£‹ç›˜
-                this.highlightPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-                break;
-            case 2: // å±•ç¤ºç›®æ ‡
-                this.highlightPositions = [0, 1, 2];
-                break;
-            case 3: // å±•ç¤ºå¡ç‰Œ
-                this.highlightCard = -2; // æ‰€æœ‰å¡ç‰Œ
-                break;
-            case 4: // é€‰æ‹©Spinå¡ç‰Œ
-                this.highlightCard = 0;
-                break;
-            case 5: // æ‰§è¡ŒåŠ¨ä½œ
-                this.highlightCard = 0;
-                this.highlightPositions = [1];
-                break;
-            case 6: // å®Œæˆæ¼”ç¤º
-                this.board = [
-                    new Medal(MedalType.GOLD, '0'),
-                    new Medal(MedalType.GOLD, '1'),
-                    new Medal(MedalType.GOLD, '2'),
-                    new Medal(MedalType.SILVER, '3'),
-                    new Medal(MedalType.BRONZE, '4'),
-                    new Medal(MedalType.BRONZE, '5'),
-                    new Medal(MedalType.BRONZE, '6'),
-                    new Medal(MedalType.SILVER, '7'),
-                    new Medal(MedalType.GOLD, '8')
-                ];
-                this.highlightPositions = [0, 1, 2];
-                break;
-        }
-        // åŠ¨ç”»è¿›åº¦
-        this.startAnimation();
-        // è‡ªåŠ¨è¿›å…¥ä¸‹ä¸€æ­¥
-        this.timer = setTimeout(() => {
-            this.tutorialStep++;
-            this.playNextStep();
-        }, 3000);
-    }
-    startAnimation() {
-        this.animationProgress = 0;
-        this.animationTimer = setInterval(() => {
-            this.animationProgress += 2;
-            if (this.animationProgress >= 100) {
-                this.animationProgress = 100;
-                clearInterval(this.animationTimer);
-            }
-        }, 60);
-    }
-    stopAnimation() {
-        if (this.timer !== -1) {
-            clearTimeout(this.timer);
-            this.timer = -1;
-        }
-        if (this.animationTimer !== -1) {
-            clearInterval(this.animationTimer);
-            this.animationTimer = -1;
-        }
-    }
-    getMedalColor(type) {
-        switch (type) {
-            case MedalType.GOLD:
-                return '#FFD700';
-            case MedalType.SILVER:
-                return '#C0C0C0';
-            case MedalType.BRONZE:
-                return '#CD7F32';
-            default:
-                return '#CCCCCC';
-        }
-    }
-    getMedalIcon(type) {
-        switch (type) {
-            case MedalType.GOLD:
-                return 'ðŸ¥‡';
-            case MedalType.SILVER:
-                return 'ðŸ¥ˆ';
-            case MedalType.BRONZE:
-                return 'ðŸ¥‰';
-            default:
-                return 'ðŸ…';
-        }
-    }
-    initialRender() {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.height('100%');
-            Column.linearGradient({
-                angle: 135,
-                colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
-            });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // é¡¶éƒ¨æ 
-            Row.create();
-            // é¡¶éƒ¨æ 
-            Row.width('100%');
-            // é¡¶éƒ¨æ 
-            Row.height(70);
-            // é¡¶éƒ¨æ 
-            Row.padding({ left: 20, right: 20 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithChild();
-            Button.height(40);
-            Button.backgroundColor('rgba(255,255,255,0.2)');
-            Button.borderRadius(20);
-            Button.onClick(() => {
-                this.stopAnimation();
-                router.replaceUrl({
-                    url: 'pages/PuzzleGamePage',
-                    params: { mode: GameMode.CLASSIC }
-                });
-            });
-        }, Button);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('è·³è¿‡');
-            Text.fontSize(16);
-            Text.fontColor(Color.White);
-        }, Text);
-        Text.pop();
-        Button.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-            Blank.layoutWeight(1);
-        }, Blank);
-        Blank.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('ðŸ“– æ–°æ‰‹æ•™ç¨‹');
-            Text.fontSize(20);
-            Text.fontColor(Color.White);
-            Text.fontWeight(FontWeight.Bold);
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-            Blank.layoutWeight(1);
-        }, Blank);
-        Blank.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-            Blank.width(60);
-        }, Blank);
-        Blank.pop();
-        // é¡¶éƒ¨æ 
-        Row.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // ä¸»å†…å®¹åŒº
-            Column.create();
-            // ä¸»å†…å®¹åŒº
-            Column.layoutWeight(1);
-            // ä¸»å†…å®¹åŒº
-            Column.width('100%');
-            // ä¸»å†…å®¹åŒº
-            Column.padding(20);
-        }, Column);
-        // æ£‹ç›˜å±•ç¤º
-        this.buildDemoBoard.bind(this)();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            // ç›®æ ‡å±•ç¤º
-            if (this.currentTarget) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.buildTargetDisplay.bind(this)();
-                });
-            }
-            // å¡ç‰Œå±•ç¤º
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                });
-            }
-        }, If);
-        If.pop();
-        // å¡ç‰Œå±•ç¤º
-        this.buildDemoCards.bind(this)();
-        // æç¤ºæ–‡å­—
-        this.buildTipText.bind(this)();
-        // ä¸»å†…å®¹åŒº
-        Column.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // åº•éƒ¨æŽ§åˆ¶
-            Row.create();
-            // åº•éƒ¨æŽ§åˆ¶
-            Row.width('100%');
-            // åº•éƒ¨æŽ§åˆ¶
-            Row.height(80);
-            // åº•éƒ¨æŽ§åˆ¶
-            Row.padding({ left: 20, right: 20 });
-            // åº•éƒ¨æŽ§åˆ¶
-            Row.justifyContent(FlexAlign.Center);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            if (!this.isPlaying) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Button.createWithLabel('å¼€å§‹æ¼”ç¤º');
-                        Button.width('80%');
-                        Button.height(50);
-                        Button.backgroundColor('#667eea');
-                        Button.borderRadius(25);
-                        Button.fontColor(Color.White);
-                        Button.fontSize(18);
-                        Button.onClick(() => {
-                            this.startAutoPlay();
-                        });
-                    }, Button);
-                    Button.pop();
-                });
-            }
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Row.create();
-                        Row.justifyContent(FlexAlign.Center);
-                        Row.width('100%');
-                    }, Row);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(`æ­¥éª¤ ${this.tutorialStep + 1}/${this.tutorialSteps.length}`);
-                        Text.fontSize(16);
-                        Text.fontColor(Color.White);
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // è¿›åº¦æ¡
-                        Row.create();
-                        // è¿›åº¦æ¡
-                        Row.width(150);
-                        // è¿›åº¦æ¡
-                        Row.height(8);
-                        // è¿›åº¦æ¡
-                        Row.backgroundColor('rgba(255,255,255,0.3)');
-                        // è¿›åº¦æ¡
-                        Row.borderRadius(4);
-                        // è¿›åº¦æ¡
-                        Row.margin({ left: 15 });
-                    }, Row);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Row.create();
-                        Row.width(`${this.animationProgress}%`);
-                        Row.height('100%');
-                        Row.backgroundColor('#FFD700');
-                        Row.borderRadius(4);
-                    }, Row);
-                    Row.pop();
-                    // è¿›åº¦æ¡
-                    Row.pop();
-                    Row.pop();
-                });
-            }
-        }, If);
-        If.pop();
-        // åº•éƒ¨æŽ§åˆ¶
-        Row.pop();
-        Column.pop();
-    }
-    buildDemoBoard(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.padding(15);
-            Column.backgroundColor('rgba(255,255,255,0.1)');
-            Column.borderRadius(15);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('â›¸ï¸ æ»‘å†°åœºåœ°');
-            Text.fontSize(16);
-            Text.fontColor(Color.White);
-            Text.fontWeight(FontWeight.Bold);
-            Text.margin({ bottom: 10 });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = _item => {
-                const row = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Row.create();
-                    Row.margin({ top: row === 0 ? 0 : 8 });
-                }, Row);
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    ForEach.create();
-                    const forEachItemGenFunction = _item => {
-                        const col = _item;
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Column.create();
-                            Context.animation({
-                                duration: 300,
-                                curve: Curve.EaseInOut
-                            });
-                            Column.width(70);
-                            Column.height(70);
-                            Column.backgroundColor(this.getMedalColor(this.board[row * 3 + col]?.type || MedalType.BRONZE));
-                            Column.borderRadius(10);
-                            Column.justifyContent(FlexAlign.Center);
-                            Column.border({
-                                width: this.highlightPositions.includes(row * 3 + col) ? 3 : 1,
-                                color: this.highlightPositions.includes(row * 3 + col) ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
-                            });
-                            Column.shadow({ radius: 5, color: 'rgba(0,0,0,0.3)', offsetX: 2, offsetY: 2 });
-                            Column.opacity(this.highlightPositions.length > 0 && !this.highlightPositions.includes(row * 3 + col) ? 0.5 : 1);
-                            Context.animation(null);
-                            Column.margin({ left: col === 0 ? 0 : 8 });
-                        }, Column);
-                        this.observeComponentCreation2((elmtId, isInitialRender) => {
-                            Text.create(this.getMedalIcon(this.board[row * 3 + col]?.type || MedalType.BRONZE));
-                            Text.fontSize(36);
-                        }, Text);
-                        Text.pop();
-                        Column.pop();
-                    };
-                    this.forEachUpdateFunction(elmtId, [0, 1, 2], forEachItemGenFunction, (col) => col.toString(), false, false);
-                }, ForEach);
-                ForEach.pop();
-                Row.pop();
-            };
-            this.forEachUpdateFunction(elmtId, [0, 1, 2], forEachItemGenFunction, (row) => row.toString(), false, false);
-        }, ForEach);
-        ForEach.pop();
-        Column.pop();
-    }
-    buildTargetDisplay(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.padding(15);
-            Column.backgroundColor('rgba(255,255,255,0.1)');
-            Column.borderRadius(15);
-            Column.margin({ top: 15 });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.width('100%');
-            Row.margin({ bottom: 10 });
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('ðŸŽ¯ ç›®æ ‡å›¾æ¡ˆ');
-            Text.fontSize(16);
-            Text.fontColor(Color.White);
-            Text.fontWeight(FontWeight.Bold);
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Blank.create();
-            Blank.layoutWeight(1);
-        }, Blank);
-        Blank.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.currentTarget?.description || '');
-            Text.fontSize(14);
-            Text.fontColor('rgba(255,255,255,0.8)');
-        }, Text);
-        Text.pop();
-        Row.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.width('100%');
-            Row.justifyContent(FlexAlign.Center);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = (_item, index) => {
-                const medal = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Text.create(this.getMedalIcon(medal));
-                    Text.fontSize(30);
-                    Text.margin({ left: index === 0 ? 0 : 10 });
-                }, Text);
-                Text.pop();
-            };
-            this.forEachUpdateFunction(elmtId, this.currentTarget?.requiredMedals || [], forEachItemGenFunction, (medal, index) => index.toString(), true, true);
-        }, ForEach);
-        ForEach.pop();
-        Row.pop();
-        Column.pop();
-    }
-    buildDemoCards(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.padding(15);
-            Column.backgroundColor('rgba(255,255,255,0.1)');
-            Column.borderRadius(15);
-            Column.margin({ top: 15 });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('ðŸŽ´ åŠ¨ä½œå¡ç‰Œ');
-            Text.fontSize(16);
-            Text.fontColor(Color.White);
-            Text.fontWeight(FontWeight.Bold);
-            Text.margin({ bottom: 10 });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Row.create();
-            Row.width('100%');
-            Row.justifyContent(FlexAlign.Center);
-        }, Row);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            ForEach.create();
-            const forEachItemGenFunction = (_item, index) => {
-                const card = _item;
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Column.create();
-                    Context.animation({
-                        duration: 300,
-                        curve: Curve.EaseInOut
-                    });
-                    Column.width(70);
-                    Column.height(80);
-                    Column.backgroundColor(this.highlightCard === index || this.highlightCard === -2 ? '#FF6B6B' : 'rgba(255,255,255,0.2)');
-                    Column.borderRadius(10);
-                    Column.justifyContent(FlexAlign.Center);
-                    Column.border({
-                        width: 2,
-                        color: this.highlightCard === index || this.highlightCard === -2 ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
-                    });
-                    Column.opacity(this.highlightCard >= 0 && this.highlightCard !== index ? 0.5 : 1);
-                    Context.animation(null);
-                    Column.margin({ left: index === 0 ? 0 : 10 });
-                }, Column);
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Text.create(card.icon);
-                    Text.fontSize(28);
-                }, Text);
-                Text.pop();
-                this.observeComponentCreation2((elmtId, isInitialRender) => {
-                    Text.create(card.name);
-                    Text.fontSize(12);
-                    Text.fontColor(Color.White);
-                    Text.margin({ top: 5 });
-                }, Text);
-                Text.pop();
-                Column.pop();
-            };
-            this.forEachUpdateFunction(elmtId, this.handCards, forEachItemGenFunction, (card, index) => index.toString(), true, true);
-        }, ForEach);
-        ForEach.pop();
-        Row.pop();
-        Column.pop();
-    }
-    buildTipText(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.margin({ top: 20 });
-            Column.padding(15);
-            Column.backgroundColor('rgba(255,255,255,0.15)');
-            Column.borderRadius(15);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create(this.tutorialSteps[this.tutorialStep] || 'ç‚¹å‡»"å¼€å§‹æ¼”ç¤º"æŸ¥çœ‹æ¸¸æˆçŽ©æ³•');
-            Text.fontSize(16);
-            Text.fontColor(Color.White);
-            Text.textAlign(TextAlign.Center);
-            Text.lineHeight(26);
-            Text.padding(20);
-        }, Text);
-        Text.pop();
-        Column.pop();
-    }
-    rerender() {
-        this.updateDirtyElements();
-    }
-    static getEntryName() {
-        return "GameTutorialPage";
-    }
-}
-registerNamedRoute(() => new GameTutorialPage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/GameTutorialPage", pageFullPath: "entry/src/main/ets/pages/GameTutorialPage", integratedHsp: "false", moduleType: "followWithHap" });
-//# sourceMappingURL=GameTutorialPage.js.mapÂ“Ù` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙfG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\PuzzleGameEngine.etsÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\PuzzleGameModel.etsÙ`G:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\GameTutorialPage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ1G/*
- * èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆ - æ–°æ‰‹æ•™ç¨‹
- * è‡ªåŠ¨æ¼”ç¤ºæ¸¸æˆçŽ©æ³•
- */
-
-import router from '@ohos.router';
-import { PuzzleGameEngine } from '../common/util/PuzzleGameEngine';
-import {
-  Medal, MedalType, ActionType, ActionCard,
-  TargetPattern, GameMode, GameState, PlayerScore
-} from '../viewmodel/PuzzleGameModel';
-
-@Entry
-@Component
-struct GameTutorialPage {
-  private gameEngine: PuzzleGameEngine = new PuzzleGameEngine();
-  
-  @State board: Medal[] = [];
-  @State handCards: ActionCard[] = [];
-  @State currentTarget: TargetPattern | null = null;
-  @State tutorialStep: number = 0;
-  @State isPlaying: boolean = false;
-  @State showTip: boolean = true;
-  @State highlightPositions: number[] = [];
-  @State highlightCard: number = -1;
-  @State animationProgress: number = 0;
-  
-  private timer: number = -1;
-  private animationTimer: number = -1;
-  
-  // æ•™ç¨‹æ­¥éª¤å®šä¹‰
-  private tutorialSteps: string[] = [
-    'æ¬¢è¿Žæ¥åˆ°èŠ±æ ·æ»‘å†°è§£è°œæ¸¸æˆï¼\nè®©æˆ‘ä»¬å­¦ä¹ å¦‚ä½•çŽ©è¿™ä¸ªæ¸¸æˆã€‚',
-    'è¿™æ˜¯3Ã—3çš„æ»‘å†°åœºåœ°ï¼Œæ¯ä¸ªæ ¼å­ä¸Šæ”¾ç€ä¸åŒçš„å¥–ç‰Œã€‚',
-    'è¿™æ˜¯ç›®æ ‡å›¾æ¡ˆï¼Œæˆ‘ä»¬éœ€è¦åœ¨æ£‹ç›˜ä¸Šå‡‘å‡ºè¿™ä¸ªå›¾æ¡ˆæ‰èƒ½è¿‡å…³ã€‚',
-    'è¿™äº›æ˜¯åŠ¨ä½œå¡ç‰Œï¼Œæ¯ä¸ªå¡ç‰Œä»£è¡¨ä¸€ä¸ªèŠ±æ ·æ»‘å†°åŠ¨ä½œã€‚',
-    'è®©æˆ‘ä»¬ä½¿ç”¨ Spinï¼ˆæ—‹è½¬ï¼‰å¡ç‰Œæ¥ç¿»è½¬ä¸€åˆ—å¥–ç‰Œã€‚',
-    'ç‚¹å‡»å¡ç‰ŒåŽï¼Œå†ç‚¹å‡»æ£‹ç›˜ä½ç½®æ¥æ‰§è¡ŒåŠ¨ä½œã€‚',
-    'å¤ªæ£’äº†ï¼æˆ‘ä»¬æˆåŠŸå®Œæˆäº†ç›®æ ‡å›¾æ¡ˆï¼',
-    'çŽ°åœ¨ä½ å·²ç»å­¦ä¼šäº†åŸºæœ¬æ“ä½œï¼Œå¼€å§‹ä½ çš„è¡¨æ¼”å§ï¼'
-  ];
-  
-  aboutToAppear(): void {
-    this.initDemoGame();
-  }
-  
-  aboutToDisappear(): void {
-    this.stopAnimation();
-  }
-  
-  initDemoGame(): void {
-    // åˆ›å»ºä¸€ä¸ªç®€å•çš„æ¼”ç¤ºæ£‹ç›˜
-    this.board = [
-      new Medal(MedalType.GOLD, '0'),
-      new Medal(MedalType.SILVER, '1'),
-      new Medal(MedalType.BRONZE, '2'),
-      new Medal(MedalType.SILVER, '3'),
-      new Medal(MedalType.GOLD, '4'),
-      new Medal(MedalType.BRONZE, '5'),
-      new Medal(MedalType.BRONZE, '6'),
-      new Medal(MedalType.SILVER, '7'),
-      new Medal(MedalType.GOLD, '8')
-    ];
-    
-    // åˆ›å»ºæ¼”ç¤ºå¡ç‰Œ
-    this.handCards = [
-      new ActionCard(ActionType.SPIN, 'Spin', 'ç¿»è½¬æ•´åˆ—å¥–ç‰Œ', 2, 'ðŸ”„'),
-      new ActionCard(ActionType.JUMP, 'Jump', 'äº¤æ¢ä¸¤å †å¥–ç‰Œ', 3, 'ðŸ¦˜'),
-      new ActionCard(ActionType.POSE, 'Pose', 'å †å ç›¸é‚»å¥–ç‰Œ', 2, 'ðŸ’ƒ')
-    ];
-    
-    // åˆ›å»ºæ¼”ç¤ºç›®æ ‡
-    this.currentTarget = new TargetPattern(
-      [0, 1, 2],
-      [MedalType.GOLD, MedalType.GOLD, MedalType.GOLD],
-      'ç¬¬ä¸€è¡Œå…¨æ˜¯é‡‘ç‰Œ'
-    );
-  }
-  
-  startAutoPlay(): void {
-    this.isPlaying = true;
-    this.tutorialStep = 0;
-    this.playNextStep();
-  }
-  
-  playNextStep(): void {
-    if (this.tutorialStep >= this.tutorialSteps.length) {
-      this.isPlaying = false;
-      return;
-    }
-    
-    // æ¸…é™¤ä¹‹å‰çš„é«˜äº®
-    this.highlightPositions = [];
-    this.highlightCard = -1;
-    
-    // æ ¹æ®æ­¥éª¤è®¾ç½®æ¼”ç¤ºæ•ˆæžœ
-    switch (this.tutorialStep) {
-      case 1: // å±•ç¤ºæ£‹ç›˜
-        this.highlightPositions = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        break;
-      case 2: // å±•ç¤ºç›®æ ‡
-        this.highlightPositions = [0, 1, 2];
-        break;
-      case 3: // å±•ç¤ºå¡ç‰Œ
-        this.highlightCard = -2; // æ‰€æœ‰å¡ç‰Œ
-        break;
-      case 4: // é€‰æ‹©Spinå¡ç‰Œ
-        this.highlightCard = 0;
-        break;
-      case 5: // æ‰§è¡ŒåŠ¨ä½œ
-        this.highlightCard = 0;
-        this.highlightPositions = [1];
-        break;
-      case 6: // å®Œæˆæ¼”ç¤º
-        this.board = [
-          new Medal(MedalType.GOLD, '0'),
-          new Medal(MedalType.GOLD, '1'),
-          new Medal(MedalType.GOLD, '2'),
-          new Medal(MedalType.SILVER, '3'),
-          new Medal(MedalType.BRONZE, '4'),
-          new Medal(MedalType.BRONZE, '5'),
-          new Medal(MedalType.BRONZE, '6'),
-          new Medal(MedalType.SILVER, '7'),
-          new Medal(MedalType.GOLD, '8')
-        ];
-        this.highlightPositions = [0, 1, 2];
-        break;
-    }
-    
-    // åŠ¨ç”»è¿›åº¦
-    this.startAnimation();
-    
-    // è‡ªåŠ¨è¿›å…¥ä¸‹ä¸€æ­¥
-    this.timer = setTimeout(() => {
-      this.tutorialStep++;
-      this.playNextStep();
-    }, 3000);
-  }
-  
-  startAnimation(): void {
-    this.animationProgress = 0;
-    this.animationTimer = setInterval(() => {
-      this.animationProgress += 2;
-      if (this.animationProgress >= 100) {
-        this.animationProgress = 100;
-        clearInterval(this.animationTimer);
-      }
-    }, 60);
-  }
-  
-  stopAnimation(): void {
-    if (this.timer !== -1) {
-      clearTimeout(this.timer);
-      this.timer = -1;
-    }
-    if (this.animationTimer !== -1) {
-      clearInterval(this.animationTimer);
-      this.animationTimer = -1;
-    }
-  }
-  
-  getMedalColor(type: MedalType): string {
-    switch (type) {
-      case MedalType.GOLD:
-        return '#FFD700';
-      case MedalType.SILVER:
-        return '#C0C0C0';
-      case MedalType.BRONZE:
-        return '#CD7F32';
-      default:
-        return '#CCCCCC';
-    }
-  }
-  
-  getMedalIcon(type: MedalType): string {
-    switch (type) {
-      case MedalType.GOLD:
-        return 'ðŸ¥‡';
-      case MedalType.SILVER:
-        return 'ðŸ¥ˆ';
-      case MedalType.BRONZE:
-        return 'ðŸ¥‰';
-      default:
-        return 'ðŸ…';
-    }
-  }
-  
-  build() {
-    Column() {
-      // é¡¶éƒ¨æ 
-      Row() {
-        Button() {
-          Text('è·³è¿‡')
-            .fontSize(16)
-            .fontColor(Color.White)
-        }
-        .height(40)
-        .backgroundColor('rgba(255,255,255,0.2)')
-        .borderRadius(20)
-        .onClick(() => {
-          this.stopAnimation();
-          router.replaceUrl({
-            url: 'pages/PuzzleGamePage',
-            params: { mode: GameMode.CLASSIC }
-          });
-        })
-        
-        Blank().layoutWeight(1)
-        
-        Text('ðŸ“– æ–°æ‰‹æ•™ç¨‹')
-          .fontSize(20)
-          .fontColor(Color.White)
-          .fontWeight(FontWeight.Bold)
-        
-        Blank().layoutWeight(1)
-        
-        Blank().width(60)
-      }
-      .width('100%')
-      .height(70)
-      .padding({ left: 20, right: 20 })
-      
-      // ä¸»å†…å®¹åŒº
-      Column() {
-        // æ£‹ç›˜å±•ç¤º
-        this.buildDemoBoard()
-        
-        // ç›®æ ‡å±•ç¤º
-        if (this.currentTarget) {
-          this.buildTargetDisplay()
-        }
-        
-        // å¡ç‰Œå±•ç¤º
-        this.buildDemoCards()
-        
-        // æç¤ºæ–‡å­—
-        this.buildTipText()
-      }
-      .layoutWeight(1)
-      .width('100%')
-      .padding(20)
-      
-      // åº•éƒ¨æŽ§åˆ¶
-      Row() {
-        if (!this.isPlaying) {
-          Button('å¼€å§‹æ¼”ç¤º')
-            .width('80%')
-            .height(50)
-            .backgroundColor('#667eea')
-            .borderRadius(25)
-            .fontColor(Color.White)
-            .fontSize(18)
-            .onClick(() => {
-              this.startAutoPlay();
-            })
-        } else {
-          Row() {
-            Text(`æ­¥éª¤ ${this.tutorialStep + 1}/${this.tutorialSteps.length}`)
-              .fontSize(16)
-              .fontColor(Color.White)
-            
-            // è¿›åº¦æ¡
-            Row() {
-              Row()
-                .width(`${this.animationProgress}%`)
-                .height('100%')
-                .backgroundColor('#FFD700')
-                .borderRadius(4)
-            }
-            .width(150)
-            .height(8)
-            .backgroundColor('rgba(255,255,255,0.3)')
-            .borderRadius(4)
-            .margin({ left: 15 })
-          }
-          .justifyContent(FlexAlign.Center)
-          .width('100%')
-        }
-      }
-      .width('100%')
-      .height(80)
-      .padding({ left: 20, right: 20 })
-      .justifyContent(FlexAlign.Center)
-    }
-    .width('100%')
-    .height('100%')
-    .linearGradient({
-      angle: 135,
-      colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
-    })
-  }
-  
-  @Builder
-  buildDemoBoard() {
-    Column() {
-      Text('â›¸ï¸ æ»‘å†°åœºåœ°')
-        .fontSize(16)
-        .fontColor(Color.White)
-        .fontWeight(FontWeight.Bold)
-        .margin({ bottom: 10 })
-      
-      ForEach([0, 1, 2], (row: number) => {
-        Row() {
-          ForEach([0, 1, 2], (col: number) => {
-            Column() {
-              Text(this.getMedalIcon(this.board[row * 3 + col]?.type || MedalType.BRONZE))
-                .fontSize(36)
-            }
-            .width(70)
-            .height(70)
-            .backgroundColor(this.getMedalColor(this.board[row * 3 + col]?.type || MedalType.BRONZE))
-            .borderRadius(10)
-            .justifyContent(FlexAlign.Center)
-            .border({
-              width: this.highlightPositions.includes(row * 3 + col) ? 3 : 1,
-              color: this.highlightPositions.includes(row * 3 + col) ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
-            })
-            .shadow({ radius: 5, color: 'rgba(0,0,0,0.3)', offsetX: 2, offsetY: 2 })
-            .opacity(this.highlightPositions.length > 0 && !this.highlightPositions.includes(row * 3 + col) ? 0.5 : 1)
-            .animation({
-              duration: 300,
-              curve: Curve.EaseInOut
-            })
-            .margin({ left: col === 0 ? 0 : 8 })
-          }, (col: number) => col.toString())
-        }
-        .margin({ top: row === 0 ? 0 : 8 })
-      }, (row: number) => row.toString())
-    }
-    .width('100%')
-    .padding(15)
-    .backgroundColor('rgba(255,255,255,0.1)')
-    .borderRadius(15)
-  }
-  
-  @Builder
-  buildTargetDisplay() {
-    Column() {
-      Row() {
-        Text('ðŸŽ¯ ç›®æ ‡å›¾æ¡ˆ')
-          .fontSize(16)
-          .fontColor(Color.White)
-          .fontWeight(FontWeight.Bold)
-        
-        Blank().layoutWeight(1)
-        
-        Text(this.currentTarget?.description || '')
-          .fontSize(14)
-          .fontColor('rgba(255,255,255,0.8)')
-      }
-      .width('100%')
-      .margin({ bottom: 10 })
-      
-      Row() {
-        ForEach(this.currentTarget?.requiredMedals || [], (medal: MedalType, index: number) => {
-          Text(this.getMedalIcon(medal))
-            .fontSize(30)
-            .margin({ left: index === 0 ? 0 : 10 })
-        }, (medal: MedalType, index: number) => index.toString())
-      }
-      .width('100%')
-      .justifyContent(FlexAlign.Center)
-    }
-    .width('100%')
-    .padding(15)
-    .backgroundColor('rgba(255,255,255,0.1)')
-    .borderRadius(15)
-    .margin({ top: 15 })
-  }
-  
-  @Builder
-  buildDemoCards() {
-    Column() {
-      Text('ðŸŽ´ åŠ¨ä½œå¡ç‰Œ')
-        .fontSize(16)
-        .fontColor(Color.White)
-        .fontWeight(FontWeight.Bold)
-        .margin({ bottom: 10 })
-      
-      Row() {
-        ForEach(this.handCards, (card: ActionCard, index: number) => {
-          Column() {
-            Text(card.icon)
-              .fontSize(28)
-            
-            Text(card.name)
-              .fontSize(12)
-              .fontColor(Color.White)
-              .margin({ top: 5 })
-          }
-          .width(70)
-          .height(80)
-          .backgroundColor(this.highlightCard === index || this.highlightCard === -2 ? '#FF6B6B' : 'rgba(255,255,255,0.2)')
-          .borderRadius(10)
-          .justifyContent(FlexAlign.Center)
-          .border({
-            width: 2,
-            color: this.highlightCard === index || this.highlightCard === -2 ? '#FF6B6B' : 'rgba(255,255,255,0.3)'
-          })
-          .opacity(this.highlightCard >= 0 && this.highlightCard !== index ? 0.5 : 1)
-          .animation({
-            duration: 300,
-            curve: Curve.EaseInOut
-          })
-          .margin({ left: index === 0 ? 0 : 10 })
-        }, (card: ActionCard, index: number) => index.toString())
-      }
-      .width('100%')
-      .justifyContent(FlexAlign.Center)
-    }
-    .width('100%')
-    .padding(15)
-    .backgroundColor('rgba(255,255,255,0.1)')
-    .borderRadius(15)
-    .margin({ top: 15 })
-  }
-  
-  @Builder
-  buildTipText() {
-    Column() {
-      Text(this.tutorialSteps[this.tutorialStep] || 'ç‚¹å‡»"å¼€å§‹æ¼”ç¤º"æŸ¥çœ‹æ¸¸æˆçŽ©æ³•')
-        .fontSize(16)
-        .fontColor(Color.White)
-        .textAlign(TextAlign.Center)
-        .lineHeight(26)
-        .padding(20)
-    }
-    .width('100%')
-    .margin({ top: 20 })
-    .padding(15)
-    .backgroundColor('rgba(255,255,255,0.15)')
-    .borderRadius(15)
-  }
-}
-ÀÔrD“¬@ohos.router¼../viewmodel/PuzzleGameModel¿../common/util/PuzzleGameEngineÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙ` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÂÙcG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\PuzzleGameModel.etsAÃªoh-resolveÂEAÂÙfG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\common\util\PuzzleGameEngine.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings³GameTutorialPage.js ‘´GameTutorialPage.etsÜ›‘”    ‘” –”   ” ” ” ”! !”" "˜”   ” ”	 	” ” ”! !”ÌB ÌB”ÌC ÌCÜ ”   ” ”	 ” ” 	” ” ”% ”'  ”1 *”3 	”Ì@ 	”ÌB 	”ÌJ 	”ÌL 
-”ÌR 
-”Ìp 
-%”Ìq 
-&’” ” ‘”  ”” )” -”. =”0 ?’”4 ”6 ’”8 #”: %’”< /”Ì@ 3’”;  ”< !’”8 ”= #’”6 ”:  ’”ÌA (”ÌC *“”< !”= "”> #’”Ì@ %”ÌA &“” ” ” “” #” $”  %‘” $’”  ”*  "’” !”& !’” "”( " ’” #”% #’” $”& $’” %”! %’” &” &’” '”# '‘”	 (‘” 
-&’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” *” *–” +” +” +	” +” +” +’” ,” ,’” .” .–” /” /” /	” /” /” /’” 0” 0’” 2” 2’” 3” 3•” 4” 4” 4	” 4” 4š” 5” 5
-” 5” 5” 5”  5”$ 5”& 5 ”) 5#”* 5$š” 6” 6
-” 6” 6” 6”  6”& 6 ”( 6"”+ 6%”, 6&š” 7” 7
-” 7” 7” 7”  7”& 7 ”( 7"”+ 7%”, 7&š” 8” 8
-” 8” 8” 8”  8”& 8 ”( 8"”+ 8%”, 8&š” 9” 9
-” 9” 9” 9”  9”$ 9”& 9 ”) 9#”* 9$š” :” :
-” :” :” :”  :”& : ”( :"”+ :%”, :&š” ;” ;
-” ;” ;” ;”  ;”& ; ”( ;"”+ ;%”, ;&š” <” <
-” <” <” <”  <”& < ”( <"”+ <%”, <&š” =” =
-” =” =” =”  =”$ =”& = ”) =#”* =$’”	 >”
- >’” Ì@” Ì@•” ÌA” ÌA” ÌA	” ÌA” ÌAÜ ” ÌB” ÌB
-” ÌB” ÌB”% ÌB”& ÌB ”* ÌB$”, ÌB&”2 ÌB,”4 ÌB.”< ÌB6”> ÌB8”? ÌB9”ÌA ÌB;”ÌE ÌB?”ÌF ÌBÌ@Ü ” ÌC” ÌC
-” ÌC” ÌC”% ÌC”& ÌC ”* ÌC$”, ÌC&”2 ÌC,”4 ÌC.”< ÌC6”> ÌC8”? ÌC9”ÌA ÌC;”ÌE ÌC?”ÌF ÌCÌ@Ü ” ÌD” ÌD
-” ÌD” ÌD”% ÌD”& ÌD ”* ÌD$”, ÌD&”2 ÌD,”4 ÌD.”< ÌD6”> ÌD8”? ÌD9”ÌA ÌD;”ÌE ÌD?”ÌF ÌDÌ@’”	 ÌE”
- ÌE’” ÌG” ÌGÜ !” ÌH” ÌH” ÌH	” ÌH” ÌH”! ÌH”. ÌH*”/ ÌI”0 ÌI”1 ÌI”3 ÌI
-”4 ÌI”6 ÌI”7 ÌI”8 ÌI”: ÌJ”; ÌJ”ÌD ÌJ”ÌE ÌJ”ÌI ÌJ”ÌK ÌJ”ÌT ÌJ ”ÌU ÌJ!”ÌY ÌJ%”Ì[ ÌJ'”Ìd ÌJ0”Ìe ÌJ1”Ìi ÌJ5”Ìj ÌJ6”Ìl ÌK”Ìu ÌK”Ìv ÌL”Ìw ÌL’” ÌM” ÌM’” ÌO” ÌO—” ÌP” ÌP” ÌP	” ÌP” ÌP” ÌP” ÌP—” ÌQ” ÌQ” ÌQ	” ÌQ” ÌQ” ÌQ” ÌQ–” ÌR” ÌR” ÌR	” ÌR” ÌR” ÌR’” ÌS” ÌS’” ÌU” ÌUœ” ÌV” ÌV” ÌV” ÌV” ÌV”! ÌV”% ÌV!”& ÌV"”3 ÌV/”4 ÌV0”: ÌV6”< ÌV8—” ÌW” ÌW
-” ÌW” ÌW” ÌW”" ÌW”# ÌW’” ÌX” ÌX‘”	 ÌY’” Ì[” Ì[—” Ì\” Ì\” Ì\	” Ì\”" Ì\”$ Ì\ ”% Ì\!˜” Ì]” Ì]” Ì]	” Ì]” Ì]” Ì]” Ì]”  Ì]’” Ì_” Ì_–” Ì`” Ì`” Ì`” Ì`”! Ì`”# Ì`•” Ìa” Ìa” Ìa” Ìa” ÌaÜ ” Ìb” Ìb” Ìb”' Ìb”* Ìb"”+ Ìb#”, Ìb$”. Ìb&”/ Ìb'”1 Ìb)”2 Ìb*”4 Ìb,”5 Ìb-”7 Ìb/”8 Ìb0”: Ìb2”; Ìb3”= Ìb5”> Ìb6”Ì@ Ìb8”ÌA Ìb9”ÌC Ìb;”ÌD Ìb<”ÌE Ìb=”ÌF Ìb>’” Ìc” Ìc•” Ìd” Ìd” Ìd” Ìd” Ìd” Ìe” Ìe” Ìe”' Ìe”* Ìe"”+ Ìe#”, Ìe$”. Ìe&”/ Ìe'”1 Ìe)”2 Ìe*”3 Ìe+”4 Ìe,’” Ìf” Ìf•” Ìg” Ìg” Ìg” Ìg” Ìgš” Ìh” Ìh” Ìh”" Ìh”% Ìh”& Ìh”' Ìh”( Ìh ”) Ìh!”0 Ìh(’” Ìi” Ìi•” Ìj” Ìj” Ìj” Ìj” Ìj—” Ìk” Ìk” Ìk”" Ìk”% Ìk”& Ìk”' Ìk’” Ìl” Ìl•” Ìm” Ìm” Ìm” Ìm” Ìm—” Ìn” Ìn” Ìn”" Ìn”% Ìn”& Ìn”' Ìn™” Ìo” Ìo” Ìo”' Ìo”* Ìo"”+ Ìo#”, Ìo$”- Ìo%”. Ìo&’” Ìp” Ìp•” Ìq” Ìq” Ìq” Ìq” Ìq•” Ìr” Ìr” Ìr” Ìr” Ìrš” Ìs
-” Ìs” Ìs” Ìs”' Ìs”( Ìs”, Ìs"”. Ìs$”1 Ìs'”2 Ìs(š” Ìt
-” Ìt” Ìt” Ìt”' Ìt”( Ìt”, Ìt"”. Ìt$”1 Ìt'”2 Ìt(š” Ìu
-” Ìu” Ìu” Ìu”' Ìu”( Ìu”, Ìu"”. Ìu$”1 Ìu'”2 Ìu(š” Ìv
-” Ìv” Ìv” Ìv”' Ìv”( Ìv”. Ìv$”0 Ìv&”3 Ìv)”4 Ìv*š” Ìw
-” Ìw” Ìw” Ìw”' Ìw”( Ìw”. Ìw$”0 Ìw&”3 Ìw)”4 Ìw*š” Ìx
-” Ìx” Ìx” Ìx”' Ìx”( Ìx”. Ìx$”0 Ìx&”3 Ìx)”4 Ìx*š” Ìy
-” Ìy” Ìy” Ìy”' Ìy”( Ìy”. Ìy$”0 Ìy&”3 Ìy)”4 Ìy*š” Ìz
-” Ìz” Ìz” Ìz”' Ìz”( Ìz”. Ìz$”0 Ìz&”3 Ìz)”4 Ìz*š” Ì{
-” Ì{” Ì{” Ì{”' Ì{”( Ì{”, Ì{"”. Ì{$”1 Ì{'”2 Ì{(’” Ì|	” Ì|
-” Ì}” Ì}” Ì}”' Ì}”* Ì}"”+ Ì}#”, Ì}$”. Ì}&”/ Ì}'”1 Ì})”2 Ì}*”3 Ì}+”4 Ì},’” Ì~” Ì~‘”	 Ì’” Ì” Ì–” Ì‚” Ì‚” Ì‚	” Ì‚” Ì‚” Ì‚’” Ì„” Ì„™” Ì…” Ì…” Ì…	” Ì…” Ì…” Ì…”  Ì…”# Ì…”% Ì…!–” Ì†” Ì†
-” Ì†” Ì†” Ì†”  Ì†–” Ì‡” Ì‡
-” Ì‡” Ì‡” Ì‡”  Ì‡–” Ìˆ”	 Ìˆ” Ìˆ” Ìˆ” Ìˆ” Ìˆ’” Ì‰” Ì‰’” Ì‹” Ì‹—” ÌŒ” ÌŒ” ÌŒ	” ÌŒ”! ÌŒ”" ÌŒ”# ÌŒ™” Ì” Ì” Ì	” Ì” Ì”) Ì%”* Ì&”- Ì)”/ Ì+—” ÌŽ” ÌŽ
-” ÌŽ”" ÌŽ”& ÌŽ ”' ÌŽ!”( ÌŽ"˜” Ì” Ì
-” Ì” Ì”& Ì ”* Ì$”- Ì'”/ Ì)—” Ì” Ì” Ì”& Ì”) Ì!”, Ì$”- Ì%˜” Ì‘” Ì‘” Ì‘”" Ì‘”# Ì‘”1 Ì‘)”2 Ì‘*”3 Ì‘+‘” Ì’–” Ì“”	 Ì“” Ì“” Ì“	” Ì“
-” Ì“’” Ì”” Ì”’” Ì–” Ì–™” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—” Ì—˜” Ì˜” Ì˜” Ì˜” Ì˜” Ì˜”# Ì˜”$ Ì˜”% Ì˜˜” Ì™” Ì™
-” Ì™” Ì™” Ì™” Ì™” Ì™” Ì™‘”	 Ìš™” Ì›” Ì›” Ì›” Ì›” Ì›”$ Ì› ”% Ì›!”& Ì›"”( Ì›$˜” Ìœ” Ìœ” Ìœ” Ìœ” Ìœ”- Ìœ'”. Ìœ(”/ Ìœ)˜” Ì” Ì
-” Ì” Ì”" Ì”# Ì”$ Ì”% Ì‘”	 Ìž’” ÌŸ” ÌŸ”” Ì¡” Ì¡” Ì¡” Ì¡”” Ì¢” Ì¢” Ì¢” Ì¢•” Ì£” Ì£” Ì£” Ì£” Ì£”” Ì¤” Ì¤”  Ì¤”! Ì¤•” Ì¥” Ì¥” Ì¥” Ì¥”! Ì¥”” Ì¦” Ì¦”  Ì¦”! Ì¦•” Ì§” Ì§” Ì§” Ì§”! Ì§”” Ì¨” Ì¨”  Ì¨”! Ì¨‘” Ì©”” Ìª” Ìª”  Ìª”! Ìª‘”	 Ì«’” Ì¬” Ì¬”” Ì®” Ì®” Ì®” Ì®”” Ì¯” Ì¯” Ì¯” Ì¯•” Ì°” Ì°” Ì°” Ì°” Ì°”” Ì±” Ì±” Ì±” Ì±•” Ì²” Ì²” Ì²” Ì²”! Ì²”” Ì³” Ì³” Ì³” Ì³•” Ì´” Ì´” Ì´” Ì´”! Ì´”” Ìµ” Ìµ” Ìµ” Ìµ‘” Ì¶”” Ì·” Ì·” Ì·” Ì·‘”	 Ì¸’” Ì¹” Ì¹‘” Ì»’” Ì¼” Ì¼
-–” Ì¼” Ì¼
-” Í” Í
-” Í” Í–” Ì¼” Ì¼
-” Í” Í” Í”  Í•” Ì¼” Ì¼
-” Í”! Í”" Í”” Í” Í” Í” ÍÜ ” Í ” Í ” Í ” Í ” Í ”# Í ”% Í ”( Í ”) Í ”+ Í !”, Í "”5 Í +”7 Í -”: Í 0”; Í 1”< Í 2‘” Í!’” Ì½” Ì½’” Ì¾” Ì¾	’” Ì½” Ì½–” Ì¾” Ì¾	” ÌÚ” ÌÚ” ÌÚ” ÌÚ’” Ì½” Ì½–” Ì¾” Ì¾	” ÌÛ” ÌÛ” ÌÛ” ÌÛ’” Ì½” Ì½ž” Ì¾” Ì¾	” ÌÜ” ÌÜ” ÌÜ” ÌÜ” ÌÜ”  ÌÜ”" ÌÜ”$ ÌÜ”) ÌÜ ”+ ÌÜ"”- ÌÜ$”/ ÌÜ&’” Ì¿” Ì¿–” Ì¿” Ì¿” ÌÄ	” ÌÄ” ÌÄ” ÌÄ–” Ì¿” Ì¿” ÌÅ	”" ÌÅ”# ÌÅ”: ÌÅ0–” Ì¿” Ì¿” ÌÆ	” ÌÆ”  ÌÆ”" ÌÆ—” Ì¿” Ì¿” ÌÇ	” ÌÇ” ÌÇ” ÌÇ”  ÌÇ–” ÌÈ
-” ÌÈ” ÌÈ”" ÌÈ”$ ÌÈ”% ÌÈ•” ÌÉ
-” ÌÉ” ÌÉ”! ÌÉ”" ÌÉ”” ÌÊ” ÌÊ” ÌÊ”/ ÌÊ'š” ÌË” ÌË” ÌË” ÌË”" ÌË”$ ÌË”, ÌË$”- ÌË%”4 ÌË,”6 ÌË.“” ÌÌ” ÌÌ” ÌÌ’” ÌÍ” ÌÍ	”” ÌÀ
-” ÌÀ” ÌÀ” ÌÀ–” ÌÀ
-” ÌÀ” ÌÁ” ÌÁ” ÌÁ” ÌÁ˜” ÌÀ
-” ÌÀ” ÌÂ” ÌÂ” ÌÂ”  ÌÂ”! ÌÂ”& ÌÂ"’” ÌÀ
-” ÌÀ’” Ì¿” Ì¿’” ÌÏ” ÌÏ–” ÌÏ” ÌÏ” ÌÏ” ÌÏ” ÌÏ”  ÌÏ’” ÌÏ” ÌÏ”” ÌÑ” ÌÑ” ÌÑ”! ÌÑ–” ÌÑ” ÌÑ” ÌÒ” ÌÒ” ÌÒ” ÌÒ˜” ÌÑ” ÌÑ” ÌÓ” ÌÓ” ÌÓ”  ÌÓ”! ÌÓ”& ÌÓ ˜” ÌÑ” ÌÑ” ÌÔ” ÌÔ” ÌÔ”& ÌÔ ”' ÌÔ!”+ ÌÔ%’” ÌÑ” ÌÑ’” ÌÖ” ÌÖ–” ÌÖ” ÌÖ” ÌÖ” ÌÖ” ÌÖ”  ÌÖ’” ÌÖ” ÌÖ’” ÌØ” ÌØ–” ÌØ” ÌØ” ÌØ” ÌØ” ÌØ” ÌØ’” ÌØ” ÌØ’” Ì½” Ì½’” Ì¾” Ì¾	’” ÌÞ” ÌÞ’” Ìß” Ìß’” ÌÞ” ÌÞ–” Ìß” Ìß” Ìî” Ìî”  Ìî”! Ìî’” ÌÞ” ÌÞ–” Ìß” Ìß” Ìï” Ìï” Ìï” Ìï’” ÌÞ” ÌÞ–” Ìß” Ìß” Ìð” Ìð” Ìð” Ìð’” Ìà” Ìà•” Ìá” Ìá” Ìá” Ìá”( Ìá’” Ìã” Ìã–” Ìä” Ìä” Ìä” Ìä”" Ìä”$ Ìä •” Ìå
-” Ìå” Ìå”+ Ìå!”8 Ìå#‘” Ìæ	’” Ìè” Ìè‘” Ìæ	’” Ìè” Ìè•” Ìé” Ìé” Ìé” Ìé”( Ìé’” Ìë” Ìë•” Ìì” Ìì” Ìì” Ìì”& Ìì’” ÌÞ” ÌÞ’” Ìß” Ìß’” Ìò” Ìò’” Ìó” Ìó	’” Ìò” Ìò–” Ìó” Ìó	” Í” Í” Í” Í’” Ìò” Ìò–” Ìó” Ìó	” Í” Í” Í” Í’” Ìò” Ìòž” Ìó” Ìó	” Í” Í” Í” Í” Í”  Í”" Í”$ Í”) Í ”+ Í"”- Í$”/ Í&’” Ìò” Ìò˜” Ìó” Ìó	” Í” Í” Í”( Í”) Í ”/ Í&—” Ìô” Ìô” Ìô” Ìô” Ìô” Ìô”! Ìô”” Ìõ
-” Ìõ”/ Ìõ”5 Ìõ–” Ìõ
-” Ìõ” Ìö”$ Ìö”% Ìö”* Ìö–” Ìõ
-” Ìõ” Ì÷”% Ì÷”& Ì÷”( Ì÷–” Ìõ
-” Ìõ” Ìø”. Ìø”/ Ìø”8 Ìø&–” Ìõ
-” Ìõ” Ìù”+ Ìù”, Ìù”. Ìù˜” Ìõ
-” Ìõ” Ìú”( Ìú”) Ìú”. Ìú”/ Ìú”4 Ìú"–” Ìõ
-” Ìõ” Ìû”' Ìû”( Ìû”* Ìû—” Ìõ
-” Ìõ” Ìü”& Ìü”' Ìü”* Ìü”, Ìü–” Ìý”  Ìý”! Ìý”. Ìý ”0 Ìý"”1 Ìý#’” Ìþ” Ìþ’” Ìõ
-” Ìõ‘” Ìÿ	‘” Ìÿ’” Í 
-” Í ˜” Í 
-” Í ” Í”* Í”+ Í”4 Í#”5 Í$”; Í*–” Í 
-” Í ” Í”! Í”" Í”( ÍÜ ” Í” Í”$ Í”* Í”. Í”/ Í”; Í(”> Í+”? Í,”ÌC Í0”ÌG Í4”ÌH Í5”ÌU ÍÌB”ÌV ÍÌC”Ì\ ÍÌI”Ì^ ÍÌK–” Í” Í” Í”% Í”& Í”( Í˜” Í” Í” Í”& Í”' Í”, Í”- Í”2 Í$’” Í” Í’” Í” Í’” Í” Í’” Í” Í–” Í” Í” Í”! Í”" Í”% Í’” Í” Í–” Í” Í” Í”" Í”# Í”$ Í’” Í” Í–” Í” Í” Í”+ Í”, Í”ÌC Í4’” Í” Í–” Í” Í” Í”( Í”) Í”* Í’” Í” Íš” Í” Í” Í”" Í”# Í”% Í”) Í”+ Í”- Í”/ Í ’” Í” Íš” Í” Í” Í”! Í”" Í”% Í”) Í”* Í”; Í0”> Í3–” Í” Í” Í	”" Í	”# Í	”) Í	–” Í” Í” Í
-”+ Í
- ”, Í
-!”5 Í
-*–” Í” Í” Í”( Í”) Í”* Í’” Í” Í’” Í” Í’” Í” Í’” Í 
-” Í ‘” Í	’” Ìò” Ìò’” Ìó” Ìó	’” Ì¼” Ì¼
-‘” Í"’” Í%” Í%’” Í&” Í&
-–” Í&” Í&
-” ÍI” ÍI
-” ÍI” ÍI–” Í&” Í&
-” ÍJ” ÍJ” ÍJ” ÍJ–” Í&” Í&
-” ÍK”" ÍK”# ÍK”: ÍK,–” Í&” Í&
-” ÍL” ÍL”  ÍL”" ÍL”” Í'” Í'
-” Í'”! Í'–” Í'” Í'
-” Í(	” Í(” Í(” Í(˜” Í'” Í'
-” Í)	” Í)” Í)”  Í)”! Í)”& Í)˜” Í'” Í'
-” Í*	” Í*” Í*”& Í*”' Í*”+ Í*#š” Í'” Í'
-” Í+	” Í+” Í+” Í+”  Í+”" Í+”$ Í+”& Í+’” Í'” Í'
-’” Í-” Í-’” Í.” Í.Ü ” Í.” Í.” ÍF	” ÍF” ÍF”! ÍF”$ ÍF”& ÍF”) ÍF”. ÍF”/ ÍF ”0 ÍF!”1 ÍF"”2 ÍF#”3 ÍF$”4 ÍF%”5 ÍF&”6 ÍF'”7 ÍF(”9 ÍF*’” Í/
-” Í/’” Í0”" Í0“”$ Í?”- Í?”. Í?””  Í@”( Í@”* Í@”- Í@–”  ÍA”% ÍA”' ÍA”, ÍA”- ÍA”6 ÍA$‘” ÍB–” Í0”" Í0”# Í4”( Í4”) Í4”+ Í4–” Í0”" Í0”# Í5”) Í5”* Í5”, Í5Ü ” Í0”" Í0”# Í6”2 Í6”3 Í6”7 Í6!”8 Í6"”ÌE Í6/”ÌF Í60”ÌJ Í64”ÌK Í65”ÌP Í6:”ÌQ Í6;”ÌT Í6>”ÌW Í6ÌA”ÌX Í6ÌB”Ì[ Í6ÌE”Ì^ Í6ÌH”Ì_ Í6ÌI”Ìa Í6ÌK”Ìe Í6ÌO”Ìi Í6ÌS”Ìr Í6Ì\”Ìs Í6Ì]”Ìy Í6Ìc”Ìz Í6Ìd–” Í0”" Í0”# Í7”/ Í7”0 Í7”2 Í7˜” Í0”" Í0”# Í8”1 Í8”2 Í8”; Í8%”< Í8&”ÌB Í8,•” Í0”" Í0”# Í9”) Í9”* Í9Ü ”  Í:”% Í:”' Í:”+ Í:”, Í:”> Í:,”? Í:-”ÌG Í:5”ÌH Í:6”ÌK Í:9”ÌN Í:<”ÌO Í:=”ÌR Í:Ì@”ÌU Í:ÌC”ÌV Í:ÌD”ÌW Í:ÌE”ÌX Í:ÌF”ÌY Í:ÌG”ÌZ Í:ÌH”Ì[ Í:ÌI”Ì\ Í:ÌJ”Ì] Í:ÌK”Ì^ Í:ÌLÜ ”  Í;”% Í;”' Í;”+ Í;”, Í;”> Í;,”? Í;-”ÌG Í;5”ÌH Í;6”ÌK Í;9”ÌN Í;<”ÌO Í;=”ÌR Í;Ì@”ÌU Í;ÌC”ÌV Í;ÌD”ÌW Í;ÌE”ÌX Í;ÌF”ÌY Í;ÌG”Ìb Í;ÌP”Ìc Í;ÌQ”Ìd Í;ÌR”Ìe Í;ÌS”Ì| Í;Ìj‘” Í<Ü ” Í0”" Í0”# Í=”) Í=”* Í=”, Í=”2 Í=”4 Í=”5 Í=”7 Í=!”< Í=&”> Í=(”ÌO Í=9”ÌQ Í=;”ÌX Í=ÌB”ÌZ Í=ÌD”Ì[ Í=ÌE”Ì] Í=ÌG”Ìd Í=ÌN”Ìf Í=ÌP”Ìg Í=ÌQ”Ìi Í=ÌSÜ "” Í0”" Í0”# Í>”* Í>”+ Í>”/ Í>”0 Í>”ÌB Í>,”ÌC Í>-”ÌI Í>3”ÌL Í>6”ÌM Í>7”ÌQ Í>;”ÌR Í><”ÌV Í>Ì@”ÌW Í>ÌA”Ìi Í>ÌS”Ìj Í>ÌT”Ìr Í>Ì\”Ìs Í>Ì]”Ìv Í>Ì`”Ìy Í>Ìc”Ìz Í>Ìd”Ì} Í>Ìg”Ì€ Í>Ìj”Ì Í>Ìk”Ì‚ Í>Ìl”Ìƒ Í>Ìm”Ì„ Í>Ìn”Ì‡ Í>Ìq”Ìˆ Í>Ìr”Ì‰ Í>Ìs”ÌŠ Í>Ìt”Ì‹ Í>Ìu’”$ Í?”- Í?Ü ” Í0”" Í0”# ÍC”) ÍC”* ÍC”, ÍC”0 ÍC”2 ÍC”5 ÍC”: ÍC$”; ÍC%”< ÍC&”= ÍC'”> ÍC(”? ÍC)”Ì@ ÍC*”ÌA ÍC+”ÌB ÍC,”ÌC ÍC-”ÌE ÍC/Ü ” Í1”  Í1”( Í1”, Í1”- Í1”9 Í1$”: Í1%”> Í1)”? Í1*”ÌD Í1/”ÌE Í10”ÌH Í13”ÌK Í16”ÌL Í17”ÌO Í1:”ÌR Í1=”ÌS Í1>”ÌU Í1Ì@”ÌY Í1ÌD”Ì] Í1ÌH”Ìf Í1ÌQ”Ìg Í1ÌR”Ìm Í1ÌX”Ìn Í1ÌY–” Í1”  Í1”! Í2”) Í2”* Í2”, Í2’” Í1” Í1’” Í0” Í0Ü ”7 Í/”8 Í/”9 Í/”; Í/”< Í/”> Í/”? Í/”Ì@ Í/”ÌZ ÍD”Ì[ ÍD”Ì^ ÍD”Ì` ÍD”Ìb ÍD”Ìc ÍD”Ìf ÍD!”Ìg ÍD"”Ìo ÍD*”Ìq ÍD,’” Í/
-” Í/’” Í.” Í.Ü ”/ Í-”0 Í-”1 Í-”3 Í-”4 Í-”6 Í-”7 Í-”8 Í-”ÌR ÍG	”ÌS ÍG
-”ÌV ÍG”ÌX ÍG”ÌZ ÍG”Ì[ ÍG”Ì^ ÍG”Ì_ ÍG”Ìg ÍG&”Ìi ÍG(’” Í-” Í-’” Í&” Í&
-‘” ÍM’” ÍP” ÍP’” ÍQ” ÍQ
-–” ÍQ” ÍQ
-” Ík” Ík
-” Ík” Ík–” ÍQ” ÍQ
-” Íl” Íl” Íl” Íl–” ÍQ” ÍQ
-” Ím”" Ím”# Ím”: Ím,–” ÍQ” ÍQ
-” Ín” Ín”  Ín”" Ínš” ÍQ” ÍQ
-” Ío” Ío” Ío” Ío” Ío”! Ío”# Ío”% Ío’” ÍR” ÍR	–” ÍR” ÍR	” Í^” Í^” Í^” Í^š” ÍR” ÍR	” Í_” Í_” Í_” Í_” Í_”! Í_”# Í_”% Í_”” ÍS” ÍS” ÍS”! ÍS–” ÍS” ÍS” ÍT” ÍT” ÍT” ÍT˜” ÍS” ÍS” ÍU” ÍU” ÍU”  ÍU”! ÍU”& ÍU ˜” ÍS” ÍS” ÍV” ÍV” ÍV”& ÍV ”' ÍV!”+ ÍV%’” ÍS” ÍS’” ÍX” ÍX–” ÍX” ÍX” ÍX” ÍX” ÍX”  ÍX’” ÍX” ÍXš” ÍZ” ÍZ” ÍZ” ÍZ” ÍZ”* ÍZ”, ÍZ!”7 ÍZ,”; ÍZ0”= ÍZ2–” ÍZ” ÍZ” Í[” Í[” Í[” Í[–” ÍZ” ÍZ” Í\” Í\” Í\”2 Í\,’” ÍZ” ÍZ’” ÍR” ÍR	’” Ía” Ía	–” Ía” Ía	” Íh” Íh” Íh” Íh˜” Ía” Ía	” Íi” Íi” Íi”( Íi”) Íi ”/ Íi&’” Íb” Íb’”3 ÍbÌM”8 ÍbÌZ™” Íc
-” Íc”  Íc”$ Íc”% Íc”1 Íc ”2 Íc!”7 Íc&”8 Íc'–” Íc
-” Íc” Íd”! Íd”" Íd”$ ÍdÜ ” Íc
-” Íc” Íe” Íe”  Íe”" Íe”& Íe”( Íe”- Íe!”2 Íe&”3 Íe'”4 Íe(”5 Íe)”6 Íe*”7 Íe+”8 Íe,”9 Íe-”: Íe.”< Íe0”> Íe2’” Íc
-” ÍcÜ ”/ Íb”3 Íb”4 Íb”ÌA Íb"”ÌC Íb$”ÌQ Íb2”ÌU Íb6”ÌW Íb8”Ìq Íf”Ìr Íf”Ìw Íf”Ìy Íf”Ì~ Íf+”Ì€ Íf-”Ì‚ Íf/”Ìƒ Íf0”Ìˆ Íf5”Ì‰ Íf6”Ì‘ Íf>”Ì“ ÍfÌ@’” Íb” Íb’” Ía” Ía	’” ÍQ” ÍQ
-‘” Íp’” Ís” Ís’” Ít” Ít
-–” Ít” Ít
-” Íš” Íš
-” Íš” Íš–” Ít” Ít
-” Í›” Í›” Í›” Í›–” Ít” Ít
-” Íœ”" Íœ”# Íœ”: Íœ,–” Ít” Ít
-” Í” Í”  Í”" Íš” Ít” Ít
-” Íž” Íž” Íž” Íž” Íž”! Íž”# Íž”% Íž”” Íu” Íu
-” Íu”! Íu–” Íu” Íu
-” Ív	” Ív” Ív” Ív˜” Íu” Íu
-” Íw	” Íw” Íw”  Íw”! Íw”& Íw˜” Íu” Íu
-” Íx	” Íx” Íx”& Íx”' Íx”+ Íx#š” Íu” Íu
-” Íy	” Íy” Íy” Íy”  Íy”" Íy”$ Íy”& Íy’” Íu” Íu
-’” Í{” Í{	–” Í{” Í{	” Í—” Í—” Í—” Í—˜” Í{” Í{	” Í˜” Í˜” Í˜”( Í˜”) Í˜ ”/ Í˜&’” Í|” Í|’”3 Í|3”8 Í|Ì@’” Í}
-” Í}“” Í”% Í”& Í”” Í‘”  Í‘”" Í‘”% Í‘–” Í’” Í’” Í’”$ Í’”% Í’”. Í’"‘” Í“–” Í}
-” Í}” Í†”  Í†”! Í†”# Í†–” Í}
-” Í}” Í‡”! Í‡”" Í‡”$ Í‡Ü ” Í}
-” Í}” Íˆ”* Íˆ”+ Íˆ”/ Íˆ”0 Íˆ ”= Íˆ-”ÌB Íˆ2”ÌG Íˆ7”ÌK Íˆ;”ÌO Íˆ?”ÌP ÍˆÌ@”Ì] ÍˆÌM”Ìb ÍˆÌR”Ìc ÍˆÌS”Ìd ÍˆÌT”Ìe ÍˆÌU”Ìf ÍˆÌV”Ìg ÍˆÌW”Ìp ÍˆÌ`”Ìq ÍˆÌa”Ìr ÍˆÌb”Ìs ÍˆÌc”ÌŠ ÍˆÌz–” Í}
-” Í}” Í‰”' Í‰”( Í‰”* Í‰˜” Í}
-” Í}” ÍŠ”) ÍŠ”* ÍŠ”3 ÍŠ#”4 ÍŠ$”: ÍŠ*•” Í}
-” Í}” Í‹”! Í‹”" Í‹”” ÍŒ” ÍŒ” ÍŒ”  ÍŒÜ ” Í” Í” Í”# Í”$ Í”1 Í%”6 Í*”; Í/”? Í3”ÌC Í7”ÌD Í8”ÌQ ÍÌE”ÌV ÍÌJ”ÌW ÍÌK”ÌX ÍÌL”ÌY ÍÌM”ÌZ ÍÌN”Ì[ ÍÌO”Ìd ÍÌX”Ìe ÍÌY”Ìf ÍÌZ”Ìg ÍÌ[”Ì~ ÍÌr‘” ÍŽÜ ” Í}
-” Í}” Í”" Í”# Í”' Í”( Í”5 Í%”9 Í)”: Í*”> Í.”ÌB Í2”ÌC Í3”ÌP ÍÌ@”ÌU ÍÌE”ÌZ ÍÌJ”Ì[ ÍÌK”Ì\ ÍÌL”Ì] ÍÌM”Ì` ÍÌP”Ìa ÍÌQ”Ìb ÍÌR”Ìc ÍÌS”Ìd ÍÌT’” Í”% ÍÜ ” Í}
-” Í}” Í””! Í””" Í””$ Í””( Í””* Í””/ Í””4 Í”$”5 Í”%”6 Í”&”7 Í”'”8 Í”(”9 Í”)”: Í”*”; Í”+”< Í”,”> Í”.”Ì@ Í”0–” Í~” Í~”  Í~”$ Í~”% Í~”) Í~–” Í~” Í~” Í”! Í”" Í”$ Í’” Í~” Í~–” Í” Í”  Í”$ Í”% Í”) Í–” Í” Í” Í‚”! Í‚”" Í‚”$ Í‚˜” Í” Í” Íƒ”" Íƒ”# Íƒ”( Íƒ”) Íƒ”. Íƒ$š” Í” Í” Í„” Í„”  Í„”" Í„”% Í„”' Í„”( Í„”* Í„ ’” Í” Í’” Í}
-” Í}Ü ”/ Í|”3 Í|”4 Í|”= Í|”ÌW Í•”ÌX Í•”Ì\ Í•”Ì^ Í•”Ìc Í•+”Ìe Í•-”Ìg Í•/”Ìh Í•0”Ìm Í•5”Ìn Í•6”Ìv Í•>”Ìx Í•Ì@’” Í|” Í|’” Í{” Í{	’” Ít” Ít
-‘” ÍŸ’” Í¢” Í¢’” Í£” Í£
-–” Í£” Í£
-” Í«” Í«
-” Í«” Í«š” Í£” Í£
-” Í¬” Í¬” Í¬” Í¬” Í¬”! Í¬”# Í¬”% Í¬–” Í£” Í£
-” Í­” Í­” Í­” Í­–” Í£” Í£
-” Í®”" Í®”# Í®”; Í®-–” Í£” Í£
-” Í¯” Í¯”  Í¯”" Í¯” Í¤” Í¤
-” Í¤” Í¤” Í¤”* Í¤”+ Í¤”/ Í¤"”0 Í¤#”< Í¤/”= Í¤0”ÌA Í¤4”ÌQ Í¤ÌD–” Í¤” Í¤
-” Í¥	” Í¥” Í¥” Í¥˜” Í¤” Í¤
-” Í¦	” Í¦” Í¦”  Í¦”! Í¦”& Í¦˜” Í¤” Í¤
-” Í§	” Í§” Í§”$ Í§”% Í§”+ Í§#–” Í¤” Í¤
-” Í¨	” Í¨” Í¨” Í¨–” Í¤” Í¤
-” Í©	” Í©” Í©” Í©’” Í¤” Í¤
-’” Í£” Í£
-‘” Í°ÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ¤‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
- ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  ÌŽ ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ìž ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌÐ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  ÌÝ ‘”  ÌÞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìð ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìý ‘”  Ìþ ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍÐ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  ÍÝ ‘”  ÍÞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íð ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íý ‘”  Íþ ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
- ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌªÌÌ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌ±Ì·ÔrL”¤type¥start£end¤nameªIdentifierÌ±Ì·¦routerÔrM•¤type¥start£end¥value£raw§LiteralÌ½ÌË¬@ohos.router®'@ohos.router'J±ImportDeclarationÌÎÍ‘ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÌ×ÌçLªIdentifierÌ×Ìç°PuzzleGameEngineLªIdentifierÌ×Ìç°PuzzleGameEngineM§LiteralÌïÍ¿../common/util/PuzzleGameEngineÙ!'../common/util/PuzzleGameEngine'J±ImportDeclarationÍÍ„–N¯ImportSpecifierÍÍ!LªIdentifierÍÍ!¥MedalLªIdentifierÍÍ!¥MedalN¯ImportSpecifierÍ#Í,LªIdentifierÍ#Í,©MedalTypeLªIdentifierÍ#Í,©MedalTypeN¯ImportSpecifierÍ.Í8LªIdentifierÍ.Í8ªActionTypeLªIdentifierÍ.Í8ªActionTypeN¯ImportSpecifierÍ:ÍDLªIdentifierÍ:ÍDªActionCardLªIdentifierÍ:ÍDªActionCardN¯ImportSpecifierÍFÍSLªIdentifierÍFÍS­TargetPatternLªIdentifierÍFÍS­TargetPatternN¯ImportSpecifierÍUÍ]LªIdentifierÍUÍ]¨GameModeLªIdentifierÍUÍ]¨GameModeM§LiteralÍeÍƒ¼../viewmodel/PuzzleGameModel¾'../viewmodel/PuzzleGameModel'

@@ -23,7 +23,6 @@
 - 🎯 **训练计时** - 精确记录训练时长与动作组合
 - 📊 **数据分析** - 可视化统计训练成果与进步曲线
 - ⛸️ **动作库管理** - 完整的花滑动作库与自定义扩展
-- 📰 **资讯聚合** - 实时花滑新闻与科普知识
 - 🏆 **计分模拟** - 基于ISU规则的官方计分系统
 - 📱 **多设备适配** - 响应式布局，支持多种设备形态
 - 🔄 **跨设备流转** - HarmonyOS分布式能力，无缝切换设备
@@ -190,13 +189,13 @@
 
 <div align="center">
 
-| 训练台 | 动作库 | 冰闻 |
+| 训练台 | 动作库 | 成就 |
 |:------:|:------:|:------:|
-| <img src="screenshots/training_home.png" width="250" alt="训练台"/> | <img src="screenshots/move_library.png" width="250" alt="动作库"/> | <img src="screenshots/ice_news.png" width="250" alt="冰闻"/> |
+| <img src="screenshots/training_home.png" width="250" alt="训练台"/> | <img src="screenshots/move_library.png" width="250" alt="动作库"/> | <img src="screenshots/achievement.png" width="250" alt="成就"/> |
 
-| 成就 | 我的 | 计分模拟器 |
-|:------:|:------:|:------:|
-| <img src="screenshots/achievement.png" width="250" alt="成就"/> | <img src="screenshots/profile.png" width="250" alt="我的"/> | <img src="screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
+| 我的 | 计分模拟器 |
+|:------:|:------:|
+| <img src="screenshots/profile.png" width="250" alt="我的"/> | <img src="screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
 
 </div>
 
@@ -212,9 +211,9 @@
 |:--------:|:--------:|:--------------:|
 | <img src="screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="screenshots/move_filter.png" width="250" alt="动作筛选"/> | <img src="screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
 
-| 新闻详情 | 科普文章 | 打分解读 |
-|:--------:|:--------:|:--------:|
-| <img src="screenshots/news_detail.png" width="250" alt="新闻详情"/> | <img src="screenshots/science_article.png" width="250" alt="科普文章"/> | <img src="screenshots/score_interpreter.png" width="250" alt="打分解读"/> |
+| 打分解读 |
+|:--------:|
+| <img src="screenshots/score_interpreter.png" width="250" alt="打分解读"/> |
 
 </div>
 

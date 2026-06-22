@@ -186,7 +186,7 @@ class EdgeFlowMainPage extends ViewPU {
     set showMoveSelector(newValue: boolean) {
         this.__showMoveSelector.set(newValue);
     }
-    // 当天历史练习记录
+    // ������ʷ��ϰ��¼
     private __todayRecords: ObservedPropertyObjectPU<PracticeRecord[]>;
     get todayRecords() {
         return this.__todayRecords.get();
@@ -201,7 +201,7 @@ class EdgeFlowMainPage extends ViewPU {
     set showHistoryPanel(newValue: boolean) {
         this.__showHistoryPanel.set(newValue);
     }
-    // 周训练计划
+    // ��ѵ���ƻ�
     private __currentWeekPlan: ObservedPropertyObjectPU<WeeklyPlan | null>;
     get currentWeekPlan() {
         return this.__currentWeekPlan.get();
@@ -253,14 +253,14 @@ class EdgeFlowMainPage extends ViewPU {
     }
     private timer: number;
     private dataStore: DataStore;
-    // 可选动作列表
+    // ��ѡ�����б�
     private jumpMoves: string[];
     private spinMoves: string[];
     private stepMoves: string[];
     aboutToAppear() {
-        // 注释掉测试数据生成，避免初始值不为零
+        // ע�͵������������ɣ������ʼֵ��Ϊ��
         // TestDataGenerator.getInstance().generateTestData();
-        // 加载今日记录和周计划
+        // ���ؽ��ռ�¼���ܼƻ�
         this.loadTodayRecords();
         this.loadCurrentWeekPlan();
     }
@@ -276,13 +276,13 @@ class EdgeFlowMainPage extends ViewPU {
         const plan = this.dataStore.getCurrentWeekPlan();
         this.currentWeekPlan = plan || null;
     }
-    // 格式化时间
+    // ��ʽ��ʱ��
     formatTime(seconds: number): string {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
         return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
     }
-    // 计算疲劳度
+    // ����ƣ�Ͷ�
     calculateFatigue(): number {
         let fatigue = 0;
         this.selectedMoves.forEach(move => {
@@ -295,25 +295,25 @@ class EdgeFlowMainPage extends ViewPU {
         });
         return fatigue;
     }
-    // 获取今日总训练分钟
+    // ��ȡ������ѵ������
     getTodayTotalMinutes(): number {
-        // 计算已保存记录的总时长
+        // �����ѱ����¼����ʱ��
         const savedSeconds = this.todayRecords.reduce((sum, record) => sum + record.duration, 0);
-        // 加上当前正在训练的时长
+        // ���ϵ�ǰ����ѵ����ʱ��
         const currentSeconds = this.isTraining ? this.trainingTime : 0;
         return Math.floor((savedSeconds + currentSeconds) / 60);
     }
-    // 获取今日总疲劳度
+    // ��ȡ������ƣ�Ͷ�
     getTodayTotalFatigue(): number {
-        // 计算已保存记录的总疲劳度
+        // �����ѱ����¼����ƣ�Ͷ�
         const savedFatigue = this.todayRecords.reduce((sum, record) => sum + record.fatigue, 0);
-        // 加上当前正在训练的疲劳度
+        // ���ϵ�ǰ����ѵ����ƣ�Ͷ�
         const currentFatigue = this.isTraining ? this.calculateFatigue() : 0;
         return savedFatigue + currentFatigue;
     }
-    // 获取今日总训练次数
+    // ��ȡ������ѵ������
     getTodayTotalCount(): number {
-        // 已保存记录数 + 当前正在训练的动作数
+        // �ѱ����¼�� + ��ǰ����ѵ���Ķ�����
         return this.todayRecords.length + (this.isTraining ? this.selectedMoves.length : 0);
     }
     initialRender() {
@@ -332,11 +332,11 @@ class EdgeFlowMainPage extends ViewPU {
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 内容区域
+            // ��������
             Column.create();
-            // 内容区域
+            // ��������
             Column.width('100%');
-            // 内容区域
+            // ��������
             Column.layoutWeight(1);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -367,15 +367,10 @@ class EdgeFlowMainPage extends ViewPU {
             }
             else if (this.currentTab === 2) {
                 this.ifElseBranchUpdateFunction(2, () => {
-                    this.buildIceNews.bind(this)();
-                });
-            }
-            else if (this.currentTab === 3) {
-                this.ifElseBranchUpdateFunction(3, () => {
                     {
                         this.observeComponentCreation2((elmtId, isInitialRender) => {
                             if (isInitialRender) {
-                                let componentCall = new AchievementPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/EdgeFlowMainPage.ets", line: 121, col: 13 });
+                                let componentCall = new AchievementPage(this, {}, undefined, elmtId, () => { }, { page: "entry/src/main/ets/pages/EdgeFlowMainPage.ets", line: 119, col: 13 });
                                 ViewPU.create(componentCall);
                                 let paramsLambda = () => {
                                     return {};
@@ -390,26 +385,26 @@ class EdgeFlowMainPage extends ViewPU {
                 });
             }
             else {
-                this.ifElseBranchUpdateFunction(4, () => {
+                this.ifElseBranchUpdateFunction(3, () => {
                     this.buildProfile.bind(this)();
                 });
             }
         }, If);
         If.pop();
-        // 内容区域
+        // ��������
         Column.pop();
-        // 底部导航栏
+        // �ײ�������
         this.buildBottomNav.bind(this)();
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 动作选择弹窗
+            // ����ѡ�񵯴�
             if (this.showMoveSelector) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.buildMoveSelector.bind(this)();
                 });
             }
-            // 历史记录面板
+            // ��ʷ��¼���
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -418,13 +413,13 @@ class EdgeFlowMainPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 历史记录面板
+            // ��ʷ��¼���
             if (this.showHistoryPanel) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.buildHistoryPanel.bind(this)();
                 });
             }
-            // 计划本面板
+            // �ƻ������
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -433,13 +428,13 @@ class EdgeFlowMainPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 计划本面板
+            // �ƻ������
             if (this.showPlanPanel) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.buildPlanPanel.bind(this)();
                 });
             }
-            // 添加动作面板
+            // ���Ӷ������
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                 });
@@ -448,7 +443,7 @@ class EdgeFlowMainPage extends ViewPU {
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 添加动作面板
+            // ���Ӷ������
             if (this.showAddMovePanel) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.buildAddMovePanel.bind(this)();
@@ -462,7 +457,7 @@ class EdgeFlowMainPage extends ViewPU {
         If.pop();
         Stack.pop();
     }
-    // 训练台
+    // ѵ��̨
     buildTrainingGround(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Scroll.create();
@@ -482,7 +477,7 @@ class EdgeFlowMainPage extends ViewPU {
             Row.margin({ bottom: DeviceUtils.isWearable() ? 12 : 30 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('⛸️ 训练台');
+            Text.create('?? ѵ��̨');
             Text.fontSize(DeviceUtils.isWearable() ? 16 : 24);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#FFFFFF');
@@ -494,108 +489,108 @@ class EdgeFlowMainPage extends ViewPU {
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 手表端隐藏部分按钮，只保留核心功能
+            // �ֱ������ز��ְ�ť��ֻ�������Ĺ���
             if (!DeviceUtils.isWearable()) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计划本按钮
-                        Button.createWithLabel('📅 计划');
-                        // 计划本按钮
+                        // �ƻ�����ť
+                        Button.createWithLabel('?? �ƻ�');
+                        // �ƻ�����ť
                         Button.fontSize(13);
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.fontColor('#FFFFFF');
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.backgroundColor('rgba(255, 255, 255, 0.2)');
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.borderRadius(15);
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.height(32);
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.padding({ left: 10, right: 10 });
-                        // 计划本按钮
+                        // �ƻ�����ť
                         Button.onClick(() => {
                             this.showPlanPanel = true;
                         });
                     }, Button);
-                    // 计划本按钮
+                    // �ƻ�����ť
                     Button.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 历史记录按钮
-                        Button.createWithLabel('📋 记录');
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
+                        Button.createWithLabel('?? ��¼');
+                        // ��ʷ��¼��ť
                         Button.fontSize(13);
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.fontColor('#FFFFFF');
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.backgroundColor('rgba(255, 255, 255, 0.2)');
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.borderRadius(15);
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.height(32);
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.padding({ left: 10, right: 10 });
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.margin({ left: 6 });
-                        // 历史记录按钮
+                        // ��ʷ��¼��ť
                         Button.onClick(() => {
                             this.showHistoryPanel = true;
                         });
                     }, Button);
-                    // 历史记录按钮
+                    // ��ʷ��¼��ť
                     Button.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计算器入口
-                        Button.createWithLabel('🧮 计算器');
-                        // 计算器入口
+                        // ���������
+                        Button.createWithLabel('?? ������');
+                        // ���������
                         Button.fontSize(13);
-                        // 计算器入口
+                        // ���������
                         Button.fontColor('#FFFFFF');
-                        // 计算器入口
+                        // ���������
                         Button.backgroundColor('rgba(255, 255, 255, 0.2)');
-                        // 计算器入口
+                        // ���������
                         Button.borderRadius(15);
-                        // 计算器入口
+                        // ���������
                         Button.height(32);
-                        // 计算器入口
+                        // ���������
                         Button.padding({ left: 10, right: 10 });
-                        // 计算器入口
+                        // ���������
                         Button.margin({ left: 6 });
-                        // 计算器入口
+                        // ���������
                         Button.onClick(() => {
                             router.pushUrl({
                                 url: 'pages/ScoringSimulatorPage'
                             });
                         });
                     }, Button);
-                    // 计算器入口
+                    // ���������
                     Button.pop();
                 });
             }
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 手表端只显示计算器按钮
-                        Button.createWithLabel('🧮');
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
+                        Button.createWithLabel('??');
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.fontSize(14);
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.fontColor('#FFFFFF');
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.backgroundColor('rgba(255, 255, 255, 0.2)');
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.borderRadius(12);
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.height(28);
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.width(28);
-                        // 手表端只显示计算器按钮
+                        // �ֱ���ֻ��ʾ��������ť
                         Button.onClick(() => {
                             router.pushUrl({
                                 url: 'pages/ScoringSimulatorPage'
                             });
                         });
                     }, Button);
-                    // 手表端只显示计算器按钮
+                    // �ֱ���ֻ��ʾ��������ť
                     Button.pop();
                 });
             }
@@ -607,43 +602,43 @@ class EdgeFlowMainPage extends ViewPU {
             if (!this.isTraining) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.create();
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.width(DeviceUtils.isWearable() ? 100 : 180);
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.height(DeviceUtils.isWearable() ? 100 : 180);
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.borderRadius(DeviceUtils.isWearable() ? 50 : 90);
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.backgroundColor('rgba(255, 255, 255, 0.25)');
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.justifyContent(FlexAlign.Center);
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.shadow({ radius: 20, color: 'rgba(0, 0, 0, 0.3)', offsetX: 0, offsetY: 10 });
-                        // 大圆环开始按钮
+                        // ��Բ����ʼ��ť
                         Column.onClick(() => {
                             this.showMoveSelector = true;
                         });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('⛸️');
+                        Text.create('??');
                         Text.fontSize(DeviceUtils.isWearable() ? 32 : 60);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('开始训练');
+                        Text.create('��ʼѵ��');
                         Text.fontSize(DeviceUtils.isWearable() ? 14 : 20);
                         Text.fontWeight(FontWeight.Bold);
                         Text.fontColor('#FFFFFF');
                         Text.margin({ top: DeviceUtils.isWearable() ? 4 : 10 });
                     }, Text);
                     Text.pop();
-                    // 大圆环开始按钮
+                    // ��Բ����ʼ��ť
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         If.create();
-                        // 手表端添加更多内容，确保可以滚动
+                        // �ֱ������Ӹ������ݣ�ȷ�����Թ���
                         if (DeviceUtils.isWearable()) {
                             this.ifElseBranchUpdateFunction(0, () => {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -653,7 +648,7 @@ class EdgeFlowMainPage extends ViewPU {
                                     Column.margin({ top: 20 });
                                 }, Column);
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create('今日统计');
+                                    Text.create('����ͳ��');
                                     Text.fontSize(14);
                                     Text.fontColor('#FFFFFF');
                                     Text.margin({ top: 20, bottom: 10 });
@@ -668,12 +663,12 @@ class EdgeFlowMainPage extends ViewPU {
                                     Column.layoutWeight(1);
                                 }, Column);
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create('⏱️');
+                                    Text.create('??');
                                     Text.fontSize(20);
                                 }, Text);
                                 Text.pop();
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create(`${this.getTodayTotalMinutes()}分钟`);
+                                    Text.create(`${this.getTodayTotalMinutes()}����`);
                                     Text.fontSize(12);
                                     Text.fontColor('#FFFFFF');
                                     Text.margin({ top: 4 });
@@ -685,12 +680,12 @@ class EdgeFlowMainPage extends ViewPU {
                                     Column.layoutWeight(1);
                                 }, Column);
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create('🎯');
+                                    Text.create('??');
                                     Text.fontSize(20);
                                 }, Text);
                                 Text.pop();
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create(`${this.getTodayTotalCount()}次`);
+                                    Text.create(`${this.getTodayTotalCount()}��`);
                                     Text.fontSize(12);
                                     Text.fontColor('#FFFFFF');
                                     Text.margin({ top: 4 });
@@ -712,11 +707,11 @@ class EdgeFlowMainPage extends ViewPU {
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 训练进行中
+                        // ѵ��������
                         Column.create();
-                        // 训练进行中
+                        // ѵ��������
                         Column.width('100%');
-                        // 训练进行中
+                        // ѵ��������
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -727,44 +722,44 @@ class EdgeFlowMainPage extends ViewPU {
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(`已选动作: ${this.selectedMoves.length}个`);
+                        Text.create(`��ѡ����: ${this.selectedMoves.length}��`);
                         Text.fontSize(DeviceUtils.isWearable() ? 11 : 16);
                         Text.fontColor('rgba(255, 255, 255, 0.8)');
                         Text.margin({ top: DeviceUtils.isWearable() ? 4 : 10 });
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create(`疲劳度: ${this.calculateFatigue()}`);
+                        Text.create(`ƣ�Ͷ�: ${this.calculateFatigue()}`);
                         Text.fontSize(DeviceUtils.isWearable() ? 11 : 16);
                         Text.fontColor('rgba(255, 255, 255, 0.8)');
                         Text.margin({ top: 4 });
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 结束训练按钮
-                        Button.createWithLabel('结束训练');
-                        // 结束训练按钮
+                        // ����ѵ����ť
+                        Button.createWithLabel('����ѵ��');
+                        // ����ѵ����ť
                         Button.fontSize(DeviceUtils.isWearable() ? 13 : 18);
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.fontColor('#FFFFFF');
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.backgroundColor('rgba(255, 100, 100, 0.8)');
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.borderRadius(DeviceUtils.isWearable() ? 18 : 25);
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.height(DeviceUtils.isWearable() ? 36 : 50);
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.width(DeviceUtils.isWearable() ? 100 : 150);
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.margin({ top: DeviceUtils.isWearable() ? 16 : 30 });
-                        // 结束训练按钮
+                        // ����ѵ����ť
                         Button.onClick(() => {
                             this.stopTraining();
                         });
                     }, Button);
-                    // 结束训练按钮
+                    // ����ѵ����ť
                     Button.pop();
-                    // 训练进行中
+                    // ѵ��������
                     Column.pop();
                 });
             }
@@ -773,7 +768,7 @@ class EdgeFlowMainPage extends ViewPU {
         Column.pop();
         Scroll.pop();
     }
-    // 开始训练
+    // ��ʼѵ��
     startTraining() {
         this.isTraining = true;
         this.trainingTime = 0;
@@ -782,25 +777,25 @@ class EdgeFlowMainPage extends ViewPU {
             this.trainingTime++;
         }, 1000);
     }
-    // 停止训练
+    // ֹͣѵ��
     stopTraining() {
         if (this.timer !== -1) {
             clearInterval(this.timer);
             this.timer = -1;
         }
-        // 保存训练记录
+        // ����ѵ����¼
         if (this.trainingTime > 0 && this.selectedMoves.length > 0) {
             const today = new Date();
             const dateStr = today.toISOString().split('T')[0];
             const timeStr = today.toTimeString().split(' ')[0].substring(0, 5);
             const fatigue = this.calculateFatigue();
-            // 为每个选中的动作保存练习记录
+            // Ϊÿ��ѡ�еĶ���������ϰ��¼
             this.selectedMoves.forEach((moveId, index) => {
-                // 计算每个动作的练习时长（平均分配总时长）
+                // ����ÿ����������ϰʱ����ƽ��������ʱ����
                 const moveDuration = Math.floor(this.trainingTime / this.selectedMoves.length);
-                // 生成唯一ID
+                // ����ΨһID
                 const recordId = `${dateStr}-${timeStr}-${moveId}-${index}`;
-                // 保存训练记录
+                // ����ѵ����¼
                 this.dataStore.addPracticeRecord({
                     id: recordId,
                     moveName: moveId,
@@ -808,17 +803,17 @@ class EdgeFlowMainPage extends ViewPU {
                     time: timeStr,
                     duration: moveDuration,
                     fatigue: Math.floor(fatigue / this.selectedMoves.length),
-                    notes: `训练时长: ${this.formatTime(moveDuration)}`
+                    notes: `ѵ��ʱ��: ${this.formatTime(moveDuration)}`
                 });
             });
-            // 清空选中动作
+            // ���ѡ�ж���
             this.selectedMoves = [];
-            // 刷新今日记录
+            // ˢ�½��ռ�¼
             this.loadTodayRecords();
         }
         this.isTraining = false;
     }
-    // 动作选择弹窗
+    // ����ѡ�񵯴�
     buildMoveSelector(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -827,7 +822,7 @@ class EdgeFlowMainPage extends ViewPU {
             Column.backgroundColor('rgba(0, 0, 0, 0.5)');
             Column.justifyContent(FlexAlign.Center);
             Column.onClick(() => {
-                // 点击外部不关闭
+                // ����ⲿ���ر�
             });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -838,7 +833,7 @@ class EdgeFlowMainPage extends ViewPU {
             Column.borderRadius(20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('选择训练动作');
+            Text.create('ѡ��ѵ������');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#333333');
@@ -846,16 +841,16 @@ class EdgeFlowMainPage extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 跳跃动作
-            Text.create('跳跃 (疲劳度: 7)');
-            // 跳跃动作
+            // ��Ծ����
+            Text.create('��Ծ (ƣ�Ͷ�: 7)');
+            // ��Ծ����
             Text.fontSize(14);
-            // 跳跃动作
+            // ��Ծ����
             Text.fontColor('#666666');
-            // 跳跃动作
+            // ��Ծ����
             Text.margin({ bottom: 10 });
         }, Text);
-        // 跳跃动作
+        // ��Ծ����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -873,16 +868,16 @@ class EdgeFlowMainPage extends ViewPU {
         ForEach.pop();
         Flex.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 旋转动作
-            Text.create('旋转 (疲劳度: 3)');
-            // 旋转动作
+            // ��ת����
+            Text.create('��ת (ƣ�Ͷ�: 3)');
+            // ��ת����
             Text.fontSize(14);
-            // 旋转动作
+            // ��ת����
             Text.fontColor('#666666');
-            // 旋转动作
+            // ��ת����
             Text.margin({ bottom: 10 });
         }, Text);
-        // 旋转动作
+        // ��ת����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -900,16 +895,16 @@ class EdgeFlowMainPage extends ViewPU {
         ForEach.pop();
         Flex.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 步法动作
-            Text.create('步法 (疲劳度: 1)');
-            // 步法动作
+            // ��������
+            Text.create('���� (ƣ�Ͷ�: 1)');
+            // ��������
             Text.fontSize(14);
-            // 步法动作
+            // ��������
             Text.fontColor('#666666');
-            // 步法动作
+            // ��������
             Text.margin({ bottom: 10 });
         }, Text);
-        // 步法动作
+        // ��������
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -931,7 +926,7 @@ class EdgeFlowMainPage extends ViewPU {
             Row.width('100%');
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('取消');
+            Button.createWithLabel('ȡ��');
             Button.fontSize(16);
             Button.fontColor('#666666');
             Button.backgroundColor('#E0E0E0');
@@ -944,7 +939,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Button);
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('开始');
+            Button.createWithLabel('��ʼ');
             Button.fontSize(16);
             Button.fontColor('#FFFFFF');
             Button.backgroundColor('#3A7BD5');
@@ -980,114 +975,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Text);
         Text.pop();
     }
-    // 冰闻
-    buildIceNews(parent = null) {
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Scroll.create();
-            Scroll.width('100%');
-            Scroll.layoutWeight(1);
-            Scroll.scrollBar(BarState.Off);
-            Scroll.edgeEffect(EdgeEffect.Spring);
-        }, Scroll);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('100%');
-            Column.padding(DeviceUtils.isWearable() ? 10 : 20);
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('📰 冰闻');
-            Text.fontSize(DeviceUtils.isWearable() ? 18 : 24);
-            Text.fontWeight(FontWeight.Bold);
-            Text.fontColor('#FFFFFF');
-            Text.margin({ bottom: DeviceUtils.isWearable() ? 12 : 20 });
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Column.create();
-            Column.width('90%');
-            Column.padding(DeviceUtils.isWearable() ? 15 : 20);
-            Column.backgroundColor('#FFFFFF');
-            Column.borderRadius(DeviceUtils.isWearable() ? 10 : 15);
-            Column.margin({ top: DeviceUtils.isWearable() ? 10 : 20 });
-        }, Column);
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('2024世界锦标赛');
-            Text.fontSize(DeviceUtils.isWearable() ? 16 : 18);
-            Text.fontWeight(FontWeight.Bold);
-            Text.fontColor('#333333');
-        }, Text);
-        Text.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('蒙特利尔 3月18-24日');
-            Text.fontSize(DeviceUtils.isWearable() ? 12 : 14);
-            Text.fontColor('#666666');
-            Text.margin({ top: DeviceUtils.isWearable() ? 4 : 8 });
-        }, Text);
-        Text.pop();
-        Column.pop();
-        this.observeComponentCreation2((elmtId, isInitialRender) => {
-            If.create();
-            // 手表端添加更多新闻内容
-            if (DeviceUtils.isWearable()) {
-                this.ifElseBranchUpdateFunction(0, () => {
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('90%');
-                        Column.padding(15);
-                        Column.backgroundColor('#FFFFFF');
-                        Column.borderRadius(10);
-                        Column.margin({ top: 10 });
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('国内赛事');
-                        Text.fontSize(14);
-                        Text.fontWeight(FontWeight.Bold);
-                        Text.fontColor('#333333');
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('全国锦标赛 4月15-20日');
-                        Text.fontSize(12);
-                        Text.fontColor('#666666');
-                        Text.margin({ top: 4 });
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('90%');
-                        Column.padding(15);
-                        Column.backgroundColor('#FFFFFF');
-                        Column.borderRadius(10);
-                        Column.margin({ top: 10 });
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('训练技巧');
-                        Text.fontSize(14);
-                        Text.fontWeight(FontWeight.Bold);
-                        Text.fontColor('#333333');
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('如何提高跳跃稳定性');
-                        Text.fontSize(12);
-                        Text.fontColor('#666666');
-                        Text.margin({ top: 4 });
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
-                });
-            }
-            else {
-                this.ifElseBranchUpdateFunction(1, () => {
-                });
-            }
-        }, If);
-        If.pop();
-        Column.pop();
-        Scroll.pop();
-    }
-    // 我的
+    // �ҵ�
     buildProfile(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Scroll.create();
@@ -1102,7 +990,7 @@ class EdgeFlowMainPage extends ViewPU {
             Column.padding(DeviceUtils.isWearable() ? 10 : 20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('👤 我的');
+            Text.create('?? �ҵ�');
             Text.fontSize(DeviceUtils.isWearable() ? 18 : 24);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#FFFFFF');
@@ -1118,12 +1006,12 @@ class EdgeFlowMainPage extends ViewPU {
             Column.margin({ top: DeviceUtils.isWearable() ? 10 : 20 });
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('⛸️');
+            Text.create('??');
             Text.fontSize(DeviceUtils.isWearable() ? 40 : 50);
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('冰上舞者');
+            Text.create('��������');
             Text.fontSize(DeviceUtils.isWearable() ? 16 : 20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#333333');
@@ -1140,7 +1028,7 @@ class EdgeFlowMainPage extends ViewPU {
         Column.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 功能入口 - 手表端简化显示
+            // ������� - �ֱ��˼���ʾ
             if (!DeviceUtils.isWearable()) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1149,17 +1037,17 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.margin({ top: 20 });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 打分解读
+                        // ��ֽ��
                         Row.create();
-                        // 打分解读
+                        // ��ֽ��
                         Row.width('100%');
-                        // 打分解读
+                        // ��ֽ��
                         Row.padding(15);
-                        // 打分解读
+                        // ��ֽ��
                         Row.backgroundColor('#FFFFFF');
-                        // 打分解读
+                        // ��ֽ��
                         Row.borderRadius(12);
-                        // 打分解读
+                        // ��ֽ��
                         Row.onClick(() => {
                             router.pushUrl({
                                 url: 'pages/ScoreInterpreterPage'
@@ -1167,7 +1055,7 @@ class EdgeFlowMainPage extends ViewPU {
                         });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('📊');
+                        Text.create('??');
                         Text.fontSize(24);
                     }, Text);
                     Text.pop();
@@ -1178,14 +1066,14 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.margin({ left: 15 });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('打分解读');
+                        Text.create('��ֽ��');
                         Text.fontSize(16);
                         Text.fontWeight(FontWeight.Bold);
                         Text.fontColor('#333333');
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('解读比赛分数，了解评分规则');
+                        Text.create('��������������˽����ֹ���');
                         Text.fontSize(12);
                         Text.fontColor('#999999');
                         Text.margin({ top: 4 });
@@ -1193,27 +1081,27 @@ class EdgeFlowMainPage extends ViewPU {
                     Text.pop();
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('›');
+                        Text.create('?');
                         Text.fontSize(24);
                         Text.fontColor('#CCCCCC');
                     }, Text);
                     Text.pop();
-                    // 打分解读
+                    // ��ֽ��
                     Row.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.create();
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.width('100%');
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.padding(15);
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.backgroundColor('#FFFFFF');
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.borderRadius(12);
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.margin({ top: 12 });
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.onClick(() => {
                             router.pushUrl({
                                 url: 'pages/ScoringSimulatorPage'
@@ -1221,7 +1109,7 @@ class EdgeFlowMainPage extends ViewPU {
                         });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('🧮');
+                        Text.create('??');
                         Text.fontSize(24);
                     }, Text);
                     Text.pop();
@@ -1232,14 +1120,14 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.margin({ left: 15 });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('计分模拟器');
+                        Text.create('�Ʒ�ģ����');
                         Text.fontSize(16);
                         Text.fontWeight(FontWeight.Bold);
                         Text.fontColor('#333333');
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('模拟ISU官方计分规则');
+                        Text.create('ģ��ISU�ٷ��Ʒֹ���');
                         Text.fontSize(12);
                         Text.fontColor('#999999');
                         Text.margin({ top: 4 });
@@ -1247,12 +1135,12 @@ class EdgeFlowMainPage extends ViewPU {
                     Text.pop();
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('›');
+                        Text.create('?');
                         Text.fontSize(24);
                         Text.fontColor('#CCCCCC');
                     }, Text);
                     Text.pop();
-                    // 计分模拟器
+                    // �Ʒ�ģ����
                     Row.pop();
                     Column.pop();
                 });
@@ -1260,25 +1148,25 @@ class EdgeFlowMainPage extends ViewPU {
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 手表端显示功能列表
+                        // �ֱ�����ʾ�����б�
                         Column.create();
-                        // 手表端显示功能列表
+                        // �ֱ�����ʾ�����б�
                         Column.width('90%');
-                        // 手表端显示功能列表
+                        // �ֱ�����ʾ�����б�
                         Column.margin({ top: 15 });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.create();
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.width('100%');
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.padding(12);
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.backgroundColor('#FFFFFF');
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.borderRadius(10);
-                        // 计分模拟器
+                        // �Ʒ�ģ����
                         Row.onClick(() => {
                             router.pushUrl({
                                 url: 'pages/ScoringSimulatorPage'
@@ -1286,12 +1174,12 @@ class EdgeFlowMainPage extends ViewPU {
                         });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('🧮');
+                        Text.create('??');
                         Text.fontSize(20);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('计分模拟器');
+                        Text.create('�Ʒ�ģ����');
                         Text.fontSize(14);
                         Text.fontColor('#333333');
                         Text.margin({ left: 10 });
@@ -1302,34 +1190,34 @@ class EdgeFlowMainPage extends ViewPU {
                     }, Blank);
                     Blank.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('›');
+                        Text.create('?');
                         Text.fontSize(20);
                         Text.fontColor('#CCCCCC');
                     }, Text);
                     Text.pop();
-                    // 计分模拟器
+                    // �Ʒ�ģ����
                     Row.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 设置
+                        // ����
                         Row.create();
-                        // 设置
+                        // ����
                         Row.width('100%');
-                        // 设置
+                        // ����
                         Row.padding(12);
-                        // 设置
+                        // ����
                         Row.backgroundColor('#FFFFFF');
-                        // 设置
+                        // ����
                         Row.borderRadius(10);
-                        // 设置
+                        // ����
                         Row.margin({ top: 10 });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('⚙️');
+                        Text.create('??');
                         Text.fontSize(20);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('设置');
+                        Text.create('����');
                         Text.fontSize(14);
                         Text.fontColor('#333333');
                         Text.margin({ left: 10 });
@@ -1340,34 +1228,34 @@ class EdgeFlowMainPage extends ViewPU {
                     }, Blank);
                     Blank.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('›');
+                        Text.create('?');
                         Text.fontSize(20);
                         Text.fontColor('#CCCCCC');
                     }, Text);
                     Text.pop();
-                    // 设置
+                    // ����
                     Row.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 关于
+                        // ����
                         Row.create();
-                        // 关于
+                        // ����
                         Row.width('100%');
-                        // 关于
+                        // ����
                         Row.padding(12);
-                        // 关于
+                        // ����
                         Row.backgroundColor('#FFFFFF');
-                        // 关于
+                        // ����
                         Row.borderRadius(10);
-                        // 关于
+                        // ����
                         Row.margin({ top: 10 });
                     }, Row);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('ℹ️');
+                        Text.create('??');
                         Text.fontSize(20);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('关于');
+                        Text.create('����');
                         Text.fontSize(14);
                         Text.fontColor('#333333');
                         Text.margin({ left: 10 });
@@ -1378,14 +1266,14 @@ class EdgeFlowMainPage extends ViewPU {
                     }, Blank);
                     Blank.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('›');
+                        Text.create('?');
                         Text.fontSize(20);
                         Text.fontColor('#CCCCCC');
                     }, Text);
                     Text.pop();
-                    // 关于
+                    // ����
                     Row.pop();
-                    // 手表端显示功能列表
+                    // �ֱ�����ʾ�����б�
                     Column.pop();
                 });
             }
@@ -1403,51 +1291,51 @@ class EdgeFlowMainPage extends ViewPU {
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 手表端只显示3个主要Tab，其他设备显示5个
+            // �ֱ���ֻ��ʾ3����ҪTab�������豸��ʾ5��
             if (DeviceUtils.isWearable()) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 手表端简化导航栏
+                        // �ֱ��˼򻯵�����
                         Column.create();
-                        // 手表端简化导航栏
+                        // �ֱ��˼򻯵�����
                         Column.width('33.3%');
-                        // 手表端简化导航栏
+                        // �ֱ��˼򻯵�����
                         Column.height(40);
-                        // 手表端简化导航栏
+                        // �ֱ��˼򻯵�����
                         Column.justifyContent(FlexAlign.Center);
-                        // 手表端简化导航栏
+                        // �ֱ��˼򻯵�����
                         Column.onClick(() => { this.currentTab = 0; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('⛸️');
+                        Text.create('??');
                         Text.fontSize(18);
                         Text.opacity(this.currentTab === 0 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('训练');
+                        Text.create('ѵ��');
                         Text.fontSize(9);
                         Text.fontColor(this.currentTab === 0 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 1 });
                     }, Text);
                     Text.pop();
-                    // 手表端简化导航栏
+                    // �ֱ��˼򻯵�����
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
                         Column.width('33.3%');
                         Column.height(40);
                         Column.justifyContent(FlexAlign.Center);
-                        Column.onClick(() => { this.currentTab = 3; });
+                        Column.onClick(() => { this.currentTab = 2; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('🏆');
+                        Text.create('??');
                         Text.fontSize(18);
                         Text.opacity(this.currentTab === 3 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('成就');
+                        Text.create('�ɾ�');
                         Text.fontSize(9);
                         Text.fontColor(this.currentTab === 3 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 1 });
@@ -1459,16 +1347,16 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.width('33.3%');
                         Column.height(40);
                         Column.justifyContent(FlexAlign.Center);
-                        Column.onClick(() => { this.currentTab = 4; });
+                        Column.onClick(() => { this.currentTab = 3; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('👤');
+                        Text.create('??');
                         Text.fontSize(18);
                         Text.opacity(this.currentTab === 4 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('我的');
+                        Text.create('�ҵ�');
                         Text.fontSize(9);
                         Text.fontColor(this.currentTab === 4 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 1 });
@@ -1480,47 +1368,47 @@ class EdgeFlowMainPage extends ViewPU {
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 手机、平板、PC显示完整导航栏
+                        // �ֻ���ƽ�塢PC��ʾ����������
                         Column.create();
-                        // 手机、平板、PC显示完整导航栏
-                        Column.width('20%');
-                        // 手机、平板、PC显示完整导航栏
+                        // �ֻ���ƽ�塢PC��ʾ����������
+                        Column.width('25%');
+                        // �ֻ���ƽ�塢PC��ʾ����������
                         Column.height(60);
-                        // 手机、平板、PC显示完整导航栏
+                        // �ֻ���ƽ�塢PC��ʾ����������
                         Column.justifyContent(FlexAlign.Center);
-                        // 手机、平板、PC显示完整导航栏
+                        // �ֻ���ƽ�塢PC��ʾ����������
                         Column.onClick(() => { this.currentTab = 0; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('⛸️');
+                        Text.create('??');
                         Text.fontSize(24);
                         Text.opacity(this.currentTab === 0 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('训练台');
+                        Text.create('ѵ��̨');
                         Text.fontSize(12);
                         Text.fontColor(this.currentTab === 0 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 4 });
                     }, Text);
                     Text.pop();
-                    // 手机、平板、PC显示完整导航栏
+                    // �ֻ���ƽ�塢PC��ʾ����������
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.width('20%');
+                        Column.width('25%');
                         Column.height(60);
                         Column.justifyContent(FlexAlign.Center);
                         Column.onClick(() => { this.currentTab = 1; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('📚');
+                        Text.create('??');
                         Text.fontSize(24);
                         Text.opacity(this.currentTab === 1 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('动作库');
+                        Text.create('������');
                         Text.fontSize(12);
                         Text.fontColor(this.currentTab === 1 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 4 });
@@ -1529,40 +1417,19 @@ class EdgeFlowMainPage extends ViewPU {
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.width('20%');
+                        Column.width('25%');
                         Column.height(60);
                         Column.justifyContent(FlexAlign.Center);
                         Column.onClick(() => { this.currentTab = 2; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('📰');
-                        Text.fontSize(24);
-                        Text.opacity(this.currentTab === 2 ? 1.0 : 0.6);
-                    }, Text);
-                    Text.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('冰闻');
-                        Text.fontSize(12);
-                        Text.fontColor(this.currentTab === 2 ? '#FFFFFF' : '#E0E0E0');
-                        Text.margin({ top: 4 });
-                    }, Text);
-                    Text.pop();
-                    Column.pop();
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Column.create();
-                        Column.width('20%');
-                        Column.height(60);
-                        Column.justifyContent(FlexAlign.Center);
-                        Column.onClick(() => { this.currentTab = 3; });
-                    }, Column);
-                    this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('🏆');
+                        Text.create('??');
                         Text.fontSize(24);
                         Text.opacity(this.currentTab === 3 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('成就');
+                        Text.create('�ɾ�');
                         Text.fontSize(12);
                         Text.fontColor(this.currentTab === 3 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 4 });
@@ -1571,19 +1438,19 @@ class EdgeFlowMainPage extends ViewPU {
                     Column.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         Column.create();
-                        Column.width('20%');
+                        Column.width('25%');
                         Column.height(60);
                         Column.justifyContent(FlexAlign.Center);
-                        Column.onClick(() => { this.currentTab = 4; });
+                        Column.onClick(() => { this.currentTab = 3; });
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('👤');
+                        Text.create('??');
                         Text.fontSize(24);
                         Text.opacity(this.currentTab === 4 ? 1.0 : 0.6);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('我的');
+                        Text.create('�ҵ�');
                         Text.fontSize(12);
                         Text.fontColor(this.currentTab === 4 ? '#FFFFFF' : '#E0E0E0');
                         Text.margin({ top: 4 });
@@ -1596,7 +1463,7 @@ class EdgeFlowMainPage extends ViewPU {
         If.pop();
         Row.pop();
     }
-    // ========== 历史记录面板 ==========
+    // ========== ��ʷ��¼��� ==========
     buildHistoryPanel(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -1614,15 +1481,15 @@ class EdgeFlowMainPage extends ViewPU {
             Column.borderRadius(20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 标题栏
+            // ������
             Row.create();
-            // 标题栏
+            // ������
             Row.width('100%');
-            // 标题栏
+            // ������
             Row.margin({ bottom: 20 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('📋 今日练习记录');
+            Text.create('?? ������ϰ��¼');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#333333');
@@ -1633,7 +1500,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('关闭');
+            Button.createWithLabel('�ر�');
             Button.fontSize(14);
             Button.fontColor('#666666');
             Button.backgroundColor('#F0F0F0');
@@ -1645,11 +1512,11 @@ class EdgeFlowMainPage extends ViewPU {
             });
         }, Button);
         Button.pop();
-        // 标题栏
+        // ������
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
-            // 记录列表
+            // ��¼�б�
             if (this.todayRecords.length === 0) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1659,19 +1526,19 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('😴');
+                        Text.create('??');
                         Text.fontSize(60);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('今天还没有练习记录');
+                        Text.create('���컹û����ϰ��¼');
                         Text.fontSize(16);
                         Text.fontColor('#999999');
                         Text.margin({ top: 15 });
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('开始训练，记录你的每一次进步！');
+                        Text.create('��ʼѵ������¼���ÿһ�ν�����');
                         Text.fontSize(14);
                         Text.fontColor('#CCCCCC');
                         Text.margin({ top: 8 });
@@ -1705,9 +1572,9 @@ class EdgeFlowMainPage extends ViewPU {
                                 Row.margin({ bottom: 10 });
                             }, Row);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                // 时间
+                                // ʱ��
                                 Column.create();
-                                // 时间
+                                // ʱ��
                                 Column.width(60);
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1717,16 +1584,16 @@ class EdgeFlowMainPage extends ViewPU {
                                 Text.fontColor('#3A7BD5');
                             }, Text);
                             Text.pop();
-                            // 时间
+                            // ʱ��
                             Column.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                // 动作信息
+                                // ������Ϣ
                                 Column.create();
-                                // 动作信息
+                                // ������Ϣ
                                 Column.layoutWeight(1);
-                                // 动作信息
+                                // ������Ϣ
                                 Column.alignItems(HorizontalAlign.Start);
-                                // 动作信息
+                                // ������Ϣ
                                 Column.margin({ left: 15 });
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1767,12 +1634,12 @@ class EdgeFlowMainPage extends ViewPU {
                                 }
                             }, If);
                             If.pop();
-                            // 动作信息
+                            // ������Ϣ
                             Column.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                // 时长和疲劳度
+                                // ʱ����ƣ�Ͷ�
                                 Column.create();
-                                // 时长和疲劳度
+                                // ʱ����ƣ�Ͷ�
                                 Column.alignItems(HorizontalAlign.End);
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1783,13 +1650,13 @@ class EdgeFlowMainPage extends ViewPU {
                             }, Text);
                             Text.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                Text.create(`疲劳度 ${record.fatigue}`);
+                                Text.create(`ƣ�Ͷ� ${record.fatigue}`);
                                 Text.fontSize(12);
                                 Text.fontColor('#999999');
                                 Text.margin({ top: 4 });
                             }, Text);
                             Text.pop();
-                            // 时长和疲劳度
+                            // ʱ����ƣ�Ͷ�
                             Column.pop();
                             Row.pop();
                         };
@@ -1803,17 +1670,17 @@ class EdgeFlowMainPage extends ViewPU {
         }, If);
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 底部统计
+            // �ײ�ͳ��
             Row.create();
-            // 底部统计
+            // �ײ�ͳ��
             Row.width('100%');
-            // 底部统计
+            // �ײ�ͳ��
             Row.padding(20);
-            // 底部统计
+            // �ײ�ͳ��
             Row.backgroundColor('#F0F0F0');
-            // 底部统计
+            // �ײ�ͳ��
             Row.borderRadius(15);
-            // 底部统计
+            // �ײ�ͳ��
             Row.margin({ top: 15 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -1828,7 +1695,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('练习次数');
+            Text.create('��ϰ����');
             Text.fontSize(12);
             Text.fontColor('#999999');
         }, Text);
@@ -1846,7 +1713,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('总时长');
+            Text.create('��ʱ��');
             Text.fontSize(12);
             Text.fontColor('#999999');
         }, Text);
@@ -1864,18 +1731,18 @@ class EdgeFlowMainPage extends ViewPU {
         }, Text);
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('总疲劳度');
+            Text.create('��ƣ�Ͷ�');
             Text.fontSize(12);
             Text.fontColor('#999999');
         }, Text);
         Text.pop();
         Column.pop();
-        // 底部统计
+        // �ײ�ͳ��
         Row.pop();
         Column.pop();
         Column.pop();
     }
-    // ========== 计划本面板 ==========
+    // ========== �ƻ������ ==========
     buildPlanPanel(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -1893,15 +1760,15 @@ class EdgeFlowMainPage extends ViewPU {
             Column.borderRadius(20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 标题栏
+            // ������
             Row.create();
-            // 标题栏
+            // ������
             Row.width('100%');
-            // 标题栏
+            // ������
             Row.margin({ bottom: 20 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('📅 周训练计划');
+            Text.create('?? ��ѵ���ƻ�');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#333333');
@@ -1916,7 +1783,7 @@ class EdgeFlowMainPage extends ViewPU {
             if (!this.currentWeekPlan) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Button.createWithLabel('创建计划');
+                        Button.createWithLabel('�����ƻ�');
                         Button.fontSize(14);
                         Button.fontColor('#FFFFFF');
                         Button.backgroundColor('#3A7BD5');
@@ -1937,7 +1804,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, If);
         If.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('关闭');
+            Button.createWithLabel('�ر�');
             Button.fontSize(14);
             Button.fontColor('#666666');
             Button.backgroundColor('#F0F0F0');
@@ -1950,55 +1817,55 @@ class EdgeFlowMainPage extends ViewPU {
             });
         }, Button);
         Button.pop();
-        // 标题栏
+        // ������
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             If.create();
             if (!this.currentWeekPlan) {
                 this.ifElseBranchUpdateFunction(0, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 无计划提示
+                        // �޼ƻ���ʾ
                         Column.create();
-                        // 无计划提示
+                        // �޼ƻ���ʾ
                         Column.width('100%');
-                        // 无计划提示
+                        // �޼ƻ���ʾ
                         Column.height(300);
-                        // 无计划提示
+                        // �޼ƻ���ʾ
                         Column.justifyContent(FlexAlign.Center);
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('📝');
+                        Text.create('??');
                         Text.fontSize(60);
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('还没有本周训练计划');
+                        Text.create('��û�б���ѵ���ƻ�');
                         Text.fontSize(16);
                         Text.fontColor('#999999');
                         Text.margin({ top: 15 });
                     }, Text);
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        Text.create('点击"创建计划"开始规划你的训练！');
+                        Text.create('���"�����ƻ�"��ʼ�滮���ѵ����');
                         Text.fontSize(14);
                         Text.fontColor('#CCCCCC');
                         Text.margin({ top: 8 });
                     }, Text);
                     Text.pop();
-                    // 无计划提示
+                    // �޼ƻ���ʾ
                     Column.pop();
                 });
             }
             else {
                 this.ifElseBranchUpdateFunction(1, () => {
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 计划内容
+                        // �ƻ�����
                         Scroll.create();
-                        // 计划内容
+                        // �ƻ�����
                         Scroll.width('100%');
-                        // 计划内容
+                        // �ƻ�����
                         Scroll.layoutWeight(1);
-                        // 计划内容
+                        // �ƻ�����
                         Scroll.scrollBar(BarState.Auto);
                     }, Scroll);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -2006,19 +1873,19 @@ class EdgeFlowMainPage extends ViewPU {
                         Column.width('100%');
                     }, Column);
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 周日期范围
-                        Text.create(`${this.currentWeekPlan.weekStart} 至 ${this.currentWeekPlan.weekEnd}`);
-                        // 周日期范围
+                        // �����ڷ�Χ
+                        Text.create(`${this.currentWeekPlan.weekStart} �� ${this.currentWeekPlan.weekEnd}`);
+                        // �����ڷ�Χ
                         Text.fontSize(14);
-                        // 周日期范围
+                        // �����ڷ�Χ
                         Text.fontColor('#999999');
-                        // 周日期范围
+                        // �����ڷ�Χ
                         Text.margin({ bottom: 15 });
                     }, Text);
-                    // 周日期范围
+                    // �����ڷ�Χ
                     Text.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 每日计划
+                        // ÿ�ռƻ�
                         ForEach.create();
                         const forEachItemGenFunction = (_item, dayIndex: number) => {
                             const dayPlan = _item;
@@ -2032,11 +1899,11 @@ class EdgeFlowMainPage extends ViewPU {
                                 Column.border({ width: 1, color: '#E0E0E0' });
                             }, Column);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                // 日期标题
+                                // ���ڱ���
                                 Row.create();
-                                // 日期标题
+                                // ���ڱ���
                                 Row.width('100%');
-                                // 日期标题
+                                // ���ڱ���
                                 Row.margin({ bottom: 10 });
                             }, Row);
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -2059,11 +1926,11 @@ class EdgeFlowMainPage extends ViewPU {
                             Blank.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 If.create();
-                                // 目标时长
+                                // Ŀ��ʱ��
                                 if (dayPlan.targetDuration) {
                                     this.ifElseBranchUpdateFunction(0, () => {
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            Text.create(`目标: ${dayPlan.targetDuration}分钟`);
+                                            Text.create(`Ŀ��: ${dayPlan.targetDuration}����`);
                                             Text.fontSize(12);
                                             Text.fontColor('#3A7BD5');
                                         }, Text);
@@ -2076,11 +1943,11 @@ class EdgeFlowMainPage extends ViewPU {
                                 }
                             }, If);
                             If.pop();
-                            // 日期标题
+                            // ���ڱ���
                             Row.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 If.create();
-                                // 计划的动作
+                                // �ƻ��Ķ���
                                 if (dayPlan.moves.length === 0) {
                                     this.ifElseBranchUpdateFunction(0, () => {
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -2091,13 +1958,13 @@ class EdgeFlowMainPage extends ViewPU {
                                             Column.borderRadius(8);
                                         }, Column);
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            Text.create('暂无计划');
+                                            Text.create('���޼ƻ�');
                                             Text.fontSize(14);
                                             Text.fontColor('#CCCCCC');
                                         }, Text);
                                         Text.pop();
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            Button.createWithLabel('+ 添加动作');
+                                            Button.createWithLabel('+ ���Ӷ���');
                                             Button.fontSize(12);
                                             Button.fontColor('#3A7BD5');
                                             Button.backgroundColor('#E8F4FD');
@@ -2149,7 +2016,7 @@ class EdgeFlowMainPage extends ViewPU {
                                                     if (move.targetCount) {
                                                         this.ifElseBranchUpdateFunction(0, () => {
                                                             this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                                                Text.create(`×${move.targetCount}`);
+                                                                Text.create(`��${move.targetCount}`);
                                                                 Text.fontSize(12);
                                                                 Text.fontColor('#FF6B6B');
                                                                 Text.margin({ left: 4 });
@@ -2170,7 +2037,7 @@ class EdgeFlowMainPage extends ViewPU {
                                         ForEach.pop();
                                         Flex.pop();
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                            Button.createWithLabel('+ 添加更多');
+                                            Button.createWithLabel('+ ���Ӹ���');
                                             Button.fontSize(12);
                                             Button.fontColor('#3A7BD5');
                                             Button.backgroundColor('#E8F4FD');
@@ -2190,7 +2057,7 @@ class EdgeFlowMainPage extends ViewPU {
                             If.pop();
                             this.observeComponentCreation2((elmtId, isInitialRender) => {
                                 If.create();
-                                // 备注
+                                // ��ע
                                 if (dayPlan.notes) {
                                     this.ifElseBranchUpdateFunction(0, () => {
                                         this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -2213,11 +2080,11 @@ class EdgeFlowMainPage extends ViewPU {
                         };
                         this.forEachUpdateFunction(elmtId, this.currentWeekPlan.dailyPlans, forEachItemGenFunction, undefined, true, false);
                     }, ForEach);
-                    // 每日计划
+                    // ÿ�ռƻ�
                     ForEach.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
                         If.create();
-                        // 周备注
+                        // �ܱ�ע
                         if (this.currentWeekPlan.notes) {
                             this.ifElseBranchUpdateFunction(0, () => {
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
@@ -2229,7 +2096,7 @@ class EdgeFlowMainPage extends ViewPU {
                                     Column.margin({ top: 10 });
                                 }, Column);
                                 this.observeComponentCreation2((elmtId, isInitialRender) => {
-                                    Text.create('本周目标');
+                                    Text.create('����Ŀ��');
                                     Text.fontSize(14);
                                     Text.fontWeight(FontWeight.Bold);
                                     Text.fontColor('#333333');
@@ -2252,31 +2119,31 @@ class EdgeFlowMainPage extends ViewPU {
                     }, If);
                     If.pop();
                     Column.pop();
-                    // 计划内容
+                    // �ƻ�����
                     Scroll.pop();
                     this.observeComponentCreation2((elmtId, isInitialRender) => {
-                        // 删除按钮
-                        Button.createWithLabel('删除计划');
-                        // 删除按钮
+                        // ɾ����ť
+                        Button.createWithLabel('ɾ���ƻ�');
+                        // ɾ����ť
                         Button.fontSize(16);
-                        // 删除按钮
+                        // ɾ����ť
                         Button.fontColor('#FF6B6B');
-                        // 删除按钮
+                        // ɾ����ť
                         Button.backgroundColor('#FFE5E5');
-                        // 删除按钮
+                        // ɾ����ť
                         Button.borderRadius(20);
-                        // 删除按钮
+                        // ɾ����ť
                         Button.width('100%');
-                        // 删除按钮
+                        // ɾ����ť
                         Button.height(44);
-                        // 删除按钮
+                        // ɾ����ť
                         Button.margin({ top: 15 });
-                        // 删除按钮
+                        // ɾ����ť
                         Button.onClick(() => {
                             this.deleteCurrentPlan();
                         });
                     }, Button);
-                    // 删除按钮
+                    // ɾ����ť
                     Button.pop();
                 });
             }
@@ -2285,7 +2152,7 @@ class EdgeFlowMainPage extends ViewPU {
         Column.pop();
         Column.pop();
     }
-    // ========== 添加动作面板 ==========
+    // ========== ���Ӷ������ ==========
     buildAddMovePanel(parent = null) {
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Column.create();
@@ -2303,15 +2170,15 @@ class EdgeFlowMainPage extends ViewPU {
             Column.borderRadius(20);
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 标题栏
+            // ������
             Row.create();
-            // 标题栏
+            // ������
             Row.width('100%');
-            // 标题栏
+            // ������
             Row.margin({ bottom: 20 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Text.create('添加训练动作');
+            Text.create('����ѵ������');
             Text.fontSize(20);
             Text.fontWeight(FontWeight.Bold);
             Text.fontColor('#333333');
@@ -2322,7 +2189,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Blank);
         Blank.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('关闭');
+            Button.createWithLabel('�ر�');
             Button.fontSize(14);
             Button.fontColor('#666666');
             Button.backgroundColor('#F0F0F0');
@@ -2336,7 +2203,7 @@ class EdgeFlowMainPage extends ViewPU {
             });
         }, Button);
         Button.pop();
-        // 标题栏
+        // ������
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Scroll.create();
@@ -2349,30 +2216,30 @@ class EdgeFlowMainPage extends ViewPU {
             Column.width('100%');
         }, Column);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 选择动作
-            Text.create('选择动作');
-            // 选择动作
+            // ѡ����
+            Text.create('ѡ����');
+            // ѡ����
             Text.fontSize(16);
-            // 选择动作
+            // ѡ����
             Text.fontWeight(FontWeight.Bold);
-            // 选择动作
+            // ѡ����
             Text.fontColor('#333333');
-            // 选择动作
+            // ѡ����
             Text.margin({ bottom: 10 });
         }, Text);
-        // 选择动作
+        // ѡ����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 跳跃动作
-            Text.create('跳跃');
-            // 跳跃动作
+            // ��Ծ����
+            Text.create('��Ծ');
+            // ��Ծ����
             Text.fontSize(14);
-            // 跳跃动作
+            // ��Ծ����
             Text.fontColor('#666666');
-            // 跳跃动作
+            // ��Ծ����
             Text.margin({ bottom: 8 });
         }, Text);
-        // 跳跃动作
+        // ��Ծ����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -2402,16 +2269,16 @@ class EdgeFlowMainPage extends ViewPU {
         ForEach.pop();
         Flex.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 旋转动作
-            Text.create('旋转');
-            // 旋转动作
+            // ��ת����
+            Text.create('��ת');
+            // ��ת����
             Text.fontSize(14);
-            // 旋转动作
+            // ��ת����
             Text.fontColor('#666666');
-            // 旋转动作
+            // ��ת����
             Text.margin({ bottom: 8 });
         }, Text);
-        // 旋转动作
+        // ��ת����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -2441,16 +2308,16 @@ class EdgeFlowMainPage extends ViewPU {
         ForEach.pop();
         Flex.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 步法动作
-            Text.create('步法');
-            // 步法动作
+            // ��������
+            Text.create('����');
+            // ��������
             Text.fontSize(14);
-            // 步法动作
+            // ��������
             Text.fontColor('#666666');
-            // 步法动作
+            // ��������
             Text.margin({ bottom: 8 });
         }, Text);
-        // 步法动作
+        // ��������
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Flex.create({ wrap: FlexWrap.Wrap });
@@ -2480,21 +2347,21 @@ class EdgeFlowMainPage extends ViewPU {
         ForEach.pop();
         Flex.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 目标次数
-            Text.create('目标次数（可选）');
-            // 目标次数
+            // Ŀ�����
+            Text.create('Ŀ���������ѡ��');
+            // Ŀ�����
             Text.fontSize(16);
-            // 目标次数
+            // Ŀ�����
             Text.fontWeight(FontWeight.Bold);
-            // 目标次数
+            // Ŀ�����
             Text.fontColor('#333333');
-            // 目标次数
+            // Ŀ�����
             Text.margin({ bottom: 10 });
         }, Text);
-        // 目标次数
+        // Ŀ�����
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            TextInput.create({ placeholder: '例如: 10', text: this.targetCountInput });
+            TextInput.create({ placeholder: '����: 10', text: this.targetCountInput });
             TextInput.fontSize(16);
             TextInput.type(InputType.Number);
             TextInput.height(44);
@@ -2507,18 +2374,18 @@ class EdgeFlowMainPage extends ViewPU {
             TextInput.margin({ bottom: 20 });
         }, TextInput);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 优先级
-            Text.create('优先级');
-            // 优先级
+            // ���ȼ�
+            Text.create('���ȼ�');
+            // ���ȼ�
             Text.fontSize(16);
-            // 优先级
+            // ���ȼ�
             Text.fontWeight(FontWeight.Bold);
-            // 优先级
+            // ���ȼ�
             Text.fontColor('#333333');
-            // 优先级
+            // ���ȼ�
             Text.margin({ bottom: 10 });
         }, Text);
-        // 优先级
+        // ���ȼ�
         Text.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
             Row.create();
@@ -2526,7 +2393,7 @@ class EdgeFlowMainPage extends ViewPU {
             Row.margin({ bottom: 30 });
         }, Row);
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('高');
+            Button.createWithLabel('��');
             Button.fontSize(14);
             Button.fontColor(this.selectedPriority === 'high' ? '#FFFFFF' : '#FF6B6B');
             Button.backgroundColor(this.selectedPriority === 'high' ? '#FF6B6B' : '#FFE5E5');
@@ -2538,7 +2405,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Button);
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('中');
+            Button.createWithLabel('��');
             Button.fontSize(14);
             Button.fontColor(this.selectedPriority === 'medium' ? '#FFFFFF' : '#FFD700');
             Button.backgroundColor(this.selectedPriority === 'medium' ? '#FFD700' : '#FFF9E6');
@@ -2551,7 +2418,7 @@ class EdgeFlowMainPage extends ViewPU {
         }, Button);
         Button.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            Button.createWithLabel('低');
+            Button.createWithLabel('��');
             Button.fontSize(14);
             Button.fontColor(this.selectedPriority === 'low' ? '#FFFFFF' : '#4CAF50');
             Button.backgroundColor(this.selectedPriority === 'low' ? '#4CAF50' : '#E8F5E9');
@@ -2565,53 +2432,53 @@ class EdgeFlowMainPage extends ViewPU {
         Button.pop();
         Row.pop();
         this.observeComponentCreation2((elmtId, isInitialRender) => {
-            // 确认按钮
-            Button.createWithLabel('确认添加');
-            // 确认按钮
+            // ȷ�ϰ�ť
+            Button.createWithLabel('ȷ������');
+            // ȷ�ϰ�ť
             Button.fontSize(18);
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.fontColor('#FFFFFF');
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.backgroundColor(this.selectedMoveForPlan ? '#3A7BD5' : '#CCCCCC');
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.borderRadius(25);
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.width('100%');
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.height(50);
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.enabled(!!this.selectedMoveForPlan);
-            // 确认按钮
+            // ȷ�ϰ�ť
             Button.onClick(() => {
                 this.addMoveToPlan();
             });
         }, Button);
-        // 确认按钮
+        // ȷ�ϰ�ť
         Button.pop();
         Column.pop();
         Scroll.pop();
         Column.pop();
         Column.pop();
     }
-    // 辅助方法
+    // ��������
     private getMoveIcon(moveName: string): string {
         if (this.jumpMoves.includes(moveName))
-            return '🦶';
+            return '??';
         if (this.spinMoves.includes(moveName))
-            return '🌀';
+            return '??';
         if (this.stepMoves.includes(moveName))
-            return '👣';
-        return '⛸️';
+            return '??';
+        return '??';
     }
     private formatDuration(seconds: number): string {
         if (seconds < 60)
-            return `${seconds}秒`;
+            return `${seconds}��`;
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
-        return secs > 0 ? `${mins}分${secs}秒` : `${mins}分钟`;
+        return secs > 0 ? `${mins}��${secs}��` : `${mins}����`;
     }
     private getDayName(dayOfWeek: number): string {
-        const days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+        const days = ['����', '��һ', '�ܶ�', '����', '����', '����', '����'];
         return days[dayOfWeek] || '';
     }
     private getPriorityColor(priority: string): string {
@@ -2631,18 +2498,18 @@ class EdgeFlowMainPage extends ViewPU {
         if (!this.currentWeekPlan || this.editingDayIndex < 0 || !this.selectedMoveForPlan) {
             return;
         }
-        // 创建新的动作计划
+        // �����µĶ����ƻ�
         const newMove: PlannedMove = {
             moveName: this.selectedMoveForPlan,
             targetCount: this.targetCountInput ? parseInt(this.targetCountInput) : undefined,
             priority: this.selectedPriority as 'high' | 'medium' | 'low',
             notes: ''
         };
-        // 添加到对应天的计划中
+        // ���ӵ���Ӧ��ļƻ���
         this.currentWeekPlan.dailyPlans[this.editingDayIndex].moves.push(newMove);
-        // 保存更新
+        // �������
         this.dataStore.saveWeeklyPlan(this.currentWeekPlan);
-        // 重置状态
+        // ����״̬
         this.showAddMovePanel = false;
         this.selectedMoveForPlan = '';
         this.targetCountInput = '';
