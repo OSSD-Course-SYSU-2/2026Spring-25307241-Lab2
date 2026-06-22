@@ -124,7 +124,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\entryability\\EntryAbility.ts": {
-      "mtimeMs": 1781830733159.7776,
+      "mtimeMs": 1776182163372.52,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.AbilityConstant.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.UIAbility.d.ts",
@@ -134,10 +134,7 @@
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.hilog.d.ts"
       ],
       "parent": [],
-      "error": true,
-      "errorCodes": [
-        28040
-      ]
+      "error": false
     },
     "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.appManager.d.ts": {
       "mtimeMs": 1774582692000,
@@ -642,22 +639,7 @@
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameHelpPage.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\WikiHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProgramAppreciationPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CommunityPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\TrainingGroundPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProfilePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
       ],
       "error": false
     },
@@ -1526,7 +1508,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets": {
-      "mtimeMs": 1781399554532.4253,
+      "mtimeMs": 1780389894109.5957,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\BreakpointSystem.ets",
@@ -1600,7 +1582,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779788274879.732,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets"
@@ -2137,7 +2119,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779622012810.6233,
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameModePage.ets",
@@ -2152,7 +2134,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameModePage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779639049739.6292,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
@@ -2164,7 +2146,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets": {
-      "mtimeMs": 1780394605644.315,
+      "mtimeMs": 1779623524307.2363,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
       ],
@@ -2175,7 +2157,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\PuzzleGamePage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779626208884.7292,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets",
@@ -2189,7 +2171,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets": {
-      "mtimeMs": 1780394605644.315,
+      "mtimeMs": 1779623890791.2417,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.data.preferences.d.ts"
@@ -2200,7 +2182,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LeaderboardPage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779622834011.2673,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\LeaderboardManager.ets",
@@ -2224,7 +2206,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameHelpPage.ets": {
-      "mtimeMs": 1780394605658.4316,
+      "mtimeMs": 1779624036006.505,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
@@ -2235,7 +2217,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GameTutorialPage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779626751293.9778,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\util\\PuzzleGameEngine.ets",
@@ -2248,7 +2230,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779638951077.2651,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets"
@@ -2259,7 +2241,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelModel.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779638123088.7832,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\PuzzleGameModel.ets"
       ],
@@ -2270,7 +2252,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\LevelSelectPage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779639366833.0474,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\LevelData.ets",
@@ -2283,16 +2265,15 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1779786747548.8252,
       "children": [],
       "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
       ],
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\BreakpointSystem.ets": {
-      "mtimeMs": 1780394605644.315,
+      "mtimeMs": 1780389594986.5808,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.mediaquery.d.ts"
       ],
@@ -2305,15 +2286,12 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets": {
-      "mtimeMs": 1781969033612.265,
+      "mtimeMs": 1780391248233.701,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.deviceInfo.d.ts"
       ],
       "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets"
+        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MainPage.ets"
       ],
       "error": false
     },
@@ -2324,435 +2302,6 @@
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
       ],
       "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets": {
-      "mtimeMs": 1781427939372.9883,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GlossaryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\DataRecordsPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\WikiHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\QuizChallengePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HistoryTimelinePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ActionGuessPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProgramAppreciationPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CommunityPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets"
-      ],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets": {
-      "mtimeMs": 1781427895432.7249,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GlossaryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\DataRecordsPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\WikiHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\QuizChallengePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HistoryTimelinePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ActionGuessPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProgramAppreciationPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CommunityPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets"
-      ],
-      "error": false,
-      "errorCodes": [
-        2416
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets": {
-      "mtimeMs": 1781428002105.6768,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GlossaryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\DataRecordsPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\QuizChallengePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ActionGuessPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProgramAppreciationPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CommunityPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets": {
-      "mtimeMs": 1781432967037.2744,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GlossaryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets": {
-      "mtimeMs": 1781432770934.2932,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets"
-      ],
-      "error": false,
-      "errorCodes": [
-        40
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceTraceHomePage.ets": {
-      "mtimeMs": 1781428336849.1123,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceFilterBar.ets": {
-      "mtimeMs": 1780998090757.439,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceEmpty.ets": {
-      "mtimeMs": 1780998094081.6265,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CompetitionCenterPage.ets": {
-      "mtimeMs": 1781428234840.546,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceFilterBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceEmpty.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\SkaterArchivePage.ets": {
-      "mtimeMs": 1781428313646.2537,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceFilterBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceEmpty.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\GlossaryPage.ets": {
-      "mtimeMs": 1781428234766.065,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveGalleryPage.ets": {
-      "mtimeMs": 1781428313754.439,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\SampleData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\DataRecordsPage.ets": {
-      "mtimeMs": 1781428234539.5947,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\WikiHomePage.ets": {
-      "mtimeMs": 1781428314020.273,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\QuizChallengePage.ets": {
-      "mtimeMs": 1781428234616.8633,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets": {
-      "mtimeMs": 1782054002114.1067,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HistoryTimelinePage.ets": {
-      "mtimeMs": 1781428313840.6392,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ActionGuessPage.ets": {
-      "mtimeMs": 1781428234684.7534,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProgramAppreciationPage.ets": {
-      "mtimeMs": 1781434525451.252,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\CommunityPage.ets": {
-      "mtimeMs": 1781434709169.5466,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets": {
-      "mtimeMs": 1781434873650.8618,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
-      ],
-      "parent": [],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\TrainingGroundPage.ets": {
-      "mtimeMs": 1781623290173.9197,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets": {
-      "mtimeMs": 1781674064324.1482,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\IceNewsPage.ets": {
-      "mtimeMs": 1781624819103.9644,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": false,
-      "errorCodes": [
-        40,
-        43,
-        38
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets": {
-      "mtimeMs": 1781830949621.782,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ProfilePage.ets": {
-      "mtimeMs": 1781624798236.544,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets": {
-      "mtimeMs": 1782056366091.0889,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets": {
-      "mtimeMs": 1781673014237.5881,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets": {
-      "mtimeMs": 1781831594437.3225,
-      "children": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
-      ],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets": {
-      "mtimeMs": 1781831532152.187,
-      "children": [],
-      "parent": [
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets"
-      ],
-      "error": false
-    },
-    "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets": {
-      "mtimeMs": 1781629637201.405,
-      "children": [
-        "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
-        "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
-      ],
-      "parent": [],
-      "error": true,
-      "errorCodes": [
-        28007
-      ]
     }
   }
 }

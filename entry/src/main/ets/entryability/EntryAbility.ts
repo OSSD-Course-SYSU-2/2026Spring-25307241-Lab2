@@ -32,7 +32,11 @@ export default class EntryAbility extends UIAbility {
   onWindowStageCreate(windowStage: window.WindowStage) {
     // Main window is created, set main page for this ability
     hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onWindowStageCreate');
+<<<<<<< HEAD
     windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
+=======
+    windowStage.loadContent('pages/MainPage', (err, data) => {
+>>>>>>> origin/main
       if (err.code) {
         hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;
@@ -68,12 +72,17 @@ export default class EntryAbility extends UIAbility {
     
     try {
       // 获取当前页面路径（从AppStorage中获取）
+<<<<<<< HEAD
       const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMainPage';
+=======
+      const currentPage = AppStorage.get<string>('currentPage') || 'pages/MainPage';
+>>>>>>> origin/main
       hilog.info(DOMAIN_NUMBER, TAG, `Current page: ${currentPage}`);
       
       // 保存需要迁移的数据到wantParam
       wantParam['currentPage'] = currentPage;
       
+<<<<<<< HEAD
       // 保存成就页面的滚动位置
       const achievementScrollOffset = AppStorage.get<number>('achievementScrollOffset');
       if (achievementScrollOffset) {
@@ -81,6 +90,8 @@ export default class EntryAbility extends UIAbility {
         hilog.info(DOMAIN_NUMBER, TAG, `Saved achievement scroll offset: ${achievementScrollOffset}`);
       }
       
+=======
+>>>>>>> origin/main
       // 如果有其他需要迁移的数据，也可以在这里保存
       // 例如：计算器的当前输入值、历史记录等
       const calculatorData = AppStorage.get<string>('calculatorData');
@@ -110,6 +121,7 @@ export default class EntryAbility extends UIAbility {
         hilog.info(DOMAIN_NUMBER, TAG, `Restored page: ${currentPage}`);
       }
       
+<<<<<<< HEAD
       // 恢复成就页面的滚动位置
       const achievementScrollOffset = want.parameters['achievementScrollOffset'] as number;
       if (achievementScrollOffset) {
@@ -117,6 +129,8 @@ export default class EntryAbility extends UIAbility {
         hilog.info(DOMAIN_NUMBER, TAG, `Restored achievement scroll offset: ${achievementScrollOffset}`);
       }
       
+=======
+>>>>>>> origin/main
       // 恢复其他数据
       const calculatorData = want.parameters['calculatorData'] as string;
       if (calculatorData) {
@@ -157,7 +171,11 @@ export default class EntryAbility extends UIAbility {
     hilog.info(DOMAIN_NUMBER, TAG, 'onWindowStageRestore called');
     
     // 获取要恢复的页面路径
+<<<<<<< HEAD
     const continuePage = AppStorage.get<string>('continuePage') || 'pages/EdgeFlowMainPage';
+=======
+    const continuePage = AppStorage.get<string>('continuePage') || 'pages/MainPage';
+>>>>>>> origin/main
     hilog.info(DOMAIN_NUMBER, TAG, `Loading continue page: ${continuePage}`);
     
     // 加载恢复的页面
@@ -165,9 +183,15 @@ export default class EntryAbility extends UIAbility {
       if (err.code) {
         hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load continue page. Cause: %{public}s', JSON.stringify(err) ?? '');
         // 如果加载失败，回退到主页
+<<<<<<< HEAD
         windowStage.loadContent('pages/EdgeFlowMainPage', (fallbackErr) => {
           if (fallbackErr.code) {
             hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load IceTraceHomePage. Cause: %{public}s', JSON.stringify(fallbackErr) ?? '');
+=======
+        windowStage.loadContent('pages/MainPage', (fallbackErr) => {
+          if (fallbackErr.code) {
+            hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load MainPage. Cause: %{public}s', JSON.stringify(fallbackErr) ?? '');
+>>>>>>> origin/main
           }
         });
         return;
