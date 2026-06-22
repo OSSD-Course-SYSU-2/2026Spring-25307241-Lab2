@@ -257,10 +257,10 @@
 
 ## 📂 截图存储位置
 
-所有截图应保存在项目根目录�?`screenshots/` 文件夹中�?
+所有截图应保存在项目根目录�?`assets/` 文件夹中�?
 ```
 SimpleCalculator-master/
-├── screenshots/
+├── assets/
 �?  ├── README.md                      # 本文�?�?  �?�?  │── # 主界面截图（6张）
 �?  ├── training_home.png              # 训练台首�?�?  ├── move_library.png               # 动作库页�?�?  ├── ice_news.png                   # 冰闻页面
 �?  ├── achievement.png                # 成就页面
@@ -381,7 +381,7 @@ SimpleCalculator-master/
 ## �?完成检查清�?
 完成截图后，请检查：
 
-- [ ] 所�?1张截图都已保存到 `screenshots/` 文件�?- [ ] 文件名与 README 中引用的路径一�?- [ ] 图片清晰，无模糊
+- [ ] 所�?1张截图都已保存到 `assets/` 文件�?- [ ] 文件名与 README 中引用的路径一�?- [ ] 图片清晰，无模糊
 - [ ] 图片内容正确展示了对应功�?- [ ] README 中的图片链接可以正常显示
 - [ ] 已删除或替换旧的截图文件
 - [ ] 手机端截图完整（至少3张）
