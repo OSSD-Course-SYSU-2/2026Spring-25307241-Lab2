@@ -205,9 +205,17 @@
 
 <div align="center">
 
-| 设备运行效果 |
-|:------------:|
-| <img src="screenshots/device/SimpleCalculator.gif" width="300" alt="多设备运行效果"/> |
+| 手机端 - 训练台 | 平板端 - 训练台 | 手机端 - 成就 |
+|:---------------:|:---------------:|:---------------:|
+| <img src="screenshots/training_home.png" width="200" alt="手机端训练台"/> | <img src="screenshots/tablet_training_home.png" width="280" alt="平板端训练台"/> | <img src="screenshots/achievement.png" width="200" alt="手机端成就页"/> |
+
+| 平板端 - 成就1 | 平板端 - 成就2 | 手机端 - 动作库 |
+|:---------------:|:---------------:|:---------------:|
+| <img src="screenshots/tablet_achievement_1.png" width="280" alt="平板端成就页1"/> | <img src="screenshots/tablet_achievement_2.png" width="280" alt="平板端成就页2"/> | <img src="screenshots/move_library.png" width="200" alt="手机端动作库"/> |
+
+| 平板端 - 动作库 |
+|:---------------:|
+| <img src="screenshots/tablet_move_library.png" width="280" alt="平板端动作库"/> |
 
 </div>
 
