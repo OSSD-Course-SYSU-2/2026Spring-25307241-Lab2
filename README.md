@@ -173,7 +173,7 @@
 
 | 训练台 | 动作库 | 成就 |
 |:------:|:------:|:------:|
-| ![训练台](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/training_home.png) | ![动作库](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_library.png) | ![成就](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/achievement.png) |
+| ![训练台](screenshots/training_home.png) | ![动作库](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_library.png) | ![成就](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/achievement.png) |
 
 | 我的 | 计分模拟器 |
 |:------:|:------:|
