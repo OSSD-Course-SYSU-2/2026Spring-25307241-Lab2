@@ -192,7 +192,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\entryability\\EntryAbility.ts": {
-      "mtimeMs": 1782148248380.9612,
+      "mtimeMs": 1782206400349.2812,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.AbilityConstant.d.ts",
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.app.ability.UIAbility.d.ts",
@@ -4071,7 +4071,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets": {
-      "mtimeMs": 1781673014237.5881,
+      "mtimeMs": 1782202863128.3584,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
@@ -4082,7 +4082,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveLibraryPage.ets": {
-      "mtimeMs": 1781674064324.1482,
+      "mtimeMs": 1782202863118.3582,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
@@ -4097,7 +4097,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets": {
-      "mtimeMs": 1781830949621.782,
+      "mtimeMs": 1782202863109.3586,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
@@ -4113,7 +4113,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets": {
-      "mtimeMs": 1781831594437.3225,
+      "mtimeMs": 1782202863125.3618,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets"
       ],
@@ -4127,7 +4127,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\models\\IceTraceData.ets": {
-      "mtimeMs": 1781831532152.187,
+      "mtimeMs": 1782202863109.3586,
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets",
@@ -4137,10 +4137,26 @@
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\AchievementPage.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets"
       ],
-      "error": false
+      "error": false,
+      "errorCodes": [
+        38,
+        1,
+        1011,
+        1109,
+        1128,
+        1005,
+        1351,
+        1002,
+        2693,
+        2304,
+        2362,
+        2363,
+        2322,
+        18004
+      ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\utils\\DeviceUtils.ets": {
-      "mtimeMs": 1781969033612.265,
+      "mtimeMs": 1782202863107.3606,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.deviceInfo.d.ts"
       ],
@@ -4152,7 +4168,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\EdgeFlowMainPage.ets": {
-      "mtimeMs": 1782147287633.68,
+      "mtimeMs": 1782208199623.004,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\utils\\TestDataGenerator.ets",
@@ -4177,7 +4193,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\MoveDetailPage.ets": {
-      "mtimeMs": 1781629637201.405,
+      "mtimeMs": 1782202863117.3882,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\services\\DataStore.ets",
@@ -4190,7 +4206,7 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets": {
-      "mtimeMs": 1781427939372.9883,
+      "mtimeMs": 1782202863101.3745,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts"
       ],
@@ -4204,16 +4220,22 @@
       ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets": {
-      "mtimeMs": 1781427895432.7249,
+      "mtimeMs": 1782202863097.7954,
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets"
       ],
-      "error": false
+      "error": false,
+      "errorCodes": [
+        1002,
+        1005,
+        2551,
+        2339
+      ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets": {
-      "mtimeMs": 1781428002105.6768,
+      "mtimeMs": 1782202863102.3584,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets"
       ],
@@ -4224,16 +4246,20 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1782202863135.3633,
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets"
       ],
-      "error": false
+      "error": false,
+      "errorCodes": [
+        1002,
+        1005
+      ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoringSimulatorPage.ets": {
-      "mtimeMs": 1782054002114.1067,
+      "mtimeMs": 1782202863122.3586,
       "children": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceCard.ets",
@@ -4245,15 +4271,21 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\IceTraceModel.ets": {
-      "mtimeMs": 1781432770934.2932,
+      "mtimeMs": 1782202863130.363,
       "children": [],
       "parent": [
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceTag.ets"
       ],
-      "error": false
+      "error": false,
+      "errorCodes": [
+        1002,
+        1005,
+        1131,
+        2322
+      ]
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\ScoreInterpreterPage.ets": {
-      "mtimeMs": 1781434873650.8618,
+      "mtimeMs": 1782202863122.3586,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\common\\components\\IceNavBar.ets",
@@ -4264,7 +4296,7 @@
       "error": false
     },
     "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\pages\\HomePage.ets": {
-      "mtimeMs": 1780394605659.2625,
+      "mtimeMs": 1782202863116.3582,
       "children": [
         "G:\\DevEco program\\DevEco Studio\\sdk\\default\\openharmony\\ets\\api\\@ohos.router.d.ts",
         "G:\\SimpleCalculator-master\\SimpleCalculator-master\\entry\\src\\main\\ets\\viewmodel\\TechnicalElementModel.ets"

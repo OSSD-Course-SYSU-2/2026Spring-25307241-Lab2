@@ -1,0 +1,1340 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚ{Ìif (!("finalizeConstruction" in ViewPU.prototype)) {
+    Reflect.set(ViewPU.prototype, "finalizeConstruction", () => { });
+}
+/*
+ * èŠ±æ ·æ»‘å†°æŠ€æœ¯å…ƒç´ è®¡ç®—å™¨
+ * Copyright (c) 2024
+ */
+import router from '@ohos.router';
+import { GOE_RANGE, getAllJumps, getAllSpins, getAllSteps, createTechnicalElement, getElementChineseName } from '../viewmodel/TechnicalElementModel';
+class HomePage extends ViewPU {
+    constructor(parent, params, __localStorage, elmtId = -1, paramsLambda = undefined, extraInfo) {
+        super(parent, __localStorage, elmtId, extraInfo);
+        if (typeof paramsLambda === "function") {
+            this.paramsGenerator_ = paramsLambda;
+        }
+        this.__selectedCategory = new ObservedPropertySimplePU('jump', this, "selectedCategory");
+        this.__selectedElement = new ObservedPropertySimplePU('', this, "selectedElement");
+        this.__selectedGOE = new ObservedPropertySimplePU(0, this, "selectedGOE");
+        this.__currentElement = new ObservedPropertyObjectPU(null, this, "currentElement");
+        this.__elementList = new ObservedPropertyObjectPU([], this, "elementList");
+        this.__totalScore = new ObservedPropertySimplePU(0, this, "totalScore");
+        this.jumps = getAllJumps();
+        this.spins = getAllSpins();
+        this.steps = getAllSteps();
+        this.setInitiallyProvidedValue(params);
+        this.finalizeConstruction();
+    }
+    setInitiallyProvidedValue(params) {
+        if (params.selectedCategory !== undefined) {
+            this.selectedCategory = params.selectedCategory;
+        }
+        if (params.selectedElement !== undefined) {
+            this.selectedElement = params.selectedElement;
+        }
+        if (params.selectedGOE !== undefined) {
+            this.selectedGOE = params.selectedGOE;
+        }
+        if (params.currentElement !== undefined) {
+            this.currentElement = params.currentElement;
+        }
+        if (params.elementList !== undefined) {
+            this.elementList = params.elementList;
+        }
+        if (params.totalScore !== undefined) {
+            this.totalScore = params.totalScore;
+        }
+        if (params.jumps !== undefined) {
+            this.jumps = params.jumps;
+        }
+        if (params.spins !== undefined) {
+            this.spins = params.spins;
+        }
+        if (params.steps !== undefined) {
+            this.steps = params.steps;
+        }
+    }
+    updateStateVars(params) {
+    }
+    purgeVariableDependenciesOnElmtId(rmElmtId) {
+        this.__selectedCategory.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedElement.purgeDependencyOnElmtId(rmElmtId);
+        this.__selectedGOE.purgeDependencyOnElmtId(rmElmtId);
+        this.__currentElement.purgeDependencyOnElmtId(rmElmtId);
+        this.__elementList.purgeDependencyOnElmtId(rmElmtId);
+        this.__totalScore.purgeDependencyOnElmtId(rmElmtId);
+    }
+    aboutToBeDeleted() {
+        this.__selectedCategory.aboutToBeDeleted();
+        this.__selectedElement.aboutToBeDeleted();
+        this.__selectedGOE.aboutToBeDeleted();
+        this.__currentElement.aboutToBeDeleted();
+        this.__elementList.aboutToBeDeleted();
+        this.__totalScore.aboutToBeDeleted();
+        SubscriberManager.Get().delete(this.id__());
+        this.aboutToBeDeletedInternal();
+    }
+    get selectedCategory() {
+        return this.__selectedCategory.get();
+    }
+    set selectedCategory(newValue) {
+        this.__selectedCategory.set(newValue);
+    }
+    get selectedElement() {
+        return this.__selectedElement.get();
+    }
+    set selectedElement(newValue) {
+        this.__selectedElement.set(newValue);
+    }
+    get selectedGOE() {
+        return this.__selectedGOE.get();
+    }
+    set selectedGOE(newValue) {
+        this.__selectedGOE.set(newValue);
+    }
+    get currentElement() {
+        return this.__currentElement.get();
+    }
+    set currentElement(newValue) {
+        this.__currentElement.set(newValue);
+    }
+    get elementList() {
+        return this.__elementList.get();
+    }
+    set elementList(newValue) {
+        this.__elementList.set(newValue);
+    }
+    get totalScore() {
+        return this.__totalScore.get();
+    }
+    set totalScore(newValue) {
+        this.__totalScore.set(newValue);
+    }
+    initialRender() {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.height('100%');
+            Column.linearGradient({
+                angle: 135,
+                colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            // é¡¶éƒ¨å¯¼èˆªæ 
+            Row.create();
+            // é¡¶éƒ¨å¯¼èˆªæ 
+            Row.width('100%');
+            // é¡¶éƒ¨å¯¼èˆªæ 
+            Row.height(80);
+            // é¡¶éƒ¨å¯¼èˆªæ 
+            Row.padding({ left: 20, right: 20 });
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Button.createWithChild();
+            Button.width(40);
+            Button.height(40);
+            Button.backgroundColor('rgba(255,255,255,0.2)');
+            Button.borderRadius(20);
+            Button.onClick(() => {
+                router.back();
+            });
+        }, Button);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('â†');
+            Text.fontSize(24);
+            Text.fontColor(Color.White);
+        }, Text);
+        Text.pop();
+        Button.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('â›¸ï¸ æŠ€æœ¯å…ƒç´ è®¡ç®—å™¨');
+            Text.fontSize(20);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.layoutWeight(1);
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+            Blank.width(40);
+        }, Blank);
+        Blank.pop();
+        // é¡¶éƒ¨å¯¼èˆªæ 
+        Row.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Scroll.create();
+            Scroll.layoutWeight(1);
+            Scroll.scrollBar(BarState.Auto);
+            Scroll.edgeEffect(EdgeEffect.Spring);
+        }, Scroll);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(20);
+        }, Column);
+        // åˆ†ç±»é€‰æ‹©
+        this.buildCategorySelector.bind(this)();
+        // å…ƒç´ é€‰æ‹©
+        this.buildElementSelector.bind(this)();
+        // GOEé€‰æ‹©
+        this.buildGOESelector.bind(this)();
+        // å½“å‰å…ƒç´ ä¿¡æ¯
+        this.buildCurrentElementInfo.bind(this)();
+        // æ·»åŠ æŒ‰é’®
+        this.buildAddButton.bind(this)();
+        // å·²æ·»åŠ å…ƒç´ åˆ—è¡¨
+        this.buildElementList.bind(this)();
+        // æ€»åˆ†æ˜¾ç¤º
+        this.buildTotalScore.bind(this)();
+        Column.pop();
+        Scroll.pop();
+        Column.pop();
+    }
+    // åˆ†ç±»é€‰æ‹©å™¨
+    buildCategorySelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.margin({ bottom: 25 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('é€‰æ‹©å…ƒç´ ç±»åž‹');
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 15 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.justifyContent(FlexAlign.SpaceEvenly);
+        }, Row);
+        this.buildCategoryButton.bind(this)('è·³è·ƒ', 'jump', 'ðŸ¦˜');
+        this.buildCategoryButton.bind(this)('æ—‹è½¬', 'spin', 'ðŸ”„');
+        this.buildCategoryButton.bind(this)('æ­¥æ³•', 'step', 'ðŸ‘Ÿ');
+        Row.pop();
+        Column.pop();
+    }
+    buildCategoryButton(name, category, icon, parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width(80);
+            Column.height(80);
+            Column.backgroundColor(this.selectedCategory === category ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)');
+            Column.borderRadius(15);
+            Column.justifyContent(FlexAlign.Center);
+            Column.onClick(() => {
+                this.selectedCategory = category;
+                this.selectedElement = '';
+                this.currentElement = null;
+            });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(icon);
+            Text.fontSize(30);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(name);
+            Text.fontSize(14);
+            Text.fontColor(Color.White);
+            Text.margin({ top: 5 });
+        }, Text);
+        Text.pop();
+        Column.pop();
+    }
+    // å…ƒç´ é€‰æ‹©å™¨
+    buildElementSelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.margin({ bottom: 25 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('é€‰æ‹©æŠ€æœ¯å…ƒç´ ');
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 15 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Grid.create();
+            Grid.columnsTemplate('1fr 1fr 1fr');
+            Grid.rowsGap(10);
+            Grid.columnsGap(10);
+            Grid.width('100%');
+            Grid.height(300);
+        }, Grid);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const element = _item;
+                {
+                    const itemCreation2 = (elmtId, isInitialRender) => {
+                        GridItem.create(() => { }, false);
+                    };
+                    const observedDeepRender = () => {
+                        this.observeComponentCreation2(itemCreation2, GridItem);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Column.create();
+                            Column.width('100%');
+                            Column.height(60);
+                            Column.backgroundColor(this.selectedElement === element ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)');
+                            Column.borderRadius(10);
+                            Column.justifyContent(FlexAlign.Center);
+                            Column.onClick(() => {
+                                this.selectedElement = element;
+                                this.currentElement = createTechnicalElement(element);
+                                if (this.currentElement) {
+                                    this.currentElement.goe = this.selectedGOE;
+                                    this.currentElement.calculateFinalScore();
+                                }
+                            });
+                        }, Column);
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(element);
+                            Text.fontSize(16);
+                            Text.fontColor(Color.White);
+                            Text.fontWeight(FontWeight.Medium);
+                        }, Text);
+                        Text.pop();
+                        this.observeComponentCreation2((elmtId, isInitialRender) => {
+                            Text.create(getElementChineseName(element));
+                            Text.fontSize(12);
+                            Text.fontColor('rgba(255,255,255,0.7)');
+                            Text.margin({ top: 3 });
+                        }, Text);
+                        Text.pop();
+                        Column.pop();
+                        GridItem.pop();
+                    };
+                    observedDeepRender();
+                }
+            };
+            this.forEachUpdateFunction(elmtId, this.getCurrentElements(), forEachItemGenFunction);
+        }, ForEach);
+        ForEach.pop();
+        Grid.pop();
+        Column.pop();
+    }
+    // GOEé€‰æ‹©å™¨
+    buildGOESelector(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.margin({ bottom: 25 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('é€‰æ‹©GOEè¯„åˆ†');
+            Text.fontSize(16);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+            Text.margin({ bottom: 15 });
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.justifyContent(FlexAlign.SpaceBetween);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            ForEach.create();
+            const forEachItemGenFunction = _item => {
+                const goe = _item;
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Column.create();
+                    Column.width(30);
+                    Column.height(40);
+                    Column.backgroundColor(this.selectedGOE === goe ? this.getGOEColor(goe) : 'rgba(255,255,255,0.1)');
+                    Column.borderRadius(8);
+                    Column.justifyContent(FlexAlign.Center);
+                    Column.onClick(() => {
+                        this.selectedGOE = goe;
+                        if (this.currentElement) {
+                            this.currentElement.goe = goe;
+                            this.currentElement.calculateFinalScore();
+                        }
+                    });
+                }, Column);
+                this.observeComponentCreation2((elmtId, isInitialRender) => {
+                    Text.create(goe > 0 ? `+${goe}` : `${goe}`);
+                    Text.fontSize(18);
+                    Text.fontColor(Color.White);
+                    Text.fontWeight(FontWeight.Bold);
+                }, Text);
+                Text.pop();
+                Column.pop();
+            };
+            this.forEachUpdateFunction(elmtId, GOE_RANGE, forEachItemGenFunction);
+        }, ForEach);
+        ForEach.pop();
+        Row.pop();
+        Column.pop();
+    }
+    // å½“å‰å…ƒç´ ä¿¡æ¯
+    buildCurrentElementInfo(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.currentElement) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.padding(20);
+                        Column.backgroundColor('rgba(255,255,255,0.15)');
+                        Column.borderRadius(15);
+                        Column.margin({ bottom: 20 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('å½“å‰å…ƒç´ å¾—åˆ†');
+                        Text.fontSize(16);
+                        Text.fontColor(Color.White);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ bottom: 15 });
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.layoutWeight(1);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('å…ƒç´ ');
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.7)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.currentElement.name);
+                        Text.fontSize(20);
+                        Text.fontColor(Color.White);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ top: 5 });
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.layoutWeight(1);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('åŸºç¡€åˆ†');
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.7)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.currentElement.baseValue.toFixed(2));
+                        Text.fontSize(20);
+                        Text.fontColor(Color.White);
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ top: 5 });
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.layoutWeight(1);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('GOE');
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.7)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.selectedGOE > 0 ? `+${this.selectedGOE}` : `${this.selectedGOE}`);
+                        Text.fontSize(20);
+                        Text.fontColor(this.getGOEColor(this.selectedGOE));
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ top: 5 });
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.layoutWeight(1);
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('æœ€ç»ˆå¾—åˆ†');
+                        Text.fontSize(14);
+                        Text.fontColor('rgba(255,255,255,0.7)');
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create(this.currentElement.finalScore.toFixed(2));
+                        Text.fontSize(20);
+                        Text.fontColor('#FFD700');
+                        Text.fontWeight(FontWeight.Bold);
+                        Text.margin({ top: 5 });
+                    }, Text);
+                    Text.pop();
+                    Column.pop();
+                    Row.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+    }
+    // æ·»åŠ æŒ‰é’®
+    buildAddButton(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.currentElement) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel('æ·»åŠ å…ƒç´ ');
+                        Button.width('100%');
+                        Button.height(50);
+                        Button.backgroundColor('#4CAF50');
+                        Button.borderRadius(25);
+                        Button.fontSize(18);
+                        Button.fontColor(Color.White);
+                        Button.fontWeight(FontWeight.Bold);
+                        Button.onClick(() => {
+                            if (this.currentElement) {
+                                this.elementList.push(ObservedObject.GetRawObject(this.currentElement));
+                                this.calculateTotalScore();
+                                // é‡ç½®é€‰æ‹©
+                                this.selectedElement = '';
+                                this.currentElement = null;
+                                this.selectedGOE = 0;
+                            }
+                        });
+                        Button.margin({ bottom: 25 });
+                    }, Button);
+                    Button.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+    }
+    // å·²æ·»åŠ å…ƒç´ åˆ—è¡¨
+    buildElementList(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            If.create();
+            if (this.elementList.length > 0) {
+                this.ifElseBranchUpdateFunction(0, () => {
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Column.create();
+                        Column.width('100%');
+                        Column.padding(20);
+                        Column.backgroundColor('rgba(255,255,255,0.15)');
+                        Column.borderRadius(15);
+                        Column.margin({ bottom: 25 });
+                    }, Column);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Row.create();
+                        Row.width('100%');
+                        Row.margin({ bottom: 15 });
+                    }, Row);
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Text.create('å·²æ·»åŠ å…ƒç´ ');
+                        Text.fontSize(16);
+                        Text.fontColor(Color.White);
+                        Text.fontWeight(FontWeight.Bold);
+                    }, Text);
+                    Text.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Blank.create();
+                    }, Blank);
+                    Blank.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        Button.createWithLabel('æ¸…ç©º');
+                        Button.height(30);
+                        Button.backgroundColor('rgba(255,255,255,0.2)');
+                        Button.borderRadius(15);
+                        Button.fontSize(14);
+                        Button.fontColor(Color.White);
+                        Button.onClick(() => {
+                            this.elementList = [];
+                            this.totalScore = 0;
+                        });
+                    }, Button);
+                    Button.pop();
+                    Row.pop();
+                    this.observeComponentCreation2((elmtId, isInitialRender) => {
+                        ForEach.create();
+                        const forEachItemGenFunction = (_item, index) => {
+                            const element = _item;
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Row.create();
+                                Row.width('100%');
+                                Row.padding(15);
+                                Row.backgroundColor('rgba(255,255,255,0.1)');
+                                Row.borderRadius(10);
+                                Row.margin({ bottom: 10 });
+                            }, Row);
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(element.name);
+                                Text.fontSize(16);
+                                Text.fontColor(Color.White);
+                                Text.fontWeight(FontWeight.Medium);
+                                Text.layoutWeight(1);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`åŸºç¡€: ${element.baseValue.toFixed(2)}`);
+                                Text.fontSize(14);
+                                Text.fontColor('rgba(255,255,255,0.7)');
+                                Text.margin({ right: 10 });
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`GOE: ${element.goe > 0 ? '+' : ''}${element.goe}`);
+                                Text.fontSize(14);
+                                Text.fontColor(this.getGOEColor(element.goe));
+                                Text.margin({ right: 10 });
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Text.create(`${element.finalScore.toFixed(2)}`);
+                                Text.fontSize(16);
+                                Text.fontColor('#FFD700');
+                                Text.fontWeight(FontWeight.Bold);
+                            }, Text);
+                            Text.pop();
+                            this.observeComponentCreation2((elmtId, isInitialRender) => {
+                                Button.createWithLabel('Ã—');
+                                Button.width(30);
+                                Button.height(30);
+                                Button.backgroundColor('rgba(255,255,255,0.2)');
+                                Button.borderRadius(15);
+                                Button.fontSize(16);
+                                Button.fontColor(Color.White);
+                                Button.margin({ left: 10 });
+                                Button.onClick(() => {
+                                    this.elementList.splice(index, 1);
+                                    this.calculateTotalScore();
+                                });
+                            }, Button);
+                            Button.pop();
+                            Row.pop();
+                        };
+                        this.forEachUpdateFunction(elmtId, this.elementList, forEachItemGenFunction, undefined, true, false);
+                    }, ForEach);
+                    ForEach.pop();
+                    Column.pop();
+                });
+            }
+            else {
+                this.ifElseBranchUpdateFunction(1, () => {
+                });
+            }
+        }, If);
+        If.pop();
+    }
+    // æ€»åˆ†æ˜¾ç¤º
+    buildTotalScore(parent = null) {
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Column.create();
+            Column.width('100%');
+            Column.padding(25);
+            Column.backgroundColor('rgba(255,255,255,0.2)');
+            Column.borderRadius(20);
+            Column.shadow({ radius: 10, color: 'rgba(0,0,0,0.3)', offsetX: 0, offsetY: 5 });
+        }, Column);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Row.create();
+            Row.width('100%');
+            Row.justifyContent(FlexAlign.SpaceBetween);
+        }, Row);
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create('æŠ€æœ¯åˆ†æ€»åˆ†');
+            Text.fontSize(18);
+            Text.fontColor(Color.White);
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Blank.create();
+        }, Blank);
+        Blank.pop();
+        this.observeComponentCreation2((elmtId, isInitialRender) => {
+            Text.create(this.totalScore.toFixed(2));
+            Text.fontSize(32);
+            Text.fontColor('#FFD700');
+            Text.fontWeight(FontWeight.Bold);
+        }, Text);
+        Text.pop();
+        Row.pop();
+        Column.pop();
+    }
+    // èŽ·å–å½“å‰åˆ†ç±»çš„å…ƒç´ åˆ—è¡¨
+    getCurrentElements() {
+        switch (this.selectedCategory) {
+            case 'jump':
+                return this.jumps;
+            case 'spin':
+                return this.spins;
+            case 'step':
+                return this.steps;
+            default:
+                return this.jumps;
+        }
+    }
+    // èŽ·å–GOEå¯¹åº”çš„é¢œè‰²
+    getGOEColor(goe) {
+        if (goe > 0) {
+            return '#4CAF50'; // ç»¿è‰²
+        }
+        else if (goe < 0) {
+            return '#F44336'; // çº¢è‰²
+        }
+        else {
+            return '#FFFFFF'; // ç™½è‰²
+        }
+    }
+    // è®¡ç®—æ€»åˆ†
+    calculateTotalScore() {
+        this.totalScore = this.elementList.reduce((sum, element) => {
+            return sum + element.finalScore;
+        }, 0);
+    }
+    rerender() {
+        this.updateDirtyElements();
+    }
+    static getEntryName() {
+        return "HomePage";
+    }
+}
+registerNamedRoute(() => new HomePage(undefined, {}), "", { bundleName: "com.example.simplecalculator", moduleName: "entry", pagePath: "pages/HomePage", pageFullPath: "entry/src/main/ets/pages/HomePage", integratedHsp: "false", moduleType: "followWithHap" });
+//# sourceMappingURL=HomePage.js.mapÂ’Ù` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsÙiG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\TechnicalElementModel.etsÙXG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\pages\HomePage.etsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ2./*
+ * èŠ±æ ·æ»‘å†°æŠ€æœ¯å…ƒç´ è®¡ç®—å™¨
+ * Copyright (c) 2024
+ */
+
+import router from '@ohos.router';
+import {
+  TechnicalElement, ElementType, GOE_RANGE,
+  getAllJumps, getAllSpins, getAllSteps,
+  createTechnicalElement, getElementChineseName
+} from '../viewmodel/TechnicalElementModel';
+
+@Entry
+@Component
+struct HomePage {
+  @State selectedCategory: string = 'jump'; // jump, spin, step
+  @State selectedElement: string = '';
+  @State selectedGOE: number = 0;
+  @State currentElement: TechnicalElement | null = null;
+  @State elementList: TechnicalElement[] = [];
+  @State totalScore: number = 0;
+  
+  private jumps: string[] = getAllJumps();
+  private spins: string[] = getAllSpins();
+  private steps: string[] = getAllSteps();
+  
+  build() {
+    Column() {
+      // é¡¶éƒ¨å¯¼èˆªæ 
+      Row() {
+        Button() {
+          Text('â†')
+            .fontSize(24)
+            .fontColor(Color.White)
+        }
+        .width(40)
+        .height(40)
+        .backgroundColor('rgba(255,255,255,0.2)')
+        .borderRadius(20)
+        .onClick(() => {
+          router.back();
+        })
+        
+        Blank().layoutWeight(1)
+        
+        Text('â›¸ï¸ æŠ€æœ¯å…ƒç´ è®¡ç®—å™¨')
+          .fontSize(20)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+        
+        Blank().layoutWeight(1)
+        
+        Blank().width(40)
+      }
+      .width('100%')
+      .height(80)
+      .padding({ left: 20, right: 20 })
+      
+      Scroll() {
+        Column() {
+          // åˆ†ç±»é€‰æ‹©
+          this.buildCategorySelector()
+          
+          // å…ƒç´ é€‰æ‹©
+          this.buildElementSelector()
+          
+          // GOEé€‰æ‹©
+          this.buildGOESelector()
+          
+          // å½“å‰å…ƒç´ ä¿¡æ¯
+          this.buildCurrentElementInfo()
+          
+          // æ·»åŠ æŒ‰é’®
+          this.buildAddButton()
+          
+          // å·²æ·»åŠ å…ƒç´ åˆ—è¡¨
+          this.buildElementList()
+          
+          // æ€»åˆ†æ˜¾ç¤º
+          this.buildTotalScore()
+        }
+        .width('100%')
+        .padding(20)
+      }
+      .layoutWeight(1)
+      .scrollBar(BarState.Auto)
+      .edgeEffect(EdgeEffect.Spring)
+    }
+    .width('100%')
+    .height('100%')
+    .linearGradient({
+      angle: 135,
+      colors: [['#667eea', 0.0], ['#764ba2', 1.0]]
+    })
+  }
+  
+  // åˆ†ç±»é€‰æ‹©å™¨
+  @Builder
+  buildCategorySelector() {
+    Column() {
+      Text('é€‰æ‹©å…ƒç´ ç±»åž‹')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Row() {
+        this.buildCategoryButton('è·³è·ƒ', 'jump', 'ðŸ¦˜')
+        this.buildCategoryButton('æ—‹è½¬', 'spin', 'ðŸ”„')
+        this.buildCategoryButton('æ­¥æ³•', 'step', 'ðŸ‘Ÿ')
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceEvenly)
+    }
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  @Builder
+  buildCategoryButton(name: string, category: string, icon: string) {
+    Column() {
+      Text(icon)
+        .fontSize(30)
+      Text(name)
+        .fontSize(14)
+        .fontColor(Color.White)
+        .margin({ top: 5 })
+    }
+    .width(80)
+    .height(80)
+    .backgroundColor(this.selectedCategory === category ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)')
+    .borderRadius(15)
+    .justifyContent(FlexAlign.Center)
+    .onClick(() => {
+      this.selectedCategory = category;
+      this.selectedElement = '';
+      this.currentElement = null;
+    })
+  }
+  
+  // å…ƒç´ é€‰æ‹©å™¨
+  @Builder
+  buildElementSelector() {
+    Column() {
+      Text('é€‰æ‹©æŠ€æœ¯å…ƒç´ ')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Grid() {
+        ForEach(this.getCurrentElements(), (element: string) => {
+          GridItem() {
+            Column() {
+              Text(element)
+                .fontSize(16)
+                .fontColor(Color.White)
+                .fontWeight(FontWeight.Medium)
+              Text(getElementChineseName(element))
+                .fontSize(12)
+                .fontColor('rgba(255,255,255,0.7)')
+                .margin({ top: 3 })
+            }
+            .width('100%')
+            .height(60)
+            .backgroundColor(this.selectedElement === element ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)')
+            .borderRadius(10)
+            .justifyContent(FlexAlign.Center)
+            .onClick(() => {
+              this.selectedElement = element;
+              this.currentElement = createTechnicalElement(element);
+              if (this.currentElement) {
+                this.currentElement.goe = this.selectedGOE;
+                this.currentElement.calculateFinalScore();
+              }
+            })
+          }
+        })
+      }
+      .columnsTemplate('1fr 1fr 1fr')
+      .rowsGap(10)
+      .columnsGap(10)
+      .width('100%')
+      .height(300)
+    }
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  // GOEé€‰æ‹©å™¨
+  @Builder
+  buildGOESelector() {
+    Column() {
+      Text('é€‰æ‹©GOEè¯„åˆ†')
+        .fontSize(16)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .margin({ bottom: 15 })
+      
+      Row() {
+        ForEach(GOE_RANGE, (goe: number) => {
+          Column() {
+            Text(goe > 0 ? `+${goe}` : `${goe}`)
+              .fontSize(18)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+          }
+          .width(30)
+          .height(40)
+          .backgroundColor(this.selectedGOE === goe ? this.getGOEColor(goe) : 'rgba(255,255,255,0.1)')
+          .borderRadius(8)
+          .justifyContent(FlexAlign.Center)
+          .onClick(() => {
+            this.selectedGOE = goe;
+            if (this.currentElement) {
+              this.currentElement.goe = goe;
+              this.currentElement.calculateFinalScore();
+            }
+          })
+        })
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+    }
+    .width('100%')
+    .margin({ bottom: 25 })
+  }
+  
+  // å½“å‰å…ƒç´ ä¿¡æ¯
+  @Builder
+  buildCurrentElementInfo() {
+    if (this.currentElement) {
+      Column() {
+        Text('å½“å‰å…ƒç´ å¾—åˆ†')
+          .fontSize(16)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+          .margin({ bottom: 15 })
+        
+        Row() {
+          Column() {
+            Text('å…ƒç´ ')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.name)
+              .fontSize(20)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('åŸºç¡€åˆ†')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.baseValue.toFixed(2))
+              .fontSize(20)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('GOE')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.selectedGOE > 0 ? `+${this.selectedGOE}` : `${this.selectedGOE}`)
+              .fontSize(20)
+              .fontColor(this.getGOEColor(this.selectedGOE))
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+          
+          Column() {
+            Text('æœ€ç»ˆå¾—åˆ†')
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+            Text(this.currentElement.finalScore.toFixed(2))
+              .fontSize(20)
+              .fontColor('#FFD700')
+              .fontWeight(FontWeight.Bold)
+              .margin({ top: 5 })
+          }
+          .layoutWeight(1)
+        }
+        .width('100%')
+      }
+      .width('100%')
+      .padding(20)
+      .backgroundColor('rgba(255,255,255,0.15)')
+      .borderRadius(15)
+      .margin({ bottom: 20 })
+    }
+  }
+  
+  // æ·»åŠ æŒ‰é’®
+  @Builder
+  buildAddButton() {
+    if (this.currentElement) {
+      Button('æ·»åŠ å…ƒç´ ')
+        .width('100%')
+        .height(50)
+        .backgroundColor('#4CAF50')
+        .borderRadius(25)
+        .fontSize(18)
+        .fontColor(Color.White)
+        .fontWeight(FontWeight.Bold)
+        .onClick(() => {
+          if (this.currentElement) {
+            this.elementList.push(this.currentElement);
+            this.calculateTotalScore();
+            // é‡ç½®é€‰æ‹©
+            this.selectedElement = '';
+            this.currentElement = null;
+            this.selectedGOE = 0;
+          }
+        })
+        .margin({ bottom: 25 })
+    }
+  }
+  
+  // å·²æ·»åŠ å…ƒç´ åˆ—è¡¨
+  @Builder
+  buildElementList() {
+    if (this.elementList.length > 0) {
+      Column() {
+        Row() {
+          Text('å·²æ·»åŠ å…ƒç´ ')
+            .fontSize(16)
+            .fontColor(Color.White)
+            .fontWeight(FontWeight.Bold)
+          
+          Blank()
+          
+          Button('æ¸…ç©º')
+            .height(30)
+            .backgroundColor('rgba(255,255,255,0.2)')
+            .borderRadius(15)
+            .fontSize(14)
+            .fontColor(Color.White)
+            .onClick(() => {
+              this.elementList = [];
+              this.totalScore = 0;
+            })
+        }
+        .width('100%')
+        .margin({ bottom: 15 })
+        
+        ForEach(this.elementList, (element: TechnicalElement, index: number) => {
+          Row() {
+            Text(element.name)
+              .fontSize(16)
+              .fontColor(Color.White)
+              .fontWeight(FontWeight.Medium)
+              .layoutWeight(1)
+            
+            Text(`åŸºç¡€: ${element.baseValue.toFixed(2)}`)
+              .fontSize(14)
+              .fontColor('rgba(255,255,255,0.7)')
+              .margin({ right: 10 })
+            
+            Text(`GOE: ${element.goe > 0 ? '+' : ''}${element.goe}`)
+              .fontSize(14)
+              .fontColor(this.getGOEColor(element.goe))
+              .margin({ right: 10 })
+            
+            Text(`${element.finalScore.toFixed(2)}`)
+              .fontSize(16)
+              .fontColor('#FFD700')
+              .fontWeight(FontWeight.Bold)
+            
+            Button('Ã—')
+              .width(30)
+              .height(30)
+              .backgroundColor('rgba(255,255,255,0.2)')
+              .borderRadius(15)
+              .fontSize(16)
+              .fontColor(Color.White)
+              .margin({ left: 10 })
+              .onClick(() => {
+                this.elementList.splice(index, 1);
+                this.calculateTotalScore();
+              })
+          }
+          .width('100%')
+          .padding(15)
+          .backgroundColor('rgba(255,255,255,0.1)')
+          .borderRadius(10)
+          .margin({ bottom: 10 })
+        })
+      }
+      .width('100%')
+      .padding(20)
+      .backgroundColor('rgba(255,255,255,0.15)')
+      .borderRadius(15)
+      .margin({ bottom: 25 })
+    }
+  }
+  
+  // æ€»åˆ†æ˜¾ç¤º
+  @Builder
+  buildTotalScore() {
+    Column() {
+      Row() {
+        Text('æŠ€æœ¯åˆ†æ€»åˆ†')
+          .fontSize(18)
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Bold)
+        
+        Blank()
+        
+        Text(this.totalScore.toFixed(2))
+          .fontSize(32)
+          .fontColor('#FFD700')
+          .fontWeight(FontWeight.Bold)
+      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+    }
+    .width('100%')
+    .padding(25)
+    .backgroundColor('rgba(255,255,255,0.2)')
+    .borderRadius(20)
+    .shadow({ radius: 10, color: 'rgba(0,0,0,0.3)', offsetX: 0, offsetY: 5 })
+  }
+  
+  // èŽ·å–å½“å‰åˆ†ç±»çš„å…ƒç´ åˆ—è¡¨
+  getCurrentElements(): string[] {
+    switch (this.selectedCategory) {
+      case 'jump':
+        return this.jumps;
+      case 'spin':
+        return this.spins;
+      case 'step':
+        return this.steps;
+      default:
+        return this.jumps;
+    }
+  }
+  
+  // èŽ·å–GOEå¯¹åº”çš„é¢œè‰²
+  getGOEColor(goe: number): string {
+    if (goe > 0) {
+      return '#4CAF50'; // ç»¿è‰²
+    } else if (goe < 0) {
+      return '#F44336'; // çº¢è‰²
+    } else {
+      return '#FFFFFF'; // ç™½è‰²
+    }
+  }
+  
+  // è®¡ç®—æ€»åˆ†
+  calculateTotalScore(): void {
+    this.totalScore = this.elementList.reduce((sum, element) => {
+      return sum + element.finalScore;
+    }, 0);
+  }
+}
+ÀÔrD’¬@ohos.routerÙ"../viewmodel/TechnicalElementModelÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙ` hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.router.d.tsAÃªoh-resolveÂEAÂÙiG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\viewmodel\TechnicalElementModel.etsAÃªoh-resolveÂ“ÔrF–§version¤fileªsourceRoot§sources¥names¨mappings«HomePage.js ‘¬HomePage.etsÜÍ‘”    ‘” –”   ” ” ” ”! !”" "Ü ”   ” ”	 !” *” ” ”! ”, ”. ”9 '”; 	”ÌQ 	”ÌS 	”Ìh 	/”Ìj 
+”Ìp 
+”Ì” 
++”Ì• 
+,’” ” ‘”  ’”? $”ÌE *’”> #”Ì@ %’”: ”;  ’”= 3”ÌA 7’”: +”< -’”9 ”: “” ”  '”" )“” ”  '”" )“” ”  '”" )‘” 
+,’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ’” 	” ‘” ’” ” 
+–” ” 
+” ÌX” ÌX
+” ÌX” ÌX–” ” 
+” ÌY” ÌY” ÌY”  ÌY•” ” 
+” ÌZ”! ÌZ”" ÌZ”” Ì[” Ì[” Ì[” Ì[Ü ” Ì\” Ì\” Ì\” Ì\” Ì\”# Ì\”% Ì\”( Ì\”) Ì\”+ Ì\!”, Ì\"”5 Ì\+”7 Ì\-”: Ì\0”; Ì\1”< Ì\2‘” Ì]’” ” ’” ” 	’” ” –” ” 	” 6” 6” 6” 6’” ” –” ” 	” 7” 7” 7” 7’” ” ž” ” 	” 8” 8” 8” 8” 8”  8”" 8”$ 8”) 8 ”+ 8"”- 8$”/ 8&’” ” –” ” ” #	” #” #” #–” ” ” $	” $” $” $–” ” ” %	”" %”# %”: %0–” ” ” &	” &”  &”" &—” ” ” '	” '” '” '”  '–” (
+” (” (” (” (” (’” )” )	”” 
+” ” ” –” 
+” ”  ”  ”  ”  ˜” 
+” ” !” !” !”  !”! !”& !"’” 
+” ’” ” ’” +” +–” +” +” +” +” +”  +’” +” +”” -” -” -”$ -–” -” -” .” .” .” .˜” -” -” /” /” /”  /”! /”& / ˜” -” -” 0” 0” 0”& 0 ”' 0!”+ 0%’” -” -’” 2” 2–” 2” 2” 2” 2” 2”  2’” 2” 2’” 4” 4–” 4” 4” 4” 4” 4” 4’” 4” 4’” ” ’” ” 	’” :” :–” :” :” ÌT” ÌT”  ÌT”! ÌT˜” :” :” ÌU” ÌU” ÌU”% ÌU”& ÌU”* ÌU˜” :” :” ÌV” ÌV” ÌV”( ÌV”) ÌV”/ ÌV#’” ;” ;–” ;” ;” ÌQ	” ÌQ” ÌQ” ÌQ–” ;” ;” ÌR	” ÌR” ÌR” ÌR’” <
+” <•” =
+” =” =”" =$”/ =&’” ?
+” ?•” Ì@
+” Ì@” Ì@”! Ì@#”. Ì@%’” ÌB
+” ÌB•” ÌC
+” ÌC” ÌC” ÌC”* ÌC!’” ÌE
+” ÌE•” ÌF
+” ÌF” ÌF”$ ÌF&”1 ÌF(’” ÌH
+” ÌH•” ÌI
+” ÌI” ÌI” ÌI”( ÌI’” ÌK
+” ÌK•” ÌL
+” ÌL” ÌL” ÌL”* ÌL!’” ÌN
+” ÌN•” ÌO
+” ÌO” ÌO” ÌO”) ÌO ’” ;” ;’” :” :’” ” 
+‘” Ì^’” Ì`” Ì`
+’” Ìb” Ìb’” Ìc” Ìc
+–” Ìc” Ìc
+” Ìr” Ìr
+” Ìr” Ìrš” Ìc” Ìc
+” Ìs” Ìs” Ìs” Ìs”" Ìs”$ Ìs”& Ìs”( Ìs”” Ìd” Ìd
+” Ìd”  Ìd–” Ìd” Ìd
+” Ìe	” Ìe” Ìe” Ìe˜” Ìd” Ìd
+” Ìf	” Ìf” Ìf”  Ìf”! Ìf”& Ìf˜” Ìd” Ìd
+” Ìg	” Ìg” Ìg”& Ìg”' Ìg”+ Ìg#š” Ìd” Ìd
+” Ìh	” Ìh” Ìh” Ìh”  Ìh”" Ìh”$ Ìh”& Ìh’” Ìd” Ìd
+’” Ìj” Ìj	–” Ìj” Ìj	” Ìo” Ìo” Ìo” Ìo˜” Ìj” Ìj	” Ìp” Ìp” Ìp”( Ìp”) Ìp ”4 Ìp+›” Ìk” Ìk” Ìk”  Ìk ”, Ìk!”0 Ìk%”2 Ìk'”8 Ìk-”: Ìk/”> Ìk3”? Ìk4›” Ìl” Ìl” Ìl”  Ìl ”, Ìl!”0 Ìl%”2 Ìl'”8 Ìl-”: Ìl/”> Ìl3”? Ìl4›” Ìm” Ìm” Ìm”  Ìm ”, Ìm!”0 Ìm%”2 Ìm'”8 Ìm-”: Ìm/”> Ìm3”? Ìm4’” Ìj” Ìj	’” Ìc” Ìc
+‘” Ìt˜” Ìw” Ìw” Ìw” Ìw"” Ìw$”& Ìw4”( Ìw6”, ÌwÌB’” Ìx” Ìx
+–” Ìx” Ìx
+” Ì€” Ì€
+” Ì€” Ì€–” Ìx” Ìx
+” Ì” Ì” Ì” ÌÜ ” Ìx” Ìx
+” Ì‚”" Ì‚”# Ì‚”' Ì‚”( Ì‚”8 Ì‚*”= Ì‚/”ÌE Ì‚7”ÌF Ì‚8”ÌG Ì‚9”ÌH Ì‚:”Ì_ Ì‚ÌQ”Ì` Ì‚ÌR”Ìa Ì‚ÌS”Ìb Ì‚ÌT”Ìy Ì‚Ìk–” Ìx” Ìx
+” Ìƒ” Ìƒ”  Ìƒ”" Ìƒ˜” Ìx” Ìx
+” Ì„”! Ì„”" Ì„”+ Ì„”, Ì„”2 Ì„$—” Ìx” Ìx
+” Ì…” Ì…” Ì…” Ì…”  Ì…—” Ì†” Ì†
+” Ì†”% Ì†”( Ì†”0 Ì†&”1 Ì†'—” Ì‡” Ì‡
+” Ì‡”$ Ì‡”' Ì‡”) Ì‡”* Ì‡ —” Ìˆ” Ìˆ
+” Ìˆ”# Ìˆ”& Ìˆ”* Ìˆ ”+ Ìˆ!’” Ì‰” Ì‰”” Ìy” Ìy
+” Ìy” Ìy–” Ìy” Ìy
+” Ìz	” Ìz” Ìz” Ìz’” Ìy” Ìy
+”” Ì{” Ì{
+” Ì{” Ì{–” Ì{” Ì{
+” Ì|	” Ì|” Ì|” Ì|˜” Ì{” Ì{
+” Ì}	” Ì}” Ì}”  Ì}”! Ì}”& Ì}š” Ì{” Ì{
+” Ì~	” Ì~” Ì~” Ì~” Ì~” Ì~”  Ì~”" Ì~’” Ì{” Ì{
+’” Ìx” Ìx
+‘” ÌŠ’” ÌŒ” ÌŒ
+’” ÌŽ” ÌŽ’” Ì” Ì
+–” Ì” Ì
+” Ì¹” Ì¹
+” Ì¹” Ì¹š” Ì” Ì
+” Ìº” Ìº” Ìº” Ìº”" Ìº”$ Ìº”& Ìº”( Ìº”” Ì” Ì
+” Ì”  Ì–” Ì” Ì
+” Ì‘	” Ì‘” Ì‘” Ì‘˜” Ì” Ì
+” Ì’	” Ì’” Ì’”  Ì’”! Ì’”& Ì’˜” Ì” Ì
+” Ì“	” Ì“” Ì“”& Ì“”' Ì“”+ Ì“#š” Ì” Ì
+” Ì”	” Ì”” Ì”” Ì””  Ì””" Ì””$ Ì””& Ì”’” Ì” Ì
+’” Ì–” Ì–
+–” Ì–” Ì–
+” Ì³”  Ì³”! Ì³”. Ì³$–” Ì–” Ì–
+” Ì´” Ì´” Ì´” Ì´–” Ì–” Ì–
+” Ìµ” Ìµ” Ìµ” Ìµ–” Ì–” Ì–
+” Ì¶” Ì¶” Ì¶” Ì¶–” Ì–” Ì–
+” Ì·” Ì·” Ì·” Ì·’” Ì—” Ì—’” Ì™”" Ì™–” Ì™”" Ì™”# Ì£”( Ì£”) Ì£”/ Ì£–” Ì™”" Ì™”# Ì¤”) Ì¤”* Ì¤”, Ì¤Ü ” Ì™”" Ì™”# Ì¥”2 Ì¥”3 Ì¥”7 Ì¥!”8 Ì¥"”ÌG Ì¥1”ÌL Ì¥6”ÌS Ì¥=”ÌT Ì¥>”ÌU Ì¥?”ÌV Ì¥Ì@”Ìm Ì¥ÌW”Ìn Ì¥ÌX”Ìo Ì¥ÌY”Ìp Ì¥ÌZ”Ì‡ Ì¥Ìq–” Ì™”" Ì™”# Ì¦”/ Ì¦”0 Ì¦”2 Ì¦˜” Ì™”" Ì™”# Ì§”1 Ì§”2 Ì§”; Ì§%”< Ì§&”ÌB Ì§,—” Ì™”" Ì™”# Ì¨”* Ì¨”+ Ì¨”. Ì¨”0 Ì¨—”  Ì©”$ Ì©”% Ì©”4 Ì©"”7 Ì©%”> Ì©,”? Ì©-š”  Ìª”$ Ìª”% Ìª”3 Ìª!”6 Ìª$”ÌL Ìª:”ÌM Ìª;”ÌT ÌªÌB”ÌU ÌªÌC”ÌV ÌªÌD–”  Ì«”$ Ì«”( Ì«”) Ì«”7 Ì«%”9 Ì«'›”$ Ì¬”( Ì¬”) Ì¬”7 Ì¬#”8 Ì¬$”; Ì¬'”> Ì¬*”ÌB Ì¬.”ÌC Ì¬/”ÌN Ì¬:”ÌO Ì¬;˜”$ Ì­”( Ì­”) Ì­”7 Ì­#”8 Ì­$”ÌK Ì­7”ÌM Ì­9”ÌN Ì­:‘”! Ì®’” Ì¯” Ì¯”” Ìš”  Ìš”( Ìš”/ Ìš–” Ìš”  Ìš”! Ì›”) Ì›”* Ì›”, Ì›˜” Ìš”  Ìš”! Ìœ”* Ìœ”+ Ìœ”0 Ìœ ”1 Ìœ!”6 Ìœ&˜” Ìš”  Ìš”! Ì”+ Ì”, Ì”6 Ì&”7 Ì'”= Ì-’” Ìš” Ìš—” Ìž”  Ìž”( Ìž”= Ìž(”> Ìž)”ÌE Ìž0”ÌF Ìž1–” Ìž”  Ìž”! ÌŸ”) ÌŸ”* ÌŸ”, ÌŸ–” Ìž”  Ìž”! Ì ”* Ì ”+ Ì ”ÌB Ì 2š” Ìž”  Ìž”! Ì¡”' Ì¡”( Ì¡”* Ì¡”- Ì¡”/ Ì¡”0 Ì¡ ”2 Ì¡"’” Ìž” Ìž’” Ì™” Ì™’” Ì˜
+”  Ì˜•”/ Ì—”3 Ì—”4 Ì—”ÌF Ì—'”ÌH Ì—)’” Ì—” Ì—’” Ì–” Ì–
+’” Ì” Ì
+‘” Ì»’” Ì½” Ì½’” Ì¿” Ì¿’” ÌÀ” ÌÀ
+–” ÌÀ” ÌÀ
+” Ìà” Ìà
+” Ìà” Ìàš” ÌÀ” ÌÀ
+” Ìá” Ìá” Ìá” Ìá”" Ìá”$ Ìá”& Ìá”( Ìá”” ÌÁ” ÌÁ
+” ÌÁ”! ÌÁ–” ÌÁ” ÌÁ
+” ÌÂ	” ÌÂ” ÌÂ” ÌÂ˜” ÌÁ” ÌÁ
+” ÌÃ	” ÌÃ” ÌÃ”  ÌÃ”! ÌÃ”& ÌÃ˜” ÌÁ” ÌÁ
+” ÌÄ	” ÌÄ” ÌÄ”& ÌÄ”' ÌÄ”+ ÌÄ#š” ÌÁ” ÌÁ
+” ÌÅ	” ÌÅ” ÌÅ” ÌÅ”  ÌÅ”" ÌÅ”$ ÌÅ”& ÌÅ’” ÌÁ” ÌÁ
+’” ÌÇ” ÌÇ	–” ÌÇ” ÌÇ	” ÌÝ” ÌÝ” ÌÝ” ÌÝ˜” ÌÇ” ÌÇ	” ÌÞ” ÌÞ” ÌÞ”( ÌÞ”) ÌÞ ”5 ÌÞ,’” ÌÈ” ÌÈ’” ÌÉ
+” ÌÉ–” ÌÉ
+” ÌÉ” ÌÏ”  ÌÏ”! ÌÏ”# ÌÏ–” ÌÉ
+” ÌÉ” ÌÐ”! ÌÐ”" ÌÐ”$ ÌÐÜ ” ÌÉ
+” ÌÉ” ÌÑ”* ÌÑ”+ ÌÑ”/ ÌÑ”0 ÌÑ ”; ÌÑ+”Ì@ ÌÑ0”ÌC ÌÑ3”ÌD ÌÑ4”ÌE ÌÑ5”ÌF ÌÑ6”ÌJ ÌÑ:”ÌK ÌÑ;”ÌV ÌÑÌF”ÌW ÌÑÌG”ÌZ ÌÑÌJ”Ì[ ÌÑÌK”Ì\ ÌÑÌL”Ì] ÌÑÌM”Ì^ ÌÑÌN”Ìu ÌÑÌe–” ÌÉ
+” ÌÉ” ÌÒ”' ÌÒ”( ÌÒ”) ÌÒ˜” ÌÉ
+” ÌÉ” ÌÓ”) ÌÓ”* ÌÓ”3 ÌÓ#”4 ÌÓ$”: ÌÓ*—” ÌÉ
+” ÌÉ” ÌÔ”" ÌÔ”# ÌÔ”& ÌÔ”( ÌÔ—” ÌÕ” ÌÕ” ÌÕ”( ÌÕ”+ ÌÕ”. ÌÕ"”/ ÌÕ#–” ÌÖ” ÌÖ”  ÌÖ”! ÌÖ”/ ÌÖ#”1 ÌÖ%™” Ì×”  Ì×”! Ì×”/ Ì×!”0 Ì×"”3 Ì×%”6 Ì×(”9 Ì×+”: Ì×,˜” ÌØ”  ÌØ”! ÌØ”/ ÌØ!”0 ÌØ"”ÌC ÌØ5”ÌE ÌØ7”ÌF ÌØ8‘” ÌÙ’” ÌÚ
+” ÌÚÜ ” ÌÊ” ÌÊ”  ÌÊ”# ÌÊ”& ÌÊ”' ÌÊ”( ÌÊ”) ÌÊ”* ÌÊ”. ÌÊ”1 ÌÊ"”3 ÌÊ$”4 ÌÊ%”5 ÌÊ&”6 ÌÊ'”9 ÌÊ*”< ÌÊ-”> ÌÊ/–” ÌÊ” ÌÊ” ÌË”! ÌË”" ÌË”$ ÌË˜” ÌÊ” ÌÊ” ÌÌ”" ÌÌ”# ÌÌ”( ÌÌ”) ÌÌ”. ÌÌ$˜” ÌÊ” ÌÊ” ÌÍ”# ÌÍ”$ ÌÍ”. ÌÍ$”/ ÌÍ%”3 ÌÍ)’” ÌÊ” ÌÊ’” ÌÉ
+” ÌÉ’”/ ÌÈ”8 ÌÈ’” ÌÈ” ÌÈ’” ÌÇ” ÌÇ	’” ÌÀ” ÌÀ
+‘” Ìâ’” Ìä” Ìä’” Ìæ” Ìæ–” Ìç” Ìç” Ìç” Ìç”# Ìç”% Ìç’” Ìè” Ìè–” Ìè” Ìè” Í"”$ Í"”% Í"”+ Í"–” Ìè” Ìè” Í#”& Í#”' Í#”) Í#–” Ìè” Ìè” Í$”. Í$”/ Í$”ÌG Í$/–” Ìè” Ìè” Í%”+ Í%”, Í%”. Í%š” Ìè” Ìè” Í&”% Í&”& Í&”( Í&”. Í&”0 Í&”2 Í&”4 Í&”” Ìé” Ìé”$ Ìé”, Ìé–” Ìé” Ìé” Ìê”% Ìê”& Ìê”( Ìê˜” Ìé” Ìé” Ìë”& Ìë”' Ìë”, Ìë”- Ìë”2 Ìë ˜” Ìé” Ìé” Ìì”' Ìì”( Ìì”2 Ìì ”3 Ìì!”7 Ìì%š” Ìé” Ìé” Ìí”# Ìí”$ Ìí”& Ìí”, Ìí”. Ìí”0 Ìí”2 Ìí ’” Ìé” Ìé’” Ìï” Ìï–” Ìï” Ìï” Í 	”! Í ”" Í ”( Í ’” Ìð
+” Ìð–” Ìð
+” Ìð” Ìú”+ Ìú”, Ìú”- Ìú”” Ìñ” Ìñ”$ Ìñ”( Ìñ–” Ìñ” Ìñ” Ìò”% Ìò”& Ìò”( Ìò–” Ìñ” Ìñ” Ìó”& Ìó”' Ìó”> Ìó0’” Ìñ” Ìñ˜” Ìô” Ìô”$ Ìô”( Ìô”) Ìô”7 Ìô$”8 Ìô%”< Ìô)–” Ìô” Ìô” Ìõ”% Ìõ”& Ìõ”( Ìõ˜” Ìô” Ìô” Ìö”& Ìö”' Ìö”, Ìö”- Ìö”2 Ìö$˜” Ìô” Ìô” Ì÷”' Ì÷”( Ì÷”2 Ì÷$”3 Ì÷%”7 Ì÷)š” Ìô” Ìô” Ìø”# Ìø”$ Ìø”& Ìø”) Ìø”+ Ìø”, Ìø”. Ìø ’” Ìô” Ìô’” Ìð
+” Ìð’” Ìü
+” Ìü–” Ìü
+” Ìü” Í”+ Í”, Í”- Í”” Ìý” Ìý”$ Ìý”) Ìý–” Ìý” Ìý” Ìþ”% Ìþ”& Ìþ”( Ìþ–” Ìý” Ìý” Ìÿ”& Ìÿ”' Ìÿ”> Ìÿ0’” Ìý” Ìý” Í ” Í ”$ Í ”( Í ”) Í ”7 Í $”8 Í %”ÌA Í .”ÌB Í /”ÌI Í 6”ÌJ Í 7”ÌK Í 8”ÌL Í 9–” Í ” Í ” Í”% Í”& Í”( Í˜” Í ” Í ” Í”& Í”' Í”, Í”- Í”2 Í$˜” Í ” Í ” Í”' Í”( Í”2 Í$”3 Í%”7 Í)š” Í ” Í ” Í”# Í”$ Í”& Í”) Í”+ Í”, Í”. Í ’” Í ” Í ’” Ìü
+” Ìü’” Í
+” Í–” Í
+” Í” Í”+ Í”, Í”- Í”” Í	” Í	”$ Í	”) Í	–” Í	” Í	” Í
+”% Í
+”& Í
+”( Í
+–” Í	” Í	” Í”& Í”' Í”> Í0’” Í	” Í	Ü ” Í” Í”$ Í”( Í”) Í”4 Í!”7 Í$”8 Í%”9 Í&”: Í'”; Í(”? Í,”ÌC Í0”ÌD Í1”ÌO Í<”ÌQ Í>”ÌR Í?”ÌS ÍÌ@”ÌT ÍÌA”ÌW ÍÌD”Ì[ ÍÌH”Ì\ ÍÌI”Ìg ÍÌT”Ìi ÍÌV–” Í” Í” Í”% Í”& Í”( Í” Í” Í” Í”& Í”' Í”+ Í”, Í”7 Í)”8 Í*”< Í.”= Í/”ÌH Í:”ÌI Í;˜” Í” Í” Í”' Í”( Í”2 Í$”3 Í%”7 Í)š” Í” Í” Í”# Í”$ Í”& Í”) Í”+ Í”, Í”. Í ’” Í” Í’” Í
+” Í’” Í
+” Í–” Í
+” Í” Í”+ Í”, Í”- Í”” Í” Í”$ Í”* Í–” Í” Í” Í”% Í”& Í”( Í–” Í” Í” Í”& Í”' Í”> Í0’” Í” Í” Í” Í”$ Í”( Í”) Í”7 Í$”8 Í%”ÌB Í/”ÌC Í0”ÌJ Í7”ÌK Í8”ÌL Í9”ÌM Í:–” Í” Í” Í”% Í”& Í”( Í–” Í” Í” Í”& Í”' Í”0 Í"˜” Í” Í” Í”' Í”( Í”2 Í$”3 Í%”7 Í)š” Í” Í” Í”# Í”$ Í”& Í”) Í”+ Í”, Í”. Í ’” Í” Í’” Í
+” Í’” Ìï” Ìï’” Ìè” Ìè‘” Í'‘” Í'‘” Í(’” Í*” Í*	’” Í,” Í,–” Í-” Í-” Í-” Í-”# Í-”% Í-”” Í.” Í.”/ Í.”5 Í.–” Í.” Í.” Í/	”$ Í/”% Í/”+ Í/–” Í.” Í.” Í0	”% Í0”& Í0”( Í0–” Í.” Í.” Í1	”. Í1”/ Í1”8 Í1"–” Í.” Í.” Í2	”+ Í2”, Í2”. Í2–” Í.” Í.” Í3	”' Í3”( Í3”* Í3˜” Í.” Í.” Í4	”( Í4”) Í4”. Í4”/ Í4”4 Í4˜” Í.” Í.” Í5	”) Í5”* Í5”4 Í5”5 Í5”9 Í5#—” Í.” Í.” Í6	”& Í6”' Í6”* Í6”, Í6–” Í7
+”  Í7”$ Í7”% Í7”3 Í7!”5 Í7#œ”  Í8”$ Í8”% Í8”0 Í8”1 Í8”5 Í8!”ÌR Í8"”ÌV Í8&”ÌW Í8'”Ìe Í85”Ìg Í86”Ìh Í87–”  Í9”$ Í9”% Í9”8 Í9$”: Í9&”; Í9'’”  Í:”' Í:—”  Í;”$ Í;”% Í;”4 Í; ”7 Í;#”9 Í;%”: Í;&—”  Í<”$ Í<”% Í<”3 Í<”6 Í<"”: Í<&”; Í<'—”  Í=”$ Í=”% Í=”0 Í=”3 Í=”4 Í= ”5 Í=!‘” Í>’” Í?” Í?	š” Í.” Í.” Í@	”% Í@”& Í@”( Í@”. Í@”0 Í@”2 Í@”4 Í@’” Í.” Í.‘” ÍA‘” ÍA‘” ÍB’” ÍD” ÍD’” ÍF” ÍFš” ÍG” ÍG” ÍG” ÍG”  ÍG”! ÍG”' ÍG”* ÍG"”+ ÍG#”- ÍG%’” ÍH” ÍH–” ÍH” ÍH” ÍŠ”$ ÍŠ”% ÍŠ”+ ÍŠ–” ÍH” ÍH” Í‹”& Í‹”' Í‹”) Í‹–” ÍH” ÍH” ÍŒ”. ÍŒ”/ ÍŒ”ÌG ÍŒ/–” ÍH” ÍH” Í”+ Í”, Í”. Íš” ÍH” ÍH” ÍŽ”% ÍŽ”& ÍŽ”( ÍŽ”. ÍŽ”0 ÍŽ”2 ÍŽ”4 ÍŽ’” ÍI” ÍI–” ÍI” ÍI” Í\	”! Í\”" Í\”( Í\š” ÍI” ÍI” Í]	”" Í]”# Í]”% Í]”+ Í]”- Í]”/ Í]”1 Í]”” ÍJ
+” ÍJ”$ ÍJ”+ ÍJ–” ÍJ
+” ÍJ” ÍK”% ÍK”& ÍK”( ÍK˜” ÍJ
+” ÍJ” ÍL”& ÍL”' ÍL”, ÍL”- ÍL”2 ÍL"˜” ÍJ
+” ÍJ” ÍM”' ÍM”( ÍM”2 ÍM"”3 ÍM#”7 ÍM'’” ÍJ
+” ÍJ’” ÍO
+” ÍO’” ÍO
+” ÍO”” ÍQ
+” ÍQ”/ ÍQ”3 ÍQ–” ÍQ
+” ÍQ” ÍR”% ÍR”& ÍR”( ÍR–” ÍQ
+” ÍQ” ÍS”. ÍS”/ ÍS”ÌF ÍS4–” ÍQ
+” ÍQ” ÍT”+ ÍT”, ÍT”. ÍT–” ÍQ
+” ÍQ” ÍU”' ÍU”( ÍU”* ÍU˜” ÍQ
+” ÍQ” ÍV”( ÍV”) ÍV”. ÍV”/ ÍV”4 ÍV"—” ÍQ
+” ÍQ” ÍW”& ÍW”' ÍW”* ÍW”, ÍW—” ÍX”  ÍX”! ÍX”, ÍX”/ ÍX!”1 ÍX#”2 ÍX$—” ÍY”  ÍY”! ÍY”+ ÍY”. ÍY ”/ ÍY!”0 ÍY"’” ÍZ” ÍZ’” ÍQ
+” ÍQ’” ÍI” ÍI’” Í_” Í_’”? Í_>”ÌD Í_ÌK’”  Í`
+”# Í`–”  Í`
+”# Í`”$ Íƒ”) Íƒ”* Íƒ”0 Íƒ–”  Í`
+”# Í`”$ Í„”+ Í„”, Í„”. Í„–”  Í`
+”# Í`”$ Í…”3 Í…”4 Í…”ÌK Í…2–”  Í`
+”# Í`”$ Í†”0 Í†”1 Í†”3 Í†š”  Í`
+”# Í`”$ Í‡”* Í‡”+ Í‡”- Í‡”3 Í‡”5 Í‡”7 Í‡”9 Í‡ –”  Ía”$ Ía”, Ía”3 Ía”4 Ía”8 Ía–”  Ía”$ Ía”% Íb”- Íb”. Íb”0 Íb˜”  Ía”$ Ía”% Íc”. Íc”/ Íc”4 Íc”5 Íc”: Íc$˜”  Ía”$ Ía”% Íd”/ Íd”0 Íd”: Íd$”; Íd%”ÌA Íd+–”  Ía”$ Ía”% Íe”1 Íe”2 Íe”3 Íe’” Ía”  Ía”  Íg”$ Íg”, Íg”3 Íg”: Íg”; Íg ”ÌD Íg)”ÌE Íg*”ÌL Íg1”ÌM Íg2”ÌN Íg3”ÌO Íg4”ÌQ Íg6–”  Íg”$ Íg”% Íh”- Íh”. Íh”0 Íh–”  Íg”$ Íg”% Íi”. Íi”/ Íi”ÌF Íi0š”  Íg”$ Íg”% Íj”+ Íj”, Íj”. Íj”3 Íj”5 Íj”7 Íj!”9 Íj#’” Íg”  ÍgÜ ”  Íl”$ Íl”, Íl”4 Íl”; Íl ”< Íl!”? Íl$”ÌB Íl'”ÌC Íl(”ÌD Íl)”ÌE Íl*”ÌF Íl+”ÌI Íl.”ÌJ Íl/”ÌK Íl0”ÌL Íl1”ÌN Íl3”ÌQ Íl6”ÌX Íl=”ÌY Íl>”Ì\ ÍlÌA”Ì^ ÍlÌC–”  Íl”$ Íl”% Ím”- Ím”. Ím”0 Ím”  Íl”$ Íl”% Ín”. Ín”/ Ín”3 Ín”4 Ín”? Ín)”Ì@ Ín*”ÌG Ín1”ÌH Ín2”ÌK Ín5”ÌL Ín6š”  Íl”$ Íl”% Ío”+ Ío”, Ío”. Ío”3 Ío”5 Ío”7 Ío!”9 Ío#’” Íl”  Íl”  Íq”$ Íq”, Íq”/ Íq”6 Íq”7 Íq”ÌA Íq&”ÌB Íq'”ÌI Íq.”ÌJ Íq/”ÌK Íq0”ÌL Íq1”ÌN Íq3–”  Íq”$ Íq”% Ír”- Ír”. Ír”0 Ír–”  Íq”$ Íq”% Ís”. Ís”/ Ís”8 Ís"˜”  Íq”$ Íq”% Ít”/ Ít”0 Ít”: Ít$”; Ít%”? Ít)’” Íq”  Íq””  Ív”& Ív”7 Ív”: Ív–”  Ív”& Ív”' Íw”, Íw”- Íw”/ Íw–”  Ív”& Ív”' Íx”- Íx”. Íx”0 Íx–”  Ív”& Ív”' Íy”6 Íy”7 Íy”ÌN Íy6–”  Ív”& Ív”' Íz”3 Íz”4 Íz”6 Íz–”  Ív”& Ív”' Í{”/ Í{”0 Í{”2 Í{˜”  Ív”& Ív”' Í|”0 Í|”1 Í|”6 Í|”7 Í|”< Í|$š”  Ív”& Ív”' Í}”- Í}”. Í}”0 Í}”4 Í}”6 Í}”8 Í} ”: Í}"—”  Ív”& Ív”' Í~”. Í~”/ Í~”2 Í~”4 Í~œ”$ Í”( Í”) Í”4 Í ”5 Í!”; Í'”< Í(”ÌA Í-”ÌC Í/”ÌD Í0”ÌE Í1”ÌF Í2–”$ Í€”( Í€”) Í€”< Í€(”> Í€*”? Í€+’”  Í”! Í’” Ív”" Ív’” Í`
+” Í`””; Í_”? Í_”Ì@ Í_”ÌK Í_ ’” Í_” Í_’” ÍH” ÍH‘” Í‘” Í‘” Í’” Í’” Í’	’” Í”” Í”’” Í•” Í•
+–” Í•” Í•
+” Í¦” Í¦
+” Í¦” Í¦–” Í•” Í•
+” Í§” Í§” Í§” Í§–” Í•” Í•
+” Í¨”" Í¨”# Í¨”: Í¨,–” Í•” Í•
+” Í©” Í©”  Í©”" Í©Ü ” Í•” Í•
+” Íª” Íª” Íª” Íª”" Íª”$ Íª”& Íª”( Íª”- Íª”/ Íª!”Ì@ Íª2”ÌB Íª4”ÌI Íª;”ÌK Íª=”ÌL Íª>”ÌN ÍªÌ@”ÌU ÍªÌG”ÌW ÍªÌI”ÌX ÍªÌJ”ÌZ ÍªÌL’” Í–” Í–	–” Í–” Í–	” Í£” Í£” Í£” Í£˜” Í–” Í–	” Í¤” Í¤” Í¤”( Í¤”) Í¤ ”5 Í¤,”” Í—” Í—” Í—” Í—–” Í—” Í—” Í˜” Í˜” Í˜” Í˜˜” Í—” Í—” Í™” Í™” Í™”  Í™”! Í™”& Í™ ˜” Í—” Í—” Íš” Íš” Íš”& Íš ”' Íš!”+ Íš%’” Í—” Í—’” Íœ” Íœ’” Íœ” Íœ›” Íž” Íž” Íž” Íž” Íž”' Íž”( Íž”/ Íž$”0 Íž%”1 Íž&”2 Íž'–” Íž” Íž” ÍŸ” ÍŸ” ÍŸ” ÍŸ–” Íž” Íž” Í ” Í ” Í ”$ Í ˜” Íž” Íž” Í¡” Í¡” Í¡”& Í¡ ”' Í¡!”+ Í¡%’” Íž” Íž’” Í–” Í–	’” Í•” Í•
+‘” Í«’” Í­” Í­’” Í®” Í®–” Í¯” Í¯” Í¯” Í¯”% Í¯!”' Í¯#“” Í°” Í°” Í°–” Í±” Í±” Í±” Í±”! Í±”" Í±“” Í²” Í²” Í²–” Í³” Í³” Í³” Í³”! Í³”" Í³“” Í´” Í´” Í´–” Íµ” Íµ” Íµ” Íµ”! Íµ”" Íµ‘” Í¶–” Í·” Í·” Í·” Í·”! Í·”" Í·‘”	 Í¸’” Í¹” Í¹’” Í»” Í»”” Í¼” Í¼” Í¼” Í¼–” Í½” Í½” Í½” Í½” Í½” Í½–” Í¾” Í¾” Í¾” Í¾” Í¾”# Í¾‘”	 Í¿–” Í¿” Í¿” Í¿” Í¿” Í¿” Í¿–” ÍÀ” ÍÀ” ÍÀ” ÍÀ” ÍÀ”# ÍÀ‘”	 ÍÁ‘” ÍÁ–” ÍÂ” ÍÂ” ÍÂ” ÍÂ” ÍÂ”# ÍÂ‘”	 ÍÃ’” ÍÄ” ÍÄ’” ÍÆ” ÍÆ	’” ÍÇ” ÍÇÜ ” ÍÈ” ÍÈ” ÍÈ	” ÍÈ” ÍÈ” ÍÈ” ÍÈ”* ÍÈ&”+ ÍÈ'”1 ÍÈ-”2 ÍÈ.”3 ÍÈ/”6 ÍÈ2”8 ÍÈ4”? ÍÈ;”ÌA ÍÈ=”ÌC ÍÈ?˜” ÍÉ” ÍÉ” ÍÉ” ÍÉ”  ÍÉ”! ÍÉ”+ ÍÉ%”, ÍÉ&–” ÍÊ”	 ÍÊ” ÍÊ” ÍÊ” ÍÊ	” ÍÊ
+’” ÍË” ÍËÔrG–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜÖ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  ÌŽ ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ìž ‘”  ÌŸ ‘”  Ì  ‘”  Ì¡ ‘”  Ì¢ ‘”  Ì£ ‘”  Ì¤ ‘”  Ì¥ ‘”  Ì¦ ‘”  Ì§ ‘”  Ì¨ ‘”  Ì© ‘”  Ìª ‘”  Ì« ‘”  Ì¬ ‘”  Ì­ ‘”  Ì® ‘”  Ì¯ ‘”  Ì° ‘”  Ì± ‘”  Ì² ‘”  Ì³ ‘”  Ì´ ‘”  Ìµ ‘”  Ì¶ ‘”  Ì· ‘”  Ì¸ ‘”  Ì¹ ‘”  Ìº ‘”  Ì» ‘”  Ì¼ ‘”  Ì½ ‘”  Ì¾ ‘”  Ì¿ ‘”  ÌÀ ‘”  ÌÁ ‘”  ÌÂ ‘”  ÌÃ ‘”  ÌÄ ‘”  ÌÅ ‘”  ÌÆ ‘”  ÌÇ ‘”  ÌÈ ‘”  ÌÉ ‘”  ÌÊ ‘”  ÌË ‘”  ÌÌ ‘”  ÌÍ ‘”  ÌÎ ‘”  ÌÏ ‘”  ÌÐ ‘”  ÌÑ ‘”  ÌÒ ‘”  ÌÓ ‘”  ÌÔ ‘”  ÌÕ ‘”  ÌÖ ‘”  Ì× ‘”  ÌØ ‘”  ÌÙ ‘”  ÌÚ ‘”  ÌÛ ‘”  ÌÜ ‘”  ÌÝ ‘”  ÌÞ ‘”  Ìß ‘”  Ìà ‘”  Ìá ‘”  Ìâ ‘”  Ìã ‘”  Ìä ‘”  Ìå ‘”  Ìæ ‘”  Ìç ‘”  Ìè ‘”  Ìé ‘”  Ìê ‘”  Ìë ‘”  Ìì ‘”  Ìí ‘”  Ìî ‘”  Ìï ‘”  Ìð ‘”  Ìñ ‘”  Ìò ‘”  Ìó ‘”  Ìô ‘”  Ìõ ‘”  Ìö ‘”  Ì÷ ‘”  Ìø ‘”  Ìù ‘”  Ìú ‘”  Ìû ‘”  Ìü ‘”  Ìý ‘”  Ìþ ‘”  Ìÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍÐ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ‘”  ÍÖ ‘”  Í× ‘”  ÍØ ‘”  ÍÙ ‘”  ÍÚ ‘”  ÍÛ ‘”  ÍÜ ‘”  ÍÝ ‘”  ÍÞ ‘”  Íß ‘”  Íà ‘”  Íá ‘”  Íâ ‘”  Íã ‘”  Íä ‘”  Íå ‘”  Íæ ‘”  Íç ‘”  Íè ‘”  Íé ‘”  Íê ‘”  Íë ‘”  Íì ‘”  Íí ‘”  Íî ‘”  Íï ‘”  Íð ‘”  Íñ ‘”  Íò ‘”  Íó ‘”  Íô ‘”  Íõ ‘”  Íö ‘”  Í÷ ‘”  Íø ‘”  Íù ‘”  Íú ‘”  Íû ‘”  Íü ‘”  Íý ‘”  Íþ ‘”  Íÿ ‘”  Í  ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í	 ‘”  Í
+ ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í ‘”  Í  ‘”  Í! ‘”  Í" ‘”  Í# ‘”  Í$ ‘”  Í% ‘”  Í& ‘”  Í' ‘”  Í( ‘”  Í) ‘”  Í* ‘”  Í+ ‘”  Í, ‘”  Í- ‘”  Í. ‘”  Í/ ‘”  Í0 ‘”  Í1 ‘”  Í2 ‘”  Í3 ‘”  Í4 ‘”  Í5 ‘”  Í6 ‘”  Í7 ‘”  Í8 ‘”  Í9 ‘”  Í: ‘”  Í; ‘”  Í< ‘”  Í= ‘”  Í> ‘”  Í? ‘”  Í@ ‘”  ÍA ‘”  ÍB ‘”  ÍC ‘”  ÍD ‘”  ÍE ‘”  ÍF ‘”  ÍG ‘”  ÍH ‘”  ÍI ‘”  ÍJ ‘”  ÍK ‘”  ÍL ‘”  ÍM ‘”  ÍN ‘”  ÍO ‘”  ÍP ‘”  ÍQ ‘”  ÍR ‘”  ÍS ‘”  ÍT ‘”  ÍU ‘”  ÍV ‘”  ÍW ‘”  ÍX ‘”  ÍY ‘”  ÍZ ‘”  Í[ ‘”  Í\ ‘”  Í] ‘”  Í^ ‘”  Í_ ‘”  Í` ‘”  Ía ‘”  Íb ‘”  Íc ‘”  Íd ‘”  Íe ‘”  Íf ‘”  Íg ‘”  Íh ‘”  Íi ‘”  Íj ‘”  Ík ‘”  Íl ‘”  Ím ‘”  Ín ‘”  Ío ‘”  Íp ‘”  Íq ‘”  Ír ‘”  Ís ‘”  Ít ‘”  Íu ‘”  Ív ‘”  Íw ‘”  Íx ‘”  Íy ‘”  Íz ‘”  Í{ ‘”  Í| ‘”  Í} ‘”  Í~ ‘”  Í ‘”  Í€ ‘”  Í ‘”  Í‚ ‘”  Íƒ ‘”  Í„ ‘”  Í… ‘”  Í† ‘”  Í‡ ‘”  Íˆ ‘”  Í‰ ‘”  ÍŠ ‘”  Í‹ ‘”  ÍŒ ‘”  Í ‘”  ÍŽ ‘”  Í ‘”  Í ‘”  Í‘ ‘”  Í’ ‘”  Í“ ‘”  Í” ‘”  Í• ‘”  Í– ‘”  Í— ‘”  Í˜ ‘”  Í™ ‘”  Íš ‘”  Í› ‘”  Íœ ‘”  Í ‘”  Íž ‘”  ÍŸ ‘”  Í  ‘”  Í¡ ‘”  Í¢ ‘”  Í£ ‘”  Í¤ ‘”  Í¥ ‘”  Í¦ ‘”  Í§ ‘”  Í¨ ‘”  Í© ‘”  Íª ‘”  Í« ‘”  Í¬ ‘”  Í­ ‘”  Í® ‘”  Í¯ ‘”  Í° ‘”  Í± ‘”  Í² ‘”  Í³ ‘”  Í´ ‘”  Íµ ‘”  Í¶ ‘”  Í· ‘”  Í¸ ‘”  Í¹ ‘”  Íº ‘”  Í» ‘”  Í¼ ‘”  Í½ ‘”  Í¾ ‘”  Í¿ ‘”  ÍÀ ‘”  ÍÁ ‘”  ÍÂ ‘”  ÍÃ ‘”  ÍÄ ‘”  ÍÅ ‘”  ÍÆ ‘”  ÍÇ ‘”  ÍÈ ‘”  ÍÉ ‘”  ÍÊ ‘”  ÍË ‘”  ÍÌ ‘”  ÍÍ ‘”  ÍÎ ‘”  ÍÏ ‘”  ÍÐ ‘”  ÍÑ ‘”  ÍÒ ‘”  ÍÓ ‘”  ÍÔ ‘”  ÍÕ ÔrH’§missing¦pluginÃ¦genAbcÂÔ  ÔrI”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache’ÔrJ•¤type¥start£endªspecifiers¦source±ImportDeclarationÌ°ÌÒ‘ÔrK”¤type¥start£end¥local¶ImportDefaultSpecifierÌ·Ì½ÔrL”¤type¥start£end¤nameªIdentifierÌ·Ì½¦routerÔrM•¤type¥start£end¥value£raw§LiteralÌÃÌÑ¬@ohos.router®'@ohos.router'J±ImportDeclarationÌÔÍi–ÔrN•¤type¥start£end¨imported¥local¯ImportSpecifierÌÝÌæLªIdentifierÌÝÌæ©GOE_RANGELªIdentifierÌÝÌæ©GOE_RANGEN¯ImportSpecifierÌèÌóLªIdentifierÌèÌó«getAllJumpsLªIdentifierÌèÌó«getAllJumpsN¯ImportSpecifierÌõÍ LªIdentifierÌõÍ «getAllSpinsLªIdentifierÌõÍ «getAllSpinsN¯ImportSpecifierÍÍLªIdentifierÍÍ«getAllStepsLªIdentifierÍÍ«getAllStepsN¯ImportSpecifierÍÍ%LªIdentifierÍÍ%¶createTechnicalElementLªIdentifierÍÍ%¶createTechnicalElementN¯ImportSpecifierÍ'Í<LªIdentifierÍ'Í<µgetElementChineseNameLªIdentifierÍ'Í<µgetElementChineseNameM§LiteralÍDÍhÙ"../viewmodel/TechnicalElementModelÙ$'../viewmodel/TechnicalElementModel'

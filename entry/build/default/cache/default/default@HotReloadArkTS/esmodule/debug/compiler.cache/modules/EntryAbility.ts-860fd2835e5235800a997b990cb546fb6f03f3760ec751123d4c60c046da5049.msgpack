@@ -1,0 +1,375 @@
+Ôr@Ÿªassertions¤code´customTransformCache¬dependencies¢id¤meta±moduleSideEffects¬originalCode±originalSourcemap«resolvedIds®sourcemapChainµsyntheticNamedExportsµtransformDependencies®transformFiles¨cacheAstÔrAÚÇimport AbilityConstant from "@ohos.app.ability.AbilityConstant";
+import UIAbility from "@ohos.app.ability.UIAbility";
+import hilog from "@ohos.hilog";
+const TAG = 'EntryAbility';
+const DOMAIN_NUMBER = 0xFF00;
+export default class EntryAbility extends UIAbility {
+    constructor() {
+        super(...arguments);
+        // ç”¨äºå­˜å‚¨è¿ç§»æ•°æ®çš„LocalStorage
+        this.storage = new LocalStorage();
+    }
+    onCreate(want, launchParam) {
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onCreate');
+        // æ£€æŸ¥æ˜¯å¦ä¸ºè¿ç§»å¯åŠ¨
+        if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
+            hilog.info(DOMAIN_NUMBER, TAG, 'Ability launched by continuation');
+            // æ¢å¤è¿ç§»æ•°æ®
+            this.restoreContinueData(want);
+        }
+        // è®¾ç½®è¿ç§»çŠ¶æ€ä¸ºå¯è¿ç§»ï¼ˆä¿è¯è¿ç§»è¿ç»­æ€§ï¼‰
+        this.context.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (result) => {
+            hilog.info(DOMAIN_NUMBER, TAG, `setMissionContinueState result: ${JSON.stringify(result)}`);
+        });
+    }
+    onDestroy() {
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onDestroy');
+    }
+    onWindowStageCreate(windowStage) {
+        // Main window is created, set main page for this ability
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onWindowStageCreate');
+        windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
+            if (err.code) {
+                hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+                return;
+            }
+            hilog.info(DOMAIN_NUMBER, TAG, 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
+            let uiContext = windowStage.getMainWindowSync().getUIContext();
+            AppStorage.setOrCreate('uiContext', uiContext);
+        });
+    }
+    onWindowStageDestroy() {
+        // Main window is destroyed, release UI related resources
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onWindowStageDestroy');
+    }
+    onForeground() {
+        // Ability has brought to foreground
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onForeground');
+    }
+    onBackground() {
+        // Ability has back to background
+        hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onBackground');
+    }
+    /**
+     * åº”ç”¨æ¥ç»­ - ä¿å­˜è¿ç§»æ•°æ®
+     * å½“åº”ç”¨è§¦å‘è¿ç§»æ—¶ï¼Œæ­¤æ¥å£åœ¨æºç«¯è¢«è°ƒç”¨
+     */
+    onContinue(wantParam) {
+        hilog.info(DOMAIN_NUMBER, TAG, 'onContinue called');
+        try {
+            // è·å–å½“å‰é¡µé¢è·¯å¾„ï¼ˆä»AppStorageä¸­è·å–ï¼‰
+            const currentPage = AppStorage.get('currentPage') || 'pages/EdgeFlowMainPage';
+            hilog.info(DOMAIN_NUMBER, TAG, `Current page: ${currentPage}`);
+            // ä¿å­˜éœ€è¦è¿ç§»çš„æ•°æ®åˆ°wantParam
+            wantParam['currentPage'] = currentPage;
+            // ä¿å­˜æˆå°±é¡µé¢çš„æ»šåŠ¨ä½ï¿½?
+            const achievementScrollOffset = AppStorage.get('achievementScrollOffset');
+            if (achievementScrollOffset) {
+                wantParam['achievementScrollOffset'] = achievementScrollOffset;
+                hilog.info(DOMAIN_NUMBER, TAG, `Saved achievement scroll offset: ${achievementScrollOffset}`);
+            }
+            // å¦‚æœæœ‰å…¶ä»–éœ€è¦è¿ç§»çš„æ•°æ®ï¼Œä¹Ÿå¯ä»¥åœ¨è¿™é‡Œä¿ï¿½?
+            // ä¾‹å¦‚ï¼šè®¡ç®—å™¨çš„å½“å‰è¾“å…¥å€¼ã€å†å²è®°å½•ç­‰
+            const calculatorData = AppStorage.get('calculatorData');
+            if (calculatorData) {
+                wantParam['calculatorData'] = calculatorData;
+            }
+            hilog.info(DOMAIN_NUMBER, TAG, 'onContinue data saved successfully');
+            return AbilityConstant.OnContinueResult.AGREE;
+        }
+        catch (error) {
+            hilog.error(DOMAIN_NUMBER, TAG, `onContinue error: ${JSON.stringify(error)}`);
+            return AbilityConstant.OnContinueResult.REJECT;
+        }
+    }
+    /**
+     * åº”ç”¨æ¥ç»­ - æ¢å¤è¿ç§»æ•°æ®ï¼ˆå†·å¯åŠ¨æˆ–å¤šå®ä¾‹çƒ­å¯åŠ¨ï¼‰
+     */
+    restoreContinueData(want) {
+        hilog.info(DOMAIN_NUMBER, TAG, 'restoreContinueData called');
+        if (want.parameters) {
+            // æ¢å¤é¡µé¢è·¯å¾„
+            const currentPage = want.parameters['currentPage'];
+            if (currentPage) {
+                AppStorage.setOrCreate('continuePage', currentPage);
+                hilog.info(DOMAIN_NUMBER, TAG, `Restored page: ${currentPage}`);
+            }
+            // æ¢å¤æˆå°±é¡µé¢çš„æ»šåŠ¨ä½ï¿½?
+            const achievementScrollOffset = want.parameters['achievementScrollOffset'];
+            if (achievementScrollOffset) {
+                AppStorage.setOrCreate('achievementScrollOffset', achievementScrollOffset);
+                hilog.info(DOMAIN_NUMBER, TAG, `Restored achievement scroll offset: ${achievementScrollOffset}`);
+            }
+            // æ¢å¤å…¶ä»–æ•°æ®
+            const calculatorData = want.parameters['calculatorData'];
+            if (calculatorData) {
+                AppStorage.setOrCreate('calculatorData', calculatorData);
+                hilog.info(DOMAIN_NUMBER, TAG, 'Restored calculator data');
+            }
+        }
+        // è§¦å‘é¡µé¢æ¢å¤ï¼ˆå¿…é¡»åœ¨åŒæ­¥æ–¹æ³•ä¸­æ‰§è¡Œï¼‰
+        this.context.restoreWindowStage(this.storage);
+    }
+    /**
+     * åº”ç”¨æ¥ç»­ - å•å®ä¾‹çƒ­å¯åŠ¨æ—¶è°ƒï¿½?
+     */
+    onNewWant(want, launchParam) {
+        hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant called');
+        // æ£€æŸ¥æ˜¯å¦ä¸ºè¿ç§»å¯åŠ¨
+        if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
+            hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant launched by continuation');
+            // è®¾ç½®è¿ç§»çŠ¶æ€ä¸ºå¯è¿ï¿½?
+            this.context.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (result) => {
+                hilog.info(DOMAIN_NUMBER, TAG, `setMissionContinueState result: ${JSON.stringify(result)}`);
+            });
+            // æ¢å¤è¿ç§»æ•°æ®
+            this.restoreContinueData(want);
+        }
+    }
+    /**
+     * åº”ç”¨æ¥ç»­ - çª—å£æ¢å¤
+     * è¿ç§»å¯åŠ¨æ—¶ï¼Œä¼šè§¦å‘æ­¤ç”Ÿå‘½å‘¨æœŸå‡½æ•°ï¼Œè€Œä¸æ˜¯onWindowStageCreate
+     */
+    onWindowStageRestore(windowStage) {
+        hilog.info(DOMAIN_NUMBER, TAG, 'onWindowStageRestore called');
+        // è·å–è¦æ¢å¤çš„é¡µé¢è·¯å¾„
+        const continuePage = AppStorage.get('continuePage') || 'pages/EdgeFlowMainPage';
+        hilog.info(DOMAIN_NUMBER, TAG, `Loading continue page: ${continuePage}`);
+        // åŠ è½½æ¢å¤çš„é¡µï¿½?
+        windowStage.loadContent(continuePage, (err, data) => {
+            if (err.code) {
+                hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load continue page. Cause: %{public}s', JSON.stringify(err) ?? '');
+                // å¦‚æœåŠ è½½å¤±è´¥ï¼Œå›é€€åˆ°ä¸»ï¿½?
+                windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
+                    if (err.code) {
+                        hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load fallback page. Cause: %{public}s', JSON.stringify(err) ?? '');
+                    }
+                });
+                return;
+            }
+            hilog.info(DOMAIN_NUMBER, TAG, 'Succeeded in loading continue page. Data: %{public}s', JSON.stringify(data) ?? '');
+            // è·å–UIContextå¹¶ä¿å­˜åˆ°AppStorage
+            let uiContext = windowStage.getMainWindowSync().getUIContext();
+            AppStorage.setOrCreate('uiContext', uiContext);
+            // æ¸…é™¤ä¸´æ—¶å­˜å‚¨çš„è¿ç§»é¡µé¢è·¯ï¿½?
+            AppStorage.delete('continuePage');
+        });
+    }
+}
+//# sourceMappingURL=EntryAbility.js.mapÂ“Ùu hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.app.ability.AbilityConstant.d.tsÙo hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.app.ability.UIAbility.d.tsÙ_ hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.hilog.d.tsÙbG:\SimpleCalculator-master\SimpleCalculator-master\entry\src\main\ets\entryability\EntryAbility.tsÔrB›ªmoduleName±isLocalDependency¯isNodeEntryFile§pkgPath±belongProjectPath§pkgNameªpkgVersion±dependencyPkgInfo°belongModulePath§checker¬shouldEmitJs¥entryÃÂÙ8G:\SimpleCalculator-master\SimpleCalculator-master\entryÙ2G:\SimpleCalculator-master\SimpleCalculator-master¥entry¥1.0.0Ô  Ù8G:\SimpleCalculator-master\SimpleCalculator-master\entryÔrCÜ ®¬getNodeCount²getIdentifierCount®getSymbolCount¬getTypeCountµgetInstantiationCountµgetRelationCacheSizes±isUndefinedSymbol±isArgumentsSymbol¯isUnknownSymbol¯getMergedSymbol®getDiagnostics´getGlobalDiagnostics´getRecursionIdentity¶getUnmatchedProperties¹getTypeOfSymbolAtLocation¯getTypeOfSymbolÙ(getSymbolsOfParameterPropertyDeclaration·getDeclaredTypeOfSymbol³getPropertiesOfType±getPropertyOfTypeÙ"getPrivateIdentifierPropertyOfType·getTypeOfPropertyOfType²getIndexInfoOfType³getIndexInfosOfTypeºgetIndexInfosOfIndexSymbol³getSignaturesOfType²getIndexTypeOfType¬getIndexType¬getBaseTypes¸getBaseTypeOfLiteralType®getWidenedType³getTypeFromTypeNode°getParameterTypeÙ$getParameterIdentifierNameAtPosition¸getPromisedTypeOfPromise®getAwaitedType¸getReturnTypeOfSignature®isNullableType¯getNullableType²getNonNullableType²getNonOptionalType°getTypeArguments®typeToTypeNodeÙ$indexInfoToIndexSignatureDeclaration¿signatureToSignatureDeclaration²symbolToEntityName²symbolToExpression¬symbolToNodeÙ!symbolToTypeParameterDeclarations¼symbolToParameterDeclarationºtypeParameterToDeclaration±getSymbolsInScope³getSymbolAtLocation·getIndexInfosAtLocationÙ!getShorthandAssignmentValueSymbolÙ#getExportSpecifierLocalTargetSymbol·getExportSymbolOfSymbol±getTypeAtLocationºgetTypeAtLocationForLinterÙ tryGetTypeAtLocationWithoutCheckºgetTypeOfAssignmentPatternÙ*getPropertySymbolOfDestructuringAssignment±signatureToString¬typeToString®symbolToStringµtypePredicateToString®writeSignature©writeType«writeSymbol²writeTypePredicate¼getAugmentedPropertiesOfType®getRootSymbols²getSymbolOfExpando±getContextualTypeÙ(getContextualTypeForObjectLiteralElementÙ#getContextualTypeForArgumentAtIndexÙ getContextualTypeForJsxAttribute²isContextSensitiveÙ!getTypeOfPropertyOfContextualTypeµgetFullyQualifiedNameÙ#tryGetResolvedSignatureWithoutCheck´getResolvedSignatureÙ/getResolvedSignatureForStringLiteralCompletionsÙ$getResolvedSignatureForSignatureHelpµgetExpandedParameters¹hasEffectiveRestParameterºcontainsArgumentsReference°getConstantValueµisValidPropertyAccessÙ#isValidPropertyAccessForCompletions»getSignatureFromDeclarationºisImplementationOfOverload¹getImmediateAliasedSymbol°getAliasedSymbol¯getEmitResolver²getExportsOfModule¿getExportsAndPropertiesOfModuleÙ forEachExportAndPropertyOfModule¯getSymbolWalker±getAmbientModules¹getJsxIntrinsicTagNamesAt³isOptionalParameter»tryGetMemberInModuleExportsÙ(tryGetMemberInModuleExportsAndProperties´tryFindAmbientModuleÙ(tryFindAmbientModuleWithoutAugmentations¯getApparentType¬getUnionType²isTypeAssignableTo³createAnonymousType¯createSignature¬createSymbol¯createIndexInfoªgetAnyType­getStringType­getNumberType±createPromiseType¯createArrayType¹getElementTypeOfArrayType®getBooleanType¬getFalseType«getTrueType«getVoidType°getUndefinedType«getNullType¯getESSymbolType¬getNeverType¯getOptionalType®getPromiseType²getPromiseLikeType´getAsyncIterableType²isSymbolAccessible«isArrayType«isTupleType¯isArrayLikeTypeÙ#isTypeInvalidDueToUnionDiscriminantºgetExactOptionalProperties¿getAllPossiblePropertiesOfTypesÙ(getSuggestedSymbolForNonexistentPropertyÙ#getSuggestionForNonexistentPropertyÙ,getSuggestedSymbolForNonexistentJSXAttributeÙ&getSuggestedSymbolForNonexistentSymbolÙ!getSuggestionForNonexistentSymbolÙ&getSuggestedSymbolForNonexistentModuleÙ!getSuggestionForNonexistentExportÙ+getSuggestedSymbolForNonexistentClassMember·getBaseConstraintOfType»getDefaultFromTypeParameter«resolveName¯getJsxNamespaceµgetJsxFragmentFactory¸getAccessibleSymbolChain»getTypePredicateOfSignature¹resolveExternalModuleName»resolveExternalModuleSymbol°tryGetThisTypeAt¹getTypeArgumentConstraint¸getSuggestionDiagnostics¸runWithCancellationTokenÙ3getLocalTypeParametersOfClassOrInterfaceOrTypeAlias´isDeclarationVisible´isPropertyAccessible»getTypeOnlyAliasDeclaration¿getMemberOverrideModifierStatusÙ!isTypeParameterPossiblyReferenced²getConstEnumRelate´clearConstEnumRelateµdeleteConstEnumRelateÙ$getTypeArgumentsForResolvedSignatureµgetCheckedSourceFilesÙ"collectHaveTsNoCheckFilesForLinter·clearQualifiedNameCache®isStaticRecord²isStaticSourceFileÔ  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  Ô  ÃÃÚ`import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { UIContext, window } from '@kit.ArkUI';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const TAG = 'EntryAbility';
+const DOMAIN_NUMBER = 0xFF00;
+
+export default class EntryAbility extends UIAbility {
+  // ç”¨äºå­˜å‚¨è¿ç§»æ•°æ®çš„LocalStorage
+  storage: LocalStorage = new LocalStorage();
+  
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam) {
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onCreate');
+    
+    // æ£€æŸ¥æ˜¯å¦ä¸ºè¿ç§»å¯åŠ¨
+    if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
+      hilog.info(DOMAIN_NUMBER, TAG, 'Ability launched by continuation');
+      // æ¢å¤è¿ç§»æ•°æ®
+      this.restoreContinueData(want);
+    }
+    
+    // è®¾ç½®è¿ç§»çŠ¶æ€ä¸ºå¯è¿ç§»ï¼ˆä¿è¯è¿ç§»è¿ç»­æ€§ï¼‰
+    this.context.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (result) => {
+      hilog.info(DOMAIN_NUMBER, TAG, `setMissionContinueState result: ${JSON.stringify(result)}`);
+    });
+  }
+
+  onDestroy() {
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onDestroy');
+  }
+
+  onWindowStageCreate(windowStage: window.WindowStage) {
+    // Main window is created, set main page for this ability
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onWindowStageCreate');
+windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
+      if (err.code) {
+        hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+        return;
+      }
+      hilog.info(DOMAIN_NUMBER, TAG, 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
+
+      let uiContext: UIContext | undefined = windowStage.getMainWindowSync().getUIContext()
+      AppStorage.setOrCreate('uiContext', uiContext);
+    });
+  }
+
+  onWindowStageDestroy() {
+    // Main window is destroyed, release UI related resources
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onWindowStageDestroy');
+  }
+
+  onForeground() {
+    // Ability has brought to foreground
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onForeground');
+  }
+
+  onBackground() {
+    // Ability has back to background
+    hilog.info(DOMAIN_NUMBER, TAG, '%{public}s', 'Ability onBackground');
+  }
+
+  /**
+   * åº”ç”¨æ¥ç»­ - ä¿å­˜è¿ç§»æ•°æ®
+   * å½“åº”ç”¨è§¦å‘è¿ç§»æ—¶ï¼Œæ­¤æ¥å£åœ¨æºç«¯è¢«è°ƒç”¨
+   */
+  onContinue(wantParam: Record<string, Object>): AbilityConstant.OnContinueResult {
+    hilog.info(DOMAIN_NUMBER, TAG, 'onContinue called');
+    
+    try {
+      // è·å–å½“å‰é¡µé¢è·¯å¾„ï¼ˆä»AppStorageä¸­è·å–ï¼‰
+const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMainPage';
+      hilog.info(DOMAIN_NUMBER, TAG, `Current page: ${currentPage}`);
+      
+      // ä¿å­˜éœ€è¦è¿ç§»çš„æ•°æ®åˆ°wantParam
+      wantParam['currentPage'] = currentPage;
+      
+      // ä¿å­˜æˆå°±é¡µé¢çš„æ»šåŠ¨ä½ï¿½?
+      const achievementScrollOffset = AppStorage.get<number>('achievementScrollOffset');
+      if (achievementScrollOffset) {
+        wantParam['achievementScrollOffset'] = achievementScrollOffset;
+        hilog.info(DOMAIN_NUMBER, TAG, `Saved achievement scroll offset: ${achievementScrollOffset}`);
+      }
+      
+      // å¦‚æœæœ‰å…¶ä»–éœ€è¦è¿ç§»çš„æ•°æ®ï¼Œä¹Ÿå¯ä»¥åœ¨è¿™é‡Œä¿ï¿½?
+      // ä¾‹å¦‚ï¼šè®¡ç®—å™¨çš„å½“å‰è¾“å…¥å€¼ã€å†å²è®°å½•ç­‰
+      const calculatorData = AppStorage.get<string>('calculatorData');
+      if (calculatorData) {
+        wantParam['calculatorData'] = calculatorData;
+      }
+      
+      hilog.info(DOMAIN_NUMBER, TAG, 'onContinue data saved successfully');
+      return AbilityConstant.OnContinueResult.AGREE;
+    } catch (error) {
+      hilog.error(DOMAIN_NUMBER, TAG, `onContinue error: ${JSON.stringify(error)}`);
+      return AbilityConstant.OnContinueResult.REJECT;
+    }
+  }
+
+  /**
+   * åº”ç”¨æ¥ç»­ - æ¢å¤è¿ç§»æ•°æ®ï¼ˆå†·å¯åŠ¨æˆ–å¤šå®ä¾‹çƒ­å¯åŠ¨ï¼‰
+   */
+  private restoreContinueData(want: Want) {
+    hilog.info(DOMAIN_NUMBER, TAG, 'restoreContinueData called');
+    
+    if (want.parameters) {
+      // æ¢å¤é¡µé¢è·¯å¾„
+      const currentPage = want.parameters['currentPage'] as string;
+      if (currentPage) {
+        AppStorage.setOrCreate('continuePage', currentPage);
+        hilog.info(DOMAIN_NUMBER, TAG, `Restored page: ${currentPage}`);
+      }
+      
+      // æ¢å¤æˆå°±é¡µé¢çš„æ»šåŠ¨ä½ï¿½?
+      const achievementScrollOffset = want.parameters['achievementScrollOffset'] as number;
+      if (achievementScrollOffset) {
+        AppStorage.setOrCreate('achievementScrollOffset', achievementScrollOffset);
+        hilog.info(DOMAIN_NUMBER, TAG, `Restored achievement scroll offset: ${achievementScrollOffset}`);
+      }
+      
+      // æ¢å¤å…¶ä»–æ•°æ®
+      const calculatorData = want.parameters['calculatorData'] as string;
+      if (calculatorData) {
+        AppStorage.setOrCreate('calculatorData', calculatorData);
+        hilog.info(DOMAIN_NUMBER, TAG, 'Restored calculator data');
+      }
+    }
+    
+    // è§¦å‘é¡µé¢æ¢å¤ï¼ˆå¿…é¡»åœ¨åŒæ­¥æ–¹æ³•ä¸­æ‰§è¡Œï¼‰
+    this.context.restoreWindowStage(this.storage);
+  }
+
+  /**
+   * åº”ç”¨æ¥ç»­ - å•å®ä¾‹çƒ­å¯åŠ¨æ—¶è°ƒï¿½?
+   */
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam) {
+    hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant called');
+    
+    // æ£€æŸ¥æ˜¯å¦ä¸ºè¿ç§»å¯åŠ¨
+    if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
+      hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant launched by continuation');
+      
+      // è®¾ç½®è¿ç§»çŠ¶æ€ä¸ºå¯è¿ï¿½?
+      this.context.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (result) => {
+        hilog.info(DOMAIN_NUMBER, TAG, `setMissionContinueState result: ${JSON.stringify(result)}`);
+      });
+      
+      // æ¢å¤è¿ç§»æ•°æ®
+      this.restoreContinueData(want);
+    }
+  }
+
+  /**
+   * åº”ç”¨æ¥ç»­ - çª—å£æ¢å¤
+   * è¿ç§»å¯åŠ¨æ—¶ï¼Œä¼šè§¦å‘æ­¤ç”Ÿå‘½å‘¨æœŸå‡½æ•°ï¼Œè€Œä¸æ˜¯onWindowStageCreate
+   */
+  onWindowStageRestore(windowStage: window.WindowStage) {
+    hilog.info(DOMAIN_NUMBER, TAG, 'onWindowStageRestore called');
+    
+    // è·å–è¦æ¢å¤çš„é¡µé¢è·¯å¾„
+const continuePage = AppStorage.get<string>('continuePage') || 'pages/EdgeFlowMainPage';
+    hilog.info(DOMAIN_NUMBER, TAG, `Loading continue page: ${continuePage}`);
+    
+    // åŠ è½½æ¢å¤çš„é¡µï¿½?
+    windowStage.loadContent(continuePage, (err, data) => {
+      if (err.code) {
+        hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load continue page. Cause: %{public}s', JSON.stringify(err) ?? '');
+        // å¦‚æœåŠ è½½å¤±è´¥ï¼Œå›é€€åˆ°ä¸»ï¿½?
+windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
+            if (err.code) {
+              hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load fallback page. Cause: %{public}s', JSON.stringify(err) ?? '');
+            }
+          });
+        return;
+      }
+      
+      hilog.info(DOMAIN_NUMBER, TAG, 'Succeeded in loading continue page. Data: %{public}s', JSON.stringify(data) ?? '');
+      
+      // è·å–UIContextå¹¶ä¿å­˜åˆ°AppStorage
+      let uiContext: UIContext | undefined = windowStage.getMainWindowSync().getUIContext();
+      AppStorage.setOrCreate('uiContext', uiContext);
+      
+      // æ¸…é™¤ä¸´æ—¶å­˜å‚¨çš„è¿ç§»é¡µé¢è·¯ï¿½?
+      AppStorage.delete('continuePage');
+    });
+  }
+}
+ÀÔrD“Ù!@ohos.app.ability.AbilityConstant»@ohos.app.ability.UIAbility«@ohos.hilogÔrE—ªassertions¨external¢id¤meta±moduleSideEffectsªresolvedByµsyntheticNamedExportsAÃÙu hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.app.ability.AbilityConstant.d.tsÔrF‘¯hostModulesInfo‘ÔrG’²hostDependencyName®hostModuleNameÙ!@ohos.app.ability.AbilityConstant¥entryÃªoh-resolveÂEAÃÙo hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.app.ability.UIAbility.d.tsF‘G»@ohos.app.ability.UIAbility¥entryÃªoh-resolveÂEAÃÙ_ hvigor_ignore_G:_DevEco program_DevEco Studio_sdk_default_openharmony_ets_api_@ohos.hilog.d.tsF‘G«@ohos.hilog¥entryÃªoh-resolveÂ“ÔrH–§version¤fileªsourceRoot§sources¥names¨mappings¯EntryAbility.js ‘¯EntryAbility.tsÜ –”    ”  	”  ”  1”?  ÌB”Ì@  ÌC–”    ”  ”  #”  1”3  ÌB”4  ÌC–”   ” 	” ” ” 3”  4–”   ” ”	 	” ” ” –”   ” ” ” ” ” ˜”   ” ” ” ” ”! "”* *”3 3‘”  ’” ”  —” 	” 		” 	” 	”' 	*”) 	,”* 	-’” Ì¹ ” Ì¹–” ” 
+” ” ” ” ?” ” 	” 
+” ” ”  ”" ”% !”' #”3 /”5 1”ÌG ÌC”ÌH ÌD”ÌI ÌE’” ” œ” ” ” ” ”$  ”) %”8 4”9 5”ÌE ÌA”ÌF ÌB”ÌR ÌN”ÌT ÌPœ” ” ” ” ” ”$ ”&  ”) #”+ %”ÌM ÌG”ÌN ÌH”ÌO ÌI’” ” ˜” ” 
+” ”$ ”% ”) #”* $”+ %‘”	 ’” ” Ü ” ” ” 	” ” ”, (”- )”< 8”= 9”ÌJ ÌF”ÌK ÌG”ÌQ ÌM”ÌS ÌO”ÌT ÌP”ÌZ ÌV”Ì\ ÌX”Ì^ ÌZÜ ” ” ” ” ” ”$ ”&  ”) #”+ %”ÌN ÌH”ÌR ÌL”ÌS ÌM”Ì\ ÌV”Ì] ÌW”Ìc Ì]”Ìd Ì^”Ìf Ì`”Ìg Ìa”Ìh Ìb”” ”	 ”
+ ” ’” ” ’” ” ” ” 	” 
+” ” ”  ”" ”% !”' #”3 /”5 1”ÌH ÌD”ÌI ÌE”ÌJ ÌF’” ” ”” ” ” ”# 5’”  ”ÌA  =” !” !	” !
+” !” !”  !”" !”% !!”' !#”3 !/”5 !1”ÌR !ÌN”ÌS !ÌO”ÌT !ÌP” " ” "” "” "”  "”8 "0”: "2”; "3”> "6”Ì@ "8”ÌD "<”ÌF ">”ÌH "Ì@–” #” #
+” #” #” #” #Ü ” $” $” $” $” $”) $!”+ $#”. $&”0 $(”Ì_ $ÌW”Ìa $ÌY”Ìe $Ì]”Ìf $Ì^”Ìo $Ìg”Ìp $Ìh”Ìs $Ìk”Ìt $Ìl”Ìx $Ìp”Ìz $Ìr”Ì{ $Ìs”Ì| $Ìt’” %” %‘” &Ü ” '” '” '” '” '”$ '”& ' ”) '#”+ '%”Ì_ 'ÌY”Ìa 'Ì[”Ìe 'Ì_”Ìf 'Ì`”Ìo 'Ìi”Ìp 'Ìj”Ìt 'Ìn”Ìu 'Ìo”Ìy 'Ìs”Ì{ 'Ìu”Ì| 'Ìv”Ì} 'Ìwœ” )” )
+” )” )-”' )8”( )9”9 )ÌJ”; )ÌL”< )ÌM”ÌH )ÌY”ÌJ )Ì[”ÌK )Ì[š” *” *” *”" *”# *”. *(”0 **”9 *3”: *4”; *5”” +”	 +”
+ +” +’” ,” ,’” .” .’” /”ÌA /=” 0” 0	” 0
+” 0” 0”  0”" 0”% 0!”' 0#”3 0/”5 01”ÌS 0ÌO”ÌT 0ÌP”ÌU 0ÌQ’” 1” 1’” 3” 3’” 4”, 4(” 5” 5	” 5
+” 5” 5”  5”" 5”% 5!”' 5#”3 5/”5 51”ÌK 5ÌG”ÌL 5ÌH”ÌM 5ÌI’” 6” 6’” 8” 8’” 9”) 9%” :” :	” :
+” :” :”  :”" :”% :!”' :#”3 :/”5 :1”ÌK :ÌG”ÌL :ÌH”ÌM :ÌI’” ;” ;‘” =‘” Ì@”” ÌA” ÌA” ÌA” ÌA.œ” ÌB” ÌB	” ÌB
+” ÌB” ÌB”  ÌB”" ÌB”% ÌB!”' ÌB#”: ÌB6”; ÌB7”< ÌB8’” ÌD” ÌD’” ÌE”' ÌE!” ÌF ” ÌF” ÌF”  ÌF”* ÌF”+ ÌF”. ÌF"”/ ÌF+”< ÌF8”= ÌF9”ÌA ÌF=”ÌY ÌFÌU”ÌZ ÌFÌV” ÌG” ÌG” ÌG” ÌG” ÌG”$ ÌG”& ÌG ”) ÌG#”+ ÌG%”< ÌG6”ÌG ÌGÌA”ÌI ÌGÌC”ÌJ ÌGÌD”ÌK ÌGÌE’” ÌI”" ÌI˜” ÌJ” ÌJ” ÌJ”# ÌJ”$ ÌJ”' ÌJ!”2 ÌJ,”3 ÌJ-’” ÌL” ÌL›” ÌM” ÌM”) ÌM#”, ÌM&”6 ÌM0”7 ÌM1”: ÌM4”; ÌM=”ÌT ÌMÌV”ÌU ÌMÌW”ÌV ÌMÌX”” ÌN” ÌN
+”' ÌN!”) ÌN#˜” ÌO” ÌO” ÌO”3 ÌO+”4 ÌO,”7 ÌO/”ÌN ÌOÌF”ÌO ÌOÌG” ÌP” ÌP” ÌP” ÌP” ÌP”( ÌP ”* ÌP"”- ÌP%”/ ÌP'”ÌS ÌPÌK”Ìj ÌPÌb”Ìl ÌPÌd”Ìm ÌPÌe”Ìn ÌPÌf‘” ÌQ’” ÌS”% ÌS’” ÌT”! ÌT›” ÌU” ÌU”  ÌU”# ÌU”- ÌU'”. ÌU(”1 ÌU+”2 ÌU4”ÌB ÌUÌD”ÌC ÌUÌE”ÌD ÌUÌF”” ÌV” ÌV
+” ÌV”  ÌV˜” ÌW” ÌW” ÌW”* ÌW"”+ ÌW#”. ÌW&”< ÌW4”= ÌW5‘” ÌXœ” ÌZ” ÌZ” ÌZ” ÌZ” ÌZ”$ ÌZ”& ÌZ ”) ÌZ#”+ ÌZ%”ÌO ÌZÌI”ÌP ÌZÌJ”ÌQ ÌZÌK˜” Ì[” Ì[”" Ì[”# Ì[”3 Ì[-”4 Ì[.”9 Ì[3”: Ì[4‘”	 Ì\”” Ì\” Ì\” Ì\” Ì\Ü ” Ì]” Ì]” Ì]” Ì]” Ì]”% Ì]”' Ì]!”* Ì]$”, Ì]&”ÌA Ì];”ÌE Ì]?”ÌF Ì]Ì@”ÌO Ì]ÌI”ÌP Ì]ÌJ”ÌU Ì]ÌO”ÌV Ì]ÌP”ÌX Ì]ÌR”ÌY Ì]ÌS”ÌZ Ì]ÌT˜” Ì^” Ì^”" Ì^”# Ì^”3 Ì^-”4 Ì^.”: Ì^4”; Ì^5‘”	 Ì_’” Ì`” Ì`‘” Ìb‘” Ìd”” Ìe
+” Ìe” Ìe” Ìe(œ” Ìf” Ìf	” Ìf
+” Ìf” Ìf”  Ìf”" Ìf”% Ìf!”' Ìf#”ÌC Ìf?”ÌD ÌfÌ@”ÌE ÌfÌA–” Ìh” Ìh” Ìh” Ìh” Ìh” Ìh’” Ìi” Ìi›” Ìj” Ìj” Ìj”  Ìj”$ Ìj”% Ìj”/ Ìj)”0 Ìj*”= Ìj7”> ÌjÌB”? ÌjÌC”” Ìk” Ìk
+” Ìk” Ìkš” Ìl” Ìl” Ìl”& Ìl”' Ìl”5 Ìl-”7 Ìl/”ÌB Ìl:”ÌC Ìl;”ÌD Ìl<” Ìm” Ìm” Ìm” Ìm” Ìm”( Ìm ”* Ìm"”- Ìm%”/ Ìm'”ÌA Ìm9”ÌL ÌmÌD”ÌN ÌmÌF”ÌO ÌmÌG”ÌP ÌmÌH‘” Ìn’” Ìp” Ìp›” Ìq” Ìq”) Ìq#”, Ìq&”0 Ìq*”1 Ìq+”; Ìq5”< Ìq6”ÌU ÌqÌO”ÌV ÌqÌZ”ÌW ÌqÌ[”” Ìr” Ìr
+”' Ìr!”) Ìr#š” Ìs” Ìs” Ìs”& Ìs”' Ìs”Ì@ Ìs8”ÌB Ìs:”ÌY ÌsÌQ”ÌZ ÌsÌR”Ì[ ÌsÌS” Ìt” Ìt” Ìt” Ìt” Ìt”( Ìt ”* Ìt"”- Ìt%”/ Ìt'”ÌV ÌtÌN”Ìm ÌtÌe”Ìo ÌtÌg”Ìp ÌtÌh”Ìq ÌtÌi‘” Ìu’” Ìw” Ìw›” Ìx” Ìx”  Ìx”# Ìx”' Ìx!”( Ìx"”2 Ìx,”3 Ìx-”ÌC Ìx=”ÌD ÌxÌH”ÌE ÌxÌI”” Ìy” Ìy
+” Ìy”  Ìyš” Ìz” Ìz” Ìz”& Ìz”' Ìz”7 Ìz/”9 Ìz1”ÌG Ìz?”ÌH ÌzÌ@”ÌI ÌzÌAœ” Ì{” Ì{” Ì{” Ì{” Ì{”( Ì{ ”* Ì{"”- Ì{%”/ Ì{'”ÌI Ì{ÌA”ÌJ Ì{ÌB”ÌK Ì{ÌC‘” Ì|‘”	 Ì}’” Ì” Ìœ” Ì€” Ì€” Ì€	” Ì€” Ì€”' Ì€#”( Ì€$”, Ì€(”- Ì€)”4 Ì€0”5 Ì€1”6 Ì€2’” Ì” Ì‘” Ìƒ‘” Ì…–” Ì†” Ì†” Ì†” Ì†” Ì†” Ì†Ì@œ” Ì‡” Ì‡	” Ì‡
+” Ì‡” Ì‡”  Ì‡”" Ì‡”% Ì‡!”' Ì‡#”9 Ì‡5”: Ì‡6”; Ì‡7’” Ì‰” Ì‰œ” ÌŠ” ÌŠ” ÌŠ” ÌŠ”$ ÌŠ ”) ÌŠ%”8 ÌŠ4”9 ÌŠ5”ÌE ÌŠÌA”ÌF ÌŠÌB”ÌR ÌŠÌN”ÌT ÌŠÌPœ” Ì‹” Ì‹” Ì‹” Ì‹” Ì‹”$ Ì‹”& Ì‹ ”) Ì‹#”+ Ì‹%”ÌO Ì‹ÌI”ÌP Ì‹ÌJ”ÌQ Ì‹ÌK’” Ì” ÌÜ ” Ì” Ì
+” Ì” Ì” Ì”0 Ì*”1 Ì+”Ì@ Ì:”ÌA Ì;”ÌN ÌÌH”ÌO ÌÌI”ÌU ÌÌO”ÌW ÌÌQ”ÌX ÌÌR”Ì^ ÌÌX”Ì` ÌÌZ”Ìb ÌÌ\Ü ” Ì” Ì” Ì” Ì” Ì”( Ì ”* Ì"”- Ì%”/ Ì'”ÌR ÌÌJ”ÌV ÌÌN”ÌW ÌÌO”Ì` ÌÌX”Ìa ÌÌY”Ìg ÌÌ_”Ìh ÌÌ`”Ìj ÌÌb”Ìk ÌÌc”Ìl ÌÌd”” Ì” Ì” Ì” Ì	’” Ì’” Ì’˜” Ì“” Ì“
+” Ì“”$ Ì“”% Ì“”) Ì“#”* Ì“$”+ Ì“%‘”	 Ì”’” Ì•” Ì•‘” Ì—‘” Ìš”” Ì›” Ì›” Ì›”$ Ì›6œ” Ìœ” Ìœ	” Ìœ
+” Ìœ” Ìœ”  Ìœ”" Ìœ”% Ìœ!”' Ìœ#”ÌD ÌœÌ@”ÌE ÌœÌA”ÌF ÌœÌB’” Ì” Ì” ÌŸ ” ÌŸ” ÌŸ” ÌŸ”' ÌŸ”( ÌŸ ”+ ÌŸ#”, ÌŸ,”: ÌŸ:”; ÌŸ;”? ÌŸ?”ÌW ÌŸÌW”ÌX ÌŸÌX” Ì ” Ì 	” Ì 
+” Ì ” Ì ”  Ì ”" Ì ”% Ì !”' Ì #”ÌA Ì =”ÌM Ì ÌI”ÌO Ì ÌK”ÌP Ì ÌL”ÌQ Ì ÌM’” Ì¢” Ì¢” Ì£” Ì£” Ì£” Ì£”  Ì£”, Ì£(”. Ì£*”/ Ì£+”2 Ì£.”4 Ì£0”8 Ì£4”: Ì£6”< Ì£8–” Ì¤” Ì¤
+” Ì¤” Ì¤” Ì¤” Ì¤Ü ” Ì¥” Ì¥” Ì¥” Ì¥” Ì¥”) Ì¥!”+ Ì¥#”. Ì¥&”0 Ì¥(”Ìa Ì¥ÌY”Ìc Ì¥Ì[”Ìg Ì¥Ì_”Ìh Ì¥Ì`”Ìq Ì¥Ìi”Ìr Ì¥Ìj”Ìu Ì¥Ìm”Ìv Ì¥Ìn”Ìz Ì¥Ìr”Ì| Ì¥Ìt”Ì} Ì¥Ìu”Ì~ Ì¥Ìv’” Ì¦”  Ì¦” Ì§ ” Ì§” Ì§”' Ì§”( Ì§”Ì@ Ì§0”ÌB Ì§2”ÌC Ì§3”ÌF Ì§6”ÌH Ì§8”ÌL Ì§<”ÌN Ì§>”ÌP Ì§Ì@–” Ì¨” Ì¨” Ì¨” Ì¨”  Ì¨”" Ì¨Ü ” Ì©” Ì©” Ì©”# Ì©”$ Ì©”1 Ì©'”3 Ì©)”6 Ì©,”8 Ì©.”Ìi Ì©Ì_”Ìk Ì©Ìa”Ìo Ì©Ìe”Ìp Ì©Ìf”Ìy Ì©Ìo”Ìz Ì©Ìp”Ì} Ì©Ìs”Ì~ Ì©Ìt”Ì‚ Ì©Ìx”Ì„ Ì©Ìz”Ì… Ì©Ì{”Ì† Ì©Ì|‘” Ìª”” Ì«
+” Ì«” Ì«” Ì«’” Ì¬” Ì¬‘” Ì­Ü ” Ì¯” Ì¯” Ì¯” Ì¯” Ì¯”$ Ì¯”& Ì¯ ”) Ì¯#”+ Ì¯%”Ìa Ì¯Ì[”Ìc Ì¯Ì]”Ìg Ì¯Ìa”Ìh Ì¯Ìb”Ìq Ì¯Ìk”Ìr Ì¯Ìl”Ìv Ì¯Ìp”Ìw Ì¯Ìq”Ì{ Ì¯Ìu”Ì} Ì¯Ìw”Ì~ Ì¯Ìx”Ì Ì¯Ìy’” Ì±”( Ì±"œ” Ì²” Ì²
+” Ì²” Ì²-”' Ì²8”( Ì²9”9 Ì²ÌJ”; Ì²ÌL”< Ì²ÌM”ÌH Ì²ÌY”ÌJ Ì²Ì[”ÌK Ì²Ì\š” Ì³” Ì³” Ì³”" Ì³”# Ì³”. Ì³(”0 Ì³*”9 Ì³3”: Ì³4”; Ì³5’” Ìµ” Ìµ˜” Ì¶” Ì¶” Ì¶” Ì¶” Ì¶”, Ì¶&”- Ì¶'”. Ì¶(”” Ì·”	 Ì·”
+ Ì·” Ì·’” Ì¸” Ì¸‘” Ì¹ÔrI–§version¤file§sources®sourcesContent¥names¨mappingsÀ‘À‘ÀÜ Ÿ‘”    ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”  	 ‘”  
+ ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”   ‘”    ‘”  ! ‘”  " ‘”  # ‘”  $ ‘”  % ‘”  & ‘”  ' ‘”  ( ‘”  ) ‘”  * ‘”  + ‘”  , ‘”  - ‘”  . ‘”  / ‘”  0 ‘”  1 ‘”  2 ‘”  3 ‘”  4 ‘”  5 ‘”  6 ‘”  7 ‘”  8 ‘”  9 ‘”  : ‘”  ; ‘”  < ‘”  = ‘”  > ‘”  ? ‘”  Ì@ ‘”  ÌA ‘”  ÌB ‘”  ÌC ‘”  ÌD ‘”  ÌE ‘”  ÌF ‘”  ÌG ‘”  ÌH ‘”  ÌI ‘”  ÌJ ‘”  ÌK ‘”  ÌL ‘”  ÌM ‘”  ÌN ‘”  ÌO ‘”  ÌP ‘”  ÌQ ‘”  ÌR ‘”  ÌS ‘”  ÌT ‘”  ÌU ‘”  ÌV ‘”  ÌW ‘”  ÌX ‘”  ÌY ‘”  ÌZ ‘”  Ì[ ‘”  Ì\ ‘”  Ì] ‘”  Ì^ ‘”  Ì_ ‘”  Ì` ‘”  Ìa ‘”  Ìb ‘”  Ìc ‘”  Ìd ‘”  Ìe ‘”  Ìf ‘”  Ìg ‘”  Ìh ‘”  Ìi ‘”  Ìj ‘”  Ìk ‘”  Ìl ‘”  Ìm ‘”  Ìn ‘”  Ìo ‘”  Ìp ‘”  Ìq ‘”  Ìr ‘”  Ìs ‘”  Ìt ‘”  Ìu ‘”  Ìv ‘”  Ìw ‘”  Ìx ‘”  Ìy ‘”  Ìz ‘”  Ì{ ‘”  Ì| ‘”  Ì} ‘”  Ì~ ‘”  Ì ‘”  Ì€ ‘”  Ì ‘”  Ì‚ ‘”  Ìƒ ‘”  Ì„ ‘”  Ì… ‘”  Ì† ‘”  Ì‡ ‘”  Ìˆ ‘”  Ì‰ ‘”  ÌŠ ‘”  Ì‹ ‘”  ÌŒ ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì ‘”  Ì‘ ‘”  Ì’ ‘”  Ì“ ‘”  Ì” ‘”  Ì• ‘”  Ì– ‘”  Ì— ‘”  Ì˜ ‘”  Ì™ ‘”  Ìš ‘”  Ì› ‘”  Ìœ ‘”  Ì ‘”  Ì ÔrJ’§missing¦pluginÃ¦genAbcÂÔ  ÔrK”²dynamicImportCache¹exportAllDeclarationCache»exportNamedDeclarationCache«importCache“ÔrL•¤type¥start£endªspecifiers¦source±ImportDeclaration Ì@‘ÔrM”¤type¥start£end¥local¶ImportDefaultSpecifierÔrN”¤type¥start£end¤nameªIdentifier¯AbilityConstantÔrO•¤type¥start£end¥value£raw§Literal?Ù!@ohos.app.ability.AbilityConstantÙ#"@ohos.app.ability.AbilityConstant"L±ImportDeclarationÌBÌv‘M¶ImportDefaultSpecifierÌIÌRNªIdentifierÌIÌR©UIAbilityO§LiteralÌXÌu»@ohos.app.ability.UIAbility½"@ohos.app.ability.UIAbility"L±ImportDeclarationÌxÌ˜‘M¶ImportDefaultSpecifierÌÌ„NªIdentifierÌÌ„¥hilogO§LiteralÌŠÌ—«@ohos.hilog­"@ohos.hilog"

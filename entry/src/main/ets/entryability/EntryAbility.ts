@@ -74,14 +74,14 @@ const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMain
       // 保存需要迁移的数据到wantParam
       wantParam['currentPage'] = currentPage;
       
-      // 保存成就页面的滚动位�?
+      // 保存成就页面的滚动位置
       const achievementScrollOffset = AppStorage.get<number>('achievementScrollOffset');
       if (achievementScrollOffset) {
         wantParam['achievementScrollOffset'] = achievementScrollOffset;
         hilog.info(DOMAIN_NUMBER, TAG, `Saved achievement scroll offset: ${achievementScrollOffset}`);
       }
       
-      // 如果有其他需要迁移的数据，也可以在这里保�?
+      // 如果有其他需要迁移的数据，也可以在这里保存
       // 例如：计算器的当前输入值、历史记录等
       const calculatorData = AppStorage.get<string>('calculatorData');
       if (calculatorData) {
@@ -110,7 +110,7 @@ const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMain
         hilog.info(DOMAIN_NUMBER, TAG, `Restored page: ${currentPage}`);
       }
       
-      // 恢复成就页面的滚动位�?
+      // 恢复成就页面的滚动位置
       const achievementScrollOffset = want.parameters['achievementScrollOffset'] as number;
       if (achievementScrollOffset) {
         AppStorage.setOrCreate('achievementScrollOffset', achievementScrollOffset);
@@ -130,7 +130,7 @@ const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMain
   }
 
   /**
-   * 应用接续 - 单实例热启动时调�?
+   * 应用接续 - 单实例热启动时调用
    */
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam) {
     hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant called');
@@ -139,7 +139,7 @@ const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMain
     if (launchParam.launchReason === AbilityConstant.LaunchReason.CONTINUATION) {
       hilog.info(DOMAIN_NUMBER, TAG, 'onNewWant launched by continuation');
       
-      // 设置迁移状态为可迁�?
+      // 设置迁移状态为可迁移
       this.context.setMissionContinueState(AbilityConstant.ContinueState.ACTIVE, (result) => {
         hilog.info(DOMAIN_NUMBER, TAG, `setMissionContinueState result: ${JSON.stringify(result)}`);
       });
@@ -160,11 +160,11 @@ const currentPage = AppStorage.get<string>('currentPage') || 'pages/EdgeFlowMain
 const continuePage = AppStorage.get<string>('continuePage') || 'pages/EdgeFlowMainPage';
     hilog.info(DOMAIN_NUMBER, TAG, `Loading continue page: ${continuePage}`);
     
-    // 加载恢复的页�?
+    // 加载恢复的页面
     windowStage.loadContent(continuePage, (err, data) => {
       if (err.code) {
         hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load continue page. Cause: %{public}s', JSON.stringify(err) ?? '');
-        // 如果加载失败，回退到主�?
+        // 如果加载失败，回退到主页
 windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
             if (err.code) {
               hilog.error(DOMAIN_NUMBER, TAG, 'Failed to load fallback page. Cause: %{public}s', JSON.stringify(err) ?? '');
@@ -179,7 +179,7 @@ windowStage.loadContent('pages/EdgeFlowMainPage', (err, data) => {
       let uiContext: UIContext | undefined = windowStage.getMainWindowSync().getUIContext();
       AppStorage.setOrCreate('uiContext', uiContext);
       
-      // 清除临时存储的迁移页面路�?
+      // 清除临时存储的迁移页面路径
       AppStorage.delete('continuePage');
     });
   }

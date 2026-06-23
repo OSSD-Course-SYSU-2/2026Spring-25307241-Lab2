@@ -1,6 +1,6 @@
 /**
- * ±ù¼£¡¤EdgeFlow - Ö÷µ¼º½Ò³Ãæ
- * µ×²¿ÎåTabµ¼º½£ºÑµÁ·Ì¨¡¢¶¯×÷¿â¡¢±ùÎÅ¡¢³É¾Í¡¢ÎÒµÄ
+ * å†°è¿¹Â·EdgeFlow - ä¸»å¯¼èˆªé¡µé¢
+ * åº•éƒ¨äº”Tabå¯¼èˆªï¼šè®­ç»ƒå°ã€åŠ¨ä½œåº“ã€å†°é—»ã€æˆå°±ã€æˆ‘çš„
  */
 
 import router from '@ohos.router';
@@ -20,11 +20,11 @@ struct EdgeFlowMainPage {
   @State selectedMoves: string[] = [];
   @State showMoveSelector: boolean = false;
   
-  // µ±ÌìÀúÊ·Á·Ï°¼ÇÂ¼
+  // å½“å¤©å†å²ç»ƒä¹ è®°å½•
   @State todayRecords: PracticeRecord[] = [];
   @State showHistoryPanel: boolean = false;
   
-  // ÖÜÑµÁ·¼Æ»®
+  // å‘¨è®­ç»ƒè®¡åˆ’
   @State currentWeekPlan: WeeklyPlan | null = null;
   @State showPlanPanel: boolean = false;
   @State editingDayIndex: number = -1;
@@ -36,15 +36,15 @@ struct EdgeFlowMainPage {
   private timer: number = -1;
   private dataStore: DataStore = DataStore.getInstance();
   
-  // ¿ÉÑ¡¶¯×÷ÁĞ±í
+  // å¯é€‰åŠ¨ä½œåˆ—è¡¨
   private jumpMoves: string[] = ['1A', '2A', '3A', '1Lz', '2Lz', '3Lz', '1F', '2F', '3F', '1Lo', '2Lo', '3Lo', '1S', '2S', '3S', '1T', '2T', '3T'];
   private spinMoves: string[] = ['USp', 'SSp', 'CSp', 'LSp', 'CCoSp'];
   private stepMoves: string[] = ['StSq', 'CiSt', 'RoLi', 'SlSt'];
   
   aboutToAppear() {
-    // ×¢ÊÍµô²âÊÔÊı¾İÉú³É£¬±ÜÃâ³õÊ¼Öµ²»ÎªÁã
+    // æ³¨é‡Šæ‰æµ‹è¯•æ•°æ®ç”Ÿæˆï¼Œé¿å…åˆå§‹å€¼ä¸ä¸ºé›¶
     // TestDataGenerator.getInstance().generateTestData();
-    // ¼ÓÔØ½ñÈÕ¼ÇÂ¼ºÍÖÜ¼Æ»®
+    // åŠ è½½ä»Šæ—¥è®°å½•å’Œå‘¨è®¡åˆ’
     this.loadTodayRecords();
     this.loadCurrentWeekPlan();
   }
@@ -64,14 +64,14 @@ struct EdgeFlowMainPage {
     this.currentWeekPlan = plan || null;
   }
   
-  // ¸ñÊ½»¯Ê±¼ä
+  // æ ¼å¼åŒ–æ—¶é—´
   formatTime(seconds: number): string {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   }
   
-  // ¼ÆËãÆ£ÀÍ¶È
+  // è®¡ç®—ç–²åŠ³åº¦
   calculateFatigue(): number {
     let fatigue = 0;
     this.selectedMoves.forEach(move => {
@@ -82,34 +82,34 @@ struct EdgeFlowMainPage {
     return fatigue;
   }
   
-  // »ñÈ¡½ñÈÕ×ÜÑµÁ··ÖÖÓ
+  // è·å–ä»Šæ—¥æ€»è®­ç»ƒåˆ†é’Ÿ
   getTodayTotalMinutes(): number {
-    // ¼ÆËãÒÑ±£´æ¼ÇÂ¼µÄ×ÜÊ±³¤
+    // è®¡ç®—å·²ä¿å­˜è®°å½•çš„æ€»æ—¶é•¿
     const savedSeconds = this.todayRecords.reduce((sum, record) => sum + record.duration, 0);
-    // ¼ÓÉÏµ±Ç°ÕıÔÚÑµÁ·µÄÊ±³¤
+    // åŠ ä¸Šå½“å‰æ­£åœ¨è®­ç»ƒçš„æ—¶é•¿
     const currentSeconds = this.isTraining ? this.trainingTime : 0;
     return Math.floor((savedSeconds + currentSeconds) / 60);
   }
   
-  // »ñÈ¡½ñÈÕ×ÜÆ£ÀÍ¶È
+  // è·å–ä»Šæ—¥æ€»ç–²åŠ³åº¦
   getTodayTotalFatigue(): number {
-    // ¼ÆËãÒÑ±£´æ¼ÇÂ¼µÄ×ÜÆ£ÀÍ¶È
+    // è®¡ç®—å·²ä¿å­˜è®°å½•çš„æ€»ç–²åŠ³åº¦
     const savedFatigue = this.todayRecords.reduce((sum, record) => sum + record.fatigue, 0);
-    // ¼ÓÉÏµ±Ç°ÕıÔÚÑµÁ·µÄÆ£ÀÍ¶È
+    // åŠ ä¸Šå½“å‰æ­£åœ¨è®­ç»ƒçš„ç–²åŠ³åº¦
     const currentFatigue = this.isTraining ? this.calculateFatigue() : 0;
     return savedFatigue + currentFatigue;
   }
   
-  // »ñÈ¡½ñÈÕ×ÜÑµÁ·´ÎÊı
+  // è·å–ä»Šæ—¥æ€»è®­ç»ƒæ¬¡æ•°
   getTodayTotalCount(): number {
-    // ÒÑ±£´æ¼ÇÂ¼Êı + µ±Ç°ÕıÔÚÑµÁ·µÄ¶¯×÷Êı
+    // å·²ä¿å­˜è®°å½•æ•° + å½“å‰æ­£åœ¨è®­ç»ƒçš„åŠ¨ä½œæ•°
     return this.todayRecords.length + (this.isTraining ? this.selectedMoves.length : 0);
   }
   
   build() {
     Stack() {
       Column() {
-        // ÄÚÈİÇøÓò
+        // å†…å®¹åŒºåŸŸ
         Column() {
           if (this.currentTab === 0) {
             this.buildTrainingGround()
@@ -124,7 +124,7 @@ struct EdgeFlowMainPage {
         .width('100%')
         .layoutWeight(1)
         
-        // µ×²¿µ¼º½À¸
+        // åº•éƒ¨å¯¼èˆªæ 
         this.buildBottomNav()
       }
       .width('100%')
@@ -134,22 +134,22 @@ struct EdgeFlowMainPage {
         colors: [['#00D2FF', 0.0], ['#3A7BD5', 1.0]]
       })
       
-      // ¶¯×÷Ñ¡Ôñµ¯´°
+      // åŠ¨ä½œé€‰æ‹©å¼¹çª—
       if (this.showMoveSelector) {
         this.buildMoveSelector()
       }
       
-      // ÀúÊ·¼ÇÂ¼Ãæ°å
+      // å†å²è®°å½•é¢æ¿
       if (this.showHistoryPanel) {
         this.buildHistoryPanel()
       }
       
-      // ¼Æ»®±¾Ãæ°å
+      // è®¡åˆ’æœ¬é¢æ¿
       if (this.showPlanPanel) {
         this.buildPlanPanel()
       }
       
-      // Ìí¼Ó¶¯×÷Ãæ°å
+      // æ·»åŠ åŠ¨ä½œé¢æ¿
       if (this.showAddMovePanel) {
         this.buildAddMovePanel()
       }
@@ -158,23 +158,23 @@ struct EdgeFlowMainPage {
     .height('100%')
   }
 
-  // ÑµÁ·Ì¨
+  // è®­ç»ƒå°
   @Builder
   buildTrainingGround() {
     Scroll() {
       Column() {
         Row() {
-          Text('?? ÑµÁ·Ì¨')
+          Text('â›¸ï¸ è®­ç»ƒå°')
             .fontSize(DeviceUtils.isWearable() ? 16 : 24)
             .fontWeight(FontWeight.Bold)
             .fontColor('#FFFFFF')
           
           Blank()
           
-          // ÊÖ±í¶ËÒş²Ø²¿·Ö°´Å¥£¬Ö»±£ÁôºËĞÄ¹¦ÄÜ
+          // æ‰‹è¡¨ç«¯éšè—éƒ¨åˆ†æŒ‰é’®ï¼Œåªä¿ç•™æ ¸å¿ƒåŠŸèƒ½
           if (!DeviceUtils.isWearable()) {
-            // ¼Æ»®±¾°´Å¥
-            Button('?? ¼Æ»®')
+            // è®¡åˆ’æœ¬æŒ‰é’®
+            Button('ğŸ“… è®¡åˆ’')
               .fontSize(13)
               .fontColor('#FFFFFF')
               .backgroundColor('rgba(255, 255, 255, 0.2)')
@@ -185,8 +185,8 @@ struct EdgeFlowMainPage {
                 this.showPlanPanel = true;
               })
             
-            // ÀúÊ·¼ÇÂ¼°´Å¥
-            Button('?? ¼ÇÂ¼')
+            // å†å²è®°å½•æŒ‰é’®
+            Button('ğŸ“‹ è®°å½•')
               .fontSize(13)
               .fontColor('#FFFFFF')
               .backgroundColor('rgba(255, 255, 255, 0.2)')
@@ -198,8 +198,8 @@ struct EdgeFlowMainPage {
                 this.showHistoryPanel = true;
               })
             
-            // ¼ÆËãÆ÷Èë¿Ú
-            Button('?? ¼ÆËãÆ÷')
+            // è®¡ç®—å™¨å…¥å£
+            Button('ğŸ§® è®¡ç®—å™¨')
               .fontSize(13)
               .fontColor('#FFFFFF')
               .backgroundColor('rgba(255, 255, 255, 0.2)')
@@ -213,8 +213,8 @@ struct EdgeFlowMainPage {
                 });
               })
           } else {
-            // ÊÖ±í¶ËÖ»ÏÔÊ¾¼ÆËãÆ÷°´Å¥
-            Button('??')
+            // æ‰‹è¡¨ç«¯åªæ˜¾ç¤ºè®¡ç®—å™¨æŒ‰é’®
+            Button('ğŸ§®')
               .fontSize(14)
               .fontColor('#FFFFFF')
               .backgroundColor('rgba(255, 255, 255, 0.2)')
@@ -232,12 +232,12 @@ struct EdgeFlowMainPage {
         .margin({ bottom: DeviceUtils.isWearable() ? 12 : 30 })
         
         if (!this.isTraining) {
-          // ´óÔ²»·¿ªÊ¼°´Å¥
+          // å¤§åœ†ç¯å¼€å§‹æŒ‰é’®
           Column() {
-            Text('??')
+            Text('â›¸ï¸')
               .fontSize(DeviceUtils.isWearable() ? 32 : 60)
             
-            Text('¿ªÊ¼ÑµÁ·')
+            Text('å¼€å§‹è®­ç»ƒ')
               .fontSize(DeviceUtils.isWearable() ? 14 : 20)
               .fontWeight(FontWeight.Bold)
               .fontColor('#FFFFFF')
@@ -253,19 +253,19 @@ struct EdgeFlowMainPage {
             this.showMoveSelector = true;
           })
           
-          // ÊÖ±í¶ËÌí¼Ó¸ü¶àÄÚÈİ£¬È·±£¿ÉÒÔ¹ö¶¯
+          // æ‰‹è¡¨ç«¯æ·»åŠ æ›´å¤šå†…å®¹ï¼Œç¡®ä¿å¯ä»¥æ»šåŠ¨
           if (DeviceUtils.isWearable()) {
             Column() {
-              Text('½ñÈÕÍ³¼Æ')
+              Text('ä»Šæ—¥ç»Ÿè®¡')
                 .fontSize(14)
                 .fontColor('#FFFFFF')
                 .margin({ top: 20, bottom: 10 })
               
               Row() {
                 Column() {
-                  Text('??')
+                  Text('â±ï¸')
                     .fontSize(20)
-                  Text(`${this.getTodayTotalMinutes()}·ÖÖÓ`)
+                  Text(`${this.getTodayTotalMinutes()}åˆ†é’Ÿ`)
                     .fontSize(12)
                     .fontColor('#FFFFFF')
                     .margin({ top: 4 })
@@ -273,9 +273,9 @@ struct EdgeFlowMainPage {
                 .layoutWeight(1)
                 
                 Column() {
-                  Text('??')
+                  Text('ğŸ¯')
                     .fontSize(20)
-                  Text(`${this.getTodayTotalCount()}´Î`)
+                  Text(`${this.getTodayTotalCount()}æ¬¡`)
                     .fontSize(12)
                     .fontColor('#FFFFFF')
                     .margin({ top: 4 })
@@ -289,25 +289,25 @@ struct EdgeFlowMainPage {
             .margin({ top: 20 })
           }
         } else {
-          // ÑµÁ·½øĞĞÖĞ
+          // è®­ç»ƒè¿›è¡Œä¸­
           Column() {
             Text(this.formatTime(this.trainingTime))
               .fontSize(DeviceUtils.isWearable() ? 32 : 48)
               .fontWeight(FontWeight.Bold)
               .fontColor('#FFFFFF')
             
-            Text(`ÒÑÑ¡¶¯×÷: ${this.selectedMoves.length}¸ö`)
+            Text(`å·²é€‰åŠ¨ä½œ: ${this.selectedMoves.length}ä¸ª`)
               .fontSize(DeviceUtils.isWearable() ? 11 : 16)
               .fontColor('rgba(255, 255, 255, 0.8)')
               .margin({ top: DeviceUtils.isWearable() ? 4 : 10 })
             
-            Text(`Æ£ÀÍ¶È: ${this.calculateFatigue()}`)
+            Text(`ç–²åŠ³åº¦: ${this.calculateFatigue()}`)
               .fontSize(DeviceUtils.isWearable() ? 11 : 16)
               .fontColor('rgba(255, 255, 255, 0.8)')
               .margin({ top: 4 })
             
-            // ½áÊøÑµÁ·°´Å¥
-            Button('½áÊøÑµÁ·')
+            // ç»“æŸè®­ç»ƒæŒ‰é’®
+            Button('ç»“æŸè®­ç»ƒ')
               .fontSize(DeviceUtils.isWearable() ? 13 : 18)
               .fontColor('#FFFFFF')
               .backgroundColor('rgba(255, 100, 100, 0.8)')
@@ -333,7 +333,7 @@ struct EdgeFlowMainPage {
     .edgeEffect(EdgeEffect.Spring)
   }
   
-  // ¿ªÊ¼ÑµÁ·
+  // å¼€å§‹è®­ç»ƒ
   startTraining() {
     this.isTraining = true;
     this.trainingTime = 0;
@@ -345,29 +345,29 @@ struct EdgeFlowMainPage {
   }
   
   
-  // Í£Ö¹ÑµÁ·
+  // åœæ­¢è®­ç»ƒ
   stopTraining() {
     if (this.timer !== -1) {
       clearInterval(this.timer);
       this.timer = -1;
     }
     
-    // ±£´æÑµÁ·¼ÇÂ¼
+    // ä¿å­˜è®­ç»ƒè®°å½•
     if (this.trainingTime > 0 && this.selectedMoves.length > 0) {
       const today = new Date();
       const dateStr = today.toISOString().split('T')[0];
       const timeStr = today.toTimeString().split(' ')[0].substring(0, 5);
       const fatigue = this.calculateFatigue();
       
-      // ÎªÃ¿¸öÑ¡ÖĞµÄ¶¯×÷±£´æÁ·Ï°¼ÇÂ¼
+      // ä¸ºæ¯ä¸ªé€‰ä¸­çš„åŠ¨ä½œä¿å­˜ç»ƒä¹ è®°å½•
       this.selectedMoves.forEach((moveId, index) => {
-        // ¼ÆËãÃ¿¸ö¶¯×÷µÄÁ·Ï°Ê±³¤£¨Æ½¾ù·ÖÅä×ÜÊ±³¤£©
+        // è®¡ç®—æ¯ä¸ªåŠ¨ä½œçš„ç»ƒä¹ æ—¶é•¿ï¼ˆå¹³å‡åˆ†é…æ€»æ—¶é•¿ï¼‰
         const moveDuration = Math.floor(this.trainingTime / this.selectedMoves.length);
         
-        // Éú³ÉÎ¨Ò»ID
+        // ç”Ÿæˆå”¯ä¸€ID
         const recordId = `${dateStr}-${timeStr}-${moveId}-${index}`;
         
-        // ±£´æÑµÁ·¼ÇÂ¼
+        // ä¿å­˜è®­ç»ƒè®°å½•
         this.dataStore.addPracticeRecord({
           id: recordId,
           moveName: moveId,
@@ -375,33 +375,33 @@ struct EdgeFlowMainPage {
           time: timeStr,
           duration: moveDuration,
           fatigue: Math.floor(fatigue / this.selectedMoves.length),
-          notes: `ÑµÁ·Ê±³¤: ${this.formatTime(moveDuration)}`
+          notes: `è®­ç»ƒæ—¶é•¿: ${this.formatTime(moveDuration)}`
         });
       });
       
-      // Çå¿ÕÑ¡ÖĞ¶¯×÷
+      // æ¸…ç©ºé€‰ä¸­åŠ¨ä½œ
       this.selectedMoves = [];
       
-      // Ë¢ĞÂ½ñÈÕ¼ÇÂ¼
+      // åˆ·æ–°ä»Šæ—¥è®°å½•
       this.loadTodayRecords();
     }
     
     this.isTraining = false;
   }
 
-  // ¶¯×÷Ñ¡Ôñµ¯´°
+  // åŠ¨ä½œé€‰æ‹©å¼¹çª—
   @Builder
   buildMoveSelector() {
     Column() {
       Column() {
-        Text('Ñ¡ÔñÑµÁ·¶¯×÷')
+        Text('é€‰æ‹©è®­ç»ƒåŠ¨ä½œ')
           .fontSize(20)
           .fontWeight(FontWeight.Bold)
           .fontColor('#333333')
           .margin({ bottom: 20 })
         
-        // ÌøÔ¾¶¯×÷
-        Text('ÌøÔ¾ (Æ£ÀÍ¶È: 7)')
+        // è·³è·ƒåŠ¨ä½œ
+        Text('è·³è·ƒ (ç–²åŠ³åº¦: 7)')
           .fontSize(14)
           .fontColor('#666666')
           .margin({ bottom: 10 })
@@ -414,8 +414,8 @@ struct EdgeFlowMainPage {
         .width('100%')
         .margin({ bottom: 15 })
         
-        // Ğı×ª¶¯×÷
-        Text('Ğı×ª (Æ£ÀÍ¶È: 3)')
+        // æ—‹è½¬åŠ¨ä½œ
+        Text('æ—‹è½¬ (ç–²åŠ³åº¦: 3)')
           .fontSize(14)
           .fontColor('#666666')
           .margin({ bottom: 10 })
@@ -428,8 +428,8 @@ struct EdgeFlowMainPage {
         .width('100%')
         .margin({ bottom: 15 })
         
-        // ²½·¨¶¯×÷
-        Text('²½·¨ (Æ£ÀÍ¶È: 1)')
+        // æ­¥æ³•åŠ¨ä½œ
+        Text('æ­¥æ³• (ç–²åŠ³åº¦: 1)')
           .fontSize(14)
           .fontColor('#666666')
           .margin({ bottom: 10 })
@@ -443,7 +443,7 @@ struct EdgeFlowMainPage {
         .margin({ bottom: 20 })
         
         Row() {
-          Button('È¡Ïû')
+          Button('å–æ¶ˆ')
             .fontSize(16)
             .fontColor('#666666')
             .backgroundColor('#E0E0E0')
@@ -454,7 +454,7 @@ struct EdgeFlowMainPage {
               this.selectedMoves = [];
             })
           
-          Button('¿ªÊ¼')
+          Button('å¼€å§‹')
             .fontSize(16)
             .fontColor('#FFFFFF')
             .backgroundColor('#3A7BD5')
@@ -477,7 +477,7 @@ struct EdgeFlowMainPage {
     .backgroundColor('rgba(0, 0, 0, 0.5)')
     .justifyContent(FlexAlign.Center)
     .onClick(() => {
-      // µã»÷Íâ²¿²»¹Ø±Õ
+      // ç‚¹å‡»å¤–éƒ¨ä¸å…³é—­
     })
   }
   
@@ -500,22 +500,22 @@ struct EdgeFlowMainPage {
   }
 
 
-  // ÎÒµÄ
+  // æˆ‘çš„
   @Builder
   buildProfile() {
     Scroll() {
       Column() {
-        Text('?? ÎÒµÄ')
+        Text('ğŸ‘¤ æˆ‘çš„')
           .fontSize(DeviceUtils.isWearable() ? 18 : 24)
           .fontWeight(FontWeight.Bold)
           .fontColor('#FFFFFF')
           .margin({ bottom: DeviceUtils.isWearable() ? 12 : 20 })
         
         Column() {
-          Text('??')
+          Text('â›¸ï¸')
             .fontSize(DeviceUtils.isWearable() ? 40 : 50)
           
-          Text('±ùÉÏÎèÕß')
+          Text('å†°ä¸Šèˆè€…')
             .fontSize(DeviceUtils.isWearable() ? 16 : 20)
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
@@ -532,21 +532,21 @@ struct EdgeFlowMainPage {
         .borderRadius(DeviceUtils.isWearable() ? 10 : 15)
         .margin({ top: DeviceUtils.isWearable() ? 10 : 20 })
         
-        // ¹¦ÄÜÈë¿Ú - ÊÖ±í¶Ë¼ò»¯ÏÔÊ¾
+        // åŠŸèƒ½å…¥å£ - æ‰‹è¡¨ç«¯ç®€åŒ–æ˜¾ç¤º
         if (!DeviceUtils.isWearable()) {
           Column() {
-            // ´ò·Ö½â¶Á
+            // æ‰“åˆ†è§£è¯»
             Row() {
-              Text('??')
+              Text('ğŸ“Š')
                 .fontSize(24)
               
               Column() {
-                Text('´ò·Ö½â¶Á')
+                Text('æ‰“åˆ†è§£è¯»')
                   .fontSize(16)
                   .fontWeight(FontWeight.Bold)
                   .fontColor('#333333')
                 
-                Text('½â¶Á±ÈÈü·ÖÊı£¬ÁË½âÆÀ·Ö¹æÔò')
+                Text('è§£è¯»æ¯”èµ›åˆ†æ•°ï¼Œäº†è§£è¯„åˆ†è§„åˆ™')
                   .fontSize(12)
                   .fontColor('#999999')
                   .margin({ top: 4 })
@@ -555,7 +555,7 @@ struct EdgeFlowMainPage {
               .layoutWeight(1)
               .margin({ left: 15 })
               
-              Text('?')
+              Text('â€º')
                 .fontSize(24)
                 .fontColor('#CCCCCC')
             }
@@ -569,18 +569,18 @@ struct EdgeFlowMainPage {
               });
             })
             
-            // ¼Æ·ÖÄ£ÄâÆ÷
+            // è®¡åˆ†æ¨¡æ‹Ÿå™¨
             Row() {
-              Text('??')
+              Text('ğŸ§®')
                 .fontSize(24)
               
               Column() {
-                Text('¼Æ·ÖÄ£ÄâÆ÷')
+                Text('è®¡åˆ†æ¨¡æ‹Ÿå™¨')
                   .fontSize(16)
                   .fontWeight(FontWeight.Bold)
                   .fontColor('#333333')
                 
-                Text('Ä£ÄâISU¹Ù·½¼Æ·Ö¹æÔò')
+                Text('æ¨¡æ‹ŸISUå®˜æ–¹è®¡åˆ†è§„åˆ™')
                   .fontSize(12)
                   .fontColor('#999999')
                   .margin({ top: 4 })
@@ -589,7 +589,7 @@ struct EdgeFlowMainPage {
               .layoutWeight(1)
               .margin({ left: 15 })
               
-              Text('?')
+              Text('â€º')
                 .fontSize(24)
                 .fontColor('#CCCCCC')
             }
@@ -607,21 +607,21 @@ struct EdgeFlowMainPage {
           .width('90%')
           .margin({ top: 20 })
         } else {
-          // ÊÖ±í¶ËÏÔÊ¾¹¦ÄÜÁĞ±í
+          // æ‰‹è¡¨ç«¯æ˜¾ç¤ºåŠŸèƒ½åˆ—è¡¨
           Column() {
-            // ¼Æ·ÖÄ£ÄâÆ÷
+            // è®¡åˆ†æ¨¡æ‹Ÿå™¨
             Row() {
-              Text('??')
+              Text('ğŸ§®')
                 .fontSize(20)
               
-              Text('¼Æ·ÖÄ£ÄâÆ÷')
+              Text('è®¡åˆ†æ¨¡æ‹Ÿå™¨')
                 .fontSize(14)
                 .fontColor('#333333')
                 .margin({ left: 10 })
               
               Blank()
               
-              Text('?')
+              Text('â€º')
                 .fontSize(20)
                 .fontColor('#CCCCCC')
             }
@@ -635,19 +635,19 @@ struct EdgeFlowMainPage {
               });
             })
             
-            // ÉèÖÃ
+            // è®¾ç½®
             Row() {
-              Text('??')
+              Text('âš™ï¸')
                 .fontSize(20)
               
-              Text('ÉèÖÃ')
+              Text('è®¾ç½®')
                 .fontSize(14)
                 .fontColor('#333333')
                 .margin({ left: 10 })
               
               Blank()
               
-              Text('?')
+              Text('â€º')
                 .fontSize(20)
                 .fontColor('#CCCCCC')
             }
@@ -657,19 +657,19 @@ struct EdgeFlowMainPage {
             .borderRadius(10)
             .margin({ top: 10 })
             
-            // ¹ØÓÚ
+            // å…³äº
             Row() {
-              Text('??')
+              Text('â„¹ï¸')
                 .fontSize(20)
               
-              Text('¹ØÓÚ')
+              Text('å…³äº')
                 .fontSize(14)
                 .fontColor('#333333')
                 .margin({ left: 10 })
               
               Blank()
               
-              Text('?')
+              Text('â€º')
                 .fontSize(20)
                 .fontColor('#CCCCCC')
             }
@@ -697,14 +697,14 @@ struct EdgeFlowMainPage {
   @Builder
   buildBottomNav() {
     Row() {
-      // ÊÖ±í¶ËÖ»ÏÔÊ¾3¸öÖ÷ÒªTab£¬ÆäËûÉè±¸ÏÔÊ¾5¸ö
+      // æ‰‹è¡¨ç«¯åªæ˜¾ç¤º3ä¸ªä¸»è¦Tabï¼Œå…¶ä»–è®¾å¤‡æ˜¾ç¤º5ä¸ª
       if (DeviceUtils.isWearable()) {
-        // ÊÖ±í¶Ë¼ò»¯µ¼º½À¸
+        // æ‰‹è¡¨ç«¯ç®€åŒ–å¯¼èˆªæ 
         Column() {
-          Text('??')
+          Text('â›¸ï¸')
             .fontSize(18)
             .opacity(this.currentTab === 0 ? 1.0 : 0.6)
-          Text('ÑµÁ·')
+          Text('è®­ç»ƒ')
             .fontSize(9)
             .fontColor(this.currentTab === 0 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 1 })
@@ -715,10 +715,10 @@ struct EdgeFlowMainPage {
         .onClick(() => { this.currentTab = 0; })
         
         Column() {
-          Text('??')
+          Text('ğŸ†')
             .fontSize(18)
             .opacity(this.currentTab === 3 ? 1.0 : 0.6)
-          Text('³É¾Í')
+          Text('æˆå°±')
             .fontSize(9)
             .fontColor(this.currentTab === 3 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 1 })
@@ -729,10 +729,10 @@ struct EdgeFlowMainPage {
         .onClick(() => { this.currentTab = 2; })
         
         Column() {
-          Text('??')
+          Text('ğŸ‘¤')
             .fontSize(18)
             .opacity(this.currentTab === 4 ? 1.0 : 0.6)
-          Text('ÎÒµÄ')
+          Text('æˆ‘çš„')
             .fontSize(9)
             .fontColor(this.currentTab === 4 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 1 })
@@ -742,12 +742,12 @@ struct EdgeFlowMainPage {
         .justifyContent(FlexAlign.Center)
         .onClick(() => { this.currentTab = 3; })
       } else {
-        // ÊÖ»ú¡¢Æ½°å¡¢PCÏÔÊ¾ÍêÕûµ¼º½À¸
+        // æ‰‹æœºã€å¹³æ¿ã€PCæ˜¾ç¤ºå®Œæ•´å¯¼èˆªæ 
         Column() {
-          Text('??')
+          Text('â›¸ï¸')
             .fontSize(24)
             .opacity(this.currentTab === 0 ? 1.0 : 0.6)
-          Text('ÑµÁ·Ì¨')
+          Text('è®­ç»ƒå°')
             .fontSize(12)
             .fontColor(this.currentTab === 0 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 4 })
@@ -758,10 +758,10 @@ struct EdgeFlowMainPage {
         .onClick(() => { this.currentTab = 0; })
         
         Column() {
-          Text('??')
+          Text('ğŸ¦¶')
             .fontSize(24)
             .opacity(this.currentTab === 1 ? 1.0 : 0.6)
-          Text('¶¯×÷¿â')
+          Text('åŠ¨ä½œåº“')
             .fontSize(12)
             .fontColor(this.currentTab === 1 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 4 })
@@ -772,10 +772,10 @@ struct EdgeFlowMainPage {
         .onClick(() => { this.currentTab = 1; })
         
         Column() {
-          Text('??')
+          Text('ğŸ†')
             .fontSize(24)
             .opacity(this.currentTab === 3 ? 1.0 : 0.6)
-          Text('³É¾Í')
+          Text('æˆå°±')
             .fontSize(12)
             .fontColor(this.currentTab === 3 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 4 })
@@ -786,10 +786,10 @@ struct EdgeFlowMainPage {
         .onClick(() => { this.currentTab = 2; })
         
         Column() {
-          Text('??')
+          Text('ğŸ‘¤')
             .fontSize(24)
             .opacity(this.currentTab === 4 ? 1.0 : 0.6)
-          Text('ÎÒµÄ')
+          Text('æˆ‘çš„')
             .fontSize(12)
             .fontColor(this.currentTab === 4 ? '#FFFFFF' : '#E0E0E0')
             .margin({ top: 4 })
@@ -805,21 +805,21 @@ struct EdgeFlowMainPage {
     .backgroundColor('rgba(255, 255, 255, 0.15)')
   }
   
-  // ========== ÀúÊ·¼ÇÂ¼Ãæ°å ==========
+  // ========== å†å²è®°å½•é¢æ¿ ==========
   @Builder
   buildHistoryPanel() {
     Column() {
       Column() {
-        // ±êÌâÀ¸
+        // æ ‡é¢˜æ 
         Row() {
-          Text('?? ½ñÈÕÁ·Ï°¼ÇÂ¼')
+          Text('ğŸ“‹ ä»Šæ—¥ç»ƒä¹ è®°å½•')
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
           
           Blank()
           
-          Button('¹Ø±Õ')
+          Button('å…³é—­')
             .fontSize(14)
             .fontColor('#666666')
             .backgroundColor('#F0F0F0')
@@ -833,16 +833,16 @@ struct EdgeFlowMainPage {
         .width('100%')
         .margin({ bottom: 20 })
         
-        // ¼ÇÂ¼ÁĞ±í
+        // è®°å½•åˆ—è¡¨
         if (this.todayRecords.length === 0) {
           Column() {
-            Text('??')
+            Text('ğŸ˜´')
               .fontSize(60)
-            Text('½ñÌì»¹Ã»ÓĞÁ·Ï°¼ÇÂ¼')
+            Text('ä»Šå¤©è¿˜æ²¡æœ‰ç»ƒä¹ è®°å½•')
               .fontSize(16)
               .fontColor('#999999')
               .margin({ top: 15 })
-            Text('¿ªÊ¼ÑµÁ·£¬¼ÇÂ¼ÄãµÄÃ¿Ò»´Î½ø²½£¡')
+            Text('å¼€å§‹è®­ç»ƒï¼Œè®°å½•ä½ çš„æ¯ä¸€æ¬¡è¿›æ­¥ï¼')
               .fontSize(14)
               .fontColor('#CCCCCC')
               .margin({ top: 8 })
@@ -855,7 +855,7 @@ struct EdgeFlowMainPage {
             Column() {
               ForEach(this.todayRecords, (record: PracticeRecord, index: number) => {
                 Row() {
-                  // Ê±¼ä
+                  // æ—¶é—´
                   Column() {
                     Text(record.time)
                       .fontSize(16)
@@ -864,7 +864,7 @@ struct EdgeFlowMainPage {
                   }
                   .width(60)
                   
-                  // ¶¯×÷ĞÅÏ¢
+                  // åŠ¨ä½œä¿¡æ¯
                   Column() {
                     Row() {
                       Text(this.getMoveIcon(record.moveName))
@@ -889,13 +889,13 @@ struct EdgeFlowMainPage {
                   .alignItems(HorizontalAlign.Start)
                   .margin({ left: 15 })
                   
-                  // Ê±³¤ºÍÆ£ÀÍ¶È
+                  // æ—¶é•¿å’Œç–²åŠ³åº¦
                   Column() {
                     Text(this.formatDuration(record.duration))
                       .fontSize(14)
                       .fontWeight(FontWeight.Bold)
                       .fontColor('#FF6B6B')
-                    Text(`Æ£ÀÍ¶È ${record.fatigue}`)
+                    Text(`ç–²åŠ³åº¦ ${record.fatigue}`)
                       .fontSize(12)
                       .fontColor('#999999')
                       .margin({ top: 4 })
@@ -916,14 +916,14 @@ struct EdgeFlowMainPage {
           .scrollBar(BarState.Auto)
         }
         
-        // µ×²¿Í³¼Æ
+        // åº•éƒ¨ç»Ÿè®¡
         Row() {
           Column() {
             Text(this.todayRecords.length.toString())
               .fontSize(24)
               .fontWeight(FontWeight.Bold)
               .fontColor('#3A7BD5')
-            Text('Á·Ï°´ÎÊı')
+            Text('ç»ƒä¹ æ¬¡æ•°')
               .fontSize(12)
               .fontColor('#999999')
           }
@@ -934,7 +934,7 @@ struct EdgeFlowMainPage {
               .fontSize(24)
               .fontWeight(FontWeight.Bold)
               .fontColor('#FF6B6B')
-            Text('×ÜÊ±³¤')
+            Text('æ€»æ—¶é•¿')
               .fontSize(12)
               .fontColor('#999999')
           }
@@ -945,7 +945,7 @@ struct EdgeFlowMainPage {
               .fontSize(24)
               .fontWeight(FontWeight.Bold)
               .fontColor('#FFD700')
-            Text('×ÜÆ£ÀÍ¶È')
+            Text('æ€»ç–²åŠ³åº¦')
               .fontSize(12)
               .fontColor('#999999')
           }
@@ -969,14 +969,14 @@ struct EdgeFlowMainPage {
     .justifyContent(FlexAlign.Center)
   }
   
-  // ========== ¼Æ»®±¾Ãæ°å ==========
+  // ========== è®¡åˆ’æœ¬é¢æ¿ ==========
   @Builder
   buildPlanPanel() {
     Column() {
       Column() {
-        // ±êÌâÀ¸
+        // æ ‡é¢˜æ 
         Row() {
-          Text('?? ÖÜÑµÁ·¼Æ»®')
+          Text('ğŸ“… å‘¨è®­ç»ƒè®¡åˆ’')
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
@@ -984,7 +984,7 @@ struct EdgeFlowMainPage {
           Blank()
           
           if (!this.currentWeekPlan) {
-            Button('´´½¨¼Æ»®')
+            Button('åˆ›å»ºè®¡åˆ’')
               .fontSize(14)
               .fontColor('#FFFFFF')
               .backgroundColor('#3A7BD5')
@@ -996,7 +996,7 @@ struct EdgeFlowMainPage {
               })
           }
           
-          Button('¹Ø±Õ')
+          Button('å…³é—­')
             .fontSize(14)
             .fontColor('#666666')
             .backgroundColor('#F0F0F0')
@@ -1012,15 +1012,15 @@ struct EdgeFlowMainPage {
         .margin({ bottom: 20 })
         
         if (!this.currentWeekPlan) {
-          // ÎŞ¼Æ»®ÌáÊ¾
+          // æ— è®¡åˆ’æç¤º
           Column() {
-            Text('??')
+            Text('ğŸ“')
               .fontSize(60)
-            Text('»¹Ã»ÓĞ±¾ÖÜÑµÁ·¼Æ»®')
+            Text('è¿˜æ²¡æœ‰æœ¬å‘¨è®­ç»ƒè®¡åˆ’')
               .fontSize(16)
               .fontColor('#999999')
               .margin({ top: 15 })
-            Text('µã»÷"´´½¨¼Æ»®"¿ªÊ¼¹æ»®ÄãµÄÑµÁ·£¡')
+            Text('ç‚¹å‡»"åˆ›å»ºè®¡åˆ’"å¼€å§‹è§„åˆ’ä½ çš„è®­ç»ƒï¼')
               .fontSize(14)
               .fontColor('#CCCCCC')
               .margin({ top: 8 })
@@ -1029,19 +1029,19 @@ struct EdgeFlowMainPage {
           .height(300)
           .justifyContent(FlexAlign.Center)
         } else {
-          // ¼Æ»®ÄÚÈİ
+          // è®¡åˆ’å†…å®¹
           Scroll() {
             Column() {
-              // ÖÜÈÕÆÚ·¶Î§
-              Text(`${this.currentWeekPlan.weekStart} ÖÁ ${this.currentWeekPlan.weekEnd}`)
+              // å‘¨æ—¥æœŸèŒƒå›´
+              Text(`${this.currentWeekPlan.weekStart} è‡³ ${this.currentWeekPlan.weekEnd}`)
                 .fontSize(14)
                 .fontColor('#999999')
                 .margin({ bottom: 15 })
               
-              // Ã¿ÈÕ¼Æ»®
+              // æ¯æ—¥è®¡åˆ’
               ForEach(this.currentWeekPlan.dailyPlans, (dayPlan: DailyPlan, dayIndex: number) => {
                 Column() {
-                  // ÈÕÆÚ±êÌâ
+                  // æ—¥æœŸæ ‡é¢˜
                   Row() {
                     Text(this.getDayName(dayPlan.dayOfWeek))
                       .fontSize(16)
@@ -1055,9 +1055,9 @@ struct EdgeFlowMainPage {
                     
                     Blank()
                     
-                    // Ä¿±êÊ±³¤
+                    // ç›®æ ‡æ—¶é•¿
                     if (dayPlan.targetDuration) {
-                      Text(`Ä¿±ê: ${dayPlan.targetDuration}·ÖÖÓ`)
+                      Text(`ç›®æ ‡: ${dayPlan.targetDuration}åˆ†é’Ÿ`)
                         .fontSize(12)
                         .fontColor('#3A7BD5')
                     }
@@ -1065,14 +1065,14 @@ struct EdgeFlowMainPage {
                   .width('100%')
                   .margin({ bottom: 10 })
                   
-                  // ¼Æ»®µÄ¶¯×÷
+                  // è®¡åˆ’çš„åŠ¨ä½œ
                   if (dayPlan.moves.length === 0) {
                     Column() {
-                      Text('ÔİÎŞ¼Æ»®')
+                      Text('æš‚æ— è®¡åˆ’')
                         .fontSize(14)
                         .fontColor('#CCCCCC')
                       
-                      Button('+ Ìí¼Ó¶¯×÷')
+                      Button('+ æ·»åŠ åŠ¨ä½œ')
                         .fontSize(12)
                         .fontColor('#3A7BD5')
                         .backgroundColor('#E8F4FD')
@@ -1101,7 +1101,7 @@ struct EdgeFlowMainPage {
                               .margin({ left: 4 })
                             
                             if (move.targetCount) {
-                              Text(`¡Á${move.targetCount}`)
+                              Text(`Ã—${move.targetCount}`)
                                 .fontSize(12)
                                 .fontColor('#FF6B6B')
                                 .margin({ left: 4 })
@@ -1114,7 +1114,7 @@ struct EdgeFlowMainPage {
                         })
                       }
                       
-                      Button('+ Ìí¼Ó¸ü¶à')
+                      Button('+ æ·»åŠ æ›´å¤š')
                         .fontSize(12)
                         .fontColor('#3A7BD5')
                         .backgroundColor('#E8F4FD')
@@ -1128,7 +1128,7 @@ struct EdgeFlowMainPage {
                     }
                   }
                   
-                  // ±¸×¢
+                  // å¤‡æ³¨
                   if (dayPlan.notes) {
                     Text(dayPlan.notes)
                       .fontSize(12)
@@ -1145,10 +1145,10 @@ struct EdgeFlowMainPage {
                 .border({ width: 1, color: '#E0E0E0' })
               })
               
-              // ÖÜ±¸×¢
+              // å‘¨å¤‡æ³¨
               if (this.currentWeekPlan.notes) {
                 Column() {
-                  Text('±¾ÖÜÄ¿±ê')
+                  Text('æœ¬å‘¨ç›®æ ‡')
                     .fontSize(14)
                     .fontWeight(FontWeight.Bold)
                     .fontColor('#333333')
@@ -1170,8 +1170,8 @@ struct EdgeFlowMainPage {
           .layoutWeight(1)
           .scrollBar(BarState.Auto)
           
-          // É¾³ı°´Å¥
-          Button('É¾³ı¼Æ»®')
+          // åˆ é™¤æŒ‰é’®
+          Button('åˆ é™¤è®¡åˆ’')
             .fontSize(16)
             .fontColor('#FF6B6B')
             .backgroundColor('#FFE5E5')
@@ -1196,21 +1196,21 @@ struct EdgeFlowMainPage {
     .justifyContent(FlexAlign.Center)
   }
   
-  // ========== Ìí¼Ó¶¯×÷Ãæ°å ==========
+  // ========== æ·»åŠ åŠ¨ä½œé¢æ¿ ==========
   @Builder
   buildAddMovePanel() {
     Column() {
       Column() {
-        // ±êÌâÀ¸
+        // æ ‡é¢˜æ 
         Row() {
-          Text('Ìí¼ÓÑµÁ·¶¯×÷')
+          Text('æ·»åŠ è®­ç»ƒåŠ¨ä½œ')
             .fontSize(20)
             .fontWeight(FontWeight.Bold)
             .fontColor('#333333')
           
           Blank()
           
-          Button('¹Ø±Õ')
+          Button('å…³é—­')
             .fontSize(14)
             .fontColor('#666666')
             .backgroundColor('#F0F0F0')
@@ -1228,15 +1228,15 @@ struct EdgeFlowMainPage {
         
         Scroll() {
           Column() {
-            // Ñ¡Ôñ¶¯×÷
-            Text('Ñ¡Ôñ¶¯×÷')
+            // é€‰æ‹©åŠ¨ä½œ
+            Text('é€‰æ‹©åŠ¨ä½œ')
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
               .fontColor('#333333')
               .margin({ bottom: 10 })
             
-            // ÌøÔ¾¶¯×÷
-            Text('ÌøÔ¾')
+            // è·³è·ƒåŠ¨ä½œ
+            Text('è·³è·ƒ')
               .fontSize(14)
               .fontColor('#666666')
               .margin({ bottom: 8 })
@@ -1258,8 +1258,8 @@ struct EdgeFlowMainPage {
             .width('100%')
             .margin({ bottom: 15 })
             
-            // Ğı×ª¶¯×÷
-            Text('Ğı×ª')
+            // æ—‹è½¬åŠ¨ä½œ
+            Text('æ—‹è½¬')
               .fontSize(14)
               .fontColor('#666666')
               .margin({ bottom: 8 })
@@ -1281,8 +1281,8 @@ struct EdgeFlowMainPage {
             .width('100%')
             .margin({ bottom: 15 })
             
-            // ²½·¨¶¯×÷
-            Text('²½·¨')
+            // æ­¥æ³•åŠ¨ä½œ
+            Text('æ­¥æ³•')
               .fontSize(14)
               .fontColor('#666666')
               .margin({ bottom: 8 })
@@ -1304,14 +1304,14 @@ struct EdgeFlowMainPage {
             .width('100%')
             .margin({ bottom: 20 })
             
-            // Ä¿±ê´ÎÊı
-            Text('Ä¿±ê´ÎÊı£¨¿ÉÑ¡£©')
+            // ç›®æ ‡æ¬¡æ•°
+            Text('ç›®æ ‡æ¬¡æ•°ï¼ˆå¯é€‰ï¼‰')
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
               .fontColor('#333333')
               .margin({ bottom: 10 })
             
-            TextInput({ placeholder: 'ÀıÈç: 10', text: this.targetCountInput })
+            TextInput({ placeholder: 'ä¾‹å¦‚: 10', text: this.targetCountInput })
               .fontSize(16)
               .type(InputType.Number)
               .height(44)
@@ -1323,15 +1323,15 @@ struct EdgeFlowMainPage {
               })
               .margin({ bottom: 20 })
             
-            // ÓÅÏÈ¼¶
-            Text('ÓÅÏÈ¼¶')
+            // ä¼˜å…ˆçº§
+            Text('ä¼˜å…ˆçº§')
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
               .fontColor('#333333')
               .margin({ bottom: 10 })
             
             Row() {
-              Button('¸ß')
+              Button('é«˜')
                 .fontSize(14)
                 .fontColor(this.selectedPriority === 'high' ? '#FFFFFF' : '#FF6B6B')
                 .backgroundColor(this.selectedPriority === 'high' ? '#FF6B6B' : '#FFE5E5')
@@ -1341,7 +1341,7 @@ struct EdgeFlowMainPage {
                   this.selectedPriority = 'high';
                 })
               
-              Button('ÖĞ')
+              Button('ä¸­')
                 .fontSize(14)
                 .fontColor(this.selectedPriority === 'medium' ? '#FFFFFF' : '#FFD700')
                 .backgroundColor(this.selectedPriority === 'medium' ? '#FFD700' : '#FFF9E6')
@@ -1352,7 +1352,7 @@ struct EdgeFlowMainPage {
                   this.selectedPriority = 'medium';
                 })
               
-              Button('µÍ')
+              Button('ä½')
                 .fontSize(14)
                 .fontColor(this.selectedPriority === 'low' ? '#FFFFFF' : '#4CAF50')
                 .backgroundColor(this.selectedPriority === 'low' ? '#4CAF50' : '#E8F5E9')
@@ -1366,8 +1366,8 @@ struct EdgeFlowMainPage {
             .width('100%')
             .margin({ bottom: 30 })
             
-            // È·ÈÏ°´Å¥
-            Button('È·ÈÏÌí¼Ó')
+            // ç¡®è®¤æŒ‰é’®
+            Button('ç¡®è®¤æ·»åŠ ')
               .fontSize(18)
               .fontColor('#FFFFFF')
               .backgroundColor(this.selectedMoveForPlan ? '#3A7BD5' : '#CCCCCC')
@@ -1397,23 +1397,23 @@ struct EdgeFlowMainPage {
     .justifyContent(FlexAlign.Center)
   }
   
-  // ¸¨Öú·½·¨
+  // è¾…åŠ©æ–¹æ³•
   private getMoveIcon(moveName: string): string {
-    if (this.jumpMoves.includes(moveName)) return '??';
-    if (this.spinMoves.includes(moveName)) return '??';
-    if (this.stepMoves.includes(moveName)) return '??';
-    return '??';
+    if (this.jumpMoves.includes(moveName)) return 'ğŸ¦¶';
+    if (this.spinMoves.includes(moveName)) return 'ğŸŒ€';
+    if (this.stepMoves.includes(moveName)) return 'ğŸ‘£';
+    return 'â›¸ï¸';
   }
   
   private formatDuration(seconds: number): string {
-    if (seconds < 60) return `${seconds}Ãë`;
+    if (seconds < 60) return `${seconds}ç§’`;
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return secs > 0 ? `${mins}·Ö${secs}Ãë` : `${mins}·ÖÖÓ`;
+    return secs > 0 ? `${mins}åˆ†${secs}ç§’` : `${mins}åˆ†é’Ÿ`;
   }
   
   private getDayName(dayOfWeek: number): string {
-    const days = ['ÖÜÈÕ', 'ÖÜÒ»', 'ÖÜ¶ş', 'ÖÜÈı', 'ÖÜËÄ', 'ÖÜÎå', 'ÖÜÁù'];
+    const days = ['å‘¨æ—¥', 'å‘¨ä¸€', 'å‘¨äºŒ', 'å‘¨ä¸‰', 'å‘¨å››', 'å‘¨äº”', 'å‘¨å…­'];
     return days[dayOfWeek] || '';
   }
   
@@ -1437,7 +1437,7 @@ struct EdgeFlowMainPage {
       return;
     }
     
-    // ´´½¨ĞÂµÄ¶¯×÷¼Æ»®
+    // åˆ›å»ºæ–°çš„åŠ¨ä½œè®¡åˆ’
     const newMove: PlannedMove = {
       moveName: this.selectedMoveForPlan,
       targetCount: this.targetCountInput ? parseInt(this.targetCountInput) : undefined,
@@ -1445,13 +1445,13 @@ struct EdgeFlowMainPage {
       notes: ''
     };
     
-    // Ìí¼Óµ½¶ÔÓ¦ÌìµÄ¼Æ»®ÖĞ
+    // æ·»åŠ åˆ°å¯¹åº”å¤©çš„è®¡åˆ’ä¸­
     this.currentWeekPlan.dailyPlans[this.editingDayIndex].moves.push(newMove);
     
-    // ±£´æ¸üĞÂ
+    // ä¿å­˜æ›´æ–°
     this.dataStore.saveWeeklyPlan(this.currentWeekPlan);
     
-    // ÖØÖÃ×´Ì¬
+    // é‡ç½®çŠ¶æ€
     this.showAddMovePanel = false;
     this.selectedMoveForPlan = '';
     this.targetCountInput = '';
