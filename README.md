@@ -171,41 +171,33 @@
 
 ### 主界面截图
 
-<p align="center">
-<img src="screenshots/training_home.png" width="24%" alt="训练台"/>
-<img src="screenshots/move_library.png" width="24%" alt="动作库"/>
-<img src="screenshots/achievement.png" width="24%" alt="成就"/>
-</p>
+| 训练台 | 动作库 | 成就 |
+|:------:|:------:|:------:|
+| ![训练台](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/training_home.png) | ![动作库](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_library.png) | ![成就](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/achievement.png) |
 
-<p align="center">
-<img src="screenshots/profile.png" width="24%" alt="我的"/>
-<img src="screenshots/scoring_simulator.png" width="24%" alt="计分模拟器"/>
-</p>
+| 我的 | 计分模拟器 |
+|:------:|:------:|
+| ![我的](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/profile.png) | ![计分模拟器](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/scoring_simulator.png) |
 
 ### 功能详情截图
 
-<p align="center">
-<img src="screenshots/training_running.png" width="24%" alt="训练计时器"/>
-<img src="screenshots/training_history.png" width="24%" alt="历史记录"/>
-<img src="screenshots/weekly_plan.png" width="24%" alt="周训练计划"/>
-</p>
+| 训练计时器 | 历史记录 | 周训练计划 |
+|:----------:|:--------:|:----------:|
+| ![训练计时器](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/training_running.png) | ![历史记录](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/training_history.png) | ![周训练计划](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/weekly_plan.png) |
 
-<p align="center">
-<img src="screenshots/move_detail.png" width="24%" alt="动作详情"/>
-<img src="screenshots/choose_move.png" width="24%" alt="选择动作"/>
-<img src="screenshots/add_custom_move.png" width="24%" alt="添加自定义动作"/>
-</p>
+| 动作详情 | 选择动作 | 添加自定义动作 |
+|:--------:|:--------:|:--------------:|
+| ![动作详情](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_detail.png) | ![选择动作](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/choose_move.png) | ![添加自定义动作](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/add_custom_move.png) |
 
-<p align="center">
-<img src="screenshots/score_interpreter_1.png" width="24%" alt="打分解读1"/>
-<img src="screenshots/score_interpreter_2.png" width="24%" alt="打分解读2"/>
-</p>
+| 打分解读1 | 打分解读2 |
+|:--------:|:--------:|
+| ![打分解读1](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/score_interpreter_1.png) | ![打分解读2](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/score_interpreter_2.png) |
 
 ### 多设备适配截图（自由流转）
 
-<p align="center">
-<img src="screenshots/device/SimpleCalculator.gif" width="40%" alt="多设备运行效果"/>
-</p>
+| 设备运行效果 |
+|:------------:|
+| ![多设备运行效果](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/device/SimpleCalculator.gif) |
 
 **自由流转说明：**
 - 📱 手机端：单列布局，紧凑高效
