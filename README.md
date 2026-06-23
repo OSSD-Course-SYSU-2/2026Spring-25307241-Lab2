@@ -187,45 +187,33 @@
 
 ### 主界面截图
 
-<div align="center">
-
 | 训练台 | 动作库 | 成就 |
 |:------:|:------:|:------:|
-| <img src="screenshots/training_home.png" width="250" alt="训练台"/> | <img src="screenshots/move_library.png" width="250" alt="动作库"/> | <img src="screenshots/achievement.png" width="250" alt="成就"/> |
+| ![训练台](screenshots/training_home.png) | ![动作库](screenshots/move_library.png) | ![成就](screenshots/achievement.png) |
 
 | 我的 | 计分模拟器 |
 |:------:|:------:|
-| <img src="screenshots/profile.png" width="250" alt="我的"/> | <img src="screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
-
-</div>
+| ![我的](screenshots/profile.png) | ![计分模拟器](screenshots/scoring_simulator.png) |
 
 ### 功能详情截图
 
-<div align="center">
-
 | 训练计时器 | 历史记录 | 周训练计划 |
 |:----------:|:--------:|:----------:|
-| <img src="screenshots/training_running.png" width="250" alt="训练计时器"/> | <img src="screenshots/training_history.png" width="250" alt="历史记录"/> | <img src="screenshots/weekly_plan.png" width="250" alt="周训练计划"/> |
+| ![训练计时器](screenshots/training_running.png) | ![历史记录](screenshots/training_history.png) | ![周训练计划](screenshots/weekly_plan.png) |
 
 | 动作详情 | 选择动作 | 添加自定义动作 |
 |:--------:|:--------:|:--------------:|
-| <img src="screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="screenshots/choose_move.png" width="250" alt="选择动作"/> | <img src="screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
+| ![动作详情](screenshots/move_detail.png) | ![选择动作](screenshots/choose_move.png) | ![添加自定义动作](screenshots/add_custom_move.png) |
 
 | 打分解读1 | 打分解读2 |
 |:--------:|:--------:|
-| <img src="screenshots/score_interpreter_1.png" width="250" alt="打分解读1"/> | <img src="screenshots/score_interpreter_2.png" width="250" alt="打分解读2"/> |
-
-</div>
+| ![打分解读1](screenshots/score_interpreter_1.png) | ![打分解读2](screenshots/score_interpreter_2.png) |
 
 ### 多设备适配截图（自由流转）
 
-<div align="center">
-
 | 设备运行效果 |
 |:------------:|
-| <img src="screenshots/device/SimpleCalculator.gif" width="300" alt="多设备运行效果"/> |
-
-</div>
+| ![多设备运行效果](screenshots/device/SimpleCalculator.gif) |
 
 **自由流转说明：**
 - 📱 手机端：单列布局，紧凑高效
