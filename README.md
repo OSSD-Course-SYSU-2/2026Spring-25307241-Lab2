@@ -16,7 +16,7 @@
 
 ## 📖 项目简介
 
-**冰迹·EdgeFlow** 是一款基于 HarmonyOS 开发的花样滑冰训练辅助应用，为花滑爱好者提供全方位的训练记录、技术分析、计分模拟等功能。应用采用多设备适配设计，支持手机、平板、2in1设备等多种设备形态。
+**冰迹·EdgeFlow** 是一款基于 HarmonyOS 开发的花样滑冰训练辅助应用，为花滑爱好者提供全方位的训练记录、技术分析、计分模拟等功能。应用采用多设备适配设计，支持手机、平板、2in1设备、智能手表等多种设备形态。
 
 ### 核心特性
 
@@ -90,7 +90,7 @@
 - 📝 **节目类型选择** - 短节目(SP) / 自由滑(FS)
 - 🎯 **技术元素添加** - 跳跃、旋转、步法序列
 - 📊 **GOE评分** - -5到+5的执行等级评分
-- 💯 **PCS输入** - 五大节目内容分
+- 💯 **PCS输入** - 五大节目内容分（手表端隐藏）
 - 📈 **实时计算** - 自动计算TES、PCS、总分
 
 #### 支持的技术元素
@@ -131,6 +131,7 @@
 |----------|----------|
 | 📱 **手机** | 单列布局，适合单手操作，紧凑的界面设计 |
 | 📟 **平板** | 多列布局，充分利用大屏空间，更丰富的信息展示 |
+| ⌚ **手表** | 简化界面，核心功能优先，适合快速查看 |
 
 #### 自由流转场景
 
@@ -155,53 +156,33 @@
 
 ### 主界面截图
 
-<div align="center">
-
 | 训练台 | 动作库 | 成就 |
 |:------:|:------:|:------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_home.png" width="250" alt="训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_library.png" width="250" alt="动作库"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/achievement.png" width="250" alt="成就"/> |
+| ![训练台](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/training_home.png) | ![动作库](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_library.png) | ![成就](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/achievement.png) |
 
 | 我的 | 计分模拟器 |
 |:------:|:------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/profile.png" width="250" alt="我的"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
-
-</div>
+| ![我的](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/profile.png) | ![计分模拟器](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/scoring_simulator.png) |
 
 ### 功能详情截图
 
-<div align="center">
-
 | 训练计时器 | 历史记录 | 周训练计划 |
 |:----------:|:--------:|:----------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_running.png" width="250" alt="训练计时器"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_history.png" width="250" alt="历史记录"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/weekly_plan.png" width="250" alt="周训练计划"/> |
+| ![训练计时器](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/training_running.png) | ![历史记录](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/training_history.png) | ![周训练计划](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/weekly_plan.png) |
 
 | 动作详情 | 选择动作 | 添加自定义动作 |
 |:--------:|:--------:|:--------------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/choose_move.png" width="250" alt="选择动作"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
+| ![动作详情](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/move_detail.png) | ![选择动作](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/choose_move.png) | ![添加自定义动作](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/add_custom_move.png) |
 
 | 打分解读1 | 打分解读2 |
 |:--------:|:--------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/score_interpreter_1.png" width="250" alt="打分解读1"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/score_interpreter_2.png" width="250" alt="打分解读2"/> |
-
-</div>
+| ![打分解读1](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/score_interpreter_1.png) | ![打分解读2](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/score_interpreter_2.png) |
 
 ### 多设备适配截图（自由流转）
 
-<div align="center">
-
-| 手机端 - 训练台 | 平板端 - 训练台 | 手机端 - 成就 |
-|:---------------:|:---------------:|:---------------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_home.png" width="200" alt="手机端训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_training_home.png" width="280" alt="平板端训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/achievement.png" width="200" alt="手机端成就页"/> |
-
-| 平板端 - 成就1 | 平板端 - 成就2 | 手机端 - 动作库 |
-|:---------------:|:---------------:|:---------------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_achievement_1.png" width="280" alt="平板端成就页1"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_achievement_2.png" width="280" alt="平板端成就页2"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_library.png" width="200" alt="手机端动作库"/> |
-
-| 平板端 - 动作库 |
-|:---------------:|
-| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_move_library.png" width="280" alt="平板端动作库"/> |
-
-</div>
+| 设备运行效果 |
+|:------------:|
+| ![多设备运行效果](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/raw/main/screenshots/device/SimpleCalculator.gif) |
 
 **自由流转说明：**
 - 📱 手机端：单列布局，紧凑高效
@@ -226,6 +207,7 @@
 - 📱 华为手机（标准系统）
 - 📟 华为平板
 - 💻 2in1设备
+- ⌚ 华为智能手表
 
 ### 安装运行
 
@@ -350,7 +332,7 @@ entry/src/main/
 - ✅ 成就数据统计
 - ✅ 计分模拟器
 - ✅ 打分解读工具
-- ✅ 多设备适配（手机、平板）
+- ✅ 多设备适配（手机、平板、手表）
 - ✅ 自由流转（界面自动适配不同设备）
 
 ---
