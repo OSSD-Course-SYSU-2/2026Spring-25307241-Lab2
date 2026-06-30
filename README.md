@@ -180,9 +180,13 @@
 
 ### 多设备适配截图（自由流转）
 
-| 设备运行效果 |
-|:------------:|
-| ![多设备运行效果](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/device/SimpleCalculator.gif) |
+| 平板端 - 训练台 | 平板端 - 成就1 | 平板端 - 成就2 |
+|:---------------:|:---------------:|:---------------:|
+| ![平板端训练台](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/tablet_training_home.png) | ![平板端成就页1](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/tablet_achievement_1.png) | ![平板端成就页2](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/tablet_achievement_2.png) |
+
+| 平板端 - 动作库 |
+|:---------------:|
+| ![平板端动作库](https://github.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/blob/main/screenshots/tablet_move_library.png) |
 
 **自由流转说明：**
 - 📱 手机端：单列布局，紧凑高效
