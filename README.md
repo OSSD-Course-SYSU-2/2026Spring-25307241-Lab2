@@ -159,11 +159,11 @@
 
 | 训练台 | 动作库 | 成就 |
 |:------:|:------:|:------:|
-| <img src="screenshots/training_home.png" width="250" alt="训练台"/> | <img src="screenshots/move_library.png" width="250" alt="动作库"/> | <img src="screenshots/achievement.png" width="250" alt="成就"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_home.png" width="250" alt="训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_library.png" width="250" alt="动作库"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/achievement.png" width="250" alt="成就"/> |
 
 | 我的 | 计分模拟器 |
 |:------:|:------:|
-| <img src="screenshots/profile.png" width="250" alt="我的"/> | <img src="screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/profile.png" width="250" alt="我的"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/scoring_simulator.png" width="250" alt="计分模拟器"/> |
 
 </div>
 
@@ -173,15 +173,15 @@
 
 | 训练计时器 | 历史记录 | 周训练计划 |
 |:----------:|:--------:|:----------:|
-| <img src="screenshots/training_running.png" width="250" alt="训练计时器"/> | <img src="screenshots/training_history.png" width="250" alt="历史记录"/> | <img src="screenshots/weekly_plan.png" width="250" alt="周训练计划"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_running.png" width="250" alt="训练计时器"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_history.png" width="250" alt="历史记录"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/weekly_plan.png" width="250" alt="周训练计划"/> |
 
 | 动作详情 | 选择动作 | 添加自定义动作 |
 |:--------:|:--------:|:--------------:|
-| <img src="screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="screenshots/choose_move.png" width="250" alt="选择动作"/> | <img src="screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_detail.png" width="250" alt="动作详情"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/choose_move.png" width="250" alt="选择动作"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/add_custom_move.png" width="250" alt="添加自定义动作"/> |
 
 | 打分解读1 | 打分解读2 |
 |:--------:|:--------:|
-| <img src="screenshots/score_interpreter_1.png" width="250" alt="打分解读1"/> | <img src="screenshots/score_interpreter_2.png" width="250" alt="打分解读2"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/score_interpreter_1.png" width="250" alt="打分解读1"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/score_interpreter_2.png" width="250" alt="打分解读2"/> |
 
 </div>
 
@@ -191,15 +191,15 @@
 
 | 手机端 - 训练台 | 平板端 - 训练台 | 手机端 - 成就 |
 |:---------------:|:---------------:|:---------------:|
-| <img src="screenshots/training_home.png" width="200" alt="手机端训练台"/> | <img src="screenshots/tablet_training_home.png" width="280" alt="平板端训练台"/> | <img src="screenshots/achievement.png" width="200" alt="手机端成就页"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/training_home.png" width="200" alt="手机端训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_training_home.png" width="280" alt="平板端训练台"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/achievement.png" width="200" alt="手机端成就页"/> |
 
 | 平板端 - 成就1 | 平板端 - 成就2 | 手机端 - 动作库 |
 |:---------------:|:---------------:|:---------------:|
-| <img src="screenshots/tablet_achievement_1.png" width="280" alt="平板端成就页1"/> | <img src="screenshots/tablet_achievement_2.png" width="280" alt="平板端成就页2"/> | <img src="screenshots/move_library.png" width="200" alt="手机端动作库"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_achievement_1.png" width="280" alt="平板端成就页1"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_achievement_2.png" width="280" alt="平板端成就页2"/> | <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/move_library.png" width="200" alt="手机端动作库"/> |
 
 | 平板端 - 动作库 |
 |:---------------:|
-| <img src="screenshots/tablet_move_library.png" width="280" alt="平板端动作库"/> |
+| <img src="https://raw.githubusercontent.com/OSSD-Course-SYSU-2/2026Spring-25307241-Lab2/main/screenshots/tablet_move_library.png" width="280" alt="平板端动作库"/> |
 
 </div>
 
